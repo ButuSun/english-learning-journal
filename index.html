@@ -53,6 +53,40 @@ Li Ming`,
  ]},
  '2026-11-15': {
  title:'临时面试，给对方写信改约', type:'考研英语 · 道歉信 · 逐句练习',
+ studyNotes:{
+  heading:'大作文模板积累：七大方案与五大措施',
+  intro:'今日学习：七大方案中的三种论证方法，以及五大措施中的个人、教育两个实施主体；同时整理措施段的开头、关联词和结尾。',
+  sections:[
+   {title:'一、七大方案：今日学习 3 / 7',items:[
+    {name:'方案三：主语从句',template:'It is widely acknowledged that + 完整句子。',example:'It is widely acknowledged that college students face heavy academic pressure, which makes traveling an ideal way to relax and relieve stress.',note:'用固定句首引出观点；that 后接完整内容。'},
+    {name:'方案四：Not only 倒装',template:'Not only does + 主语 + 动词原形..., but it also + 动词...',example:"Not only does traveling broaden students' horizons, but it also cultivates their independence and enriches their life experience.",note:'Not only 置于句首，前半句部分倒装；does 后用动词原形，but also 后恢复正常语序。'},
+    {name:'方案六：对比论证',template:'Compared with B, A can + 小方面, so as to + 大方面.\nIn contrast to B, the advantage of A lies in + 某方面.',example:'In contrast to making friends, going sightseeing enables students to get close to nature and appreciate the beautiful scenery.',note:'通过比较 A 与 B，突出主要对象 A 的优势。'}
+   ]},
+   {title:'二、五大措施：今日学习 2 个主体',items:[
+    {name:'个人行为（Personal）',template:'We should spare no pains to + 动词原形.\n可替换：We should... / It is our duty to... / We are obliged to... / We ought to...\n行动表达可替换：spare no pains to... / make concerted efforts to... / take concrete steps to...',example:'Students themselves should make every effort to experience local culture and broaden their horizons.',note:'逻辑：个人主体 + 主动采取行动 + 实现具体目标。'},
+    {name:'教育引导（Schools / Parents）',template:'Parents and teachers should set a good example for children in + 主题, through their own behavior.\nParents can serve as role models for their children by + doing...\nParents and schools should create more opportunities for children to participate in...',example:'Universities should guide students to combine travel with learning.',note:'逻辑：学校、家长或老师作为主体，通过引导、示范或创造机会帮助学生成长。'}
+   ]},
+   {title:'三、五大措施的主体总览',items:[
+    {name:'政府作为',template:'制定法律、制定政策、拨付资金。'},
+    {name:'公民意识',template:'提高公众意识、培养社会责任感。'},
+    {name:'个人行为',template:'个人主动采取行动。'},
+    {name:'媒体呼吁',template:'媒体宣传、倡导、呼吁。'},
+    {name:'家庭教育',template:'家长和老师以身作则、教育引导。'}
+   ]},
+   {title:'四、措施段的固定骨架',items:[
+    {name:'开头：总结主题',template:'We should bear in mind that 主题词 is of great importance to 某方面.',example:'We should bear in mind that travelling is of great benefit to both our body and mind.'},
+    {name:'措施一',template:'For one thing, + 主体 + 措施。'},
+    {name:'措施二',template:'For another, + 主体 + 措施。',example:'For another, students themselves should make every effort to experience local culture and broaden their horizons.'},
+    {name:'结尾：展望未来',template:'In this way, hopefully, we may have a better future.'}
+   ]},
+   {title:'五、段落关联词',items:[
+    {name:'第二段：多点原因',template:"To begin with... / What's more... / Last but not least...\nFirstly... / Secondly... / Thirdly...\nTo begin with... / More importantly... / Most importantly..."},
+    {name:'第三段：两项措施',template:'For one thing... / For another...'},
+    {name:'补充与结尾',template:'Furthermore...（此外）\nIn this way...（通过这种方式）'}
+   ]}
+  ]
+ },
+
  original:[
  "I'm writing to apologize for you, because I cannot take the event as planned. I suddenly recived a notice that I be told to take an important interview. I hope you can understand my situation, and we can change a another day to meet.",
  "Because of this interview is very important for my future career development, I cannot miss this opportunity",
@@ -85,7 +119,7 @@ const monthLabel = document.querySelector('#month');
 const grid = document.querySelector('#calendar');
 const notes = document.querySelector('#notes');
 const entry = document.querySelector('#entry');
-const tabs = ['我的原文','修改稿','语法错点','挖空复习'];
+const tabs = ['我的原文','修改稿','语法错点','挖空复习','模板笔记'];
 const initial = location.hash.slice(1);
 let selected = /^\d{4}-\d{2}-\d{2}$/.test(initial) && !Number.isNaN(Date.parse(initial)) ? initial : keys[0];
 let month = Number(selected.slice(5,7)) - 1;
@@ -191,6 +225,22 @@ function renderEntry(focus=false) {
    if (active===1 && record.original.length>1) panel.append(node('p','根据当天逐句练习整理的完整修改稿。','hint'));
    const text=active===0?record.original[0]:record.revised;
    for (const paragraph of text.split('\n\n')) panel.append(node('p',paragraph));
+  }
+ } else if (active===4) {
+  panel.className='grammar';
+  const notes = record.studyNotes;
+  panel.append(node('p',notes.intro,'hint'));
+  for (const section of notes.sections) {
+   panel.append(node('h3',section.title));
+   for (const item of section.items) {
+    const box=node('details');
+    const summary=node('summary',item.name);
+    box.append(summary);
+    if(item.template) box.append(node('p',item.template,'pair'));
+    if(item.example) box.append(node('p','例句：'+item.example,'pair'));
+    if(item.note) box.append(node('p',item.note));
+    panel.append(box);
+   }
   }
  } else {
   panel.className='grammar';
