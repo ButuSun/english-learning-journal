@@ -1,0 +1,288 @@
+{
+  "records": {
+    "2026-11-14": {
+      "title": "考研撞期，给教授写信改约",
+      "type": "考研英语 · 道歉信 · 完整原稿",
+      "original": [
+        "Dear Professor,\nI must apologize for situation that I will not be able to visit you. I am writing this email in order to apologize for my mistake.\n\nI have been looking forward to seeing you since we made the appointment. Unexpectedly, the time of postgraduate entrance exam is the same time that we settled. I have no choice but to cancel my travel plan. It's very regretful since I can't to visit you. If you are convince, I hope that we can change time after December 20 I finish my exam.\n\nWhen we met next time, I'll bring a good news that I work well on exam. I'm looking forward to you reply.\nyours,\nLiming"
+      ],
+      "revised": "Dear Professor,\n\nI am writing to apologize for not being able to visit you as planned.\n\nI have been looking forward to seeing you since we made the appointment. Unfortunately, my postgraduate entrance exam is scheduled for the same time as our appointment, so I have to cancel my trip. If it is convenient for you, could we reschedule our meeting for a date after December 20, once I have finished my exam?\n\nI hope to share some good news with you when we next meet. I apologize for any inconvenience and look forward to your reply.\n\nYours sincerely,\nLi Ming",
+      "grammar": [
+        [
+          "道歉的介词",
+          "apologize for situation",
+          "apologize for not being able to visit",
+          "apologize to + 人，apologize for + 事情或动名词。"
+        ],
+        [
+          "情态动词",
+          "I can’t to visit you.",
+          "I can’t visit you.",
+          "can、could、must 后直接接动词原形。"
+        ],
+        [
+          "礼貌改期",
+          "If you are convince",
+          "If it is convenient for you",
+          "convenient 是“方便的”。请求对方改期，可以说 If it is convenient for you, could we reschedule…?"
+        ],
+        [
+          "不可数名词",
+          "a good news",
+          "some good news",
+          "news 不可数。一条好消息用 a piece of good news。"
+        ],
+        [
+          "将来的时间从句",
+          "When we met next time",
+          "When we meet next time",
+          "用 when 引导时间从句时，可以用一般现在时表示未来。"
+        ],
+        [
+          "物主限定词",
+          "you reply",
+          "your reply",
+          "reply 在这里是名词。用 your 修饰，整句是 I look forward to your reply."
+        ]
+      ]
+    },
+    "2026-11-15": {
+      "title": "临时面试，给对方写信改约",
+      "type": "考研英语 · 道歉信 · 逐句练习",
+      "studyNotes": {
+        "heading": "大作文模板积累：七大方案与五大措施",
+        "intro": "今日学习：七大方案中的三种论证方法，以及五大措施中的个人、教育两个实施主体；同时整理措施段的开头、关联词和结尾。",
+        "sections": [
+          {
+            "title": "一、七大方案：今日学习 3 / 7",
+            "items": [
+              {
+                "name": "方案三：主语从句",
+                "template": "It is widely acknowledged that + 完整句子。",
+                "example": "It is widely acknowledged that college students face heavy academic pressure, which makes traveling an ideal way to relax and relieve stress.",
+                "note": "用固定句首引出观点；that 后接完整内容。"
+              },
+              {
+                "name": "方案四：Not only 倒装",
+                "template": "Not only does + 主语 + 动词原形..., but it also + 动词...",
+                "example": "Not only does traveling broaden students' horizons, but it also cultivates their independence and enriches their life experience.",
+                "note": "Not only 置于句首，前半句部分倒装；does 后用动词原形，but also 后恢复正常语序。"
+              },
+              {
+                "name": "方案六：对比论证",
+                "template": "Compared with B, A can + 小方面, so as to + 大方面.\nIn contrast to B, the advantage of A lies in + 某方面.",
+                "example": "In contrast to making friends, going sightseeing enables students to get close to nature and appreciate the beautiful scenery.",
+                "note": "通过比较 A 与 B，突出主要对象 A 的优势。"
+              }
+            ]
+          },
+          {
+            "title": "二、五大措施：今日学习 2 个主体",
+            "items": [
+              {
+                "name": "个人行为（Personal）",
+                "template": "We should spare no pains to + 动词原形.\n可替换：We should... / It is our duty to... / We are obliged to... / We ought to...\n行动表达可替换：spare no pains to... / make concerted efforts to... / take concrete steps to...",
+                "example": "Students themselves should make every effort to experience local culture and broaden their horizons.",
+                "note": "逻辑：个人主体 + 主动采取行动 + 实现具体目标。"
+              },
+              {
+                "name": "教育引导（Schools / Parents）",
+                "template": "Parents and teachers should set a good example for children in + 主题, through their own behavior.\nParents can serve as role models for their children by + doing...\nParents and schools should create more opportunities for children to participate in...",
+                "example": "Universities should guide students to combine travel with learning.",
+                "note": "逻辑：学校、家长或老师作为主体，通过引导、示范或创造机会帮助学生成长。"
+              }
+            ]
+          },
+          {
+            "title": "三、五大措施的主体总览",
+            "items": [
+              {
+                "name": "政府作为",
+                "template": "制定法律、制定政策、拨付资金。"
+              },
+              {
+                "name": "公民意识",
+                "template": "提高公众意识、培养社会责任感。"
+              },
+              {
+                "name": "个人行为",
+                "template": "个人主动采取行动。"
+              },
+              {
+                "name": "媒体呼吁",
+                "template": "媒体宣传、倡导、呼吁。"
+              },
+              {
+                "name": "家庭教育",
+                "template": "家长和老师以身作则、教育引导。"
+              }
+            ]
+          },
+          {
+            "title": "四、措施段的固定骨架",
+            "items": [
+              {
+                "name": "开头：总结主题",
+                "template": "We should bear in mind that 主题词 is of great importance to 某方面.",
+                "example": "We should bear in mind that travelling is of great benefit to both our body and mind."
+              },
+              {
+                "name": "措施一",
+                "template": "For one thing, + 主体 + 措施。"
+              },
+              {
+                "name": "措施二",
+                "template": "For another, + 主体 + 措施。",
+                "example": "For another, students themselves should make every effort to experience local culture and broaden their horizons."
+              },
+              {
+                "name": "结尾：展望未来",
+                "template": "In this way, hopefully, we may have a better future."
+              }
+            ]
+          },
+          {
+            "title": "五、段落关联词",
+            "items": [
+              {
+                "name": "第二段：多点原因",
+                "template": "To begin with... / What's more... / Last but not least...\nFirstly... / Secondly... / Thirdly...\nTo begin with... / More importantly... / Most importantly..."
+              },
+              {
+                "name": "第三段：两项措施",
+                "template": "For one thing... / For another..."
+              },
+              {
+                "name": "补充与结尾",
+                "template": "Furthermore...（此外）\nIn this way...（通过这种方式）"
+              }
+            ]
+          }
+        ]
+      },
+      "original": [
+        "I'm writing to apologize for you, because I cannot take the event as planned. I suddenly recived a notice that I be told to take an important interview. I hope you can understand my situation, and we can change a another day to meet.",
+        "Because of this interview is very important for my future career development, I cannot miss this opportunity",
+        "If you are convince, I hope that we can reschedule the meeting time after the interview",
+        "Once again I apologize for any inconvinence that I give to you, and I looking forward to your reply",
+        "Once again I apologize for any inconvenience I may caused to you, and I look forward to your reply."
+      ],
+      "revised": "Dear [Name],\n\nI am writing to apologize for not being able to attend the event as planned.\n\nI have just been asked to attend an important job interview. Because the interview is important for my future career, I cannot miss this opportunity. If it is convenient for you, could we arrange to meet after the interview?\n\nOnce again, I apologize for any inconvenience I may have caused, and I look forward to your reply.\n\nYours sincerely,\nLi Ming",
+      "grammar": [
+        [
+          "道歉的介词",
+          "apologize for you",
+          "apologize to you for missing the event",
+          "to 接道歉的对象，for 接道歉的原因。正式开头也可以直接说 I am writing to apologize for…"
+        ],
+        [
+          "动词搭配",
+          "take the event / take an important interview",
+          "attend the event / attend an important interview",
+          "活动和面试都可以用 attend。说收到面试通知，可以写 I have just been asked to attend an interview."
+        ],
+        [
+          "because 与 because of",
+          "Because of this interview is very important",
+          "Because this interview is very important",
+          "because 接完整句子。because of 接名词短语，例如 because of an important interview。"
+        ],
+        [
+          "礼貌改期",
+          "If you are convince",
+          "If it is convenient for you",
+          "convince 是“说服”。询问对方是否方便时，用 If it is convenient for you。"
+        ],
+        [
+          "情态动词和完成时",
+          "any inconvenience I may caused to you",
+          "any inconvenience I may have caused",
+          "说可能已经造成的不便，用 may have + 过去分词。"
+        ],
+        [
+          "look forward to",
+          "I looking forward to your reply",
+          "I look forward to your reply",
+          "要用 I look forward to 或 I am looking forward to。to 是介词，后接名词或动名词。"
+        ]
+      ]
+    }
+  },
+  "studySchedule": {
+    "2026-11-17": {
+      "title": "大作文练习 1",
+      "detail": "七大方案：复习主语从句、倒装、对比；完成一篇大作文，写后批改并重写薄弱句。",
+      "tag": "第 6 周 · 模板熟悉"
+    },
+    "2026-11-19": {
+      "title": "小作文练习 1",
+      "detail": "完成一篇小作文；重点检查书信结构、句子完整性和固定搭配。",
+      "tag": "第 6 周 · 模板熟悉"
+    },
+    "2026-11-21": {
+      "title": "大作文练习 2",
+      "detail": "完成一篇大作文；尝试主动调用今天学过的论证方法和措施主体。",
+      "tag": "第 6 周 · 模板熟悉"
+    },
+    "2026-11-24": {
+      "title": "大作文练习 3",
+      "detail": "更换真题话题，练习七大方案的迁移使用。",
+      "tag": "第 7 周 · 话题迁移"
+    },
+    "2026-11-26": {
+      "title": "小作文练习 2",
+      "detail": "更换应用文类型，练习开头、目的和具体内容表达。",
+      "tag": "第 7 周 · 话题迁移"
+    },
+    "2026-11-28": {
+      "title": "大作文练习 4",
+      "detail": "完成一篇完整大作文；检查段落衔接与措施主体是否具体。",
+      "tag": "第 7 周 · 话题迁移"
+    },
+    "2026-12-01": {
+      "title": "大作文练习 5",
+      "detail": "开始限时写作，减少看模板；写后整理反复出现的语法问题。",
+      "tag": "第 8 周 · 限时输出"
+    },
+    "2026-12-03": {
+      "title": "小作文练习 3",
+      "detail": "限时完成一篇小作文，目标 20–25 分钟。",
+      "tag": "第 8 周 · 限时输出"
+    },
+    "2026-12-05": {
+      "title": "大作文练习 6",
+      "detail": "限时完成一篇大作文，目标 30–35 分钟。",
+      "tag": "第 8 周 · 限时输出"
+    },
+    "2026-12-08": {
+      "title": "大作文练习 7",
+      "detail": "继续限时写作；重点练习不看模板独立组织第二、三段。",
+      "tag": "第 9 周 · 稳定发挥"
+    },
+    "2026-12-10": {
+      "title": "小作文练习 4",
+      "detail": "限时完成一篇小作文，集中修正常见语法错误。",
+      "tag": "第 9 周 · 稳定发挥"
+    },
+    "2026-12-12": {
+      "title": "整篇写作模拟",
+      "detail": "按考试节奏完成一篇小作文和一篇大作文，记录实际用时。",
+      "tag": "第 9 周 · 稳定发挥"
+    },
+    "2026-12-15": {
+      "title": "最后一轮写作模拟",
+      "detail": "完成一套小作文与大作文限时训练，检查时间分配。",
+      "tag": "第 10 周 · 考前回顾"
+    },
+    "2026-12-17": {
+      "title": "模板与错题回顾",
+      "detail": "只复习已经学过的句型、个人/学校措施和高频语法错误，不再大量增加新内容。",
+      "tag": "第 10 周 · 考前回顾"
+    },
+    "2026-12-19": {
+      "title": "考研考试日 ⭐️",
+      "detail": "考研考试日。按准考证上的具体日期、时间和考场安排参加考试。",
+      "tag": "第 10 周 · 考试"
+    }
+  }
+}
