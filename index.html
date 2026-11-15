@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ecefe8">
+<title>英语写作日历</title>
+<style>
+:root{color-scheme:light;--ink:#24372c;--muted:#536457;--line:#d9dfd4;--paper:#fdfbf4;--green:#284d39;--serif:Georgia,"Noto Serif SC","Songti SC",serif}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font:15px/1.55 "PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:#ecefe8;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' opacity='.12' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}
+button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2px solid #317464;outline-offset:3px}header,.workspace{width:min(1150px,calc(100% - 56px));margin:auto}header{padding:48px 0 29px;border-bottom:1px solid #aebbac;display:flex;align-items:end;justify-content:space-between;gap:20px}.kicker{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green);font-weight:700}h1{font:700 clamp(2.25rem,5.4vw,4.4rem)/1.12 var(--serif);letter-spacing:-.045em;margin:11px 0 5px}header p{margin:0;color:var(--muted)}.stamp{border:1px solid #789286;padding:8px 12px;border-radius:3px;transform:rotate(-4deg);white-space:nowrap;color:var(--green)}.workspace{display:grid;grid-template-columns:335px minmax(0,1fr);gap:28px;margin-top:28px;margin-bottom:46px;align-items:start}.sidebar{display:grid;gap:19px}.calendar,.entry{border:1px solid var(--line);border-radius:6px;background:var(--paper);box-shadow:0 3px 12px #24372c12}.calendar{padding:19px}.calHead,.legend{display:flex;align-items:center;justify-content:space-between;gap:8px}.calHead h2{margin:0;font-size:1.12rem}.monthControl{display:flex;gap:5px}.monthControl button{background:#fff;border:1px solid var(--line);border-radius:4px;width:36px;height:36px;font-size:1.1rem}.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center;margin-top:14px}.weekday{color:var(--muted);font-size:.77rem}.day{border:1px solid transparent;background:transparent;min-height:34px;border-radius:4px;padding:3px 1px;position:relative}.day:hover,.monthControl button:hover{background:#e5eee2}.day.has{background:#e6eee1;font-weight:700}.day.has:after,.dot{content:"";display:inline-block;border-radius:50%;width:4px;height:4px;background:#547359}.day.has:after{position:absolute;bottom:3px;left:calc(50% - 2px)}.day.selected{background:var(--green);color:white}.day.selected:after{background:#fff}.legend{justify-content:start;margin-top:13px;color:var(--muted);font-size:.78rem}.notes{display:grid;gap:10px}.notes h2{margin:0;font-size:.83rem;color:var(--muted)}.card{width:100%;display:block;text-align:left;border:1px solid #dad5b9;background:#f5edca;border-radius:4px;padding:13px 16px;box-shadow:0 2px 6px #24372c16}.card:nth-of-type(even){background:#e1eadb;border-color:#c7d6c0}.card[aria-current="date"]{border-color:#547359;box-shadow:inset 4px 0 #547359}.card small{display:block;color:var(--muted)}.card b{display:block;margin-top:2px}.entry{min-height:540px;padding:30px clamp(20px,3.5vw,43px);position:relative}.entry:before{content:"";position:absolute;top:-6px;left:50%;width:64px;height:13px;transform:translateX(-50%) rotate(-3deg);background:#cec59e99}.date{font-size:.76rem;letter-spacing:.14em;color:var(--muted);font-weight:700}.entry h2{font:700 clamp(1.6rem,4vw,2.35rem)/1.2 var(--serif);margin:8px 0}.sub{color:var(--muted);margin:0 0 18px}.tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:16px}.tab{border:0;background:transparent;padding:9px 4px;margin-right:8px;color:var(--muted);border-bottom:2px solid transparent}.tab[aria-selected="true"]{border-bottom-color:var(--green);color:var(--green);font-weight:700}.writing{font:1.12rem/1.85 var(--serif);overflow-wrap:anywhere}.writing p{margin:0 0 .9em;white-space:pre-line}.excerpt{border-bottom:1px solid var(--line);padding:0 0 11px}.excerpt small,.hint{font: .83rem/1.55 system-ui,sans-serif;color:var(--muted)}.grammar{display:grid;gap:9px}.grammar details{background:#f0f3ea;border:1px solid var(--line);padding:10px 13px;border-radius:4px}.grammar summary{cursor:pointer;font-weight:700}.grammar p{margin:7px 0}.pair{font:1.05rem/1.5 var(--serif)}del{color:#854137}ins{text-decoration:none;color:#24553e;font-weight:700}.answer{padding:3px 8px;font-weight:600}.empty{color:var(--muted)}[hidden]{display:none!important}
+@media(max-width:810px){header,.workspace{width:calc(100% - 30px)}header{padding-top:32px}.workspace{grid-template-columns:minmax(0,1fr);gap:18px}.sidebar{gap:12px}.notes{grid-template-columns:1fr 1fr}.notes h2{grid-column:1/-1}.entry{min-height:0}.stamp{display:none}.card{padding:9px 11px}.calendar{padding:14px}}
+</style>
+</head>
+<body>
+<header><div><div class="kicker">English Writing Journal</div><h1>英语写作日历</h1><p>按日期回看原文、批改和语法错题。</p></div><div class="stamp">考研英语 · 写作</div></header>
+<main class="workspace">
+<aside class="sidebar" aria-label="练习日期">
+<section class="calendar"><div class="calHead"><h2 id="month"></h2><div class="monthControl"><button id="prev" aria-label="上个月">‹</button><button id="next" aria-label="下个月">›</button></div></div><div class="grid" id="calendar"></div><div class="legend"><span class="dot"></span>有写作练习</div></section>
+<nav class="notes" id="notes" aria-label="已归档的作文"></nav>
+</aside>
+<section class="entry" id="entry" aria-label="当日写作"></section>
+</main>
+<script>
+const records = {
+ '2026-11-14': {
+ title:'考研撞期，给教授写信改约', type:'考研英语 · 道歉信 · 完整原稿',
+ original:[`Dear Professor,
+I must apologize for situation that I will not be able to visit you. I am writing this email in order to apologize for my mistake.
+
+I have been looking forward to seeing you since we made the appointment. Unexpectedly, the time of postgraduate entrance exam is the same time that we settled. I have no choice but to cancel my travel plan. It's very regretful since I can't to visit you. If you are convince, I hope that we can change time after December 20 I finish my exam.
+
+When we met next time, I'll bring a good news that I work well on exam. I'm looking forward to you reply.
+yours,
+Liming`],
+ revised:`Dear Professor,
+
+I am writing to apologize for not being able to visit you as planned.
+
+I have been looking forward to seeing you since we made the appointment. Unfortunately, my postgraduate entrance exam is scheduled for the same time as our appointment, so I have to cancel my trip. If it is convenient for you, could we reschedule our meeting for a date after December 20, once I have finished my exam?
+
+I hope to share some good news with you when we next meet. I apologize for any inconvenience and look forward to your reply.
+
+Yours sincerely,
+Li Ming`,
+ grammar:[
+ ['道歉的介词','apologize for situation','apologize for not being able to visit','apologize to + 人，apologize for + 事情或动名词。'],
+ ['情态动词','I can’t to visit you.','I can’t visit you.','can、could、must 后直接接动词原形。'],
+ ['礼貌改期','If you are convince','If it is convenient for you','convenient 是“方便的”。请求对方改期，可以说 If it is convenient for you, could we reschedule…?'],
+ ['不可数名词','a good news','some good news','news 不可数。一条好消息用 a piece of good news。'],
+ ['将来的时间从句','When we met next time','When we meet next time','用 when 引导时间从句时，可以用一般现在时表示未来。'],
+ ['物主限定词','you reply','your reply','reply 在这里是名词。用 your 修饰，整句是 I look forward to your reply.']
+ ]},
+ '2026-11-15': {
+ title:'临时面试，给对方写信改约', type:'考研英语 · 道歉信 · 逐句练习',
+ original:[
+ "I'm writing to apologize for you, because I cannot take the event as planned. I suddenly recived a notice that I be told to take an important interview. I hope you can understand my situation, and we can change a another day to meet.",
+ "Because of this interview is very important for my future career development, I cannot miss this opportunity",
+ "If you are convince, I hope that we can reschedule the meeting time after the interview",
+ "Once again I apologize for any inconvinence that I give to you, and I looking forward to your reply",
+ "Once again I apologize for any inconvenience I may caused to you, and I look forward to your reply."
+ ],
+ revised:`Dear [Name],
+
+I am writing to apologize for not being able to attend the event as planned.
+
+I have just been asked to attend an important job interview. Because the interview is important for my future career, I cannot miss this opportunity. If it is convenient for you, could we arrange to meet after the interview?
+
+Once again, I apologize for any inconvenience I may have caused, and I look forward to your reply.
+
+Yours sincerely,
+Li Ming`,
+ grammar:[
+ ['道歉的介词','apologize for you','apologize to you for missing the event','to 接道歉的对象，for 接道歉的原因。正式开头也可以直接说 I am writing to apologize for…'],
+ ['动词搭配','take the event / take an important interview','attend the event / attend an important interview','活动和面试都可以用 attend。说收到面试通知，可以写 I have just been asked to attend an interview.'],
+ ['because 与 because of','Because of this interview is very important','Because this interview is very important','because 接完整句子。because of 接名词短语，例如 because of an important interview。'],
+ ['礼貌改期','If you are convince','If it is convenient for you','convince 是“说服”。询问对方是否方便时，用 If it is convenient for you。'],
+ ['情态动词和完成时','any inconvenience I may caused to you','any inconvenience I may have caused','说可能已经造成的不便，用 may have + 过去分词。'],
+ ['look forward to','I looking forward to your reply','I look forward to your reply','要用 I look forward to 或 I am looking forward to。to 是介词，后接名词或动名词。']
+ ]}
+};
+
+const keys = Object.keys(records).sort().reverse();
+const monthLabel = document.querySelector('#month');
+const grid = document.querySelector('#calendar');
+const notes = document.querySelector('#notes');
+const entry = document.querySelector('#entry');
+const tabs = ['我的原文','修改稿','语法错点','挖空复习'];
+const initial = location.hash.slice(1);
+let selected = /^\d{4}-\d{2}-\d{2}$/.test(initial) && !Number.isNaN(Date.parse(initial)) ? initial : keys[0];
+let month = Number(selected.slice(5,7)) - 1;
+let year = Number(selected.slice(0,4));
+let active = 0;
+
+function node(tag, value, className) {
+ const item = document.createElement(tag);
+ if (value !== undefined) item.textContent = value;
+ if (className) item.className = className;
+ return item;
+}
+function dateKey(y,m,d) {
+ return [String(y).padStart(4,'0'),String(m+1).padStart(2,'0'),String(d).padStart(2,'0')].join('-');
+}
+function select(key, from) {
+ selected = key;
+ month = Number(key.slice(5,7)) - 1;
+ year = Number(key.slice(0,4));
+ active = 0;
+ history.replaceState(null,'','#'+key);
+ renderCalendar();
+ renderNotes();
+ renderEntry();
+ if (matchMedia('(max-width: 810px)').matches) {
+  const title = entry.querySelector('h2');
+  title.tabIndex = -1;
+  title.focus({preventScroll:true});
+  entry.scrollIntoView({block:'start'});
+ } else {
+  document.querySelector('[data-'+from+'="'+key+'"]')?.focus({preventScroll:true});
+ }
+}
+function renderCalendar() {
+ monthLabel.textContent = year+' 年 '+(month+1)+' 月';
+ grid.replaceChildren();
+ for (const day of '一二三四五六日') grid.append(node('span',day,'weekday'));
+ const offset = (new Date(year,month,1).getDay()+6)%7;
+ for (let i=0;i<offset;i++) grid.append(node('span'));
+ for (let d=1;d<=new Date(year,month+1,0).getDate();d++) {
+  const key = dateKey(year,month,d);
+  const button = node('button',d,'day');
+  button.dataset.calendar = key;
+  if (records[key]) button.classList.add('has');
+  if (selected===key) {button.classList.add('selected');button.setAttribute('aria-current','date');}
+  button.setAttribute('aria-label',key+(records[key]?'，有写作练习':''));
+  button.addEventListener('click',()=>select(key,'calendar'));
+  grid.append(button);
+ }
+}
+function renderNotes() {
+ notes.replaceChildren(node('h2','练习便签'));
+ for (const key of keys) {
+  const button=node('button',undefined,'card');
+  button.dataset.note=key;
+  if (selected===key) button.setAttribute('aria-current','date');
+  button.append(node('small',key.slice(5).replace('-',' 月 ')+' 日'),node('b',records[key].title));
+  button.addEventListener('click',()=>select(key,'note'));
+  notes.append(button);
+ }
+}
+function renderEntry(focus=false) {
+ const record = records[selected];
+ entry.replaceChildren(node('div',selected,'date'),node('h2',record?.title ?? '这天还没有写作记录'));
+ if (!record) return;
+ entry.append(node('p',record.type,'sub'));
+ const list = node('div',undefined,'tabs');
+ list.setAttribute('role','tablist');
+ list.setAttribute('aria-label','写作内容');
+ const panel = node('div');
+ panel.id='tab-panel';
+ panel.tabIndex=0;
+ panel.setAttribute('role','tabpanel');
+ panel.setAttribute('aria-labelledby','tab-'+active);
+ tabs.forEach((label,i)=>{
+  const button=node('button',label,'tab');
+  button.id='tab-'+i;
+  button.setAttribute('role','tab');
+  button.setAttribute('aria-selected',i===active);
+  button.setAttribute('aria-controls',panel.id);
+  button.tabIndex=i===active?0:-1;
+  button.onclick=()=>{active=i;renderEntry(true)};
+  button.onkeydown=event=>{
+   const step={ArrowRight:1,ArrowLeft:-1}[event.key];
+   if (!step && !['Home','End'].includes(event.key)) return;
+   event.preventDefault();
+   active=event.key==='Home'?0:event.key==='End'?tabs.length-1:(i+step+tabs.length)%tabs.length;
+   renderEntry(true);
+  };
+  list.append(button);
+ });
+ entry.append(list,panel);
+ if (active<2) {
+  panel.className='writing';
+  if (active===0 && record.original.length>1) {
+   const labels=['开头草稿','解释原因','提出改期','结尾 · 初写','结尾 · 重写'];
+   record.original.forEach((line,i)=>{
+    const block=node('div',undefined,'excerpt');
+    block.append(node('small',labels[i]),node('p',line));
+    panel.append(block);
+   });
+  } else {
+   if (active===1 && record.original.length>1) panel.append(node('p','根据当天逐句练习整理的完整修改稿。','hint'));
+   const text=active===0?record.original[0]:record.revised;
+   for (const paragraph of text.split('\n\n')) panel.append(node('p',paragraph));
+  }
+ } else {
+  panel.className='grammar';
+  if (active===3) panel.append(node('p','先试着改写原句，再展开看答案。','hint'));
+  for (const [tag,before,after,why] of record.grammar) {
+   const item=node('details');
+   const title=node('summary',tag);
+   if (active===2){
+    const pair=node('p',undefined,'pair');
+    pair.append(node('del',before),document.createElement('br'),node('ins',after));
+    item.append(title,pair,node('p',why));
+    item.open=true;
+    panel.append(item);
+   } else {
+    const box=node('div',undefined,'excerpt');
+    title.textContent='查看答案';
+    const line=node('p',before,'pair');
+    item.append(title,node('p',after,'pair'),node('p',why));
+    box.append(node('b',tag),line,node('p','改写：________________','hint'),item);
+    panel.append(box);
+   }
+  }
+ }
+ if(focus) document.querySelector('#tab-'+active).focus();
+}
+function moveMonth(delta) {
+ const date=new Date(year,month+delta,1);
+ month=date.getMonth();
+ year=date.getFullYear();
+ renderCalendar();
+}
+document.querySelector('#prev').onclick=()=>moveMonth(-1);
+document.querySelector('#next').onclick=()=>moveMonth(1);
+renderCalendar();
+renderNotes();
+renderEntry();
+</script>
+</body>
+</html>
