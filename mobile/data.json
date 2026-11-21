@@ -625,6 +625,101 @@
           }
         ]
       }
+    },
+    "2026-11-21": {
+      "title": "考研压力与应对建议 · 建议信",
+      "type": "考研英语二 · Part A · 建议信 · 完整练习",
+      "original": [
+        "Dear jack,\nI heard that you may have some stress for upcoming examination lately. It is such natural thing, and I believe you totally can deal with it. I'm writing to give you two suggestions that you could consider it.\nFirst one, start with a small task. Nearly examination, you may have a feeling of anxiety because there still are some points that you haven't familar it. Moving to a small step can contract this phenomenon. \nSecond two, do some sports. Such like swimming, running or whatever you enjoy it. The exercise can relieve your stress, which is truly beneficial to physical and mental health.\nI'm glad that you have fight for your future, and prepared this examination for a long time. I hope your dream come true and examination be passed.\nLi ming."
+      ],
+      "revised": "Dear Jack,\n\nI heard that you may be feeling stressed about the upcoming examination lately. It is such a natural thing, and I believe you can totally deal with it. I'm writing to give you two suggestions that you could consider.\n\nFirst, start with a small task. As the examination approaches, you may feel anxious because there are still some points that you aren't familiar with. Taking small steps can reduce this anxiety.\n\nSecond, do some exercise, such as swimming, running, or any other activity you enjoy. Exercise can relieve your stress, which is truly beneficial to your physical and mental health.\n\nI'm glad that you have fought for your future and prepared for this examination for a long time. I hope your dream comes true and you pass the examination.\n\nLi Ming",
+      "grammar": [
+        [
+          "固定搭配与时态语义",
+          "some stress for upcoming examination lately",
+          "feeling stressed about the upcoming examination lately",
+          "表达“对考试感到有压力”用 feel stressed about；upcoming examination 前补 the。"
+        ],
+        [
+          "冠词",
+          "such natural thing",
+          "such a natural thing",
+          "单数可数名词 thing 前需要冠词 a；结构是 such a + 形容词 + 名词。"
+        ],
+        [
+          "宾语从句与重复宾语",
+          "suggestions that you could consider it",
+          "suggestions that you could consider",
+          "that 引导的定语从句中，that 已经充当 consider 的宾语，不需要再加 it。"
+        ],
+        [
+          "句子连接与时间表达",
+          "First one... Nearly examination...",
+          "First... As the examination approaches...",
+          "列举建议用 First / Second；“临近考试”可用 as the examination approaches。"
+        ],
+        [
+          "形容词搭配",
+          "points that you haven't familar it",
+          "points that you aren't familiar with",
+          "familiar 是形容词，使用 be familiar with；不能说 familiar it。"
+        ],
+        [
+          "词汇选择与固定搭配",
+          "Moving to a small step can contract this phenomenon",
+          "Taking small steps can reduce this anxiety",
+          "take small steps 表示采取小步骤；contract 不表示“缓解焦虑”，这里用 reduce。"
+        ],
+        [
+          "举例结构与代词",
+          "Such like swimming, running or whatever you enjoy it",
+          "such as swimming, running, or any other activity you enjoy",
+          "举例用 such as；enjoy 后面已有宾语从句/关系结构，不需要额外的 it。"
+        ],
+        [
+          "动词过去分词与介词",
+          "you have fight... and prepared this examination",
+          "you have fought... and prepared for this examination",
+          "have 后接过去分词 fought；prepare for an examination 是固定搭配。"
+        ],
+        [
+          "主谓一致与句子结构",
+          "I hope your dream come true and examination be passed",
+          "I hope your dream comes true and you pass the examination",
+          "dream 是单数，谓语用 comes；用 you pass the examination 表达“你通过考试”更清楚。"
+        ],
+        [
+          "拼写与称呼格式",
+          "Dear jack / Li ming.",
+          "Dear Jack / Li Ming",
+          "英文称呼和姓名中的专有名词首字母大写。"
+        ]
+      ],
+      "studyNotes": {
+        "intro": "围绕考试压力提出两条建议：先从小任务开始，再通过喜欢的运动缓解压力。保留原文的建议顺序和鼓励语气。重点复习 such a + 名词、be familiar with、such as、have + 过去分词，以及 hope 后的主谓一致。",
+        "sections": [
+          {
+            "title": "本次可复用的三个表达",
+            "items": [
+              {
+                "name": "As the examination approaches...",
+                "template": "As the examination approaches, you may feel anxious...",
+                "note": "表达“随着考试临近”，用于引出压力或备考状态。"
+              },
+              {
+                "name": "be familiar with...",
+                "template": "There are still some points that you aren't familiar with.",
+                "note": "familiar 是形容词，固定搭配 be familiar with。"
+              },
+              {
+                "name": "Taking small steps can...",
+                "template": "Taking small steps can reduce this anxiety.",
+                "note": "动名词短语作主语；适合表达循序渐进的建议。"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "studySchedule": {
