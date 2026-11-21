@@ -627,12 +627,13 @@
       }
     },
     "2026-11-21": {
-      "title": "考研压力与应对建议 · 建议信",
-      "type": "考研英语二 · Part A · 建议信 · 完整练习",
+      "title": "考研压力与应对建议 · 建议信 · 语法理解专项练习",
+      "type": "考研英语二 · Part A · 建议信 · 完整练习；同日补充：语法理解专项练习",
       "original": [
-        "Dear jack,\nI heard that you may have some stress for upcoming examination lately. It is such natural thing, and I believe you totally can deal with it. I'm writing to give you two suggestions that you could consider it.\nFirst one, start with a small task. Nearly examination, you may have a feeling of anxiety because there still are some points that you haven't familar it. Moving to a small step can contract this phenomenon. \nSecond two, do some sports. Such like swimming, running or whatever you enjoy it. The exercise can relieve your stress, which is truly beneficial to physical and mental health.\nI'm glad that you have fight for your future, and prepared this examination for a long time. I hope your dream come true and examination be passed.\nLi ming."
+        "Dear jack,\nI heard that you may have some stress for upcoming examination lately. It is such natural thing, and I believe you totally can deal with it. I'm writing to give you two suggestions that you could consider it.\nFirst one, start with a small task. Nearly examination, you may have a feeling of anxiety because there still are some points that you haven't familar it. Moving to a small step can contract this phenomenon. \nSecond two, do some sports. Such like swimming, running or whatever you enjoy it. The exercise can relieve your stress, which is truly beneficial to physical and mental health.\nI'm glad that you have fight for your future, and prepared this examination for a long time. I hope your dream come true and examination be passed.\nLi ming.",
+        "语法理解专项练习（11月21日）\n1. 我很高兴你一直在为自己的梦想而努力。\nI'm glad that you have fought for your dream\n\n2. 只有通过循序渐进的努力，我们才能克服困难。\nOnly by taking small steps can we overcome the difficulties\n\n3. 随着考试临近，学生们变得越来越焦虑。\nAs the examination approach, students become more and more anxious"
       ],
-      "revised": "Dear Jack,\n\nI heard that you may be feeling stressed about the upcoming examination lately. It is such a natural thing, and I believe you can totally deal with it. I'm writing to give you two suggestions that you could consider.\n\nFirst, start with a small task. As the examination approaches, you may feel anxious because there are still some points that you aren't familiar with. Taking small steps can reduce this anxiety.\n\nSecond, do some exercise, such as swimming, running, or any other activity you enjoy. Exercise can relieve your stress, which is truly beneficial to your physical and mental health.\n\nI'm glad that you have fought for your future and prepared for this examination for a long time. I hope your dream comes true and you pass the examination.\n\nLi Ming",
+      "revised": "Dear Jack,\n\nI heard that you may be feeling stressed about the upcoming examination lately. It is such a natural thing, and I believe you can totally deal with it. I'm writing to give you two suggestions that you could consider.\n\nFirst, start with a small task. As the examination approaches, you may feel anxious because there are still some points that you aren't familiar with. Taking small steps can reduce this anxiety.\n\nSecond, do some exercise, such as swimming, running, or any other activity you enjoy. Exercise can relieve your stress, which is truly beneficial to your physical and mental health.\n\nI'm glad that you have fought for your future and prepared for this examination for a long time. I hope your dream comes true and you pass the examination.\n\nLi Ming\n\n---\n\n语法理解专项练习修改稿（11月21日）\n1. I'm glad that you've been fighting for your dream.\n2. Only by taking small steps can we overcome difficulties.\n3. As the examination approaches, students become more and more anxious.",
       "grammar": [
         [
           "固定搭配与时态语义",
@@ -693,10 +694,28 @@
           "Dear jack / Li ming.",
           "Dear Jack / Li Ming",
           "英文称呼和姓名中的专有名词首字母大写。"
+        ],
+        [
+          "语法理解专项练习 1",
+          "I'm glad that you have fought for your dream",
+          "I'm glad that you've been fighting for your dream.",
+          "原句语法成立，have fought 强调奋斗经历或结果；have been fighting 强调从过去持续到现在的努力，更贴合“一直在努力”。"
+        ],
+        [
+          "语法理解专项练习 2",
+          "Only by taking small steps can we overcome the difficulties",
+          "Only by taking small steps can we overcome difficulties.",
+          "Only by + 动名词置于句首时，主句部分倒装：can + 主语 + 动词原形。the difficulties 指特定困难；泛指困难时通常不加 the。"
+        ],
+        [
+          "语法理解专项练习 3",
+          "As the examination approach, students become more and more anxious",
+          "As the examination approaches, students become more and more anxious.",
+          "As 引导时间状语从句；the examination 是第三人称单数，谓语用 approaches。主句 students 是复数，因此用 become。"
         ]
       ],
       "studyNotes": {
-        "intro": "围绕考试压力提出两条建议：先从小任务开始，再通过喜欢的运动缓解压力。保留原文的建议顺序和鼓励语气。重点复习 such a + 名词、be familiar with、such as、have + 过去分词，以及 hope 后的主谓一致。",
+        "intro": "围绕考试压力提出两条建议：先从小任务开始，再通过喜欢的运动缓解压力。保留原文的建议顺序和鼓励语气。重点复习 such a + 名词、be familiar with、such as、have + 过去分词，以及 hope 后的主谓一致。 同日另完成3句语法理解练习，巩固现在完成进行时、Only by 倒装和 As 时间状语从句中的主谓一致。",
         "sections": [
           {
             "title": "本次可复用的三个表达",
@@ -715,6 +734,26 @@
                 "name": "Taking small steps can...",
                 "template": "Taking small steps can reduce this anxiety.",
                 "note": "动名词短语作主语；适合表达循序渐进的建议。"
+              }
+            ]
+          },
+          {
+            "title": "语法理解专项：时态、倒装与主谓一致",
+            "items": [
+              {
+                "name": "练习 1",
+                "template": "I'm glad that you've been fighting for your dream.",
+                "note": "原句语法成立，have fought 强调奋斗经历或结果；have been fighting 强调从过去持续到现在的努力，更贴合“一直在努力”。"
+              },
+              {
+                "name": "练习 2",
+                "template": "Only by taking small steps can we overcome difficulties.",
+                "note": "Only by + 动名词置于句首时，主句部分倒装：can + 主语 + 动词原形。the difficulties 指特定困难；泛指困难时通常不加 the。"
+              },
+              {
+                "name": "练习 3",
+                "template": "As the examination approaches, students become more and more anxious.",
+                "note": "As 引导时间状语从句；the examination 是第三人称单数，谓语用 approaches。主句 students 是复数，因此用 become。"
               }
             ]
           }
