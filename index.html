@@ -952,6 +952,7 @@ function renderGrammarStats() {
  const list=node('div',undefined,'stats-error-list');
  filtered.forEach(({date,g})=>{
   const details=node('details',undefined,'stats-error');
+  details.open=true;
   details.append(node('summary',date+' · '+g[0]));
   details.append(node('p','原句：'+g[1],'stats-before'));
   details.append(node('p','修改：'+g[2],'stats-after'));
