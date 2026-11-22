@@ -10,6 +10,8 @@
 :root{color-scheme:light;--ink:#24372c;--muted:#536457;--line:#d9dfd4;--paper:#fdfbf4;--green:#284d39;--serif:Georgia,"Noto Serif SC","Songti SC",serif}
 *{box-sizing:border-box}body{margin:0;color:var(--ink);font:15px/1.55 "PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:#ecefe8;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' opacity='.12' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}
 button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2px solid #317464;outline-offset:3px}header,.workspace{width:min(1150px,calc(100% - 56px));margin:auto}header{padding:48px 0 29px;border-bottom:1px solid #aebbac;display:flex;align-items:end;justify-content:space-between;gap:20px}.kicker{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green);font-weight:700}h1{font:700 clamp(2.25rem,5.4vw,4.4rem)/1.12 var(--serif);letter-spacing:-.045em;margin:11px 0 5px}header p{margin:0;color:var(--muted)}.stamp{border:1px solid #789286;padding:8px 12px;border-radius:3px;transform:rotate(-4deg);white-space:nowrap;color:var(--green)}.workspace{display:grid;grid-template-columns:335px minmax(0,1fr);gap:28px;margin-top:28px;margin-bottom:46px;align-items:start}.sidebar{display:grid;gap:19px}.calendar,.entry{border:1px solid var(--line);border-radius:6px;background:var(--paper);box-shadow:0 3px 12px #24372c12}.calendar{padding:19px}.progress-card{border:1px solid var(--line);border-radius:6px;background:var(--paper);padding:17px 19px;box-shadow:0 3px 12px #24372c12}.progress-card h2{font-size:1rem;margin:0}.progress-meta{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:6px 0 10px;font-size:.78rem;color:var(--muted)}.progress-meta strong{font:700 1.35rem/1 var(--serif);color:var(--green)}.progress-track{height:9px;background:#e6e9df;border-radius:20px;overflow:hidden}.progress-track span{display:block;height:100%;width:0;background:#547b5c;border-radius:20px;transition:width .35s ease}.progress-caption{font-size:.75rem;color:var(--muted);margin:10px 0 0}.calHead,.legend{display:flex;align-items:center;justify-content:space-between;gap:8px}.calHead h2{margin:0;font-size:1.12rem}.monthControl{display:flex;gap:5px}.monthControl button{background:#fff;border:1px solid var(--line);border-radius:4px;width:36px;height:36px;font-size:1.1rem}.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center;margin-top:14px}.weekday{color:var(--muted);font-size:.77rem}.day{border:1px solid transparent;background:transparent;min-height:34px;border-radius:5px;padding:3px 1px;position:relative;transition:background .15s,border-color .15s,box-shadow .15s}.day:hover,.monthControl button:hover{background:#e5eee2}.day.has{background:#e4eee3;border-color:#c8d9c8;font-weight:700}.day.has:after{content:"✓";position:absolute;right:3px;bottom:1px;display:grid;place-items:center;width:13px;height:13px;border-radius:50%;background:#315b42;color:#fff;font-size:9px;font-weight:800;line-height:1}.day.planned{border:1px dashed #b68b4f;background:#fbf3e2}.day.planned:before{content:"计";position:absolute;top:0;right:2px;display:grid;place-items:center;min-width:12px;height:12px;padding:0 2px;border-radius:3px;background:#ead7b7;color:#795a2c;font-size:8px;font-weight:800;line-height:1}.day.has.planned{background:#e4eee3;border:1px solid #b68b4f}.day.selected{outline:2px solid #284d39;outline-offset:2px;z-index:1}.day.selected:not(.has):not(.planned){background:#f0f2ec;font-weight:800}.day.exam-day{background:#fbf3e2!important;border:1px dashed #b68b4f!important;font-weight:800;color:var(--ink)}.day.exam-day:before{content:"考试";min-width:0;padding:0 2px;font-size:7px}.day.exam-day:after{content:"⭐️";display:inline;position:static;width:auto;height:auto;margin-left:2px;background:none;font-size:10px;vertical-align:baseline}.day.selected.exam-day{background:#fbf3e2!important;color:var(--ink)}.schedule-list{display:grid;gap:10px}.schedule-item{border-left:3px solid #78977a;padding:8px 12px;background:#f0f3ea;border-radius:0 4px 4px 0}.schedule-item small{display:block;color:var(--muted);font-size:.75rem}.schedule-item b{display:block;margin:2px 0}.schedule-item p{margin:0;font-size:.9rem}.schedule-tag{display:inline-block;font-size:.7rem;color:var(--green);font-weight:700;margin-top:4px}.legend{justify-content:flex-start;flex-wrap:wrap;gap:14px;margin-top:13px;color:var(--muted);font-size:.78rem}.legend-item{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}.legend-swatch{width:20px;height:20px;border-radius:5px;display:inline-grid;place-items:center;font-size:11px;font-weight:800;line-height:1}.legend-swatch.completed{background:#e4eee3;border:1px solid #c8d9c8;color:#315b42}.legend-swatch.planned{background:#fbf3e2;border:1px dashed #b68b4f;color:#795a2c}.legend-swatch.selected{background:#f0f2ec;border:2px solid #284d39;color:#24372c}.notes{display:grid;gap:10px}.notes h2{margin:0;font-size:.83rem;color:var(--muted)}.card{width:100%;display:block;text-align:left;border:1px solid #dad5b9;background:#f5edca;border-radius:4px;padding:13px 16px;box-shadow:0 2px 6px #24372c16}.card:nth-of-type(even){background:#e1eadb;border-color:#c7d6c0}.card[aria-current="date"]{border-color:#547359;box-shadow:inset 4px 0 #547359}.card small{display:block;color:var(--muted)}.card b{display:block;margin-top:2px}.entry{min-height:540px;padding:30px clamp(20px,3.5vw,43px);position:relative}.entry:before{content:"";position:absolute;top:-6px;left:50%;width:64px;height:13px;transform:translateX(-50%) rotate(-3deg);background:#cec59e99}.date{font-size:.76rem;letter-spacing:.14em;color:var(--muted);font-weight:700}.entry h2{font:700 clamp(1.6rem,4vw,2.35rem)/1.2 var(--serif);margin:8px 0}.sub{color:var(--muted);margin:0 0 18px}.tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:16px}.tab{border:0;background:transparent;padding:9px 4px;margin-right:8px;color:var(--muted);border-bottom:2px solid transparent}.tab[aria-selected="true"]{border-bottom-color:var(--green);color:var(--green);font-weight:700}.writing{font:1.12rem/1.85 var(--serif);overflow-wrap:anywhere}.writing p{margin:0 0 .9em;white-space:pre-line}.excerpt{border-bottom:1px solid var(--line);padding:0 0 11px}.excerpt small,.hint{font: .83rem/1.55 system-ui,sans-serif;color:var(--muted)}.grammar{display:grid;gap:9px}.grammar details{background:#f0f3ea;border:1px solid var(--line);padding:10px 13px;border-radius:4px}.grammar summary{cursor:pointer;font-weight:700}.grammar p{margin:7px 0}.pair{font:1.05rem/1.5 var(--serif)}del{color:#854137}ins{text-decoration:none;color:#24553e;font-weight:700}.answer{padding:3px 8px;font-weight:600}.empty{color:var(--muted)}[hidden]{display:none!important}
+
+.stats-launch{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:13px 16px;border:1px solid var(--line);border-radius:6px;background:#eef3e9;color:var(--ink);box-shadow:0 2px 8px #24372c0b}.stats-launch strong{font-size:.92rem}.stats-launch span{font-size:.75rem;color:var(--muted)}.stats-launch:hover{border-color:#9caf9b;background:#e7eee2}.stats-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}.stats-metric{background:#f0f3ea;border:1px solid var(--line);border-radius:6px;padding:15px;display:flex;flex-direction:column;gap:5px}.stats-metric strong{font:700 1.8rem/1.1 var(--serif);color:var(--green)}.stats-metric span{font-size:.76rem;color:var(--muted)}.stats-heading{font-size:1rem;margin:22px 0 10px}.stats-category-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stats-category{border:1px solid var(--line);border-radius:6px;background:#fffdf7;padding:11px 13px;text-align:left;min-width:0}.stats-category.active{border-color:#78977a;background:#eef3e9;box-shadow:inset 3px 0 #547b5c}.stats-category-top{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:.82rem}.stats-category-top b{font-size:.78rem;color:var(--muted);white-space:nowrap}.stats-track{display:block;height:6px;border-radius:8px;background:#e8ece3;overflow:hidden;margin-top:9px}.stats-track i{display:block;height:100%;background:#78977a;border-radius:8px}.stats-back{margin:0 0 10px;padding:6px 12px;border:1px solid var(--line);border-radius:5px;background:#f7f7f0;color:var(--muted);font-size:.78rem}.stats-error-list{display:grid;gap:8px}.stats-error{border:1px solid var(--line);border-radius:6px;background:#f7f8f2;padding:11px 14px}.stats-error summary{cursor:pointer;font-weight:700}.stats-error p{margin:8px 0;overflow-wrap:anywhere}.stats-before{color:#925c50;font:1rem/1.6 var(--serif)}.stats-after{color:#315b42;font:1rem/1.6 var(--serif)}.stats-method{font-size:.78rem;color:var(--muted);line-height:1.6;margin-top:8px}
 @media(max-width:810px){header,.workspace{width:calc(100% - 30px)}header{padding-top:32px}.workspace{grid-template-columns:minmax(0,1fr);gap:18px}.sidebar{gap:12px}.notes{grid-template-columns:1fr 1fr}.notes h2{grid-column:1/-1}.entry{min-height:0}.stamp{display:none}.card{padding:9px 11px}.calendar{padding:14px}}
 </style>
 </head>
@@ -19,6 +21,7 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 <aside class="sidebar" aria-label="练习日期">
 <section class="calendar"><div class="calHead"><h2 id="month"></h2><div class="monthControl"><button id="prev" aria-label="上个月">‹</button><button id="next" aria-label="下个月">›</button></div></div><div class="grid" id="calendar"></div><div class="legend" aria-label="日历状态图例"><span class="legend-item"><span class="legend-swatch completed">✓</span>已完成写作</span><span class="legend-item"><span class="legend-swatch planned">计</span>计划练习</span><span class="legend-item"><span class="legend-swatch selected">22</span>当前选中</span></div></section>
 <section class="progress-card" aria-label="考前备考进度"><h2>考前备考进度</h2><div class="progress-meta"><span id="progress-week-label">正在计算备考周次…</span><strong id="progress-week-count">— / 10 周</strong></div><div class="progress-track" role="progressbar" aria-label="备考周数进度" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span id="progress-bar"></span></div><p class="progress-caption" id="progress-caption">正在计算考试倒计时…</p></section>
+<button class="stats-launch" id="openGrammarStats" type="button"><strong>语法错误统计</strong><span id="grammarStatsCount">查看累计错点与薄弱项 →</span></button>
 <nav class="notes" id="notes" aria-label="已归档的作文"></nav>
 </aside>
 <section class="entry" id="entry" aria-label="当日写作"></section>
@@ -799,6 +802,8 @@ const grid = document.querySelector('#calendar');
 const notes = document.querySelector('#notes');
 const entry = document.querySelector('#entry');
 const tabs = ['我的原文','修改稿','语法错点','挖空复习','模板笔记'];
+let showGrammarStats = false;
+let grammarStatsFilter = '全部';
 // 备考周期：第 1 周从 2026-10-12（周一）开始；第 5 周于 2026-11-15 结束。
 const PREP_START = '2026-10-12';
 const EXAM_DATE = '2026-12-19';
@@ -866,6 +871,7 @@ function dateKey(y,m,d) {
  return [String(y).padStart(4,'0'),String(m+1).padStart(2,'0'),String(d).padStart(2,'0')].join('-');
 }
 function select(key, from) {
+ showGrammarStats = false;
  selected = key;
  month = Number(key.slice(5,7)) - 1;
  year = Number(key.slice(0,4));
@@ -882,6 +888,78 @@ function select(key, from) {
  } else {
   document.querySelector('[data-'+from+'="'+key+'"]')?.focus({preventScroll:true});
  }
+}
+function classifyGrammar(g) {
+ const tag=String(g?.[0]||''), before=String(g?.[1]||''), why=String(g?.[3]||'');
+ if (/主谓一致/.test(tag) || /第三人称单数|主语.*谓语|谓语用.*单数/.test(why) || /examination approach|pictures shows|college life give|dream come true/i.test(before)) return '主谓一致';
+ if (/倒装|Only by|Not only/i.test(tag+' '+before)) return '倒装与强调';
+ if (/^(关系从句|定语从句|宾语从句|主语从句|同位语从句|句子连接|时间从句|虚拟条件句|举例结构|原因句型)/.test(tag)) return '从句与句子结构';
+ if (/^(名词|冠词|所有格|不可数名词|数量词|词性与冠词)/.test(tag) || /名词复数|名词单复数|名词所有格|不可数名词|数量词|冠词/.test(tag)) return '名词、冠词与数量';
+ if (/非谓语|动名词|不定式|现在分词|make 使役|want \//.test(tag) || /choose to shopping|helps our to study/i.test(before)) return '非谓语与动词结构';
+ if (/时态|过去时|完成时|过去分词|情态动词|被动|虚拟语气|不规则/.test(tag) || /have fought|may caused|were busy/i.test(before)) return '时态、语态与动词形式';
+ if (/固定搭配|固定介词|道歉的介词|动词搭配|形容词搭配|地点和时间介词|倍数表达与时间介词|词汇选择与固定搭配|worth 的用法|hesitate|look forward|无选择与有选择/.test(tag)) return '固定搭配与介词';
+ if (/拼写|词汇|词性|比较级|副词|形容词|摄影词汇|肯定句中的/.test(tag)) return '词汇、词性与拼写';
+ if (/邮件结尾|称呼格式/.test(tag)) return '写作格式与语用';
+ return '固定搭配与介词';
+}
+function collectGrammarEntries() {
+ const items=[];
+ for (const date of Object.keys(records).sort().reverse()) {
+  (records[date].grammar||[]).forEach((g,index)=>items.push({date,g,index,category:classifyGrammar(g)}));
+ }
+ return items;
+}
+function collectGrammarStats() {
+ const items=collectGrammarEntries(), counts={};
+ items.forEach(item=>counts[item.category]=(counts[item.category]||0)+1);
+ const categories=Object.entries(counts).map(([name,count])=>({name,count})).sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name,'zh-CN'));
+ return {items,categories,total:items.length,recurring:categories.filter(x=>x.count>=3).length};
+}
+function renderGrammarStats() {
+ const stats=collectGrammarStats();
+ entry.replaceChildren(node('div','累计学习数据','date'),node('h2','语法错误统计'),node('p','根据已归档的作文与专项练习自动汇总。每条语法记录按主要问题归入一个类别，避免一条记录被重复计数。','sub'));
+ const metrics=node('div',undefined,'stats-metrics');
+ [[stats.total,'已记录错点'],[stats.categories.length,'错误类别'],[stats.recurring,'出现 3 次以上的类别']].forEach(([value,label])=>{
+  const card=node('div',undefined,'stats-metric');
+  card.append(node('strong',value),node('span',label));
+  metrics.append(card);
+ });
+ entry.append(metrics,node('h3','薄弱语法地图','stats-heading'));
+ const categoryList=node('div',undefined,'stats-category-list');
+ const max=Math.max(1,...stats.categories.map(x=>x.count));
+ const allButton=node('button','全部类别 · '+stats.total,'stats-category'+(grammarStatsFilter==='全部'?' active':''));
+ allButton.onclick=()=>{grammarStatsFilter='全部';renderGrammarStats();};
+ categoryList.append(allButton);
+ stats.categories.forEach(item=>{
+  const button=node('button',undefined,'stats-category'+(grammarStatsFilter===item.name?' active':''));
+  const top=node('span',undefined,'stats-category-top');
+  top.append(node('strong',item.name),node('b',item.count+' 条'));
+  const track=node('span',undefined,'stats-track');
+  const fill=node('i');
+  fill.style.width=(item.count/max*100)+'%';
+  track.append(fill);
+  button.append(top,track);
+  button.onclick=()=>{grammarStatsFilter=item.name;renderGrammarStats();};
+  categoryList.append(button);
+ });
+ entry.append(categoryList);
+ const filtered=grammarStatsFilter==='全部'?stats.items:stats.items.filter(x=>x.category===grammarStatsFilter);
+ const historyTitle=node('h3',grammarStatsFilter==='全部'?'历史错句 · 最近记录':'历史错句 · '+grammarStatsFilter,'stats-heading');
+ entry.append(historyTitle);
+ const back=node('button','返回当天作文','stats-back');
+ back.onclick=()=>{showGrammarStats=false;renderEntry();};
+ entry.append(back);
+ const list=node('div',undefined,'stats-error-list');
+ filtered.forEach(({date,g})=>{
+  const details=node('details',undefined,'stats-error');
+  details.append(node('summary',date+' · '+g[0]));
+  details.append(node('p','原句：'+g[1],'stats-before'));
+  details.append(node('p','修改：'+g[2],'stats-after'));
+  details.append(node('p',g[3],'hint'));
+  list.append(details);
+ });
+ if (!filtered.length) list.append(node('p','这个类别暂时没有记录。','empty'));
+ entry.append(list);
 }
 function renderCalendar() {
  monthLabel.textContent = year+' 年 '+(month+1)+' 月';
@@ -1017,6 +1095,8 @@ function moveMonth(delta) {
 }
 document.querySelector('#prev').onclick=()=>moveMonth(-1);
 document.querySelector('#next').onclick=()=>moveMonth(1);
+document.querySelector('#openGrammarStats').addEventListener('click',()=>{showGrammarStats=true;grammarStatsFilter='全部';renderGrammarStats();});
+document.querySelector('#grammarStatsCount').textContent=collectGrammarStats().total+' 条已记录错点 · 查看分析 →';
 updatePrepProgress();
 renderCalendar();
 renderNotes();
