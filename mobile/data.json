@@ -1,5 +1,502 @@
 {
   "records": {
+    "2026-11-22": {
+      "title": "大学生在线学习比例上升 · 图表作文",
+      "type": "考研英语二 · Part B · 图表作文 · 完整练习",
+      "original": [
+        "The bar chart illustrates the percentage of college student choose study online. To be specific, it rose from 30% in 2020 to 75% in 2026, over double between 6 years. The majority of students choose study online shows the flourish online study resources.\nThere are many factors contributes to this phenomenon. First of all, online study give the college students a chance to study what their interested in. Secondly, not only does the online study give students a choice on get in class, but it also helps students to repeat play. Last but not least, it is truly helps students to build a ability of independent study skill, which is important factor for their after day learning.\nTo sum up, we should spare no efforts to encourage this trend. On the one hand, university should open more online classes. On the other hand, it is important that students built the awerness of study on their own, not simply learn in class. In this way, hopefully, the college students accedemic life would be better."
+      ],
+      "revised": "The bar chart illustrates the percentage of college students who choose to study online. To be specific, it rose from 30% in 2020 to 75% in 2026, more than doubling over six years. The fact that the majority of students choose to study online shows the flourishing of online learning resources.\n\nThere are many factors contributing to this phenomenon. First of all, online learning gives college students a chance to study what they are interested in. Secondly, not only does online learning give students more choices in how they attend classes, but it also allows students to replay lessons. Last but not least, it truly helps students develop the ability to study independently, which is an important factor in their future learning.\n\nTo sum up, we should spare no effort to encourage this trend. On the one hand, universities should offer more online courses. On the other hand, it is important that students build an awareness of independent learning rather than simply learn in class. In this way, college students' academic lives will hopefully become better.",
+      "grammar": [
+        [
+          "名词复数与定语从句",
+          "percentage of college student choose study online",
+          "percentage of college students who choose to study online",
+          "泛指大学生用复数 students；who 引导定语从句修饰 students；choose 后接 to do。"
+        ],
+        [
+          "倍数表达与时间介词",
+          "over double between 6 years",
+          "more than doubling over six years",
+          "more than doubling 表示增长幅度超过一倍；表示一段时间用 over six years。30% 到 75% 是原来的2.5倍。"
+        ],
+        [
+          "句子连接与同位语从句",
+          "The majority of students choose study online shows the flourish online study resources",
+          "The fact that the majority of students choose to study online shows the flourishing of online learning resources",
+          "两个完整意思不能直接拼接；用 The fact that... 作主语，that 从句解释 fact；flourish 是动词，flourishing 作名词/形容词。"
+        ],
+        [
+          "非谓语与固定搭配",
+          "There are many factors contributes to this phenomenon",
+          "There are many factors contributing to this phenomenon",
+          "There are... 已有谓语 are，后面用 contributing 修饰 factors；也可改写为 Many factors contribute to...。"
+        ],
+        [
+          "主谓一致与宾语从句",
+          "online study give the college students a chance to study what their interested in",
+          "online learning gives college students a chance to study what they are interested in",
+          "online learning 是单数主语，谓语用 gives；what they are interested in 中用主格 they；固定搭配 be interested in。"
+        ],
+        [
+          "倒装句与动词搭配",
+          "not only does the online study give students a choice on get in class, but it also helps students to repeat play",
+          "not only does online learning give students more choices in how they attend classes, but it also allows students to replay lessons",
+          "Not only does 后接主语和动词原形；choices in how... 表达选择方式；replay 是“重新播放”的单个动词。"
+        ],
+        [
+          "谓语结构与词性",
+          "it is truly helps students to build a ability of independent study skill",
+          "it truly helps students develop the ability to study independently",
+          "不能把 is 和 helps 叠加；help + 人 + 动词原形；a 应改为 an，但此处 the ability 更符合泛指能力的表达。"
+        ],
+        [
+          "关系从句与冠词",
+          "which is important factor for their after day learning",
+          "which is an important factor in their future learning",
+          "单数可数名词 factor 前加 an；future learning 表示未来学习；factor in 是常见搭配。"
+        ],
+        [
+          "固定搭配",
+          "spare no efforts",
+          "spare no effort",
+          "固定表达 spare no effort，意为“不遗余力”。"
+        ],
+        [
+          "名词单复数与词汇搭配",
+          "university should open more online classes",
+          "universities should offer more online courses",
+          "泛指大学用复数 universities；offer courses 表示开设课程。"
+        ],
+        [
+          "虚拟语气与拼写",
+          "students built the awerness of study on their own, not simply learn in class",
+          "students build an awareness of independent learning rather than simply learn in class",
+          "It is important that 后可用虚拟语气动词原形 build；awareness 拼写；an awareness of 是常见搭配。"
+        ],
+        [
+          "所有格与拼写",
+          "the college students accedemic life would be better",
+          "college students' academic lives will hopefully become better",
+          "academic 拼写；多个学生的生活用 students' lives；will 更直接表达未来展望。"
+        ]
+      ],
+      "studyNotes": {
+        "intro": "文章按图表描述、在线学习优势分析和总结建议展开。保留了用户关于自主选择学习内容、灵活参加课程和重复播放课程、培养独立学习能力的三个论点。重点复习定语从句、The fact that... 主语结构、There are... contributing to...、Not only 倒装、help + 人 + 动词原形，以及 It is important that + 主语 + 动词原形。",
+        "sections": [
+          {
+            "title": "本次可复用的三个句型与逻辑点",
+            "items": [
+              {
+                "name": "The fact that... shows...",
+                "template": "The fact that the majority of students choose to study online shows the flourishing of online learning resources.",
+                "note": "用 The fact that 引导的主语结构，把观察到的现象和结论连接起来。"
+              },
+              {
+                "name": "Not only does..., but it also...",
+                "template": "Not only does online learning give students more choices, but it also allows them to replay lessons.",
+                "note": "用于并列两个优势；Not only 置于句首时倒装，does 后接动词原形。"
+              },
+              {
+                "name": "It is important that...",
+                "template": "It is important that students build an awareness of independent learning.",
+                "note": "用于提出建议或强调必要性；that 从句中可使用动词原形 build。"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "2026-11-21": {
+      "title": "考研压力与应对建议 · 建议信 · 语法理解专项练习",
+      "type": "考研英语二 · Part A · 建议信 · 完整练习；同日补充：语法理解专项练习",
+      "original": [
+        "Dear jack,\nI heard that you may have some stress for upcoming examination lately. It is such natural thing, and I believe you totally can deal with it. I'm writing to give you two suggestions that you could consider it.\nFirst one, start with a small task. Nearly examination, you may have a feeling of anxiety because there still are some points that you haven't familar it. Moving to a small step can contract this phenomenon. \nSecond two, do some sports. Such like swimming, running or whatever you enjoy it. The exercise can relieve your stress, which is truly beneficial to physical and mental health.\nI'm glad that you have fight for your future, and prepared this examination for a long time. I hope your dream come true and examination be passed.\nLi ming.",
+        "语法理解专项练习（11月21日）\n1. 我很高兴你一直在为自己的梦想而努力。\nI'm glad that you have fought for your dream\n\n2. 只有通过循序渐进的努力，我们才能克服困难。\nOnly by taking small steps can we overcome the difficulties\n\n3. 随着考试临近，学生们变得越来越焦虑。\nAs the examination approach, students become more and more anxious"
+      ],
+      "revised": "Dear Jack,\n\nI heard that you may be feeling stressed about the upcoming examination lately. It is such a natural thing, and I believe you can totally deal with it. I'm writing to give you two suggestions that you could consider.\n\nFirst, start with a small task. As the examination approaches, you may feel anxious because there are still some points that you aren't familiar with. Taking small steps can reduce this anxiety.\n\nSecond, do some exercise, such as swimming, running, or any other activity you enjoy. Exercise can relieve your stress, which is truly beneficial to your physical and mental health.\n\nI'm glad that you have fought for your future and prepared for this examination for a long time. I hope your dream comes true and you pass the examination.\n\nLi Ming\n\n---\n\n语法理解专项练习修改稿（11月21日）\n1. I'm glad that you've been fighting for your dream.\n2. Only by taking small steps can we overcome difficulties.\n3. As the examination approaches, students become more and more anxious.",
+      "grammar": [
+        [
+          "固定搭配与时态语义",
+          "some stress for upcoming examination lately",
+          "feeling stressed about the upcoming examination lately",
+          "表达“对考试感到有压力”用 feel stressed about；upcoming examination 前补 the。"
+        ],
+        [
+          "冠词",
+          "such natural thing",
+          "such a natural thing",
+          "单数可数名词 thing 前需要冠词 a；结构是 such a + 形容词 + 名词。"
+        ],
+        [
+          "宾语从句与重复宾语",
+          "suggestions that you could consider it",
+          "suggestions that you could consider",
+          "that 引导的定语从句中，that 已经充当 consider 的宾语，不需要再加 it。"
+        ],
+        [
+          "句子连接与时间表达",
+          "First one... Nearly examination...",
+          "First... As the examination approaches...",
+          "列举建议用 First / Second；“临近考试”可用 as the examination approaches。"
+        ],
+        [
+          "形容词搭配",
+          "points that you haven't familar it",
+          "points that you aren't familiar with",
+          "familiar 是形容词，使用 be familiar with；不能说 familiar it。"
+        ],
+        [
+          "词汇选择与固定搭配",
+          "Moving to a small step can contract this phenomenon",
+          "Taking small steps can reduce this anxiety",
+          "take small steps 表示采取小步骤；contract 不表示“缓解焦虑”，这里用 reduce。"
+        ],
+        [
+          "举例结构与代词",
+          "Such like swimming, running or whatever you enjoy it",
+          "such as swimming, running, or any other activity you enjoy",
+          "举例用 such as；enjoy 后面已有宾语从句/关系结构，不需要额外的 it。"
+        ],
+        [
+          "动词过去分词与介词",
+          "you have fight... and prepared this examination",
+          "you have fought... and prepared for this examination",
+          "have 后接过去分词 fought；prepare for an examination 是固定搭配。"
+        ],
+        [
+          "主谓一致与句子结构",
+          "I hope your dream come true and examination be passed",
+          "I hope your dream comes true and you pass the examination",
+          "dream 是单数，谓语用 comes；用 you pass the examination 表达“你通过考试”更清楚。"
+        ],
+        [
+          "拼写与称呼格式",
+          "Dear jack / Li ming.",
+          "Dear Jack / Li Ming",
+          "英文称呼和姓名中的专有名词首字母大写。"
+        ],
+        [
+          "语法理解专项练习 1",
+          "I'm glad that you have fought for your dream",
+          "I'm glad that you've been fighting for your dream.",
+          "原句语法成立，have fought 强调奋斗经历或结果；have been fighting 强调从过去持续到现在的努力，更贴合“一直在努力”。"
+        ],
+        [
+          "语法理解专项练习 2",
+          "Only by taking small steps can we overcome the difficulties",
+          "Only by taking small steps can we overcome difficulties.",
+          "Only by + 动名词置于句首时，主句部分倒装：can + 主语 + 动词原形。the difficulties 指特定困难；泛指困难时通常不加 the。"
+        ],
+        [
+          "语法理解专项练习 3",
+          "As the examination approach, students become more and more anxious",
+          "As the examination approaches, students become more and more anxious.",
+          "As 引导时间状语从句；the examination 是第三人称单数，谓语用 approaches。主句 students 是复数，因此用 become。"
+        ]
+      ],
+      "studyNotes": {
+        "intro": "围绕考试压力提出两条建议：先从小任务开始，再通过喜欢的运动缓解压力。保留原文的建议顺序和鼓励语气。重点复习 such a + 名词、be familiar with、such as、have + 过去分词，以及 hope 后的主谓一致。 同日另完成3句语法理解练习，巩固现在完成进行时、Only by 倒装和 As 时间状语从句中的主谓一致。",
+        "sections": [
+          {
+            "title": "本次可复用的三个表达",
+            "items": [
+              {
+                "name": "As the examination approaches...",
+                "template": "As the examination approaches, you may feel anxious...",
+                "note": "表达“随着考试临近”，用于引出压力或备考状态。"
+              },
+              {
+                "name": "be familiar with...",
+                "template": "There are still some points that you aren't familiar with.",
+                "note": "familiar 是形容词，固定搭配 be familiar with。"
+              },
+              {
+                "name": "Taking small steps can...",
+                "template": "Taking small steps can reduce this anxiety.",
+                "note": "动名词短语作主语；适合表达循序渐进的建议。"
+              }
+            ]
+          },
+          {
+            "title": "语法理解专项：时态、倒装与主谓一致",
+            "items": [
+              {
+                "name": "练习 1",
+                "template": "I'm glad that you've been fighting for your dream.",
+                "note": "原句语法成立，have fought 强调奋斗经历或结果；have been fighting 强调从过去持续到现在的努力，更贴合“一直在努力”。"
+              },
+              {
+                "name": "练习 2",
+                "template": "Only by taking small steps can we overcome difficulties.",
+                "note": "Only by + 动名词置于句首时，主句部分倒装：can + 主语 + 动词原形。the difficulties 指特定困难；泛指困难时通常不加 the。"
+              },
+              {
+                "name": "练习 3",
+                "template": "As the examination approaches, students become more and more anxious.",
+                "note": "As 引导时间状语从句；the examination 是第三人称单数，谓语用 approaches。主句 students 是复数，因此用 become。"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "2026-11-20": {
+      "title": "大学生规律运动比例上升 · 图表作文",
+      "type": "考研英语二 · Part B · 图表作文 · 完整练习",
+      "original": [
+        "The bar chart illustrates that the percentage of university students exercising regularly. To be specific, it rise gradually from 35% in 2020 to 70% to 2026, exaclly doubled btween five years. It shows university students have prioritized the exercise, which is beneficial to their mental and phisical health.\nThere are many factors contribute this phenomenon. First of all, it is the possible reason that the students have more stress of study when they came in college.  Compare to their high school, college life give them more choice to realise the stress, and the exercise is one of the great way. It helps them refresh brain off study. Secondly, the regular plan gives them a sense of control life. On the one hand, it helps them more efficient when they study. On the other hand, the regular means health diet, which is truly beneficial to their body health in the long way. \nWe should spare no pains to encourage this phenomnon. Not only does the university students should built a awerness of regular exercise, but them also should keep this habit. Meanwhile, the school and the society should give them more opportunity to exercise, such as enough time and nice place. In this way, hopefully, the university students life would be better."
+      ],
+      "revised": "The bar chart illustrates the percentage of university students who exercise regularly. To be specific, it rose gradually from 35% in 2020 to 70% in 2026, exactly doubling over six years. This shows that university students have placed greater importance on exercise, which is beneficial to their physical and mental health.\n\nThere are many factors contributing to this phenomenon. First of all, one possible reason is that students experience greater academic pressure when they enter college. Compared with high school, college life gives them more choices to relieve stress, and exercise is one of the best ways to do so. It helps them refresh their minds after studying. Secondly, having a regular exercise plan gives them a sense of control over their lives. On the one hand, it helps them study more efficiently. On the other hand, a regular routine also involves a healthy diet, which is truly beneficial to their physical health in the long run.\n\nWe should spare no effort to encourage this positive trend. Not only should university students develop an awareness of regular exercise, but they should also maintain this habit. Meanwhile, schools and society should provide them with more opportunities to exercise, such as sufficient time and suitable places. In this way, university students' lives will hopefully become better.",
+      "grammar": [
+        [
+          "图表描述与时态",
+          "it rise gradually from 35% in 2020 to 70% to 2026",
+          "it rose gradually from 35% in 2020 to 70% in 2026",
+          "描述已经发生的图表趋势用过去式 rose；from...to... 两端分别接起点和终点。2020 到 2026 是六年。"
+        ],
+        [
+          "词汇与拼写",
+          "exaclly doubled btween five years",
+          "exactly doubling over six years",
+          "exactly 和 between 拼写要准确；表示“在六年间翻了一倍”可用 doubling over six years。"
+        ],
+        [
+          "名词搭配",
+          "prioritized the exercise",
+          "placed greater importance on exercise",
+          "泛指运动时通常不加 the；place importance on 是常见搭配。"
+        ],
+        [
+          "非谓语与介词",
+          "There are many factors contribute this phenomenon",
+          "There are many factors contributing to this phenomenon",
+          "名词 factors 后可用现在分词 contributing 作后置修饰；contribute to 是固定搭配。"
+        ],
+        [
+          "原因句型与词汇",
+          "it is the possible reason that the students have more stress of study",
+          "one possible reason is that students experience greater academic pressure",
+          "用 one possible reason is that... 引出原因；academic pressure 比 stress of study 更符合英语搭配。"
+        ],
+        [
+          "比较结构与主谓一致",
+          "Compare to their high school, college life give them more choice",
+          "Compared with high school, college life gives them more choices",
+          "Compared with 用于比较；college life 是单数主语，谓语用 gives；choice 用复数 choices。"
+        ],
+        [
+          "动词搭配与介词",
+          "refresh brain off study",
+          "refresh their minds after studying",
+          "refresh 后接宾语；“学习后恢复精神”可说 refresh their minds after studying。"
+        ],
+        [
+          "固定介词搭配",
+          "a sense of control life",
+          "a sense of control over their lives",
+          "固定表达是 a sense of control over...；表示“对生活的掌控感”。"
+        ],
+        [
+          "比较级与副词",
+          "it helps them more efficient when they study",
+          "it helps them study more efficiently",
+          "help + 人 + 动词原形；修饰 study 这个动作要用副词 efficiently。"
+        ],
+        [
+          "动词结构与倒装",
+          "Not only does the university students should built... but them also should keep...",
+          "Not only should university students develop... but they should also maintain...",
+          "Not only 句首倒装只保留一个助动词；should 后接动词原形；but also 后使用正常语序。"
+        ],
+        [
+          "名词所有格与复数",
+          "the university students life",
+          "university students' lives",
+          "表示“大学生们的生活”要用复数所有格 students' lives。"
+        ],
+        [
+          "拼写与固定搭配",
+          "spare no pains",
+          "spare no effort",
+          "固定表达 spare no effort，意为“不遗余力”；phenomenon 的拼写也要注意。"
+        ]
+      ],
+      "studyNotes": {
+        "intro": "文章按图表趋势、原因分析、建议结尾展开。保留了用户关于大学学习压力、运动释放压力、生活掌控感和健康饮食的论证。重点复习图表过去时、contribute to、compared with、help + 人 + do、control over，以及 Not only 倒装。",
+        "sections": [
+          {
+            "title": "本次可复用的三个表达",
+            "items": [
+              {
+                "name": "The percentage rose from... to...",
+                "template": "The percentage rose gradually from 35% in 2020 to 70% in 2026, exactly doubling over six years.",
+                "note": "描述图表变化；注意过去式 rose，以及 from...to... 的搭配。"
+              },
+              {
+                "name": "There are many factors contributing to...",
+                "template": "There are many factors contributing to this phenomenon.",
+                "note": "用现在分词短语修饰 factors，并记住 contribute to。"
+              },
+              {
+                "name": "Not only should..., but ... should also...",
+                "template": "Not only should university students develop an awareness of regular exercise, but they should also maintain this habit.",
+                "note": "Not only 放句首时倒装；should 后接动词原形，but also 后恢复正常语序。"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "2026-11-19": {
+      "title": "校园摄影展邀请信 · Invitation to a Photography Exhibition · which从句与动词形式专项练习",
+      "type": "考研英语二 · Part A · 邀请信 · 完整练习；同日补充：语法专项翻译练习",
+      "original": [
+        "Dear jack,\nIs your preparing for postgraduate entrance examination going well recently? Hope you can relax for a while after studying hard, which is truly helps you refresh your brain and give your constant energy. Anyway, I'm writing to invite you to attend a photography exhibition on campus organized by my university.\nI always see a lots of pictures photoed by you on your social media, that is truly beautiful. Those picture shows what you talent are. The reason why I think you have to attend the exhibition is that there would be a much of same beauty photographies pictured by another talented student, even have some masterpiece. \nIn conclusion, if you are interested, you can come school activities center on next Friday. This exhibition will last for three days, I sincerely hope I can come this exhibition with you. Looking for your reply.\nyours,\nLiming",
+        "语法专项翻译练习（11月19日）\n1. 规律运动可以减轻压力，这有助于我们更好地学习。\nRegular sports can relieve stress, which helps our to study better.\n\n2. 学校建立了一个新图书馆，这为学生提供了更好的学习环境。\nSchool builds a new library, which provides students a better studying environment\n\n3. 越来越多的人选择网上购物，这使他们的生活更加方便。\nMore and more people choose to shopping online, which makes them life more convinence\n\n4. 只有通过每天练习，我们才能提高英语写作能力。\nOnly by practicing everyday, can we improve english writing skills\n\n5. 那些照片展现了他多么有才华。\nThose pictures shows how talented he are\n\n6. 坚持阅读不仅能扩大我们的知识面，还能提高写作能力。\nNot only does keeping reading can broaden our knowledge, but it also improve writing skills"
+      ],
+      "revised": "Dear Jack,\n\nIs your preparation for the postgraduate entrance examination going well recently? I hope you can relax for a while after studying hard, as this can truly help you refresh your mind and give you renewed energy. Anyway, I'm writing to invite you to attend a photography exhibition on campus organized by my university.\n\nI always see a lot of photos taken by you on your social media, and they are truly beautiful. Those pictures show how talented you are. The reason why I think you should attend the exhibition is that there will be many similarly beautiful photographs taken by other talented students, and even some masterpieces.\n\nIn conclusion, if you are interested, you can come to the school activity center next Friday. This exhibition will last for three days. I sincerely hope I can attend this exhibition with you. I look forward to your reply.\n\nYours,\nLi Ming\n\n---\n\n语法专项练习修改稿（11月19日）\n1. Regular exercise can relieve stress, which helps us study better.\n2. The school built a new library, which provides students with a better learning environment.\n3. More and more people choose to shop online, which makes their lives more convenient.\n4. Only by practicing every day can we improve our English writing skills.\n5. Those pictures show how talented he is.\n6. Not only does regular reading broaden our knowledge, but it also improves our writing skills.",
+      "grammar": [
+        [
+          "词性与冠词",
+          "your preparing for postgraduate entrance examination",
+          "your preparation for the postgraduate entrance examination",
+          "your 后需要名词 preparation；特指这场研究生入学考试时可用 the。"
+        ],
+        [
+          "定语从句与谓语",
+          "which is truly helps you",
+          "as this can truly help you",
+          "which 后不应同时使用 is 和 helps；本句改为 as this can... 使指代更清楚。"
+        ],
+        [
+          "数量词与摄影词汇",
+          "a lots of pictures photoed by you",
+          "a lot of photos taken by you",
+          "固定搭配是 a lot of；“拍摄的照片”通常说 photos taken by...。"
+        ],
+        [
+          "主谓一致与感叹结构",
+          "Those picture shows what you talent are",
+          "Those pictures show how talented you are",
+          "复数 pictures 搭配 show；talented 是形容词，使用 how talented you are。"
+        ],
+        [
+          "名词单复数与搭配",
+          "a much of same beauty photographies pictured by another talented student",
+          "many similarly beautiful photographs taken by other talented students",
+          "可数复数用 many；photograph 的复数是 photographs，拍摄用 taken by。"
+        ],
+        [
+          "地点和时间介词",
+          "come school activities center on next Friday",
+          "come to the school activity center next Friday",
+          "come to + 地点；next Friday 前通常不加 on。"
+        ],
+        [
+          "邮件结尾",
+          "Looking for your reply",
+          "I look forward to your reply",
+          "正式邮件期待回复用 I look forward to your reply；注意完整谓语。"
+        ],
+        [
+          "专项练习 1 · 语法与搭配",
+          "Regular sports can relieve stress, which helps our to study better.",
+          "Regular exercise can relieve stress, which helps us study better.",
+          "which helps 从句中 which 已作主语；help + 人 + 动词原形，使用 helps us study。"
+        ],
+        [
+          "专项练习 2 · 语法与搭配",
+          "School builds a new library, which provides students a better studying environment",
+          "The school built a new library, which provides students with a better learning environment.",
+          "过去发生的建立用 built；provide someone with something；“学习环境”用 learning environment。"
+        ],
+        [
+          "专项练习 3 · 语法与搭配",
+          "More and more people choose to shopping online, which makes them life more convinence",
+          "More and more people choose to shop online, which makes their lives more convenient.",
+          "choose to do；their lives 表示“他们的生活”；make + 宾语 + 形容词，convenient 是形容词。"
+        ],
+        [
+          "专项练习 4 · 语法与搭配",
+          "Only by practicing everyday, can we improve english writing skills",
+          "Only by practicing every day can we improve our English writing skills.",
+          "every day 表示“每天”；Only by 置于句首时主句部分倒装；English 首字母大写。"
+        ],
+        [
+          "专项练习 5 · 语法与搭配",
+          "Those pictures shows how talented he are",
+          "Those pictures show how talented he is.",
+          "pictures 是复数，谓语用 show；he 是第三人称单数，be 动词用 is；how 引导的感叹性宾语从句使用陈述语序。"
+        ],
+        [
+          "专项练习 6 · 语法与搭配",
+          "Not only does keeping reading can broaden our knowledge, but it also improve writing skills",
+          "Not only does regular reading broaden our knowledge, but it also improves our writing skills.",
+          "Not only does + 主语 + 动词原形；不能再叠加 can；it 对应的谓语用 improves。"
+        ]
+      ],
+      "studyNotes": {
+        "intro": "保留原文的邀请逻辑：关心近况 → 邀请 → 赞美作品 → 介绍摄影展 → 时间地点。重点练习词性、定语从句、固定搭配；Part A 还需控制在约100词。 当天另完成6句语法专项翻译，重点巩固 which 从句、主谓一致、动词形式、Only by 倒装和 Not only 倒装。",
+        "sections": [
+          {
+            "title": "可复用的三个表达",
+            "items": [
+              {
+                "name": "how talented you are",
+                "template": "Those pictures show how talented you are.",
+                "note": "how + 形容词 + 主语 + 谓语，用来表达对他人能力的赞美。"
+              },
+              {
+                "name": "The reason why... is that...",
+                "template": "The reason why I invited you is that you are interested in photography.",
+                "note": "用于交代邀请或建议的原因。"
+              },
+              {
+                "name": "I sincerely hope...",
+                "template": "I sincerely hope I can attend this exhibition with you.",
+                "note": "用于邀请信结尾表达真诚期望。"
+              }
+            ]
+          },
+          {
+            "title": "语法专项：which 从句与动词形式",
+            "items": [
+              {
+                "name": "练习 1",
+                "template": "Regular exercise can relieve stress, which helps us study better.",
+                "note": "which helps 从句中 which 已作主语；help + 人 + 动词原形，使用 helps us study。"
+              },
+              {
+                "name": "练习 2",
+                "template": "The school built a new library, which provides students with a better learning environment.",
+                "note": "过去发生的建立用 built；provide someone with something；“学习环境”用 learning environment。"
+              },
+              {
+                "name": "练习 3",
+                "template": "More and more people choose to shop online, which makes their lives more convenient.",
+                "note": "choose to do；their lives 表示“他们的生活”；make + 宾语 + 形容词，convenient 是形容词。"
+              },
+              {
+                "name": "练习 4",
+                "template": "Only by practicing every day can we improve our English writing skills.",
+                "note": "every day 表示“每天”；Only by 置于句首时主句部分倒装；English 首字母大写。"
+              },
+              {
+                "name": "练习 5",
+                "template": "Those pictures show how talented he is.",
+                "note": "pictures 是复数，谓语用 show；he 是第三人称单数，be 动词用 is；how 引导的感叹性宾语从句使用陈述语序。"
+              },
+              {
+                "name": "练习 6",
+                "template": "Not only does regular reading broaden our knowledge, but it also improves our writing skills.",
+                "note": "Not only does + 主语 + 动词原形；不能再叠加 can；it 对应的谓语用 improves。"
+              }
+            ]
+          }
+        ]
+      }
+    },
     "2026-11-18": {
       "title": "A Rough Day · 时间、工作与选择",
       "type": "英语自由表达 · 三轮对话 · 原文与语法复盘",
@@ -369,503 +866,6 @@
           "要用 I look forward to 或 I am looking forward to。to 是介词，后接名词或动名词。"
         ]
       ]
-    },
-    "2026-11-19": {
-      "title": "校园摄影展邀请信 · Invitation to a Photography Exhibition · which从句与动词形式专项练习",
-      "type": "考研英语二 · Part A · 邀请信 · 完整练习；同日补充：语法专项翻译练习",
-      "original": [
-        "Dear jack,\nIs your preparing for postgraduate entrance examination going well recently? Hope you can relax for a while after studying hard, which is truly helps you refresh your brain and give your constant energy. Anyway, I'm writing to invite you to attend a photography exhibition on campus organized by my university.\nI always see a lots of pictures photoed by you on your social media, that is truly beautiful. Those picture shows what you talent are. The reason why I think you have to attend the exhibition is that there would be a much of same beauty photographies pictured by another talented student, even have some masterpiece. \nIn conclusion, if you are interested, you can come school activities center on next Friday. This exhibition will last for three days, I sincerely hope I can come this exhibition with you. Looking for your reply.\nyours,\nLiming",
-        "语法专项翻译练习（11月19日）\n1. 规律运动可以减轻压力，这有助于我们更好地学习。\nRegular sports can relieve stress, which helps our to study better.\n\n2. 学校建立了一个新图书馆，这为学生提供了更好的学习环境。\nSchool builds a new library, which provides students a better studying environment\n\n3. 越来越多的人选择网上购物，这使他们的生活更加方便。\nMore and more people choose to shopping online, which makes them life more convinence\n\n4. 只有通过每天练习，我们才能提高英语写作能力。\nOnly by practicing everyday, can we improve english writing skills\n\n5. 那些照片展现了他多么有才华。\nThose pictures shows how talented he are\n\n6. 坚持阅读不仅能扩大我们的知识面，还能提高写作能力。\nNot only does keeping reading can broaden our knowledge, but it also improve writing skills"
-      ],
-      "revised": "Dear Jack,\n\nIs your preparation for the postgraduate entrance examination going well recently? I hope you can relax for a while after studying hard, as this can truly help you refresh your mind and give you renewed energy. Anyway, I'm writing to invite you to attend a photography exhibition on campus organized by my university.\n\nI always see a lot of photos taken by you on your social media, and they are truly beautiful. Those pictures show how talented you are. The reason why I think you should attend the exhibition is that there will be many similarly beautiful photographs taken by other talented students, and even some masterpieces.\n\nIn conclusion, if you are interested, you can come to the school activity center next Friday. This exhibition will last for three days. I sincerely hope I can attend this exhibition with you. I look forward to your reply.\n\nYours,\nLi Ming\n\n---\n\n语法专项练习修改稿（11月19日）\n1. Regular exercise can relieve stress, which helps us study better.\n2. The school built a new library, which provides students with a better learning environment.\n3. More and more people choose to shop online, which makes their lives more convenient.\n4. Only by practicing every day can we improve our English writing skills.\n5. Those pictures show how talented he is.\n6. Not only does regular reading broaden our knowledge, but it also improves our writing skills.",
-      "grammar": [
-        [
-          "词性与冠词",
-          "your preparing for postgraduate entrance examination",
-          "your preparation for the postgraduate entrance examination",
-          "your 后需要名词 preparation；特指这场研究生入学考试时可用 the。"
-        ],
-        [
-          "定语从句与谓语",
-          "which is truly helps you",
-          "as this can truly help you",
-          "which 后不应同时使用 is 和 helps；本句改为 as this can... 使指代更清楚。"
-        ],
-        [
-          "数量词与摄影词汇",
-          "a lots of pictures photoed by you",
-          "a lot of photos taken by you",
-          "固定搭配是 a lot of；“拍摄的照片”通常说 photos taken by...。"
-        ],
-        [
-          "主谓一致与感叹结构",
-          "Those picture shows what you talent are",
-          "Those pictures show how talented you are",
-          "复数 pictures 搭配 show；talented 是形容词，使用 how talented you are。"
-        ],
-        [
-          "名词单复数与搭配",
-          "a much of same beauty photographies pictured by another talented student",
-          "many similarly beautiful photographs taken by other talented students",
-          "可数复数用 many；photograph 的复数是 photographs，拍摄用 taken by。"
-        ],
-        [
-          "地点和时间介词",
-          "come school activities center on next Friday",
-          "come to the school activity center next Friday",
-          "come to + 地点；next Friday 前通常不加 on。"
-        ],
-        [
-          "邮件结尾",
-          "Looking for your reply",
-          "I look forward to your reply",
-          "正式邮件期待回复用 I look forward to your reply；注意完整谓语。"
-        ],
-        [
-          "专项练习 1 · 语法与搭配",
-          "Regular sports can relieve stress, which helps our to study better.",
-          "Regular exercise can relieve stress, which helps us study better.",
-          "which helps 从句中 which 已作主语；help + 人 + 动词原形，使用 helps us study。"
-        ],
-        [
-          "专项练习 2 · 语法与搭配",
-          "School builds a new library, which provides students a better studying environment",
-          "The school built a new library, which provides students with a better learning environment.",
-          "过去发生的建立用 built；provide someone with something；“学习环境”用 learning environment。"
-        ],
-        [
-          "专项练习 3 · 语法与搭配",
-          "More and more people choose to shopping online, which makes them life more convinence",
-          "More and more people choose to shop online, which makes their lives more convenient.",
-          "choose to do；their lives 表示“他们的生活”；make + 宾语 + 形容词，convenient 是形容词。"
-        ],
-        [
-          "专项练习 4 · 语法与搭配",
-          "Only by practicing everyday, can we improve english writing skills",
-          "Only by practicing every day can we improve our English writing skills.",
-          "every day 表示“每天”；Only by 置于句首时主句部分倒装；English 首字母大写。"
-        ],
-        [
-          "专项练习 5 · 语法与搭配",
-          "Those pictures shows how talented he are",
-          "Those pictures show how talented he is.",
-          "pictures 是复数，谓语用 show；he 是第三人称单数，be 动词用 is；how 引导的感叹性宾语从句使用陈述语序。"
-        ],
-        [
-          "专项练习 6 · 语法与搭配",
-          "Not only does keeping reading can broaden our knowledge, but it also improve writing skills",
-          "Not only does regular reading broaden our knowledge, but it also improves our writing skills.",
-          "Not only does + 主语 + 动词原形；不能再叠加 can；it 对应的谓语用 improves。"
-        ]
-      ],
-      "studyNotes": {
-        "intro": "保留原文的邀请逻辑：关心近况 → 邀请 → 赞美作品 → 介绍摄影展 → 时间地点。重点练习词性、定语从句、固定搭配；Part A 还需控制在约100词。 当天另完成6句语法专项翻译，重点巩固 which 从句、主谓一致、动词形式、Only by 倒装和 Not only 倒装。",
-        "sections": [
-          {
-            "title": "可复用的三个表达",
-            "items": [
-              {
-                "name": "how talented you are",
-                "template": "Those pictures show how talented you are.",
-                "note": "how + 形容词 + 主语 + 谓语，用来表达对他人能力的赞美。"
-              },
-              {
-                "name": "The reason why... is that...",
-                "template": "The reason why I invited you is that you are interested in photography.",
-                "note": "用于交代邀请或建议的原因。"
-              },
-              {
-                "name": "I sincerely hope...",
-                "template": "I sincerely hope I can attend this exhibition with you.",
-                "note": "用于邀请信结尾表达真诚期望。"
-              }
-            ]
-          },
-          {
-            "title": "语法专项：which 从句与动词形式",
-            "items": [
-              {
-                "name": "练习 1",
-                "template": "Regular exercise can relieve stress, which helps us study better.",
-                "note": "which helps 从句中 which 已作主语；help + 人 + 动词原形，使用 helps us study。"
-              },
-              {
-                "name": "练习 2",
-                "template": "The school built a new library, which provides students with a better learning environment.",
-                "note": "过去发生的建立用 built；provide someone with something；“学习环境”用 learning environment。"
-              },
-              {
-                "name": "练习 3",
-                "template": "More and more people choose to shop online, which makes their lives more convenient.",
-                "note": "choose to do；their lives 表示“他们的生活”；make + 宾语 + 形容词，convenient 是形容词。"
-              },
-              {
-                "name": "练习 4",
-                "template": "Only by practicing every day can we improve our English writing skills.",
-                "note": "every day 表示“每天”；Only by 置于句首时主句部分倒装；English 首字母大写。"
-              },
-              {
-                "name": "练习 5",
-                "template": "Those pictures show how talented he is.",
-                "note": "pictures 是复数，谓语用 show；he 是第三人称单数，be 动词用 is；how 引导的感叹性宾语从句使用陈述语序。"
-              },
-              {
-                "name": "练习 6",
-                "template": "Not only does regular reading broaden our knowledge, but it also improves our writing skills.",
-                "note": "Not only does + 主语 + 动词原形；不能再叠加 can；it 对应的谓语用 improves。"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "2026-11-20": {
-      "title": "大学生规律运动比例上升 · 图表作文",
-      "type": "考研英语二 · Part B · 图表作文 · 完整练习",
-      "original": [
-        "The bar chart illustrates that the percentage of university students exercising regularly. To be specific, it rise gradually from 35% in 2020 to 70% to 2026, exaclly doubled btween five years. It shows university students have prioritized the exercise, which is beneficial to their mental and phisical health.\nThere are many factors contribute this phenomenon. First of all, it is the possible reason that the students have more stress of study when they came in college.  Compare to their high school, college life give them more choice to realise the stress, and the exercise is one of the great way. It helps them refresh brain off study. Secondly, the regular plan gives them a sense of control life. On the one hand, it helps them more efficient when they study. On the other hand, the regular means health diet, which is truly beneficial to their body health in the long way. \nWe should spare no pains to encourage this phenomnon. Not only does the university students should built a awerness of regular exercise, but them also should keep this habit. Meanwhile, the school and the society should give them more opportunity to exercise, such as enough time and nice place. In this way, hopefully, the university students life would be better."
-      ],
-      "revised": "The bar chart illustrates the percentage of university students who exercise regularly. To be specific, it rose gradually from 35% in 2020 to 70% in 2026, exactly doubling over six years. This shows that university students have placed greater importance on exercise, which is beneficial to their physical and mental health.\n\nThere are many factors contributing to this phenomenon. First of all, one possible reason is that students experience greater academic pressure when they enter college. Compared with high school, college life gives them more choices to relieve stress, and exercise is one of the best ways to do so. It helps them refresh their minds after studying. Secondly, having a regular exercise plan gives them a sense of control over their lives. On the one hand, it helps them study more efficiently. On the other hand, a regular routine also involves a healthy diet, which is truly beneficial to their physical health in the long run.\n\nWe should spare no effort to encourage this positive trend. Not only should university students develop an awareness of regular exercise, but they should also maintain this habit. Meanwhile, schools and society should provide them with more opportunities to exercise, such as sufficient time and suitable places. In this way, university students' lives will hopefully become better.",
-      "grammar": [
-        [
-          "图表描述与时态",
-          "it rise gradually from 35% in 2020 to 70% to 2026",
-          "it rose gradually from 35% in 2020 to 70% in 2026",
-          "描述已经发生的图表趋势用过去式 rose；from...to... 两端分别接起点和终点。2020 到 2026 是六年。"
-        ],
-        [
-          "词汇与拼写",
-          "exaclly doubled btween five years",
-          "exactly doubling over six years",
-          "exactly 和 between 拼写要准确；表示“在六年间翻了一倍”可用 doubling over six years。"
-        ],
-        [
-          "名词搭配",
-          "prioritized the exercise",
-          "placed greater importance on exercise",
-          "泛指运动时通常不加 the；place importance on 是常见搭配。"
-        ],
-        [
-          "非谓语与介词",
-          "There are many factors contribute this phenomenon",
-          "There are many factors contributing to this phenomenon",
-          "名词 factors 后可用现在分词 contributing 作后置修饰；contribute to 是固定搭配。"
-        ],
-        [
-          "原因句型与词汇",
-          "it is the possible reason that the students have more stress of study",
-          "one possible reason is that students experience greater academic pressure",
-          "用 one possible reason is that... 引出原因；academic pressure 比 stress of study 更符合英语搭配。"
-        ],
-        [
-          "比较结构与主谓一致",
-          "Compare to their high school, college life give them more choice",
-          "Compared with high school, college life gives them more choices",
-          "Compared with 用于比较；college life 是单数主语，谓语用 gives；choice 用复数 choices。"
-        ],
-        [
-          "动词搭配与介词",
-          "refresh brain off study",
-          "refresh their minds after studying",
-          "refresh 后接宾语；“学习后恢复精神”可说 refresh their minds after studying。"
-        ],
-        [
-          "固定介词搭配",
-          "a sense of control life",
-          "a sense of control over their lives",
-          "固定表达是 a sense of control over...；表示“对生活的掌控感”。"
-        ],
-        [
-          "比较级与副词",
-          "it helps them more efficient when they study",
-          "it helps them study more efficiently",
-          "help + 人 + 动词原形；修饰 study 这个动作要用副词 efficiently。"
-        ],
-        [
-          "动词结构与倒装",
-          "Not only does the university students should built... but them also should keep...",
-          "Not only should university students develop... but they should also maintain...",
-          "Not only 句首倒装只保留一个助动词；should 后接动词原形；but also 后使用正常语序。"
-        ],
-        [
-          "名词所有格与复数",
-          "the university students life",
-          "university students' lives",
-          "表示“大学生们的生活”要用复数所有格 students' lives。"
-        ],
-        [
-          "拼写与固定搭配",
-          "spare no pains",
-          "spare no effort",
-          "固定表达 spare no effort，意为“不遗余力”；phenomenon 的拼写也要注意。"
-        ]
-      ],
-      "studyNotes": {
-        "intro": "文章按图表趋势、原因分析、建议结尾展开。保留了用户关于大学学习压力、运动释放压力、生活掌控感和健康饮食的论证。重点复习图表过去时、contribute to、compared with、help + 人 + do、control over，以及 Not only 倒装。",
-        "sections": [
-          {
-            "title": "本次可复用的三个表达",
-            "items": [
-              {
-                "name": "The percentage rose from... to...",
-                "template": "The percentage rose gradually from 35% in 2020 to 70% in 2026, exactly doubling over six years.",
-                "note": "描述图表变化；注意过去式 rose，以及 from...to... 的搭配。"
-              },
-              {
-                "name": "There are many factors contributing to...",
-                "template": "There are many factors contributing to this phenomenon.",
-                "note": "用现在分词短语修饰 factors，并记住 contribute to。"
-              },
-              {
-                "name": "Not only should..., but ... should also...",
-                "template": "Not only should university students develop an awareness of regular exercise, but they should also maintain this habit.",
-                "note": "Not only 放句首时倒装；should 后接动词原形，but also 后恢复正常语序。"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "2026-11-21": {
-      "title": "考研压力与应对建议 · 建议信 · 语法理解专项练习",
-      "type": "考研英语二 · Part A · 建议信 · 完整练习；同日补充：语法理解专项练习",
-      "original": [
-        "Dear jack,\nI heard that you may have some stress for upcoming examination lately. It is such natural thing, and I believe you totally can deal with it. I'm writing to give you two suggestions that you could consider it.\nFirst one, start with a small task. Nearly examination, you may have a feeling of anxiety because there still are some points that you haven't familar it. Moving to a small step can contract this phenomenon. \nSecond two, do some sports. Such like swimming, running or whatever you enjoy it. The exercise can relieve your stress, which is truly beneficial to physical and mental health.\nI'm glad that you have fight for your future, and prepared this examination for a long time. I hope your dream come true and examination be passed.\nLi ming.",
-        "语法理解专项练习（11月21日）\n1. 我很高兴你一直在为自己的梦想而努力。\nI'm glad that you have fought for your dream\n\n2. 只有通过循序渐进的努力，我们才能克服困难。\nOnly by taking small steps can we overcome the difficulties\n\n3. 随着考试临近，学生们变得越来越焦虑。\nAs the examination approach, students become more and more anxious"
-      ],
-      "revised": "Dear Jack,\n\nI heard that you may be feeling stressed about the upcoming examination lately. It is such a natural thing, and I believe you can totally deal with it. I'm writing to give you two suggestions that you could consider.\n\nFirst, start with a small task. As the examination approaches, you may feel anxious because there are still some points that you aren't familiar with. Taking small steps can reduce this anxiety.\n\nSecond, do some exercise, such as swimming, running, or any other activity you enjoy. Exercise can relieve your stress, which is truly beneficial to your physical and mental health.\n\nI'm glad that you have fought for your future and prepared for this examination for a long time. I hope your dream comes true and you pass the examination.\n\nLi Ming\n\n---\n\n语法理解专项练习修改稿（11月21日）\n1. I'm glad that you've been fighting for your dream.\n2. Only by taking small steps can we overcome difficulties.\n3. As the examination approaches, students become more and more anxious.",
-      "grammar": [
-        [
-          "固定搭配与时态语义",
-          "some stress for upcoming examination lately",
-          "feeling stressed about the upcoming examination lately",
-          "表达“对考试感到有压力”用 feel stressed about；upcoming examination 前补 the。"
-        ],
-        [
-          "冠词",
-          "such natural thing",
-          "such a natural thing",
-          "单数可数名词 thing 前需要冠词 a；结构是 such a + 形容词 + 名词。"
-        ],
-        [
-          "宾语从句与重复宾语",
-          "suggestions that you could consider it",
-          "suggestions that you could consider",
-          "that 引导的定语从句中，that 已经充当 consider 的宾语，不需要再加 it。"
-        ],
-        [
-          "句子连接与时间表达",
-          "First one... Nearly examination...",
-          "First... As the examination approaches...",
-          "列举建议用 First / Second；“临近考试”可用 as the examination approaches。"
-        ],
-        [
-          "形容词搭配",
-          "points that you haven't familar it",
-          "points that you aren't familiar with",
-          "familiar 是形容词，使用 be familiar with；不能说 familiar it。"
-        ],
-        [
-          "词汇选择与固定搭配",
-          "Moving to a small step can contract this phenomenon",
-          "Taking small steps can reduce this anxiety",
-          "take small steps 表示采取小步骤；contract 不表示“缓解焦虑”，这里用 reduce。"
-        ],
-        [
-          "举例结构与代词",
-          "Such like swimming, running or whatever you enjoy it",
-          "such as swimming, running, or any other activity you enjoy",
-          "举例用 such as；enjoy 后面已有宾语从句/关系结构，不需要额外的 it。"
-        ],
-        [
-          "动词过去分词与介词",
-          "you have fight... and prepared this examination",
-          "you have fought... and prepared for this examination",
-          "have 后接过去分词 fought；prepare for an examination 是固定搭配。"
-        ],
-        [
-          "主谓一致与句子结构",
-          "I hope your dream come true and examination be passed",
-          "I hope your dream comes true and you pass the examination",
-          "dream 是单数，谓语用 comes；用 you pass the examination 表达“你通过考试”更清楚。"
-        ],
-        [
-          "拼写与称呼格式",
-          "Dear jack / Li ming.",
-          "Dear Jack / Li Ming",
-          "英文称呼和姓名中的专有名词首字母大写。"
-        ],
-        [
-          "语法理解专项练习 1",
-          "I'm glad that you have fought for your dream",
-          "I'm glad that you've been fighting for your dream.",
-          "原句语法成立，have fought 强调奋斗经历或结果；have been fighting 强调从过去持续到现在的努力，更贴合“一直在努力”。"
-        ],
-        [
-          "语法理解专项练习 2",
-          "Only by taking small steps can we overcome the difficulties",
-          "Only by taking small steps can we overcome difficulties.",
-          "Only by + 动名词置于句首时，主句部分倒装：can + 主语 + 动词原形。the difficulties 指特定困难；泛指困难时通常不加 the。"
-        ],
-        [
-          "语法理解专项练习 3",
-          "As the examination approach, students become more and more anxious",
-          "As the examination approaches, students become more and more anxious.",
-          "As 引导时间状语从句；the examination 是第三人称单数，谓语用 approaches。主句 students 是复数，因此用 become。"
-        ]
-      ],
-      "studyNotes": {
-        "intro": "围绕考试压力提出两条建议：先从小任务开始，再通过喜欢的运动缓解压力。保留原文的建议顺序和鼓励语气。重点复习 such a + 名词、be familiar with、such as、have + 过去分词，以及 hope 后的主谓一致。 同日另完成3句语法理解练习，巩固现在完成进行时、Only by 倒装和 As 时间状语从句中的主谓一致。",
-        "sections": [
-          {
-            "title": "本次可复用的三个表达",
-            "items": [
-              {
-                "name": "As the examination approaches...",
-                "template": "As the examination approaches, you may feel anxious...",
-                "note": "表达“随着考试临近”，用于引出压力或备考状态。"
-              },
-              {
-                "name": "be familiar with...",
-                "template": "There are still some points that you aren't familiar with.",
-                "note": "familiar 是形容词，固定搭配 be familiar with。"
-              },
-              {
-                "name": "Taking small steps can...",
-                "template": "Taking small steps can reduce this anxiety.",
-                "note": "动名词短语作主语；适合表达循序渐进的建议。"
-              }
-            ]
-          },
-          {
-            "title": "语法理解专项：时态、倒装与主谓一致",
-            "items": [
-              {
-                "name": "练习 1",
-                "template": "I'm glad that you've been fighting for your dream.",
-                "note": "原句语法成立，have fought 强调奋斗经历或结果；have been fighting 强调从过去持续到现在的努力，更贴合“一直在努力”。"
-              },
-              {
-                "name": "练习 2",
-                "template": "Only by taking small steps can we overcome difficulties.",
-                "note": "Only by + 动名词置于句首时，主句部分倒装：can + 主语 + 动词原形。the difficulties 指特定困难；泛指困难时通常不加 the。"
-              },
-              {
-                "name": "练习 3",
-                "template": "As the examination approaches, students become more and more anxious.",
-                "note": "As 引导时间状语从句；the examination 是第三人称单数，谓语用 approaches。主句 students 是复数，因此用 become。"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "2026-11-22": {
-      "title": "大学生在线学习比例上升 · 图表作文",
-      "type": "考研英语二 · Part B · 图表作文 · 完整练习",
-      "original": [
-        "The bar chart illustrates the percentage of college student choose study online. To be specific, it rose from 30% in 2020 to 75% in 2026, over double between 6 years. The majority of students choose study online shows the flourish online study resources.\nThere are many factors contributes to this phenomenon. First of all, online study give the college students a chance to study what their interested in. Secondly, not only does the online study give students a choice on get in class, but it also helps students to repeat play. Last but not least, it is truly helps students to build a ability of independent study skill, which is important factor for their after day learning.\nTo sum up, we should spare no efforts to encourage this trend. On the one hand, university should open more online classes. On the other hand, it is important that students built the awerness of study on their own, not simply learn in class. In this way, hopefully, the college students accedemic life would be better."
-      ],
-      "revised": "The bar chart illustrates the percentage of college students who choose to study online. To be specific, it rose from 30% in 2020 to 75% in 2026, more than doubling over six years. The fact that the majority of students choose to study online shows the flourishing of online learning resources.\n\nThere are many factors contributing to this phenomenon. First of all, online learning gives college students a chance to study what they are interested in. Secondly, not only does online learning give students more choices in how they attend classes, but it also allows students to replay lessons. Last but not least, it truly helps students develop the ability to study independently, which is an important factor in their future learning.\n\nTo sum up, we should spare no effort to encourage this trend. On the one hand, universities should offer more online courses. On the other hand, it is important that students build an awareness of independent learning rather than simply learn in class. In this way, college students' academic lives will hopefully become better.",
-      "grammar": [
-        [
-          "名词复数与定语从句",
-          "percentage of college student choose study online",
-          "percentage of college students who choose to study online",
-          "泛指大学生用复数 students；who 引导定语从句修饰 students；choose 后接 to do。"
-        ],
-        [
-          "倍数表达与时间介词",
-          "over double between 6 years",
-          "more than doubling over six years",
-          "more than doubling 表示增长幅度超过一倍；表示一段时间用 over six years。30% 到 75% 是原来的2.5倍。"
-        ],
-        [
-          "句子连接与同位语从句",
-          "The majority of students choose study online shows the flourish online study resources",
-          "The fact that the majority of students choose to study online shows the flourishing of online learning resources",
-          "两个完整意思不能直接拼接；用 The fact that... 作主语，that 从句解释 fact；flourish 是动词，flourishing 作名词/形容词。"
-        ],
-        [
-          "非谓语与固定搭配",
-          "There are many factors contributes to this phenomenon",
-          "There are many factors contributing to this phenomenon",
-          "There are... 已有谓语 are，后面用 contributing 修饰 factors；也可改写为 Many factors contribute to...。"
-        ],
-        [
-          "主谓一致与宾语从句",
-          "online study give the college students a chance to study what their interested in",
-          "online learning gives college students a chance to study what they are interested in",
-          "online learning 是单数主语，谓语用 gives；what they are interested in 中用主格 they；固定搭配 be interested in。"
-        ],
-        [
-          "倒装句与动词搭配",
-          "not only does the online study give students a choice on get in class, but it also helps students to repeat play",
-          "not only does online learning give students more choices in how they attend classes, but it also allows students to replay lessons",
-          "Not only does 后接主语和动词原形；choices in how... 表达选择方式；replay 是“重新播放”的单个动词。"
-        ],
-        [
-          "谓语结构与词性",
-          "it is truly helps students to build a ability of independent study skill",
-          "it truly helps students develop the ability to study independently",
-          "不能把 is 和 helps 叠加；help + 人 + 动词原形；a 应改为 an，但此处 the ability 更符合泛指能力的表达。"
-        ],
-        [
-          "关系从句与冠词",
-          "which is important factor for their after day learning",
-          "which is an important factor in their future learning",
-          "单数可数名词 factor 前加 an；future learning 表示未来学习；factor in 是常见搭配。"
-        ],
-        [
-          "固定搭配",
-          "spare no efforts",
-          "spare no effort",
-          "固定表达 spare no effort，意为“不遗余力”。"
-        ],
-        [
-          "名词单复数与词汇搭配",
-          "university should open more online classes",
-          "universities should offer more online courses",
-          "泛指大学用复数 universities；offer courses 表示开设课程。"
-        ],
-        [
-          "虚拟语气与拼写",
-          "students built the awerness of study on their own, not simply learn in class",
-          "students build an awareness of independent learning rather than simply learn in class",
-          "It is important that 后可用虚拟语气动词原形 build；awareness 拼写；an awareness of 是常见搭配。"
-        ],
-        [
-          "所有格与拼写",
-          "the college students accedemic life would be better",
-          "college students' academic lives will hopefully become better",
-          "academic 拼写；多个学生的生活用 students' lives；will 更直接表达未来展望。"
-        ]
-      ],
-      "studyNotes": {
-        "intro": "文章按图表描述、在线学习优势分析和总结建议展开。保留了用户关于自主选择学习内容、灵活参加课程和重复播放课程、培养独立学习能力的三个论点。重点复习定语从句、The fact that... 主语结构、There are... contributing to...、Not only 倒装、help + 人 + 动词原形，以及 It is important that + 主语 + 动词原形。",
-        "sections": [
-          {
-            "title": "本次可复用的三个句型与逻辑点",
-            "items": [
-              {
-                "name": "The fact that... shows...",
-                "template": "The fact that the majority of students choose to study online shows the flourishing of online learning resources.",
-                "note": "用 The fact that 引导的主语结构，把观察到的现象和结论连接起来。"
-              },
-              {
-                "name": "Not only does..., but it also...",
-                "template": "Not only does online learning give students more choices, but it also allows them to replay lessons.",
-                "note": "用于并列两个优势；Not only 置于句首时倒装，does 后接动词原形。"
-              },
-              {
-                "name": "It is important that...",
-                "template": "It is important that students build an awareness of independent learning.",
-                "note": "用于提出建议或强调必要性；that 从句中可使用动词原形 build。"
-              }
-            ]
-          }
-        ]
-      }
     }
   },
   "studySchedule": {

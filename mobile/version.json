@@ -1,13 +1,13 @@
 {
   "version": "1.0.0",
-  "bundle": "7969f2ae3539c0f7551e77bd3b952a81c44011d5229fcfa4abeefe99d8bd979d",
+  "bundle": "6069944dbd3bd0ffa78f950428b50cffd642cfbd2f3bf7316fcc2a3c740e962e",
   "minNativeVersion": 1,
   "apkVersionCode": 1,
   "apkUrl": "",
   "files": {
     "index.html": "f59a8a9f3c8ec1da0ede55c18f251fadf51e868cf91991d7acdb893e3dbabac0",
-    "app.js": "5154c73154382a3ae6a725187b2edbfb80e7f90bdd0ec62673b77caf1787a4de",
-    "style.css": "adee7261157f78a7bb00218b62ec55ef7705b64e0a18bd5c1b007a2d0ab25eed",
-    "data.json": "369b2b2f8aaec2cd5d6d37956557e4a2213a323c6d33394c265df1375fc80062"
+    "app.js": "1cf7235adb9ef99e8f6048b764e1680250d578ed1005a64527c69a2f7ad48186",
+    "style.css": "e2da0d515b76cfbaa2efe4b44f63ec41b99b5152ab3e8f0d7a95517983f298f5",
+    "data.json": "986d1e542b94a9602f0912740716bc15ae407d3a760c2aff1b6fa7ee2b9f4ba5"
   }
 }
