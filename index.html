@@ -15,6 +15,7 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 .reader{padding:0;border:1px solid var(--line);border-radius:16px;width:min(780px,calc(100% - 40px));height:min(900px,calc(100dvh - 48px));max-height:none;max-width:none;background:var(--paper);color:var(--ink);overflow:hidden;box-shadow:0 24px 80px #18291f40;transform-origin:top left}.reader[open]{display:flex;flex-direction:column}.reader::backdrop{background:#1f302b66;backdrop-filter:blur(4px)}.reader-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--paper);flex-shrink:0}.reader-toolbar button{min-height:44px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:#f0f3ea}.reader-toolbar span{font-size:.8rem;color:var(--muted)}.reader-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable}.reader .entry{border:0;border-radius:0;box-shadow:none;min-height:0;padding:24px 28px 40px}.reader .entry:before{display:none}.reader .entry h2{overflow-wrap:anywhere}.tabs{overflow-x:auto;white-space:nowrap;scrollbar-width:thin}.tab{flex-shrink:0;min-height:44px}.stats-tree{display:grid;gap:14px}.stats-branch{border:1px solid var(--line);border-radius:8px;background:#f7f8f2;padding:12px}.stats-branch>summary{cursor:pointer;font-weight:700;min-height:32px}.stats-branch>summary span{font-weight:400;color:var(--muted);font-size:.8rem;margin-left:8px}.stats-children{border-left:2px solid #c9d6c4;margin:8px 0 0 6px;padding-left:12px;display:grid;gap:8px}.stats-children .stats-category{width:100%;min-height:52px}.stats-subtopics{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}.stats-subtopics button{min-height:44px;border:1px solid var(--line);border-radius:7px;padding:8px 12px;background:#fffdf7;text-align:left}.stats-subtopics button[aria-pressed=true]{background:#e4eee3;border-color:#78977a;font-weight:700}.stats-breadcrumb{font-size:.78rem;color:var(--muted);overflow-wrap:anywhere;margin:0 0 12px}.stats-entry-link{min-height:44px;padding:8px 12px;background:#eef3e9;border:1px solid var(--line);border-radius:6px;font-size:.8rem}.stats-error summary{line-height:1.6}.stats-error .hint{line-height:1.8}.stats-all{margin-top:16px;min-height:44px}.card{transition:transform .2s,box-shadow .2s}.card:active{transform:scale(.98)}
 @media(max-width:810px){.workspace>.entry{display:none}header{padding-top:24px}header p{font-size:.85rem}.notes{grid-template-columns:minmax(0,1fr)}.card{padding:14px 16px;min-height:72px}.reader{width:calc(100% - 16px);height:calc(100dvh - 20px);margin:auto;border-radius:14px}.reader-toolbar{padding:8px 12px}.reader .entry{padding:20px 16px 32px}.reader .entry h2{font-size:1.65rem;line-height:1.35}.reader .writing{font-size:1.08rem;line-height:1.9}.stats-metrics{gap:6px;margin:16px 0}.stats-metric{padding:10px 8px}.stats-metric strong{font-size:1.5rem}.stats-metric span{font-size:.7rem}.stats-subtopics{gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}.stats-subtopics button{flex:0 0 auto;max-width:85%}.reader .stats-heading{margin-top:18px}.reader-body{scrollbar-gutter:auto}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+.writing-viewport{width:100%;overflow:hidden;touch-action:pan-y;min-width:0}.writing-track{display:flex;align-items:flex-start;will-change:transform}.writing-slide{flex:0 0 100%;width:100%;min-width:0;overflow-wrap:anywhere;min-height:160px}.writing-slide[aria-hidden=true]{pointer-events:none}@media(prefers-reduced-motion:reduce){.writing-track{transition:none!important}}
 </style>
 </head>
 <body>
@@ -915,39 +916,76 @@ const grid = document.querySelector('#calendar');
 const notes = document.querySelector('#notes');
 const entry = document.querySelector('#entry');
 const tabs = ['我的原文','修改稿','语法错点','挖空复习','模板笔记'];
+function positionWritingTrack(animate=true, offset=0) {
+ const viewport=entry.querySelector('.writing-viewport');
+ const track=entry.querySelector('.writing-track');
+ if(!viewport || !track) return;
+ track.style.transition=animate && !matchMedia('(prefers-reduced-motion: reduce)').matches
+  ? 'transform 320ms cubic-bezier(.22,.75,.24,1)' : 'none';
+ track.style.transform='translate3d('+(-active*viewport.clientWidth+offset)+'px,0,0)';
+}
+function updateWritingTabState(focusTab=false) {
+ const buttons=entry.querySelectorAll('.tab');
+ buttons.forEach((button,i)=>{
+  button.setAttribute('aria-selected',String(i===active));
+  button.tabIndex=i===active?0:-1;
+ });
+ entry.querySelectorAll('.writing-slide').forEach((panel,i)=>{
+  panel.inert=i!==active;
+  panel.setAttribute('aria-hidden',String(i!==active));
+ });
+ const chosen=buttons[active];
+ chosen?.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'});
+ if(focusTab) chosen?.focus({preventScroll:true});
+}
 function switchWritingTab(next, focusTab=false) {
  if(next<0 || next>=tabs.length || next===active) return;
  active=next;
- renderEntry(focusTab);
- const chosen=document.querySelector('#tab-'+active);
- chosen?.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'});
+ positionWritingTrack(true);
+ updateWritingTabState(focusTab);
  if(reader.open) readerBody.scrollTo({top:0,behavior:'smooth'});
 }
-function enableWritingSwipe(panel) {
- let startX=0,startY=0,tracking=false,vertical=false;
- panel.addEventListener('touchstart',event=>{
+function enableWritingSwipe(viewport) {
+ let startX=0,startY=0,lastX=0,startTime=0,tracking=false,axis='';
+ viewport.addEventListener('touchstart',event=>{
   if(event.touches.length!==1 || event.target.closest('input,textarea,select,[contenteditable="true"]')) {tracking=false;return;}
-  startX=event.touches[0].clientX;
+  startX=lastX=event.touches[0].clientX;
   startY=event.touches[0].clientY;
-  tracking=true;vertical=false;
+  startTime=performance.now();
+  tracking=true;axis='';
+  positionWritingTrack(false);
  },{passive:true});
- panel.addEventListener('touchmove',event=>{
+ viewport.addEventListener('touchmove',event=>{
   if(!tracking || event.touches.length!==1) return;
-  const dx=event.touches[0].clientX-startX;
-  const dy=event.touches[0].clientY-startY;
-  if(Math.abs(dy)>12 && Math.abs(dy)>Math.abs(dx)) vertical=true;
- },{passive:true});
- panel.addEventListener('touchend',event=>{
-  if(!tracking || vertical || event.changedTouches.length!==1) return;
+  const dx=event.touches[0].clientX-startX,dy=event.touches[0].clientY-startY;
+  if(!axis && Math.max(Math.abs(dx),Math.abs(dy))>7) axis=Math.abs(dx)>Math.abs(dy)*1.15?'horizontal':'vertical';
+  if(axis!=='horizontal') return;
+  event.preventDefault();
+  lastX=event.touches[0].clientX;
+  const atEdge=(active===0&&dx>0)||(active===tabs.length-1&&dx<0);
+  positionWritingTrack(false,atEdge?dx*.22:dx);
+ },{passive:false});
+ const finish=(event,cancel=false)=>{
+  if(!tracking) return;
   tracking=false;
-  const dx=event.changedTouches[0].clientX-startX;
-  const dy=event.changedTouches[0].clientY-startY;
-  if(Math.abs(dx)<65 || Math.abs(dx)<Math.abs(dy)*1.35) return;
-  switchWritingTab(active+(dx<0?1:-1));
- },{passive:true});
- panel.addEventListener('touchcancel',()=>{tracking=false;},{passive:true});
+  if(axis!=='horizontal'||cancel) {positionWritingTrack(true);return;}
+  const dx=(event.changedTouches?.[0]?.clientX??lastX)-startX;
+  const elapsed=Math.max(1,performance.now()-startTime);
+  const speed=Math.abs(dx)/elapsed;
+  const threshold=Math.min(90,viewport.clientWidth*.23);
+  const delta=Math.abs(dx)>threshold||(Math.abs(dx)>35&&speed>.45) ? (dx<0?1:-1):0;
+  const next=Math.max(0,Math.min(tabs.length-1,active+delta));
+  if(next!==active) {
+   active=next;
+   updateWritingTabState(false);
+   if(reader.open) readerBody.scrollTo({top:0,behavior:'smooth'});
+  }
+  positionWritingTrack(true);
+ };
+ viewport.addEventListener('touchend',event=>finish(event),{passive:true});
+ viewport.addEventListener('touchcancel',event=>finish(event,true),{passive:true});
+ window.addEventListener('resize',()=>{if(viewport.isConnected)positionWritingTrack(false)},{passive:true});
 }
-
 let showGrammarStats = false;
 let grammarStatsFilter = '全部';
 let grammarTopicFilter = '全部';
@@ -1269,18 +1307,15 @@ function renderEntry(focus=false) {
  const list = node('div',undefined,'tabs');
  list.setAttribute('role','tablist');
  list.setAttribute('aria-label','写作内容');
- const panel = node('div');
- panel.id='tab-panel';
- panel.tabIndex=0;
- panel.setAttribute('role','tabpanel');
- panel.setAttribute('aria-labelledby','tab-'+active);
- enableWritingSwipe(panel);
+ const viewport=node('div',undefined,'writing-viewport');
+ const track=node('div',undefined,'writing-track');
+ viewport.append(track);
  tabs.forEach((label,i)=>{
   const button=node('button',label,'tab');
   button.id='tab-'+i;
   button.setAttribute('role','tab');
   button.setAttribute('aria-selected',i===active);
-  button.setAttribute('aria-controls',panel.id);
+  button.setAttribute('aria-controls','tab-panel-'+i);
   button.tabIndex=i===active?0:-1;
   button.onclick=()=>switchWritingTab(i,true);
   button.onkeydown=event=>{
@@ -1291,10 +1326,17 @@ function renderEntry(focus=false) {
   };
   list.append(button);
  });
- entry.append(list,panel);
- if (active<2) {
-  panel.className='writing';
-  if (active===0 && record.original.length>1) {
+ entry.append(list,viewport);
+ tabs.forEach((_,tabIndex)=>{
+ const panel=node('div',undefined,'writing-slide');
+ panel.id='tab-panel-'+tabIndex;
+ panel.tabIndex=tabIndex===active?0:-1;
+ panel.setAttribute('role','tabpanel');
+ panel.setAttribute('aria-labelledby','tab-'+tabIndex);
+ track.append(panel);
+ if (tabIndex<2) {
+  panel.className='writing writing-slide';
+  if (tabIndex===0 && record.original.length>1) {
    const labels=['开头草稿','解释原因','提出改期','结尾 · 初写','结尾 · 重写'];
    record.original.forEach((line,i)=>{
     const block=node('div',undefined,'excerpt');
@@ -1302,14 +1344,14 @@ function renderEntry(focus=false) {
     panel.append(block);
    });
   } else {
-   if (active===1 && record.original.length>1) panel.append(node('p','根据当天逐句练习整理的完整修改稿。','hint'));
-   const text=active===0?record.original[0]:record.revised;
+   if (tabIndex===1 && record.original.length>1) panel.append(node('p','根据当天逐句练习整理的完整修改稿。','hint'));
+   const text=tabIndex===0?record.original[0]:record.revised;
    for (const paragraph of text.split('\n\n')) panel.append(node('p',paragraph));
   }
- } else if (active===4) {
-  panel.className='grammar';
+ } else if (tabIndex===4) {
+  panel.className='grammar writing-slide';
   const notes = record.studyNotes;
-  if(!notes){panel.append(node('p','当天没有模板笔记。','hint'));return;}
+  if(!notes){panel.append(node('p','当天没有模板笔记。','hint'));} else {
   panel.append(node('p',notes.intro,'hint'));
   for (const section of notes.sections) {
    panel.append(node('h3',section.title));
@@ -1323,13 +1365,14 @@ function renderEntry(focus=false) {
     panel.append(box);
    }
   }
+  }
  } else {
-  panel.className='grammar';
-  if (active===3) panel.append(node('p','先试着改写原句，再展开看答案。','hint'));
+  panel.className='grammar writing-slide';
+  if (tabIndex===3) panel.append(node('p','先试着改写原句，再展开看答案。','hint'));
   for (const [tag,before,after,why] of record.grammar) {
    const item=node('details');
    const title=node('summary',tag);
-   if (active===2){
+   if (tabIndex===2){
     const pair=node('p',undefined,'pair');
     pair.append(node('del',before),document.createElement('br'),node('ins',after));
     item.append(title,pair,node('p',why));
@@ -1345,7 +1388,10 @@ function renderEntry(focus=false) {
    }
   }
  }
- if(focus) document.querySelector('#tab-'+active).focus();
+ });
+ enableWritingSwipe(viewport);
+ positionWritingTrack(false);
+ updateWritingTabState(focus);
 }
 function moveMonth(delta) {
  const date=new Date(year,month+delta,1);
