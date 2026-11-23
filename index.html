@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ecefe8">
-<title>英语写作日历</title>
+<title>Writing Calendar</title>
 <style>
 :root{color-scheme:light;--ink:#24372c;--muted:#536457;--line:#d9dfd4;--paper:#fdfbf4;--green:#284d39;--serif:Georgia,"Noto Serif SC","Songti SC",serif}
 *{box-sizing:border-box}body{margin:0;color:var(--ink);font:15px/1.55 "PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:#ecefe8;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' opacity='.12' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}
-button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2px solid #317464;outline-offset:3px}header,.workspace{width:min(1150px,calc(100% - 56px));margin:auto}header{padding:48px 0 29px;border-bottom:1px solid #aebbac;display:flex;align-items:end;justify-content:space-between;gap:20px}.kicker{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green);font-weight:700}h1{font:700 clamp(2.25rem,5.4vw,4.4rem)/1.12 var(--serif);letter-spacing:-.045em;margin:11px 0 5px}header p{margin:0;color:var(--muted)}.stamp{border:1px solid #789286;padding:8px 12px;border-radius:3px;transform:rotate(-4deg);white-space:nowrap;color:var(--green)}.workspace{display:grid;grid-template-columns:335px minmax(0,1fr);gap:28px;margin-top:28px;margin-bottom:46px;align-items:start}.sidebar{display:grid;gap:19px}.calendar,.entry{border:1px solid var(--line);border-radius:6px;background:var(--paper);box-shadow:0 3px 12px #24372c12}.calendar{padding:19px}.progress-card{border:1px solid var(--line);border-radius:6px;background:var(--paper);padding:17px 19px;box-shadow:0 3px 12px #24372c12}.progress-card h2{font-size:1rem;margin:0}.progress-meta{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:6px 0 10px;font-size:.78rem;color:var(--muted)}.progress-meta strong{font:700 1.35rem/1 var(--serif);color:var(--green)}.progress-track{height:9px;background:#e6e9df;border-radius:20px;overflow:hidden}.progress-track span{display:block;height:100%;width:0;background:#547b5c;border-radius:20px;transition:width .35s ease}.progress-caption{font-size:.75rem;color:var(--muted);margin:10px 0 0}.calHead,.legend{display:flex;align-items:center;justify-content:space-between;gap:8px}.calHead h2{margin:0;font-size:1.12rem}.monthControl{display:flex;gap:5px}.monthControl button{background:#fff;border:1px solid var(--line);border-radius:4px;width:36px;height:36px;font-size:1.1rem}.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center;margin-top:14px}.weekday{color:var(--muted);font-size:.77rem}.day{border:1px solid transparent;background:transparent;min-height:34px;border-radius:5px;padding:3px 1px;position:relative;transition:background .15s,border-color .15s,box-shadow .15s}.day:hover,.monthControl button:hover{background:#e5eee2}.day.has{background:#e4eee3;border-color:#c8d9c8;font-weight:700}.day.has:after{content:"✓";position:absolute;right:3px;bottom:1px;display:grid;place-items:center;width:13px;height:13px;border-radius:50%;background:#315b42;color:#fff;font-size:9px;font-weight:800;line-height:1}.day.planned{border:1px dashed #b68b4f;background:#fbf3e2}.day.planned:before{content:"计";position:absolute;top:0;right:2px;display:grid;place-items:center;min-width:12px;height:12px;padding:0 2px;border-radius:3px;background:#ead7b7;color:#795a2c;font-size:8px;font-weight:800;line-height:1}.day.has.planned{background:#e4eee3;border:1px solid #b68b4f}.day.selected{outline:2px solid #284d39;outline-offset:2px;z-index:1}.day.selected:not(.has):not(.planned){background:#f0f2ec;font-weight:800}.day.exam-day{background:#fbf3e2!important;border:1px dashed #b68b4f!important;font-weight:800;color:var(--ink)}.day.exam-day:before{content:"考试";min-width:0;padding:0 2px;font-size:7px}.day.exam-day:after{content:"⭐️";display:inline;position:static;width:auto;height:auto;margin-left:2px;background:none;font-size:10px;vertical-align:baseline}.day.selected.exam-day{background:#fbf3e2!important;color:var(--ink)}.schedule-list{display:grid;gap:10px}.schedule-item{border-left:3px solid #78977a;padding:8px 12px;background:#f0f3ea;border-radius:0 4px 4px 0}.schedule-item small{display:block;color:var(--muted);font-size:.75rem}.schedule-item b{display:block;margin:2px 0}.schedule-item p{margin:0;font-size:.9rem}.schedule-tag{display:inline-block;font-size:.7rem;color:var(--green);font-weight:700;margin-top:4px}.legend{justify-content:flex-start;flex-wrap:wrap;gap:14px;margin-top:13px;color:var(--muted);font-size:.78rem}.legend-item{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}.legend-swatch{width:20px;height:20px;border-radius:5px;display:inline-grid;place-items:center;font-size:11px;font-weight:800;line-height:1}.legend-swatch.completed{background:#e4eee3;border:1px solid #c8d9c8;color:#315b42}.legend-swatch.planned{background:#fbf3e2;border:1px dashed #b68b4f;color:#795a2c}.legend-swatch.selected{background:#f0f2ec;border:2px solid #284d39;color:#24372c}.notes{display:grid;gap:10px}.notes h2{margin:0;font-size:.83rem;color:var(--muted)}.card{width:100%;display:block;text-align:left;border:1px solid #dad5b9;background:#f5edca;border-radius:4px;padding:13px 16px;box-shadow:0 2px 6px #24372c16}.card:nth-of-type(even){background:#e1eadb;border-color:#c7d6c0}.card[aria-current="date"]{border-color:#547359;box-shadow:inset 4px 0 #547359}.card small{display:block;color:var(--muted)}.card b{display:block;margin-top:2px}.entry{min-height:540px;padding:30px clamp(20px,3.5vw,43px);position:relative}.entry:before{content:"";position:absolute;top:-6px;left:50%;width:64px;height:13px;transform:translateX(-50%) rotate(-3deg);background:#cec59e99}.date{font-size:.76rem;letter-spacing:.14em;color:var(--muted);font-weight:700}.entry h2{font:700 clamp(1.6rem,4vw,2.35rem)/1.2 var(--serif);margin:8px 0}.sub{color:var(--muted);margin:0 0 18px}.tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:16px}.tab{border:0;background:transparent;padding:9px 4px;margin-right:8px;color:var(--muted);border-bottom:2px solid transparent}.tab[aria-selected="true"]{border-bottom-color:var(--green);color:var(--green);font-weight:700}.writing{font:1.12rem/1.85 var(--serif);overflow-wrap:anywhere}.writing p{margin:0 0 .9em;white-space:pre-line}.excerpt{border-bottom:1px solid var(--line);padding:0 0 11px}.excerpt small,.hint{font: .83rem/1.55 system-ui,sans-serif;color:var(--muted)}.grammar{display:grid;gap:9px}.grammar details{background:#f0f3ea;border:1px solid var(--line);padding:10px 13px;border-radius:4px}.grammar summary{cursor:pointer;font-weight:700}.grammar p{margin:7px 0}.pair{font:1.05rem/1.5 var(--serif)}del{color:#854137}ins{text-decoration:none;color:#24553e;font-weight:700}.answer{padding:3px 8px;font-weight:600}.empty{color:var(--muted)}[hidden]{display:none!important}
+button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2px solid #317464;outline-offset:3px}.workspace{width:min(1150px,calc(100% - 56px));margin:auto}.workspace{display:grid;grid-template-columns:335px minmax(0,1fr);gap:28px;margin-top:28px;margin-bottom:46px;align-items:start}.sidebar{display:grid;gap:19px}.calendar,.entry{border:1px solid var(--line);border-radius:6px;background:var(--paper);box-shadow:0 3px 12px #24372c12}.calendar{padding:19px}.progress-card{border:1px solid var(--line);border-radius:6px;background:var(--paper);padding:17px 19px;box-shadow:0 3px 12px #24372c12}.progress-card h2{font-size:1rem;margin:0}.progress-meta{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:6px 0 10px;font-size:.78rem;color:var(--muted)}.progress-meta strong{font:700 1.35rem/1 var(--serif);color:var(--green)}.progress-track{height:9px;background:#e6e9df;border-radius:20px;overflow:hidden}.progress-track span{display:block;height:100%;width:0;background:#547b5c;border-radius:20px;transition:width .35s ease}.progress-caption{font-size:.75rem;color:var(--muted);margin:10px 0 0}.calHead,.legend{display:flex;align-items:center;justify-content:space-between;gap:8px}.calHead h2{margin:0;font-size:1.12rem}.monthControl{display:flex;gap:5px}.monthControl button{background:#fff;border:1px solid var(--line);border-radius:4px;width:36px;height:36px;font-size:1.1rem}.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center;margin-top:14px}.weekday{color:var(--muted);font-size:.77rem}.day{border:1px solid transparent;background:transparent;min-height:34px;border-radius:5px;padding:3px 1px;position:relative;transition:background .15s,border-color .15s,box-shadow .15s}.day:hover,.monthControl button:hover{background:#e5eee2}.day.has{background:#e4eee3;border-color:#c8d9c8;font-weight:700}.day.has:after{content:"✓";position:absolute;right:3px;bottom:1px;display:grid;place-items:center;width:13px;height:13px;border-radius:50%;background:#315b42;color:#fff;font-size:9px;font-weight:800;line-height:1}.day.planned{border:1px dashed #b68b4f;background:#fbf3e2}.day.planned:before{content:"P";position:absolute;top:0;right:2px;display:grid;place-items:center;min-width:12px;height:12px;padding:0 2px;border-radius:3px;background:#ead7b7;color:#795a2c;font-size:8px;font-weight:800;line-height:1}.day.has.planned{background:#e4eee3;border:1px solid #b68b4f}.day.selected{outline:2px solid #284d39;outline-offset:2px;z-index:1}.day.selected:not(.has):not(.planned){background:#f0f2ec;font-weight:800}.day.exam-day{background:#fbf3e2!important;border:1px dashed #b68b4f!important;font-weight:800;color:var(--ink)}.day.exam-day:before{content:"Exam";min-width:0;padding:0 2px;font-size:7px}.day.exam-day:after{content:"⭐️";display:inline;position:static;width:auto;height:auto;margin-left:2px;background:none;font-size:10px;vertical-align:baseline}.day.selected.exam-day{background:#fbf3e2!important;color:var(--ink)}.schedule-list{display:grid;gap:10px}.schedule-item{border-left:3px solid #78977a;padding:8px 12px;background:#f0f3ea;border-radius:0 4px 4px 0}.schedule-item small{display:block;color:var(--muted);font-size:.75rem}.schedule-item b{display:block;margin:2px 0}.schedule-item p{margin:0;font-size:.9rem}.schedule-tag{display:inline-block;font-size:.7rem;color:var(--green);font-weight:700;margin-top:4px}.legend{justify-content:flex-start;flex-wrap:wrap;gap:14px;margin-top:13px;color:var(--muted);font-size:.78rem}.legend-item{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}.legend-swatch{width:20px;height:20px;border-radius:5px;display:inline-grid;place-items:center;font-size:11px;font-weight:800;line-height:1}.legend-swatch.completed{background:#e4eee3;border:1px solid #c8d9c8;color:#315b42}.legend-swatch.planned{background:#fbf3e2;border:1px dashed #b68b4f;color:#795a2c}.legend-swatch.selected{background:#f0f2ec;border:2px solid #284d39;color:#24372c}.notes{display:grid;gap:10px}.notes h2{margin:0;font-size:.83rem;color:var(--muted)}.card{width:100%;display:block;text-align:left;border:1px solid #dad5b9;background:#f5edca;border-radius:4px;padding:13px 16px;box-shadow:0 2px 6px #24372c16}.card:nth-of-type(even){background:#e1eadb;border-color:#c7d6c0}.card[aria-current="date"]{border-color:#547359;box-shadow:inset 4px 0 #547359}.card small{display:block;color:var(--muted)}.card b{display:block;margin-top:2px}.entry{min-height:540px;padding:30px clamp(20px,3.5vw,43px);position:relative}.entry:before{content:"";position:absolute;top:-6px;left:50%;width:64px;height:13px;transform:translateX(-50%) rotate(-3deg);background:#cec59e99}.date{font-size:.76rem;letter-spacing:.14em;color:var(--muted);font-weight:700}.entry h2{font:700 clamp(1.6rem,4vw,2.35rem)/1.2 var(--serif);margin:8px 0}.sub{color:var(--muted);margin:0 0 18px}.tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:16px}.tab{border:0;background:transparent;padding:9px 4px;margin-right:8px;color:var(--muted);border-bottom:2px solid transparent}.tab[aria-selected="true"]{border-bottom-color:var(--green);color:var(--green);font-weight:700}.writing{font:1.12rem/1.85 var(--serif);overflow-wrap:anywhere}.writing p{margin:0 0 .9em;white-space:pre-line}.excerpt{border-bottom:1px solid var(--line);padding:0 0 11px}.excerpt small,.hint{font: .83rem/1.55 system-ui,sans-serif;color:var(--muted)}.grammar{display:grid;gap:9px}.grammar details{background:#f0f3ea;border:1px solid var(--line);padding:10px 13px;border-radius:4px}.grammar summary{cursor:pointer;font-weight:700}.grammar p{margin:7px 0}.pair{font:1.05rem/1.5 var(--serif)}del{color:#854137}ins{text-decoration:none;color:#24553e;font-weight:700}.answer{padding:3px 8px;font-weight:600}.empty{color:var(--muted)}[hidden]{display:none!important}
 
 .stats-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}.stats-metric{background:#f0f3ea;border:1px solid var(--line);border-radius:6px;padding:15px;display:flex;flex-direction:column;gap:5px}.stats-metric strong{font:700 1.8rem/1.1 var(--serif);color:var(--green)}.stats-metric span{font-size:.76rem;color:var(--muted)}.stats-heading{font-size:1rem;margin:22px 0 10px}.stats-category-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stats-category{border:1px solid var(--line);border-radius:6px;background:#fffdf7;padding:11px 13px;text-align:left;min-width:0}.stats-category.active{border-color:#78977a;background:#eef3e9;box-shadow:inset 3px 0 #547b5c}.stats-category-top{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:.82rem}.stats-category-top b{font-size:.78rem;color:var(--muted);white-space:nowrap}.stats-track{display:block;height:6px;border-radius:8px;background:#e8ece3;overflow:hidden;margin-top:9px}.stats-track i{display:block;height:100%;background:#78977a;border-radius:8px}.stats-back{margin:0 0 10px;padding:6px 12px;border:1px solid var(--line);border-radius:5px;background:#f7f7f0;color:var(--muted);font-size:.78rem}.stats-error-list{display:grid;gap:8px}.stats-error{border:1px solid var(--line);border-radius:6px;background:#f7f8f2;padding:11px 14px}.stats-error summary{cursor:pointer;font-weight:700}.stats-error p{margin:8px 0;overflow-wrap:anywhere}.stats-before,.stats-after{color:#202522;font:1rem/1.7 var(--serif)}
 .stats-before del{color:#943a2e}.stats-after strong{color:#205a38}
 .stats-method{font-size:.78rem;color:var(--muted);line-height:1.6;margin-top:8px}
-@media(max-width:810px){header,.workspace{width:calc(100% - 30px)}header{padding-top:32px}.workspace{grid-template-columns:minmax(0,1fr);gap:18px}.sidebar{gap:12px}.notes{grid-template-columns:1fr 1fr}.notes h2{grid-column:1/-1}.entry{min-height:0}.stamp{display:none}.card{padding:9px 11px}.calendar{padding:14px}}
+@media(max-width:810px){.workspace{width:calc(100% - 30px)}.workspace{grid-template-columns:minmax(0,1fr);gap:18px}.sidebar{gap:12px}.notes{grid-template-columns:1fr 1fr}.notes h2{grid-column:1/-1}.entry{min-height:0}.card{padding:9px 11px}.calendar{padding:14px}}
 .reader{inset:0;margin:0;padding:0;border:0;width:100%;height:100vh;height:100dvh;max-height:none;max-width:none;background:var(--paper);color:var(--ink);overflow:hidden;transform-origin:top left}.reader[open]{display:flex;flex-direction:column}.reader::backdrop{background:#1f302b66;backdrop-filter:blur(4px)}.reader-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--paper);flex-shrink:0}.reader-toolbar button{min-height:44px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:#f0f3ea}.reader-toolbar span{font-size:.8rem;color:var(--muted)}.reader-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable}.reader .entry{border:0;border-radius:0;box-shadow:none;min-height:0;padding:24px 28px 40px}.reader .entry:before{display:none}.reader .entry h2{overflow-wrap:anywhere}.tabs{overflow-x:auto;white-space:nowrap;scrollbar-width:thin}.tab{flex-shrink:0;min-height:44px}.stats-tree{display:grid;gap:14px}.stats-branch{border:1px solid var(--line);border-radius:8px;background:#f7f8f2;padding:12px}.stats-branch>summary{cursor:pointer;font-weight:700;min-height:32px}.stats-branch>summary span{font-weight:400;color:var(--muted);font-size:.8rem;margin-left:8px}.stats-children{border-left:2px solid #c9d6c4;margin:8px 0 0 6px;padding-left:12px;display:grid;gap:8px}.stats-children .stats-category{width:100%;min-height:52px}.stats-subtopics{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}.stats-subtopics button{min-height:44px;border:1px solid var(--line);border-radius:7px;padding:8px 12px;background:#fffdf7;text-align:left}.stats-subtopics button[aria-pressed=true]{background:#e4eee3;border-color:#78977a;font-weight:700}.stats-breadcrumb{font-size:.78rem;color:var(--muted);overflow-wrap:anywhere;margin:0 0 12px}.stats-entry-link{min-height:44px;padding:8px 12px;background:#eef3e9;border:1px solid var(--line);border-radius:6px;font-size:.8rem}.stats-error summary{line-height:1.6}.stats-error .hint{line-height:1.8}.stats-all{margin-top:16px;min-height:44px}.card{transition:transform .2s,box-shadow .2s}.card:active{transform:scale(.98)}
-@media(max-width:810px){.workspace>.entry{display:none}header{padding-top:24px}header p{font-size:.85rem}.notes{grid-template-columns:minmax(0,1fr)}.card{padding:14px 16px;min-height:72px}.reader-toolbar{padding:8px 12px}.reader .entry{padding:20px 16px 32px}.reader .entry h2{font-size:1.65rem;line-height:1.35}.reader .writing{font-size:1.08rem;line-height:1.9}.stats-metrics{gap:6px;margin:16px 0}.stats-metric{padding:10px 8px}.stats-metric strong{font-size:1.5rem}.stats-metric span{font-size:.7rem}.stats-subtopics{gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}.stats-subtopics button{flex:0 0 auto;max-width:85%}.reader .stats-heading{margin-top:18px}.reader-body{scrollbar-gutter:auto}}
+@media(max-width:810px){.workspace>.entry{display:none}.notes{grid-template-columns:minmax(0,1fr)}.card{padding:14px 16px;min-height:72px}.reader-toolbar{padding:8px 12px}.reader .entry{padding:20px 16px 32px}.reader .entry h2{font-size:1.65rem;line-height:1.35}.reader .writing{font-size:1.08rem;line-height:1.9}.stats-metrics{gap:6px;margin:16px 0}.stats-metric{padding:10px 8px}.stats-metric strong{font-size:1.5rem}.stats-metric span{font-size:.7rem}.stats-subtopics{gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}.stats-subtopics button{flex:0 0 auto;max-width:85%}.reader .stats-heading{margin-top:18px}.reader-body{scrollbar-gutter:auto}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 .writing-viewport{width:100%;overflow:hidden;touch-action:pan-y;min-width:0;transition:height 300ms cubic-bezier(.22,.75,.24,1)}.writing-track{display:flex;align-items:flex-start;will-change:transform}.writing-slide{flex:0 0 100%;width:100%;min-width:0;overflow-wrap:anywhere;min-height:160px}.writing-slide[aria-hidden=true]{pointer-events:none}@media(prefers-reduced-motion:reduce){.writing-track{transition:none!important}}
 .comparison{display:grid;gap:12px}
@@ -48,7 +48,7 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 .full-revision{white-space:pre-wrap}
 @media(max-width:810px){.entry .tabs{gap:6px}.entry .tab{flex:1 0 auto;margin-right:0;padding-inline:2px;font-size:.83rem}}
 [hidden]{display:none!important}
-.main-tabs{width:min(1150px,calc(100% - 30px));margin:12px auto 0;display:flex;flex-wrap:wrap;gap:8px}
+.main-tabs{width:min(1150px,calc(100% - 30px));margin:max(12px,env(safe-area-inset-top)) auto 0;display:flex;flex-wrap:wrap;gap:8px}
 .main-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border:1px solid var(--line);border-radius:8px;background:#f7f8f2;color:var(--ink);text-decoration:none}
 .main-tabs a[aria-current=page]{background:var(--green);color:white;border-color:var(--green)}
 .grammar-page{width:min(980px,calc(100% - 30px));margin:16px auto 42px}
@@ -61,30 +61,29 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 </style>
 </head>
 <body>
-<header><div><div class="kicker">English Writing Journal</div><h1>英语写作日历</h1><p>按日期回看原文、批改和语法错题。</p></div><div class="stamp">考研英语 · 写作</div></header>
-<nav class="main-tabs" aria-label="写作日历导航">
- <a id="calendarPageLink" href="#">英语写作日历</a>
- <a id="grammarPageLink" href="#grammar">语法错误统计</a>
+<nav class="main-tabs" aria-label="Journal navigation">
+ <a id="calendarPageLink" href="#">Writing Calendar</a>
+ <a id="grammarPageLink" href="#grammar">Grammar Review</a>
 </nav>
 <main class="workspace" id="calendarPage">
-<aside class="sidebar" aria-label="练习日期">
-<section class="calendar"><div class="calHead"><h2 id="month"></h2><div class="monthControl"><button id="prev" aria-label="上个月">‹</button><button id="next" aria-label="下个月">›</button></div></div><div class="grid" id="calendar"></div><div class="legend" aria-label="日历状态图例"><span class="legend-item"><span class="legend-swatch completed">✓</span>已完成写作</span><span class="legend-item"><span class="legend-swatch planned">计</span>计划练习</span><span class="legend-item"><span class="legend-swatch selected">22</span>当前选中</span></div></section>
-<section class="progress-card" aria-label="考前备考进度"><h2>考前备考进度</h2><div class="progress-meta"><span id="progress-week-label">正在计算备考周次…</span><strong id="progress-week-count">— / 10 周</strong></div><div class="progress-track" role="progressbar" aria-label="备考周数进度" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span id="progress-bar"></span></div><p class="progress-caption" id="progress-caption">正在计算考试倒计时…</p></section>
-<nav class="notes" id="notes" aria-label="已归档的作文"></nav>
+<aside class="sidebar" aria-label="Practice dates">
+<section class="calendar"><div class="calHead"><h2 id="month"></h2><div class="monthControl"><button id="prev" aria-label="Previous month">‹</button><button id="next" aria-label="Next month">›</button></div></div><div class="grid" id="calendar"></div><div class="legend" aria-label="Calendar legend"><span class="legend-item"><span class="legend-swatch completed">✓</span>Completed</span><span class="legend-item"><span class="legend-swatch planned">P</span>Planned</span><span class="legend-item"><span class="legend-swatch selected">22</span>Selected</span></div></section>
+<section class="progress-card" aria-label="Exam preparation"><h2>Exam preparation</h2><div class="progress-meta"><span id="progress-week-label">Calculating study week…</span><strong id="progress-week-count">— / 10 weeks</strong></div><div class="progress-track" role="progressbar" aria-label="Study plan progress" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span id="progress-bar"></span></div><p class="progress-caption" id="progress-caption">Calculating countdown…</p></section>
+<nav class="notes" id="notes" aria-label="Archived writing"></nav>
 </aside>
-<section class="entry" id="entry" aria-label="当日写作"></section>
+<section class="entry" id="entry" aria-label="Writing for this date"></section>
 </main>
-<section id="grammarPage" class="grammar-page" aria-label="语法错误统计" hidden>
+<section id="grammarPage" class="grammar-page" aria-label="Grammar Review" hidden>
  <div class="entry" id="grammarContent"></div>
 </section>
 <dialog class="reader" id="reader" aria-labelledby="readerTitle">
- <div class="reader-toolbar"><button id="readerBack" type="button">‹ 返回日历</button><span id="readerTitle">写作阅读</span><button id="readerClose" type="button" aria-label="关闭阅读视图">关闭</button></div>
+ <div class="reader-toolbar"><button id="readerBack" type="button">‹ Back to calendar</button><span id="readerTitle">Writing Review</span><button id="readerClose" type="button" aria-label="Close writing review">Close</button></div>
  <div class="reader-body" id="readerBody"></div>
 </dialog>
 <dialog class="error-explanation" id="grammarExplanation" aria-labelledby="grammarExplanationTitle">
  <div class="error-explanation-top">
   <h2 class="error-explanation-heading" id="grammarExplanationTitle"></h2>
-  <form method="dialog"><button class="error-explanation-close" type="submit" autofocus>关闭</button></form>
+  <form method="dialog"><button class="error-explanation-close" type="submit" autofocus>Close</button></form>
  </div>
  <div class="error-explanation-text"></div>
 </dialog>
@@ -965,12 +964,375 @@ Li Ming`,
  ]}
 };
 
+const englishCopy = {
+ "冠词": "Articles",
+ "固定搭配与介词": "Collocations and prepositions",
+ "专有名词大小写": "Capitalizing proper nouns",
+ "系动词缺失": "Missing linking verb",
+ "否定结构": "Negation",
+ "固定搭配": "Collocations",
+ "不定式结构": "Infinitive constructions",
+ "数量词与名词复数": "Quantifiers and plural nouns",
+ "词性": "Parts of speech",
+ "介词": "Prepositions",
+ "非谓语与句子连接": "Nonfinite verbs and sentence connections",
+ "祈使句与主语": "Imperatives and subjects",
+ "名词复数与定语从句": "Plural nouns and relative clauses",
+ "倍数表达与时间介词": "Multiples and time prepositions",
+ "句子连接与同位语从句": "Joining clauses and noun content clauses",
+ "非谓语与固定搭配": "Nonfinite verbs and collocations",
+ "主谓一致与宾语从句": "Subject–verb agreement and embedded clauses",
+ "倒装句与动词搭配": "Inversion and verb choice",
+ "谓语结构与词性": "Verb structure and parts of speech",
+ "关系从句与冠词": "Relative clauses and articles",
+ "名词单复数与词汇搭配": "Noun number and word choice",
+ "虚拟语气与拼写": "Subjunctive forms and spelling",
+ "所有格与拼写": "Possessives and spelling",
+ "固定搭配与时态语义": "Collocations and time reference",
+ "宾语从句与重复宾语": "Relative clauses and repeated objects",
+ "句子连接与时间表达": "Connecting ideas and expressing time",
+ "形容词搭配": "Adjective collocations",
+ "词汇选择与固定搭配": "Word choice and collocations",
+ "举例结构与代词": "Introducing examples and pronouns",
+ "动词过去分词与介词": "Past participles and prepositions",
+ "主谓一致与句子结构": "Subject–verb agreement and sentence structure",
+ "拼写与称呼格式": "Spelling and salutations",
+ "语法理解专项练习 1": "Grammar drill 1",
+ "语法理解专项练习 2": "Grammar drill 2",
+ "语法理解专项练习 3": "Grammar drill 3",
+ "图表描述与时态": "Chart description and tense",
+ "词汇与拼写": "Vocabulary and spelling",
+ "名词搭配": "Noun collocations",
+ "非谓语与介词": "Nonfinite verbs and prepositions",
+ "原因句型与词汇": "Stating reasons and word choice",
+ "比较结构与主谓一致": "Comparisons and subject–verb agreement",
+ "动词搭配与介词": "Verb collocations and prepositions",
+ "固定介词搭配": "Fixed preposition patterns",
+ "比较级与副词": "Comparatives and adverbs",
+ "动词结构与倒装": "Verb structure and inversion",
+ "名词所有格与复数": "Plural and possessive nouns",
+ "拼写与固定搭配": "Spelling and collocations",
+ "词性与冠词": "Parts of speech and articles",
+ "定语从句与谓语": "Relative clauses and verb structure",
+ "数量词与摄影词汇": "Quantifiers and photography vocabulary",
+ "主谓一致与感叹结构": "Subject–verb agreement and embedded exclamatives",
+ "名词单复数与搭配": "Noun number and collocations",
+ "地点和时间介词": "Prepositions of place and time",
+ "邮件结尾": "Email closings",
+ "专项练习 1 · 语法与搭配": "Grammar and collocation drill 1",
+ "专项练习 2 · 语法与搭配": "Grammar and collocation drill 2",
+ "专项练习 3 · 语法与搭配": "Grammar and collocation drill 3",
+ "专项练习 4 · 语法与搭配": "Grammar and collocation drill 4",
+ "专项练习 5 · 语法与搭配": "Grammar and collocation drill 5",
+ "专项练习 6 · 语法与搭配": "Grammar and collocation drill 6",
+ "虚拟条件句": "Hypothetical conditionals",
+ "两种 hesitate 搭配": "Patterns with hesitate",
+ "worth 的用法": "Using worth",
+ "拼写与搭配": "Spelling and word combinations",
+ "无选择与有选择": "Having or having no choice",
+ "被动表达": "Passive voice",
+ "make 使役动词": "Causative make",
+ "不规则与拼写": "Irregular forms and spelling",
+ "比较级结构": "Comparative structures",
+ "主语从句与主谓一致": "Subject clauses and subject–verb agreement",
+ "过去时与动名词": "Past tense and gerunds",
+ "Not only 置首倒装": "Inversion after Not only",
+ "肯定句中的“也”": "Too and either",
+ "Only by 置首倒装": "Inversion after Only by",
+ "举例搭配": "Introducing examples",
+ "道歉的介词": "Prepositions with apologize",
+ "情态动词": "Modal verbs",
+ "礼貌改期": "Polite requests to reschedule",
+ "不可数名词": "Uncountable nouns",
+ "将来的时间从句": "Time clauses referring to the future",
+ "物主限定词": "Possessive determiners",
+ "动词搭配": "Verb collocations",
+ "because 与 because of": "because vs. because of",
+ "情态动词和完成时": "Modals and perfect forms",
+ "honor 的 h 不发音，以元音音素开头，因此使用 an。": "The h in honor is silent. Use an because honor starts with a vowel sound.",
+ "recommend something to somebody；这里 recommend 后面接给某人的推荐对象时需要 to。": "Use recommend something to somebody. Add to before the person receiving the recommendation.",
+ "国家名称和英文姓名中的名字首字母均需大写。": "Capitalize country names and each part of a person's name.",
+ "be interested in 是固定结构，关系结构中不能省略 are。": "Use be interested in. Keep are in the relative clause.",
+ "表示“不必”用 don't have to，不能用 haven't to。": "Use don't have to to express a lack of obligation instead of haven't to.",
+ "表示“语言障碍”通常使用固定搭配 language barrier。": "Language barrier is the usual expression.",
+ "it is + 形容词 + to do；原句 that 后直接接 going，结构不完整。": "Use it is + adjective + to-infinitive. That followed directly by going leaves the clause incomplete.",
+ "具体数量“两次”用 two；可数名词 experience 用复数；现在完成时用 have had。": "Use two for the number of experiences. Make the countable noun plural and use have had for the present perfect.",
+ "修饰名词 day 需要形容词 magical。": "Use the adjective magical to describe the noun day.",
+ "表示来到某地使用 come to + 地点。": "Use come to + a place to describe arriving there.",
+ "这里用 Considering 引出考虑因素；原句的祈使动词 Consider 与后面的完整句之间连接不当。": "Use Considering to introduce the factor being taken into account. The imperative Consider does not connect directly to the independent clause that follows.",
+ "给对方建议可用祈使句 Book...；hope 前需要明确主语 I。": "Use the imperative Book to give advice. Add the subject I before hope.",
+ "泛指大学生用复数 students；who 引导定语从句修饰 students；choose 后接 to do。": "Use the plural students when speaking generally. Who introduces a relative clause describing students. Use choose + to-infinitive.",
+ "more than doubling 表示增长幅度超过一倍；表示一段时间用 over six years。30% 到 75% 是原来的2.5倍。": "More than doubling means the figure grew to more than twice its original size. Use over six years for the time span. A rise from 30% to 75% gives a final figure 2.5 times the original.",
+ "两个完整意思不能直接拼接；用 The fact that... 作主语，that 从句解释 fact；flourish 是动词，flourishing 作名词/形容词。": "Use The fact that ... as the subject instead of joining two complete ideas without a connector. The that-clause explains fact. Flourish is a verb. Flourishing can function as a noun or an adjective.",
+ "There are... 已有谓语 are，后面用 contributing 修饰 factors；也可改写为 Many factors contribute to...。": "There are ... already has a finite verb. Use contributing to modify factors. You can also write Many factors contribute to ...",
+ "online learning 是单数主语，谓语用 gives；what they are interested in 中用主格 they；固定搭配 be interested in。": "Online learning is a singular subject, so use gives. Use the subject pronoun they in what they are interested in. Remember the expression be interested in.",
+ "Not only does 后接主语和动词原形；choices in how... 表达选择方式；replay 是“重新播放”的单个动词。": "After Not only does, use the subject and the base form of the verb. Choices in how ... describes different ways to do something. Replay means play again.",
+ "不能把 is 和 helps 叠加；help + 人 + 动词原形；a 应改为 an，但此处 the ability 更符合泛指能力的表达。": "Use helps without is before it. Use help + person + base verb. An is the form before ability, but the ability fits this sentence better.",
+ "单数可数名词 factor 前加 an；future learning 表示未来学习；factor in 是常见搭配。": "Use an before the singular countable noun factor. Future learning refers to learning later on. Factor in is a common combination.",
+ "固定表达 spare no effort，意为“不遗余力”。": "Spare no effort means to do everything you can.",
+ "泛指大学用复数 universities；offer courses 表示开设课程。": "Use universities when referring to universities in general. Use offer courses when talking about making courses available.",
+ "It is important that 后可用虚拟语气动词原形 build；awareness 拼写；an awareness of 是常见搭配。": "After It is important that, the subjunctive can take the base form build. Check the spelling of awareness. An awareness of is a common expression.",
+ "academic 拼写；多个学生的生活用 students' lives；will 更直接表达未来展望。": "Check the spelling of academic. Use students' lives for the lives of multiple students. Will expresses the future expectation directly.",
+ "表达“对考试感到有压力”用 feel stressed about；upcoming examination 前补 the。": "Use feel stressed about an exam. Add the before upcoming examination when referring to the specific exam.",
+ "单数可数名词 thing 前需要冠词 a；结构是 such a + 形容词 + 名词。": "Use the article a before singular countable thing. The pattern is such a + adjective + noun.",
+ "that 引导的定语从句中，that 已经充当 consider 的宾语，不需要再加 it。": "In the relative clause, that already acts as the object of consider. Leave out the repeated object it.",
+ "列举建议用 First / Second；“临近考试”可用 as the examination approaches。": "Use First and Second to list suggestions. Use as the examination approaches for the time leading up to an exam.",
+ "familiar 是形容词，使用 be familiar with；不能说 familiar it。": "Familiar is an adjective. Use be familiar with.",
+ "take small steps 表示采取小步骤；contract 不表示“缓解焦虑”，这里用 reduce。": "Use take small steps for making progress gradually. Use reduce to describe making anxiety less intense.",
+ "举例用 such as；enjoy 后面已有宾语从句/关系结构，不需要额外的 it。": "Use such as to give examples. The clause after enjoy already supplies an object, so leave out the extra it.",
+ "have 后接过去分词 fought；prepare for an examination 是固定搭配。": "Use the past participle fought after have. The expression is prepare for an examination.",
+ "dream 是单数，谓语用 comes；用 you pass the examination 表达“你通过考试”更清楚。": "Dream is singular, so use comes. You pass the examination makes it clear who is taking the exam.",
+ "英文称呼和姓名中的专有名词首字母大写。": "Capitalize the salutation and proper names.",
+ "原句语法成立，have fought 强调奋斗经历或结果；have been fighting 强调从过去持续到现在的努力，更贴合“一直在努力”。": "The original is grammatically possible. Have fought emphasizes the experience or result. Have been fighting emphasizes effort that began in the past and continues now.",
+ "Only by + 动名词置于句首时，主句部分倒装：can + 主语 + 动词原形。the difficulties 指特定困难；泛指困难时通常不加 the。": "When Only by + gerund opens the sentence, invert the main clause: can + subject + base verb. The difficulties refers to specific difficulties. Omit the when speaking generally.",
+ "As 引导时间状语从句；the examination 是第三人称单数，谓语用 approaches。主句 students 是复数，因此用 become。": "As introduces a time clause. The examination is third-person singular, so use approaches. Students is plural, so use become.",
+ "描述已经发生的图表趋势用过去式 rose；from...to... 两端分别接起点和终点。2020 到 2026 是六年。": "Use the past tense rose for a trend that has already occurred. From ... to ... gives the starting and ending points. The period from 2020 to 2026 is six years.",
+ "exactly 和 between 拼写要准确；表示“在六年间翻了一倍”可用 doubling over six years。": "Check the spelling of exactly and between. Use doubling over six years to describe a twofold increase across that period.",
+ "泛指运动时通常不加 the；place importance on 是常见搭配。": "Omit the before exercise when speaking generally. Use place importance on something.",
+ "名词 factors 后可用现在分词 contributing 作后置修饰；contribute to 是固定搭配。": "Use the present participle contributing after factors to modify it. The expression is contribute to something.",
+ "用 one possible reason is that... 引出原因；academic pressure 比 stress of study 更符合英语搭配。": "Use one possible reason is that ... to introduce a cause. Academic pressure is the usual expression here.",
+ "Compared with 用于比较；college life 是单数主语，谓语用 gives；choice 用复数 choices。": "Use compared with to introduce the comparison. College life is a singular subject, so use gives. Use choices for multiple options.",
+ "refresh 后接宾语；“学习后恢复精神”可说 refresh their minds after studying。": "Refresh takes an object. Use refresh their minds after studying.",
+ "固定表达是 a sense of control over...；表示“对生活的掌控感”。": "Use a sense of control over ... to express a feeling of being in control of your life.",
+ "help + 人 + 动词原形；修饰 study 这个动作要用副词 efficiently。": "Use help + person + base verb. Use the adverb efficiently to describe how someone studies.",
+ "Not only 句首倒装只保留一个助动词；should 后接动词原形；but also 后使用正常语序。": "When Not only introduces inversion, use one auxiliary. Use a base verb after should. Keep normal word order in the clause after but also.",
+ "表示“大学生们的生活”要用复数所有格 students' lives。": "Use the plural possessive students' lives to describe the lives of college students.",
+ "固定表达 spare no effort，意为“不遗余力”；phenomenon 的拼写也要注意。": "Use spare no effort to mean do everything you can. Check the spelling of phenomenon.",
+ "your 后需要名词 preparation；特指这场研究生入学考试时可用 the。": "Use the noun preparation after your. Use the for the specific postgraduate entrance exam.",
+ "which 后不应同时使用 is 和 helps；本句改为 as this can... 使指代更清楚。": "Use one finite verb after which. The revision uses as this can ... to clarify what the clause refers to.",
+ "固定搭配是 a lot of；“拍摄的照片”通常说 photos taken by...。": "Use a lot of. Use photos taken by ... to name the photographer.",
+ "复数 pictures 搭配 show；talented 是形容词，使用 how talented you are。": "The plural pictures takes show. Talented is an adjective. Use how talented you are.",
+ "可数复数用 many；photograph 的复数是 photographs，拍摄用 taken by。": "Use many with plural countable nouns. The plural is photographs. Use taken by to name the photographer.",
+ "come to + 地点；next Friday 前通常不加 on。": "Use come to + place. Normally omit on before next Friday.",
+ "正式邮件期待回复用 I look forward to your reply；注意完整谓语。": "In a formal email, use I look forward to your reply. Include the complete verb phrase.",
+ "which helps 从句中 which 已作主语；help + 人 + 动词原形，使用 helps us study。": "In which helps, which is already the subject. Use help + person + base verb, as in helps us study.",
+ "过去发生的建立用 built；provide someone with something；“学习环境”用 learning environment。": "Use built for a completed action in the past. The construction is provide someone with something. Use learning environment.",
+ "choose to do；their lives 表示“他们的生活”；make + 宾语 + 形容词，convenient 是形容词。": "Use choose to do. Their lives is plural. Use the adjective convenient after make + object.",
+ "every day 表示“每天”；Only by 置于句首时主句部分倒装；English 首字母大写。": "Every day means each day. Starting with Only by triggers inversion in the main clause. Capitalize English.",
+ "pictures 是复数，谓语用 show；he 是第三人称单数，be 动词用 is；how 引导的感叹性宾语从句使用陈述语序。": "Use show with plural pictures and is with singular he. Use statement word order in the embedded clause beginning with how.",
+ "Not only does + 主语 + 动词原形；不能再叠加 can；it 对应的谓语用 improves。": "Use Not only does + subject + base verb. Avoid adding can as a second auxiliary. Use improves with it.",
+ "If I were... 与 I would... 构成对现在假设的虚拟条件句；on a trip，choose + 名词，不用 choose to a hotel。": "If I were ... and I would ... express a present hypothetical. Use on a trip and choose + noun, as in choose a nice hotel.",
+ "hesitate to do sth. 表示犹豫是否做某事。": "Use hesitate to do something when you are unsure whether to do it.",
+ "be worth + doing 或 be worth + 名词；这里按上下文用 wasn't sure it was worth spending my own money。": "Use be worth + gerund or noun. Here, wasn't sure it was worth spending my own money fits the context.",
+ "lose 是失去，loose 是松的；lower one's standards 表示降低标准；sacrifice 拼写注意。": "Lose means to stop having something. Loose means not tight. Use lower one's standards and check the spelling of sacrifice.",
+ "have no choice but to + 动词原形；have a choice 中需要冠词 a。": "Use have no choice but to + base verb. Include a in have a choice.",
+ "自己是受处罚的人，用 be punished；of 后接动名词 being。": "Use the passive be punished for the person receiving the punishment. Use the gerund being after of.",
+ "make + 宾语 + 动词原形；不要叠加 is makes。": "Use make + object + base verb. Use makes on its own instead of is makes.",
+ "want to do；make up one's mind 表示下定决心，过去式 made。": "Use want to do. Make up one's mind means decide firmly. The past tense is made.",
+ "stuck 本身已是过去分词，不是 stucked；study 过去式 studied。": "Stuck is already the past participle of stick. The past tense of study is studied.",
+ "同一分句不要出现两个没有连接词的谓语；比较用 more ... than。": "Use a connector between finite verb phrases in the same clause. Use more ... than for comparisons.",
+ "the fact 作主语中心词，谓语用 is。be related to 后接名词短语。": "The head of the subject is fact, so use is. Follow be related to with a noun phrase.",
+ "in the past 表过去，谓语用 were。be busy doing sth.，make a living。": "In the past sets a past time frame, so use were. Use be busy doing something and make a living.",
+ "regular 修饰名词 exercise。does 后用 benefit，but also 后的分句用正常语序。": "Regular modifies the noun exercise. Use the base form benefit after does. Use normal word order in the clause after but also.",
+ "肯定句用 too，either 常用于否定句。": "Use too in affirmative statements and either in negative statements.",
+ "by 后接动名词。Only by 置首时，can 提到主语前。healthy 是形容词，attitude 是态度。": "Use a gerund after by. When Only by opens the sentence, put can before the subject. Healthy is an adjective. Attitude refers to a way of thinking.",
+ "用 such as 引出例子。这里泛指多个公园，用复数。": "Use such as to introduce examples. Use the plural when referring to parks in general.",
+ "apologize to + 人，apologize for + 事情或动名词。": "Use apologize to + person and apologize for + noun or gerund.",
+ "can、could、must 后直接接动词原形。": "After can, could, or must, use the base form of the verb.",
+ "convenient 是“方便的”。请求对方改期，可以说 If it is convenient for you, could we reschedule…?": "Convenient means suitable or easy to arrange. To request a new time, you can write If it is convenient for you, could we reschedule ...?",
+ "news 不可数。一条好消息用 a piece of good news。": "News is uncountable. Use a piece of good news for one item.",
+ "用 when 引导时间从句时，可以用一般现在时表示未来。": "Use the simple present in a time clause with when even if the clause refers to the future.",
+ "reply 在这里是名词。用 your 修饰，整句是 I look forward to your reply.": "Reply is a noun here. Use your in I look forward to your reply.",
+ "to 接道歉的对象，for 接道歉的原因。正式开头也可以直接说 I am writing to apologize for…": "Use to for the person receiving the apology and for for the reason. In a formal opening, you can write I am writing to apologize for ...",
+ "活动和面试都可以用 attend。说收到面试通知，可以写 I have just been asked to attend an interview.": "Use attend for both events and interviews. To explain that you received an invitation, write I have just been asked to attend an interview.",
+ "because 接完整句子。because of 接名词短语，例如 because of an important interview。": "Follow because with a complete clause. Follow because of with a noun phrase, as in because of an important interview.",
+ "convince 是“说服”。询问对方是否方便时，用 If it is convenient for you。": "Convince means persuade. Use If it is convenient for you to ask whether the arrangement suits the other person.",
+ "说可能已经造成的不便，用 may have + 过去分词。": "Use may have + past participle for inconvenience that may already have occurred.",
+ "要用 I look forward to 或 I am looking forward to。to 是介词，后接名词或动名词。": "Use I look forward to or I am looking forward to. Here to is a preposition and takes a noun or gerund.",
+ "大作文练习 1": "Long essay practice 1",
+ "七大方案：复习主语从句、倒装、对比；完成一篇大作文，写后批改并重写薄弱句。": "Review subject clauses, inversion, and comparisons. Write a long essay, then revise its weaker sentences.",
+ "第 6 周 · 模板熟悉": "Week 6 · Learning the templates",
+ "小作文练习 1": "Short writing practice 1",
+ "完成一篇小作文；重点检查书信结构、句子完整性和固定搭配。": "Write a short response. Check letter structure, sentence completeness, and collocations.",
+ "大作文练习 2": "Long essay practice 2",
+ "完成一篇大作文；尝试主动调用今天学过的论证方法和措施主体。": "Write a long essay using the argument patterns and types of measures you studied today.",
+ "大作文练习 3": "Long essay practice 3",
+ "更换真题话题，练习七大方案的迁移使用。": "Use another past exam topic to practice applying the seven argument patterns.",
+ "第 7 周 · 话题迁移": "Week 7 · Applying patterns to new topics",
+ "小作文练习 2": "Short writing practice 2",
+ "更换应用文类型，练习开头、目的和具体内容表达。": "Try a different practical writing task. Practice the opening, the purpose, and the details.",
+ "大作文练习 4": "Long essay practice 4",
+ "完成一篇完整大作文；检查段落衔接与措施主体是否具体。": "Write a complete long essay. Check paragraph transitions and who is responsible for each proposed measure.",
+ "大作文练习 5": "Long essay practice 5",
+ "开始限时写作，减少看模板；写后整理反复出现的语法问题。": "Start writing under timed conditions with less reliance on templates. Note recurring grammar errors after writing.",
+ "第 8 周 · 限时输出": "Week 8 · Timed writing",
+ "小作文练习 3": "Short writing practice 3",
+ "限时完成一篇小作文，目标 20–25 分钟。": "Write a short response in 20–25 minutes.",
+ "大作文练习 6": "Long essay practice 6",
+ "限时完成一篇大作文，目标 30–35 分钟。": "Write a long essay in 30–35 minutes.",
+ "大作文练习 7": "Long essay practice 7",
+ "继续限时写作；重点练习不看模板独立组织第二、三段。": "Continue timed writing. Organize the second and third paragraphs without referring to a template.",
+ "第 9 周 · 稳定发挥": "Week 9 · Consistent performance",
+ "小作文练习 4": "Short writing practice 4",
+ "限时完成一篇小作文，集中修正常见语法错误。": "Write a timed short response. Focus on recurring grammar errors.",
+ "整篇写作模拟": "Full writing mock exam",
+ "按考试节奏完成一篇小作文和一篇大作文，记录实际用时。": "Complete a short response and a long essay at exam pace. Record the actual time taken.",
+ "最后一轮写作模拟": "Final writing mock exam",
+ "完成一套小作文与大作文限时训练，检查时间分配。": "Complete a timed short response and long essay. Check how you allocate your time.",
+ "第 10 周 · 考前回顾": "Week 10 · Final review",
+ "模板与错题回顾": "Review templates and errors",
+ "只复习已经学过的句型、个人/学校措施和高频语法错误，不再大量增加新内容。": "Review familiar sentence patterns, actions by individuals or schools, and frequent grammar errors. Keep new material to a minimum.",
+ "考研考试日 ⭐️": "Exam day ⭐️",
+ "考研考试日。按准考证上的具体日期、时间和考场安排参加考试。": "Check the exact date, time, and venue on your admission ticket.",
+ "第 10 周 · 考试": "Week 10 · Exam",
+ "推荐上海旅游 · 建议信": "Recommending Shanghai · Letter of advice",
+ "考研英语二 · Part A · 建议信 · 完整练习": "Entrance Exam English II · Part A · Letter of advice · Full practice",
+ "本次为英语二 Part A 建议信，推荐外国朋友 David 来上海旅游。原稿保留了上海的城市体验、英语交流、迪士尼三个理由，并在结尾补充天气与提前订酒店的建议。批改以明确语法、拼写和必要固定搭配纠错为主，没有重写论证顺序。": "This Part A letter recommends Shanghai to David. It gives three reasons to visit: the city experience, communicating in English, and Disneyland. It ends with advice on the weather and booking a hotel early. The corrections focus on grammar, spelling, and essential collocations while preserving the order of ideas.",
+ "本次可复用的三个句型与逻辑点": "Three reusable patterns and organizing ideas",
+ "用定语从句明确推荐对象，适合建议信开头。": "Use a relative clause to name what you recommend at the start of a letter of advice.",
+ "先总述推荐理由，再用 For one thing / For another 分点展开。": "State the overall point first, then develop the reasons with For one thing and For another.",
+ "Considering + 名词短语引出需要考虑的情况，再提出具体建议。": "Use Considering + noun phrase to introduce a factor before giving specific advice.",
+ "大学生在线学习比例上升 · 图表作文": "More College Students Are Studying Online · Chart essay",
+ "考研英语二 · Part B · 图表作文 · 完整练习": "Entrance Exam English II · Part B · Chart essay · Full practice",
+ "文章按图表描述、在线学习优势分析和总结建议展开。保留了用户关于自主选择学习内容、灵活参加课程和重复播放课程、培养独立学习能力的三个论点。重点复习定语从句、The fact that... 主语结构、There are... contributing to...、Not only 倒装、help + 人 + 动词原形，以及 It is important that + 主语 + 动词原形。": "The essay describes the chart, analyzes the advantages of online study, and ends with recommendations. It keeps the original points about choosing content, attending and replaying lessons flexibly, and developing independent study skills. Review relative clauses, The fact that ... as a subject, There are ... contributing to ..., Not only inversion, help + person + base verb, and It is important that + subject + base verb.",
+ "用 The fact that 引导的主语结构，把观察到的现象和结论连接起来。": "Use a The fact that subject to connect an observation with a conclusion.",
+ "用于并列两个优势；Not only 置于句首时倒装，does 后接动词原形。": "Use this pattern to pair two advantages. Invert the clause when Not only comes first and use the base verb after does.",
+ "用于提出建议或强调必要性；that 从句中可使用动词原形 build。": "Use this pattern for advice or to emphasize necessity. The that-clause can take the base form build.",
+ "考研压力与应对建议 · 建议信 · 语法理解专项练习": "Coping with Exam Stress · Letter of advice and grammar drills",
+ "考研英语二 · Part A · 建议信 · 完整练习；同日补充：语法理解专项练习": "Entrance Exam English II · Part A · Letter of advice and supplementary grammar drills",
+ "围绕考试压力提出两条建议：先从小任务开始，再通过喜欢的运动缓解压力。保留原文的建议顺序和鼓励语气。重点复习 such a + 名词、be familiar with、such as、have + 过去分词，以及 hope 后的主谓一致。 同日另完成3句语法理解练习，巩固现在完成进行时、Only by 倒装和 As 时间状语从句中的主谓一致。": "The letter suggests starting with a small task and relieving stress with an activity you enjoy. It preserves the original order of advice and its encouraging tone. Review such a + noun, be familiar with, such as, have + past participle, and agreement in the clause after hope. Three additional sentences practice the present perfect continuous, Only by inversion, and agreement in time clauses introduced by As.",
+ "本次可复用的三个表达": "Three reusable expressions",
+ "表达“随着考试临近”，用于引出压力或备考状态。": "Use this expression to introduce exam stress or describe the run-up to an exam.",
+ "familiar 是形容词，固定搭配 be familiar with。": "Familiar is an adjective. The usual pattern is be familiar with.",
+ "动名词短语作主语；适合表达循序渐进的建议。": "A gerund phrase acts as the subject. This pattern suits advice about gradual progress.",
+ "语法理解专项：时态、倒装与主谓一致": "Grammar drill: tense, inversion, and subject–verb agreement",
+ "练习 1": "Exercise 1",
+ "练习 2": "Exercise 2",
+ "练习 3": "Exercise 3",
+ "语法理解专项练习（11月21日）": "Grammar Drill (November 21)",
+ "1. 我很高兴你一直在为自己的梦想而努力。": "1. I'm glad you've been working toward your dream all this time.",
+ "2. 只有通过循序渐进的努力，我们才能克服困难。": "2. Only by making steady progress can we overcome difficulties.",
+ "3. 随着考试临近，学生们变得越来越焦虑。": "3. As the exam approaches, students are growing more anxious.",
+ "语法理解专项练习修改稿（11月21日）": "Grammar Drill Revisions (November 21)",
+ "大学生规律运动比例上升 · 图表作文": "More College Students Are Exercising Regularly · Chart essay",
+ "文章按图表趋势、原因分析、建议结尾展开。保留了用户关于大学学习压力、运动释放压力、生活掌控感和健康饮食的论证。重点复习图表过去时、contribute to、compared with、help + 人 + do、control over，以及 Not only 倒装。": "The essay describes a trend, analyzes its causes, and ends with recommendations. It preserves the original discussion of academic pressure, exercise as stress relief, a sense of control, and a healthy diet. Review the past tense in chart descriptions, contribute to, compared with, help + person + base verb, control over, and Not only inversion.",
+ "描述图表变化；注意过去式 rose，以及 from...to... 的搭配。": "Use the past tense rose to describe the change. Use from ... to ... for the starting and ending values.",
+ "用现在分词短语修饰 factors，并记住 contribute to。": "A present-participial phrase modifies factors. Remember contribute to.",
+ "Not only 放句首时倒装；should 后接动词原形，but also 后恢复正常语序。": "Starting with Not only triggers inversion. Use a base verb after should and normal word order after but also.",
+ "校园摄影展邀请信 · Invitation to a Photography Exhibition · which从句与动词形式专项练习": "Invitation to a Campus Photography Exhibition · Which clauses and verb forms",
+ "考研英语二 · Part A · 邀请信 · 完整练习；同日补充：语法专项翻译练习": "Entrance Exam English II · Part A · Invitation letter and supplementary translation drills",
+ "保留原文的邀请逻辑：关心近况 → 邀请 → 赞美作品 → 介绍摄影展 → 时间地点。重点练习词性、定语从句、固定搭配；Part A 还需控制在约100词。 当天另完成6句语法专项翻译，重点巩固 which 从句、主谓一致、动词形式、Only by 倒装和 Not only 倒装。": "The invitation keeps the original sequence: ask how the recipient is doing, extend the invitation, praise their work, and give the details of the exhibition. Review parts of speech, relative clauses, and collocations. Aim for roughly 100 words in Part A. Six additional translation exercises cover which clauses, agreement, verb forms, and inversion with Only by and Not only.",
+ "可复用的三个表达": "Three reusable expressions",
+ "how + 形容词 + 主语 + 谓语，用来表达对他人能力的赞美。": "Use how + adjective + subject + verb to praise someone's skill.",
+ "用于交代邀请或建议的原因。": "Use this pattern to explain the reason for an invitation or recommendation.",
+ "用于邀请信结尾表达真诚期望。": "Use this expression at the end of an invitation to express a sincere hope.",
+ "语法专项：which 从句与动词形式": "Grammar drill: which clauses and verb forms",
+ "练习 4": "Exercise 4",
+ "练习 5": "Exercise 5",
+ "练习 6": "Exercise 6",
+ "语法专项翻译练习（11月19日）": "Grammar Translation Drill (November 19)",
+ "1. 规律运动可以减轻压力，这有助于我们更好地学习。": "1. Regular exercise can reduce stress, which helps us study better.",
+ "2. 学校建立了一个新图书馆，这为学生提供了更好的学习环境。": "2. The school built a new library, giving students a better place to study.",
+ "3. 越来越多的人选择网上购物，这使他们的生活更加方便。": "3. More people are choosing to shop online, making their lives more convenient.",
+ "4. 只有通过每天练习，我们才能提高英语写作能力。": "4. Only through daily practice can we improve our English writing.",
+ "5. 那些照片展现了他多么有才华。": "5. Those photographs showed how talented he was.",
+ "6. 坚持阅读不仅能扩大我们的知识面，还能提高写作能力。": "6. Reading regularly broadens our knowledge and improves our writing skills.",
+ "语法专项练习修改稿（11月19日）": "Grammar Drill Revisions (November 19)",
+ "A Rough Day · 时间、工作与选择": "A Rough Day · Time, work, and choices",
+ "英语自由表达 · 三轮对话 · 原文与语法复盘": "Free English practice · Three exchanges · Original writing and grammar review",
+ "2026-11-18 自由英语口语/写作练习。重点是用真实经历组织叙事与表达个人选择，不计为限时考研真题作文；原文完整保留，修改稿供对照。": "Free speaking and writing practice on November 18, 2026. The focus was on telling a story from personal experience and expressing choices. This was an untimed practice entry. The original and revision are available for comparison.",
+ "今天主动表达的三个观点": "Three ideas expressed in this practice",
+ "工作安排不等于个人意愿": "A work assignment is not always a personal choice",
+ "过去发生的情况用 had；but to 后面接动词原形。": "Use had for a past situation. Follow but to with the base form of the verb.",
+ "我有选择生活方式的权利": "I can choose how I live",
+ "原句思想保留；have a choice 表达“有选择权”。": "The original idea is preserved. Have a choice expresses the ability to decide.",
+ "不为工作牺牲舒适度": "Keeping my standards and comfort at work",
+ "这是未来的决定，用 won't；lower standards 与 sacrifice comfort 搭配。": "Use won't for a future decision. The expressions are lower standards and sacrifice comfort.",
+ "可复用句型 · 三组": "Three reusable patterns",
+ "假设：If I were..., I would...": "Hypothetical: If I were ..., I would ...",
+ "现在虚拟条件句。": "A conditional about a present hypothetical situation.",
+ "毫不犹豫：without a second thought": "Acting without hesitation: without a second thought",
+ "不需要再添加另一个 think。": "The expression already conveys the idea. No extra verb is needed.",
+ "下决心：make up one's mind": "Making a decision: make up one's mind",
+ "越来越多人规律锻炼": "More People Are Exercising Regularly",
+ "考研英语二 · 大作文 · 完整原稿": "Entrance Exam English II · Long essay · Full draft",
+ "考研撞期，给教授写信改约": "Rescheduling with a Professor Because of an Exam Conflict",
+ "考研英语 · 道歉信 · 完整原稿": "Entrance Exam English · Apology letter · Full draft",
+ "临时面试，给对方写信改约": "Rescheduling Because of an Unexpected Interview",
+ "考研英语 · 道歉信 · 逐句练习": "Entrance Exam English · Apology letter · Sentence-level practice",
+ "大作文模板积累：七大方案与五大措施": "Long Essay Templates: Seven Argument Patterns and Five Types of Measures",
+ "今日学习：七大方案中的三种论证方法，以及五大措施中的个人、教育两个实施主体；同时整理措施段的开头、关联词和结尾。": "Three argument patterns and two groups responsible for action were studied today. The notes also collect openings, linking phrases, and endings for a recommendations paragraph.",
+ "一、七大方案：今日学习 3 / 7": "1. Argument Patterns · 3 of 7",
+ "方案三：主语从句": "Pattern 3: Subject Clause",
+ "It is widely acknowledged that + 完整句子。": "It is widely acknowledged that + complete clause.",
+ "用固定句首引出观点；that 后接完整内容。": "Use the fixed opening to introduce a point. Follow that with a complete clause.",
+ "方案四：Not only 倒装": "Pattern 4: Not Only Inversion",
+ "Not only does + 主语 + 动词原形..., but it also + 动词...": "Not only does + subject + base verb ..., but it also + verb ...",
+ "Not only 置于句首，前半句部分倒装；does 后用动词原形，but also 后恢复正常语序。": "Putting Not only first triggers inversion. Use a base verb after does and normal word order after but also.",
+ "方案六：对比论证": "Pattern 6: Comparison",
+ "Compared with B, A can + 小方面, so as to + 大方面.\nIn contrast to B, the advantage of A lies in + 某方面.": "Compared with B, A can + specific benefit, so as to + broader benefit.\nIn contrast to B, the advantage of A lies in + an aspect.",
+ "通过比较 A 与 B，突出主要对象 A 的优势。": "Compare A with B to highlight A's advantages.",
+ "二、五大措施：今日学习 2 个主体": "2. Types of Measures · Two Groups Studied",
+ "个人行为（Personal）": "Personal Action",
+ "We should spare no pains to + 动词原形.\n可替换：We should... / It is our duty to... / We are obliged to... / We ought to...\n行动表达可替换：spare no pains to... / make concerted efforts to... / take concrete steps to...": "We should spare no pains to + base verb.\nAlternative openings: We should ... / It is our duty to ... / We are obliged to ... / We ought to ...\nAlternative actions: spare no pains to ... / make concerted efforts to ... / take concrete steps to ...",
+ "逻辑：个人主体 + 主动采取行动 + 实现具体目标。": "Identify who takes action, what they do, and what they aim to achieve.",
+ "教育引导（Schools / Parents）": "Guidance from Schools and Parents",
+ "Parents and teachers should set a good example for children in + 主题, through their own behavior.\nParents can serve as role models for their children by + doing...\nParents and schools should create more opportunities for children to participate in...": "Parents and teachers should set a good example for children in + topic, through their own behavior.\nParents can serve as role models for their children by + doing ...\nParents and schools should create more opportunities for children to participate in ...",
+ "逻辑：学校、家长或老师作为主体，通过引导、示范或创造机会帮助学生成长。": "Schools, parents, or teachers can help students grow by offering guidance, setting an example, or creating opportunities.",
+ "三、五大措施的主体总览": "3. Five Groups and Types of Measures",
+ "政府作为": "Government Action",
+ "制定法律、制定政策、拨付资金。": "Pass laws, set policies, and allocate funding.",
+ "公民意识": "Public Awareness",
+ "提高公众意识、培养社会责任感。": "Raise awareness and encourage social responsibility.",
+ "个人行为": "Personal Action",
+ "个人主动采取行动。": "Individuals take the initiative.",
+ "媒体呼吁": "Media Advocacy",
+ "媒体宣传、倡导、呼吁。": "Publicize issues, advocate for change, and make appeals.",
+ "家庭教育": "Family Education",
+ "家长和老师以身作则、教育引导。": "Parents and teachers lead by example and offer guidance.",
+ "四、措施段的固定骨架": "4. Recommendations Paragraph",
+ "开头：总结主题": "Opening: Restate the Topic",
+ "We should bear in mind that 主题词 is of great importance to 某方面.": "We should bear in mind that [topic] is of great importance to [area].",
+ "措施一": "First Measure",
+ "For one thing, + 主体 + 措施。": "For one thing, + actor + action.",
+ "措施二": "Second Measure",
+ "For another, + 主体 + 措施。": "For another, + actor + action.",
+ "结尾：展望未来": "Ending: Look Ahead",
+ "五、段落关联词": "5. Linking Phrases",
+ "第二段：多点原因": "Paragraph 2: Multiple Reasons",
+ "第三段：两项措施": "Paragraph 3: Two Measures",
+ "补充与结尾": "Adding a Point and Concluding",
+ "Furthermore...（此外）\nIn this way...（通过这种方式）": "Furthermore ...\nIn this way ...",
+ "从句与句子结构": "Clauses and sentence structure",
+ "倒装与强调": "Inversion and emphasis",
+ "主谓一致": "Subject–verb agreement",
+ "谓语完整性与否定": "Complete verb phrases and negation",
+ "时态、语态与动词形式": "Tense, voice, and verb forms",
+ "非谓语与动词结构": "Nonfinite verbs and verb patterns",
+ "名词、冠词与数量": "Nouns, articles, and quantity",
+ "词汇、词性与拼写": "Vocabulary, parts of speech, and spelling",
+ "写作格式与语用": "Writing conventions and usage",
+ "句子结构": "Sentence structure",
+ "谓语动词": "Finite verbs",
+ "非谓语动词": "Nonfinite verbs",
+ "名词短语": "Noun phrases",
+ "词汇与表达": "Vocabulary and expressions",
+ "Not only … but also 倒装": "Not only … but also inversion",
+ "不定冠词 a / an": "Indefinite articles: a and an",
+ "现在分词作后置定语": "Present participles after nouns",
+ "look forward to 的用法": "Using look forward to",
+ "主谓一致与感叹从句": "Subject–verb agreement and embedded exclamatives",
+ "第三人称单数": "Third-person singular",
+ "现在完成进行时": "Present perfect continuous",
+ "help + 宾语 + 动词原形": "help + object + base verb",
+ "泛指复数名词的冠词": "Articles with generic plural nouns",
+ "全部错句": "All examples"
+};
+function englishText(value) {
+ return Object.hasOwn(englishCopy,value)?englishCopy[value]:value;
+}
+const monthFormat=new Intl.DateTimeFormat('en',{month:'long',year:'numeric'});
+const shortDateFormat=new Intl.DateTimeFormat('en',{month:'short',day:'numeric',timeZone:'UTC'});
+function formatDuration(count,unit) {
+ return count+' '+unit+(count===1?'':'s');
+}
+
 const keys = Object.keys(records).sort().reverse();
 const monthLabel = document.querySelector('#month');
 const grid = document.querySelector('#calendar');
 const notes = document.querySelector('#notes');
 const entry = document.querySelector('#entry');
-const tabs = ['逐句对照','完整修改稿','挖空复习','模板笔记'];
+const tabs = ['Compare','Revised Draft','Practice','Notes'];
 function positionWritingTrack(animate=true, offset=0) {
  const viewport=entry.querySelector('.writing-viewport');
  const track=entry.querySelector('.writing-track');
@@ -1096,8 +1458,8 @@ function openReader(source,label) {
  readerMotion(source);
 }
 function updateReaderToolbar() {
- document.querySelector('#readerTitle').textContent='写作阅读';
- document.querySelector('#readerBack').textContent=reviewFromGrammar?'‹ 返回语法统计':'‹ 返回日历';
+ document.querySelector('#readerTitle').textContent='Writing Review';
+ document.querySelector('#readerBack').textContent=reviewFromGrammar?'‹ Back to grammar':'‹ Back to calendar';
 }
 async function finishReaderClose() {
  if(!reader.open || readerClosing) return;
@@ -1158,28 +1520,28 @@ function updatePrepProgress() {
  const caption = document.getElementById('progress-caption');
  if(!weekLabel||!weekCount||!bar||!track||!caption) return;
  if(todayUTC<startUTC) {
-  weekLabel.textContent='备考计划尚未开始';
-  weekCount.textContent='0 / '+TOTAL_PREP_WEEKS+' 周';
+  weekLabel.textContent='The study plan has not started yet.';
+  weekCount.textContent='0 / '+TOTAL_PREP_WEEKS+' weeks';
  } else if(week>TOTAL_PREP_WEEKS) {
-  weekLabel.textContent='10 周备考计划已结束';
-  weekCount.textContent='10 / 10 周';
+  weekLabel.textContent='The 10-week study plan is complete.';
+  weekCount.textContent='10 / 10 weeks';
  } else {
   const dayOfWeek = new Date(todayUTC).getUTCDay();
   const nextWeekText = dayOfWeek===0
-   ? '下周进入第 '+Math.min(week+1,TOTAL_PREP_WEEKS)+' 周'
-   : '本周还剩 '+(7-dayOfWeek)+' 天';
-  weekLabel.textContent='当前：第 '+week+' 周 · '+nextWeekText;
-  weekCount.textContent=week+' / '+TOTAL_PREP_WEEKS+' 周';
+   ? 'Next week: Week '+Math.min(week+1,TOTAL_PREP_WEEKS)
+   : formatDuration(7-dayOfWeek,'day')+' left this week';
+  weekLabel.textContent='Week '+week+' · '+nextWeekText;
+  weekCount.textContent=week+' / '+TOTAL_PREP_WEEKS+' weeks';
  }
  bar.style.width=percent+'%';
  track.setAttribute('aria-valuenow',String(completedWeeks));
  if(remainingDays===0) {
-  caption.textContent='今天是考试日。祝你考试顺利！';
+  caption.textContent='It is exam day. Good luck!';
  } else {
   const weeksLeft=Math.floor(remainingDays/7);
   const daysLeft=remainingDays%7;
-  const countdown=weeksLeft>0?weeksLeft+' 周'+(daysLeft>0?' '+daysLeft+' 天':'') : remainingDays+' 天';
-  caption.textContent='距离 12 月 19 日考试还有 '+remainingDays+' 天（'+countdown+'）；继续稳步推进模板学习与真题写作。';
+  const countdown=weeksLeft>0?[formatDuration(weeksLeft,'week'),daysLeft?formatDuration(daysLeft,'day'):''].filter(Boolean).join(', '):formatDuration(remainingDays,'day');
+  caption.textContent='Exam on December 19 · '+countdown+' to go.';
  }
 }
 
@@ -1191,7 +1553,7 @@ let active = 0;
 
 function node(tag, value, className) {
  const item = document.createElement(tag);
- if (value !== undefined) item.textContent = value;
+ if (value !== undefined) item.textContent = englishText(value);
  if (className) item.className = className;
  return item;
 }
@@ -1200,7 +1562,7 @@ function dateKey(y,m,d) {
 }
 function select(key, from) {
  const source=document.querySelector('[data-'+from+'="'+key+'"]');
- if(!reader.open)openReader(source,'写作阅读');
+ if(!reader.open)openReader(source,'Writing Review');
  selected = key;
  month = Number(key.slice(5,7)) - 1;
  year = Number(key.slice(0,4));
@@ -1315,10 +1677,10 @@ grammarPageLink.onclick=event=>{
 };
 function renderGrammarStats() {
  const stats=collectGrammarStats();
- const heading=node('h2',grammarStatsFilter==='全部'?'语法错误统计':grammarStatsFilter);
+ const heading=node('h2',grammarStatsFilter==='全部'?'Grammar Review':grammarStatsFilter);
  grammarContent.replaceChildren();
  if(grammarStatsFilter!=='全部'){
-  const back=node('button','‹ 返回语法树','stats-entry-link stats-back');
+  const back=node('button','‹ Back to grammar tree','stats-entry-link stats-back');
   back.onclick=()=>{
    if(history.state?.grammarFromTree)history.back();
    else {
@@ -1337,35 +1699,35 @@ function renderGrammarStats() {
   const title=grammarContent.querySelector('h2');title.tabIndex=-1;title.focus({preventScroll:true});
  };
  if(grammarStatsFilter==='全部') {
-  grammarContent.append(node('p','按类别查看语法讲解和自己的修改例句。','sub'));
+  grammarContent.append(node('p','Browse grammar rules and examples from your writing.','sub'));
   const metrics=node('div',undefined,'stats-metrics');
-  [[stats.total,'已记录错点'],[stats.categories.length,'错误类别'],[stats.recurring,'出现至少 3 次的类别']].forEach(([value,label])=>{
+  [[stats.total,'Recorded issues'],[stats.categories.length,'Categories'],[stats.recurring,'Categories with 3+ examples']].forEach(([value,label])=>{
    const card=node('div',undefined,'stats-metric');card.append(node('strong',value),node('span',label));metrics.append(card);
   });
-  grammarContent.append(metrics,node('p','每条归档记录按主要问题计入一个类别，次数表示记录条数。','stats-method'));
+  grammarContent.append(metrics,node('p','Each issue is counted once under its main category.','stats-method'));
   const tree=node('div',undefined,'stats-tree');
   const max=Math.max(1,...stats.categories.map(x=>x.count));
   grammarTree.forEach(branch=>{
    const categories=stats.categories.filter(x=>branch.categories.includes(x.name));
    if(!categories.length)return;
    const group=node('details',undefined,'stats-branch');group.open=true;
-   const summary=node('summary',branch.name);summary.append(node('span',categories.reduce((n,c)=>n+c.count,0)+' 条'));
+   const summary=node('summary',branch.name);summary.append(node('span',categories.reduce((n,c)=>n+c.count,0)+' entries'));
    const children=node('div',undefined,'stats-children');
    categories.forEach(item=>{
     const button=node('button',undefined,'stats-category');button.type='button';
-    const top=node('span',undefined,'stats-category-top');top.append(node('strong',item.name),node('b',item.count+' 条 ›'));
+    const top=node('span',undefined,'stats-category-top');top.append(node('strong',item.name),node('b',item.count+' ›'));
     const track=node('span',undefined,'stats-track'), fill=node('i');fill.style.width=(item.count/max*100)+'%';track.append(fill);
     button.append(top,track);button.onclick=()=>openCategory(item.name);children.append(button);
    });
    group.append(summary,children);tree.append(group);
   });
   grammarContent.append(tree);
-  const all=node('button','查看全部 '+stats.total+' 条错句','stats-entry-link stats-all');all.onclick=()=>openCategory('全部错句');grammarContent.append(all);
+  const all=node('button','View all '+stats.total+' examples','stats-entry-link stats-all');all.onclick=()=>openCategory('全部错句');grammarContent.append(all);
   return;
  }
  const categoryItems=grammarStatsFilter==='全部错句'?stats.items:stats.items.filter(item=>item.category===grammarStatsFilter);
  const branch=grammarTree.find(item=>item.categories.includes(grammarStatsFilter));
- grammarContent.append(node('p',[branch?.name,grammarStatsFilter].filter(Boolean).join(' / '),'stats-breadcrumb'));
+ grammarContent.append(node('p',[branch?.name,grammarStatsFilter].filter(Boolean).map(englishText).join(' / '),'stats-breadcrumb'));
  const groups=new Map();
  for(const item of categoryItems){
   const point=grammarPoint(item.g);
@@ -1374,9 +1736,9 @@ function renderGrammarStats() {
  }
  const points=[...groups].sort((a,b)=>b[1].length-a[1].length);
  const topics=node('div',undefined,'stats-subtopics');
- topics.setAttribute('aria-label','按语法点筛选');
+ topics.setAttribute('aria-label','Filter by grammar point');
  [['全部',categoryItems.length],...points.map(([point,items])=>[point,items.length])].forEach(([point,count])=>{
-  const button=node('button',(point==='全部'?'全部语法点':point)+' · '+count);
+  const button=node('button',(point==='全部'?'All grammar points':englishText(point))+' · '+count);
   button.type='button';button.setAttribute('aria-pressed',String(grammarTopicFilter===point));
   button.onclick=()=>{
    history.replaceState(history.state,'',grammarRoute(grammarStatsFilter,point));
@@ -1394,11 +1756,11 @@ function renderGrammarStats() {
   const rules=new Set(items.flatMap(({g})=>explanationLines(g[3])));
   const explanation=node('ul',undefined,'grammar-rules');
   rules.forEach(rule=>explanation.append(node('li',rule)));
-  card.append(explanation,node('h4','修改例句 · '+items.length,'stats-heading'));
+  card.append(explanation,node('h4','Examples · '+items.length,'stats-heading'));
   for(const item of items)card.append(renderGrammarExample(item));
   list.append(card);
  }
- if(!filtered.length)list.append(node('p','这个分类暂时没有记录。','empty'));
+ if(!filtered.length)list.append(node('p','No examples in this category yet.','empty'));
  grammarContent.append(list);
 }
 function renderGrammarExample({date,g,index}) {
@@ -1407,16 +1769,16 @@ function renderGrammarExample({date,g,index}) {
  const [,original,revised]=g;
  const left=wordsWithOffsets(original,true),right=wordsWithOffsets(revised,true);
  const before=node('p',undefined,'stats-before'),after=node('p',undefined,'stats-after');
- before.append('原句　');after.append('修改　');
+ before.append('Original: ');after.append('Revised: ');
  appendMarkedText(before,original,changedWordRanges(left,right,false),'del');
  appendMarkedText(after,revised,changedWordRanges(right,left,false),'strong');
- const link=node('button','查看当天作文 ›','stats-entry-link');
+ const link=node('button','View full entry ›','stats-entry-link');
  link.type='button';
  link.onclick=()=>{
   reviewFromGrammar=true;
   selectedBeforeReview=selected;
   selected=date;active=0;
-  openReader(link,'写作阅读');
+  openReader(link,'Writing Review');
   renderEntry();
   updateReaderToolbar();
   const target=entry.querySelector('[data-grammar-index="'+index+'"]');
@@ -1426,9 +1788,9 @@ function renderGrammarExample({date,g,index}) {
  return example;
 }
 function renderCalendar() {
- monthLabel.textContent = year+' 年 '+(month+1)+' 月';
+ monthLabel.textContent=monthFormat.format(new Date(year,month,1));
  grid.replaceChildren();
- for (const day of '一二三四五六日') grid.append(node('span',day,'weekday'));
+ for (const day of ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']) grid.append(node('span',day,'weekday'));
  const offset = (new Date(year,month,1).getDay()+6)%7;
  for (let i=0;i<offset;i++) grid.append(node('span'));
  for (let d=1;d<=new Date(year,month+1,0).getDate();d++) {
@@ -1439,18 +1801,18 @@ function renderCalendar() {
   if (studySchedule[key]) button.classList.add('planned');
   if (key==='2026-12-19') button.classList.add('exam-day');
   if (selected===key) {button.classList.add('selected');button.setAttribute('aria-current','date');}
-  button.setAttribute('aria-label',key+(records[key]?'，有写作练习':'')+(studySchedule[key]?'，'+studySchedule[key].title:'')+(key==='2026-12-19'?'，考研考试日星标':''));
+  button.setAttribute('aria-label',[key,records[key]?'Writing entry':'',englishText(studySchedule[key]?.title),key==='2026-12-19'?'Exam day':''].filter(Boolean).join(', '));
   button.addEventListener('click',()=>select(key,'calendar'));
   grid.append(button);
  }
 }
 function renderNotes() {
- notes.replaceChildren(node('h2','练习便签'));
+ notes.replaceChildren(node('h2','Practice Entries'));
  for (const key of keys) {
   const button=node('button',undefined,'card');
   button.dataset.note=key;
   if (selected===key) button.setAttribute('aria-current','date');
-  button.append(node('small',key.slice(5).replace('-',' 月 ')+' 日'),node('b',records[key].title));
+  button.append(node('small',shortDateFormat.format(new Date(key+'T12:00:00Z'))),node('b',records[key].title));
   button.addEventListener('click',()=>select(key,'note'));
   notes.append(button);
  }
@@ -1594,6 +1956,7 @@ function markOriginalErrors(paragraph, sentence, issueIndexes, grammar, override
  appendMarkedText(paragraph,sentence,ranges,'del');
 }
 function appendMarkedText(paragraph,text,ranges,tag) {
+ if(!ranges.length){paragraph.append(englishText(text));return;}
  ranges.sort((left,right)=>left[0]-right[0]);
  let offset=0;
  const merged=[];
@@ -1613,7 +1976,7 @@ function appendRevisedSentences(container, originals, revised) {
  let start=0;
  for(const sentence of revised){
   const end=start+sentence.length;
-  const highlights=ranges.filter(([left,right])=>left<end && right>start)
+  const highlights=englishText(sentence)!==sentence?[]:ranges.filter(([left,right])=>left<end && right>start)
    .map(([left,right])=>[Math.max(left,start)-start,Math.min(right,end)-start]);
   const paragraph=node('p');
   appendMarkedText(paragraph,sentence,highlights,'strong');
@@ -1622,10 +1985,10 @@ function appendRevisedSentences(container, originals, revised) {
  }
 }
 function explanationLines(why) {
- return why.split(/\r?\n|(?<=[。！？；;!?])\s*/u).map(line=>line.trim()).filter(Boolean);
+ return englishText(why).split(/\r?\n|(?<=[;!?])\s+|(?<=[^.\s]\.)\s+(?=[A-Z])/u).map(line=>line.trim()).filter(Boolean);
 }
 function showGrammarExplanation(button,label,why) {
- grammarPopupTitle.textContent=label;
+ grammarPopupTitle.textContent=englishText(label);
  grammarPopupText.replaceChildren(...explanationLines(why).map(line=>node('p',line)));
  grammarPopupBadge=button;
  button.setAttribute('aria-expanded','true');
@@ -1643,7 +2006,7 @@ function renderComparison(record,panel) {
   button.append(node('span',String(index+1)));
   button.type='button';
   button.dataset.grammarIndex=index;
-  button.setAttribute('aria-label','查看第 '+(index+1)+' 处错点：'+label);
+  button.setAttribute('aria-label','Grammar note '+(index+1)+': '+englishText(label));
   button.setAttribute('aria-haspopup','dialog');
   button.setAttribute('aria-controls',grammarPopup.id);
   button.setAttribute('aria-expanded','false');
@@ -1656,11 +2019,11 @@ function renderComparison(record,panel) {
   const original=node('div',undefined,'comparison-original');
   const originalRow=node('div',undefined,'comparison-with-badges');
   const originalText=node('div');
-  originalText.append(node('div','原文','comparison-label'));
+  originalText.append(node('div','Original','comparison-label'));
   originalRow.append(originalText);
   original.append(originalRow);
   const revisedBlock=node('div',undefined,'comparison-revised');
-  revisedBlock.append(node('div','修改后','comparison-label'));
+  revisedBlock.append(node('div','Revised','comparison-label'));
   const groupIssues=new Set();
   for(const sentence of before){
    const paragraph=node('p');
@@ -1669,14 +2032,14 @@ function renderComparison(record,panel) {
    issueIndexes.forEach(index=>groupIssues.add(index));
    originalText.append(paragraph);
   }
-  if(!before.length)originalText.append(node('p','此处为修改稿新增内容','comparison-empty'));
+  if(!before.length)originalText.append(node('p','Added in the revision.','comparison-empty'));
   if(groupIssues.size){
    const badges=node('div',undefined,'error-badges');
    [...groupIssues].sort((a,b)=>a-b).forEach(index=>addBadge(badges,index));
    originalRow.append(badges);
   }
   appendRevisedSentences(revisedBlock,before,after);
-  if(!after.length)revisedBlock.append(node('p','此句未出现在修改稿中','comparison-empty'));
+  if(!after.length)revisedBlock.append(node('p','Omitted from the revision.','comparison-empty'));
   block.append(original,revisedBlock);
   panel.append(block);
  });
@@ -1684,23 +2047,23 @@ function renderComparison(record,panel) {
   const row=node('div',undefined,'comparison-with-badges');
   const badges=node('div',undefined,'error-badges');
   matches.unfound.forEach(index=>addBadge(badges,index));
-  row.append(node('span','补充语法笔记','comparison-label'),badges);
+  row.append(node('span','Additional grammar notes','comparison-label'),badges);
   panel.append(row);
  }
 }
 function renderEntry(focus=false) {
  const record=records[selected],plan=studySchedule[selected];
- entry.replaceChildren(node('div',selected,'date'),node('h2',record?.title??plan?.title??'这天还没有写作记录'));
+ entry.replaceChildren(node('div',selected,'date'),node('h2',record?.title??plan?.title??'No writing entry for this day.'));
  if(!record&&plan){
   entry.append(node('p',plan.tag,'sub'));
   const list=node('div',undefined,'schedule-list'),item=node('div',undefined,'schedule-item');
-  item.append(node('small','今日学习安排'),node('b',plan.title),node('p',plan.detail),node('span','计划日程','schedule-tag'));
+  item.append(node('small','Study plan for this day'),node('b',plan.title),node('p',plan.detail),node('span','Planned','schedule-tag'));
   list.append(item);entry.append(list);return;
  }
  if(!record)return;
  entry.append(node('p',record.type,'sub'));
  const list=node('div',undefined,'tabs');
- list.setAttribute('role','tablist');list.setAttribute('aria-label','写作内容');
+ list.setAttribute('role','tablist');list.setAttribute('aria-label','Writing review tabs');
  const viewport=node('div',undefined,'writing-viewport'),track=node('div',undefined,'writing-track');
  viewport.append(track);
  tabs.forEach((label,i)=>{
@@ -1728,11 +2091,11 @@ function renderEntry(focus=false) {
    panel.className='writing-slide comparison';
    renderComparison(record,panel);
   }else if(tabIndex===1){
-   panel.append(node('div',record.revised,'writing full-revision'));
+   panel.append(node('div',record.revised.split('\n').map(englishText).join('\n'),'writing full-revision'));
   }else if(tabIndex===3){
    panel.className='grammar writing-slide';
    const notes=record.studyNotes;
-   if(!notes)panel.append(node('p','当天没有模板笔记。','hint'));
+   if(!notes)panel.append(node('p','No notes for this entry.','hint'));
    else{
     panel.append(node('p',notes.intro,'hint'));
     for(const section of notes.sections){
@@ -1741,7 +2104,7 @@ function renderEntry(focus=false) {
       const box=node('details'),summary=node('summary',item.name);
       box.append(summary);
       if(item.template)box.append(node('p',item.template,'pair'));
-      if(item.example)box.append(node('p','例句：'+item.example,'pair'));
+      if(item.example)box.append(node('p','Example: '+englishText(item.example),'pair'));
       if(item.note)box.append(node('p',item.note));
       panel.append(box);
      }
@@ -1749,12 +2112,12 @@ function renderEntry(focus=false) {
    }
   }else{
    panel.className='grammar writing-slide';
-   panel.append(node('p','先试着改写原句，再展开看答案。','hint'));
+   panel.append(node('p','Try revising each sentence before revealing the answer.','hint'));
    for(const [tag,before,after,why] of record.grammar){
     const box=node('div',undefined,'excerpt');
-    const item=node('details'),title=node('summary','查看答案');
+    const item=node('details'),title=node('summary','Show answer');
     item.append(title,node('p',after,'pair'),node('p',why));
-    box.append(node('b',tag),node('p',before,'pair'),node('p','改写：________________','hint'),item);
+    box.append(node('b',tag),node('p',before,'pair'),node('p','Your revision: ________________','hint'),item);
     panel.append(box);
    }
   }
