@@ -26,7 +26,9 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 .comparison p{font:1.04rem/1.75 var(--serif);white-space:pre-wrap;margin:0;overflow-wrap:anywhere}
 .comparison p+p{margin-top:.25em}
 .comparison-original del{color:#943a2e;text-decoration-thickness:1.5px}
-.error-pin{display:inline-grid;place-items:center;vertical-align:middle;min-width:30px;min-height:30px;margin-inline:3px;padding:0 4px;border:0;background:transparent;color:#824129;font:700 .76rem/1 system-ui,sans-serif}
+.comparison-with-badges{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start}
+.error-badges{display:grid;justify-items:center;gap:2px;margin-inline-start:8px}
+.error-pin{display:grid;place-items:center;min-width:36px;min-height:34px;padding:0 4px;border:0;background:transparent;color:#824129;font:700 .76rem/1 system-ui,sans-serif}
 .error-pin span{display:grid;place-items:center;min-width:22px;height:22px;padding:0 3px;border:1px solid #c4927b;border-radius:99px;background:#fff5ee}
 .error-pin[aria-expanded=true] span{color:#fff;background:#824129;border-color:#824129}
 .error-explanation{padding:12px;margin-top:9px;background:#fffcf5;border:1px solid #cbb8a3;border-radius:8px}
@@ -37,8 +39,6 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 .error-explanation-before{color:#824129}
 .error-explanation-after{color:#205a38}
 .error-explanation .error-explanation-why,.comparison .comparison-empty{font:.9rem/1.6 system-ui,sans-serif;color:var(--muted)}
-.comparison-unlocated{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
-.comparison-unlocated .error-explanation{flex:0 0 100%}
 .full-revision{white-space:pre-wrap}
 @media(max-width:810px){.entry .tabs{gap:6px}.entry .tab{flex:1 0 auto;margin-right:0;padding-inline:2px;font-size:.83rem}}
 </style>
@@ -1500,7 +1500,7 @@ function renderComparison(record,panel) {
   };
   return explanation;
  };
- const addBadge=(paragraph,index,explanation)=>{
+ const addBadge=(badges,index,explanation)=>{
   const [label,before,after,why]=record.grammar[index];
   const button=node('button',undefined,'error-pin');
   button.append(node('span',String(index+1)));
@@ -1523,40 +1523,48 @@ function renderComparison(record,panel) {
    }
    positionWritingTrack(false);
   };
-  paragraph.append(' ',button);
+  badges.append(button);
  };
  let originalIndex=0;
  pairs.forEach(([before,after],row)=>{
   const block=node('section',undefined,'comparison-block');
   const original=node('div',undefined,'comparison-original');
-  original.append(node('div','原文','comparison-label'));
+  const originalRow=node('div',undefined,'comparison-with-badges');
+  const originalText=node('div');
+  originalText.append(node('div','原文','comparison-label'));
+  originalRow.append(originalText);
+  original.append(originalRow);
   const revisedBlock=node('div',undefined,'comparison-revised');
   revisedBlock.append(node('div','修改后','comparison-label'));
   const explanation=explanationFor('grammar-detail-'+row);
-  let hasBadges=false;
+  const groupIssues=new Set();
   for(const sentence of before){
    const paragraph=node('p');
    const issueIndexes=matches.result[originalIndex++];
    markOriginalErrors(paragraph,sentence,issueIndexes,record.grammar||[],errorPhrases);
-   for(const index of issueIndexes){
-    addBadge(paragraph,index,explanation);
-    hasBadges=true;
-   }
-   original.append(paragraph);
+   issueIndexes.forEach(index=>groupIssues.add(index));
+   originalText.append(paragraph);
   }
-  if(!before.length)original.append(node('p','此处为修改稿新增内容','comparison-empty'));
-  if(hasBadges)original.append(explanation.box);
+  if(!before.length)originalText.append(node('p','此处为修改稿新增内容','comparison-empty'));
+  if(groupIssues.size){
+   const badges=node('div',undefined,'error-badges');
+   [...groupIssues].sort((a,b)=>a-b).forEach(index=>addBadge(badges,index,explanation));
+   originalRow.append(badges);
+   original.append(explanation.box);
+  }
   after.forEach(sentence=>revisedBlock.append(node('p',sentence)));
   if(!after.length)revisedBlock.append(node('p','此句未出现在修改稿中','comparison-empty'));
   block.append(original,revisedBlock);
   panel.append(block);
  });
  if(matches.unfound.length){
-  const aside=node('div',undefined,'comparison-unlocated');
-  aside.append(node('span','补充语法笔记','comparison-label'));
+  const aside=node('div');
+  const row=node('div',undefined,'comparison-with-badges');
+  const badges=node('div',undefined,'error-badges');
   const explanation=explanationFor('grammar-detail-other');
-  matches.unfound.forEach(index=>addBadge(aside,index,explanation));
-  aside.append(explanation.box);
+  matches.unfound.forEach(index=>addBadge(badges,index,explanation));
+  row.append(node('span','补充语法笔记','comparison-label'),badges);
+  aside.append(row,explanation.box);
   panel.append(aside);
  }
 }
