@@ -16,6 +16,7 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 @media(max-width:810px){.workspace>.entry{display:none}header{padding-top:24px}header p{font-size:.85rem}.notes{grid-template-columns:minmax(0,1fr)}.card{padding:14px 16px;min-height:72px}.reader{width:calc(100% - 16px);height:calc(100dvh - 20px);margin:auto;border-radius:14px}.reader-toolbar{padding:8px 12px}.reader .entry{padding:20px 16px 32px}.reader .entry h2{font-size:1.65rem;line-height:1.35}.reader .writing{font-size:1.08rem;line-height:1.9}.stats-metrics{gap:6px;margin:16px 0}.stats-metric{padding:10px 8px}.stats-metric strong{font-size:1.5rem}.stats-metric span{font-size:.7rem}.stats-subtopics{gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}.stats-subtopics button{flex:0 0 auto;max-width:85%}.reader .stats-heading{margin-top:18px}.reader-body{scrollbar-gutter:auto}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 .writing-viewport{width:100%;overflow:hidden;touch-action:pan-y;min-width:0;transition:height 300ms cubic-bezier(.22,.75,.24,1)}.writing-track{display:flex;align-items:flex-start;will-change:transform}.writing-slide{flex:0 0 100%;width:100%;min-width:0;overflow-wrap:anywhere;min-height:160px}.writing-slide[aria-hidden=true]{pointer-events:none}@media(prefers-reduced-motion:reduce){.writing-track{transition:none!important}}
+.comparison{display:grid;gap:16px}.comparison-block{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fffdf8}.comparison-original,.comparison-revised{padding:14px 16px}.comparison-original{background:#f6f5ee}.comparison-revised{background:#fffdf8;border-top:1px solid var(--line)}.comparison-label{font:700 .75rem/1.4 system-ui,sans-serif;color:var(--muted);margin-bottom:8px}.comparison-revised .comparison-label{color:var(--green)}.comparison p{font:1.04rem/1.82 var(--serif);white-space:pre-line;margin:0;overflow-wrap:anywhere}.error-pins{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:11px}.comparison-caption{font:.75rem/1.3 system-ui,sans-serif;color:var(--muted)}.error-pin{display:inline-grid;place-items:center;width:29px;height:29px;border:1px solid #c4927b;border-radius:50%;background:#fff5ee;color:#925438;font:700 .81rem/1 system-ui,sans-serif;cursor:pointer}.error-pin:active{transform:scale(.92)}.error-explanation{position:sticky;bottom:8px;z-index:3;padding:15px;background:#fffcf5;border:1px solid #b8aa93;border-radius:12px;box-shadow:0 8px 30px #18291f24;margin-top:8px}.error-explanation-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.error-explanation-number,.error-explanation small{font:700 .73rem/1.5 system-ui,sans-serif;color:var(--muted)}.error-explanation-heading{font-size:1rem;margin:4px 0 12px}.error-explanation-close{border:1px solid var(--line);border-radius:6px;padding:5px 10px;background:white}.error-explanation-before{color:#864a3a}.error-explanation-after{color:#205a38;font-weight:700}.error-explanation-why{font-size:.94rem!important}@media(max-width:810px){.comparison-original,.comparison-revised{padding:12px 13px}.comparison p{font-size:1rem;line-height:1.8}}
 </style>
 </head>
 <body>
@@ -915,7 +916,7 @@ const monthLabel = document.querySelector('#month');
 const grid = document.querySelector('#calendar');
 const notes = document.querySelector('#notes');
 const entry = document.querySelector('#entry');
-const tabs = ['我的原文','修改稿','语法错点','挖空复习','模板笔记'];
+const tabs = ['原文 · 修改对照','挖空复习','模板笔记'];
 function positionWritingTrack(animate=true, offset=0) {
  const viewport=entry.querySelector('.writing-viewport');
  const track=entry.querySelector('.writing-track');
@@ -1251,7 +1252,7 @@ function renderGrammarStats() {
   const link=node('button','查看当天作文 ›','stats-entry-link');
   link.onclick=()=>{
    statsReturn={category:grammarStatsFilter,topic:grammarTopicFilter,scroll:readerBody.scrollTop};
-   selected=date;active=2;showGrammarStats=false;renderEntry();updateReaderToolbar();readerBody.scrollTop=0;
+   selected=date;active=0;showGrammarStats=false;renderEntry();updateReaderToolbar();readerBody.scrollTop=0;
    const target=entry.querySelectorAll('#tab-panel details')[index];
    if(target){target.scrollIntoView({block:'start'});target.querySelector('summary').focus({preventScroll:true});}
   };
@@ -1291,38 +1292,124 @@ function renderNotes() {
   notes.append(button);
  }
 }
-function renderEntry(focus=false) {
- const record = records[selected];
- const plan = studySchedule[selected];
- entry.replaceChildren(node('div',selected,'date'),node('h2',record?.title ?? plan?.title ?? '这天还没有写作记录'));
- if (!record && plan) {
-  entry.append(node('p',plan.tag,'sub'));
-  const list=node('div',undefined,'schedule-list');
-  const item=node('div',undefined,'schedule-item');
-  item.append(node('small','今日学习安排'),node('b',plan.title),node('p',plan.detail),node('span','计划日程','schedule-tag'));
-  list.append(item);
-  entry.append(list);
-  return;
+function textParagraphs(value) {
+ return String(value||'').split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean);
+}
+function compareKey(s) {
+ return String(s||'').toLowerCase().replace(/[\s.,!?;:'"“”‘’/\\-]+/g,'');
+}
+function grammarLocations(record, originals) {
+ const result=originals.map(()=>[]);
+ const unfound=[];
+ (record.grammar||[]).forEach((g,i)=>{
+  const original=String(g[1]||'');
+  let found=-1;
+  for(let p=0;p<originals.length;p++){
+   if(originals[p].includes(original) || originals[p].toLowerCase().includes(original.toLowerCase()) ||
+     (compareKey(original).length>10 && compareKey(originals[p]).includes(compareKey(original)))) {found=p;break;}
+  }
+  if(found<0) unfound.push(i); else result[found].push(i);
+ });
+ return {result,unfound};
+}
+function comparisonBadge(index,record) {
+ const item=record.grammar[index],button=node('button',String(index+1),'error-pin');
+ button.type='button';
+ button.setAttribute('aria-label','查看第 '+(index+1)+' 处语法错误：'+item[0]);
+ button.title=item[0];
+ button.addEventListener('click',event=>{
+  event.stopPropagation();
+  const sheet=entry.querySelector('.error-explanation');
+  const num=sheet.querySelector('.error-explanation-number');
+  const heading=sheet.querySelector('.error-explanation-heading');
+  const before=sheet.querySelector('.error-explanation-before');
+  const after=sheet.querySelector('.error-explanation-after');
+  const why=sheet.querySelector('.error-explanation-why');
+  num.textContent='错点 '+(index+1)+' / '+record.grammar.length;
+  heading.textContent=item[0];
+  before.textContent=item[1];
+  after.textContent=item[2];
+  why.textContent=item[3];
+  sheet.hidden=false;
+  sheet.scrollIntoView({behavior:'smooth',block:'nearest'});
+  sheet.querySelector('.error-explanation-close').focus({preventScroll:true});
+  requestAnimationFrame(()=>positionWritingTrack(false));
+ });
+ return button;
+}
+function renderComparison(record,panel) {
+ const originals=record.original.length>1 ? record.original : textParagraphs(record.original[0]);
+ const revised=textParagraphs(record.revised);
+ const matches=grammarLocations(record,originals);
+ const intro=node('p','上方原文，下方修改稿。点击数字角标查看语法解释。','hint');
+ panel.append(intro);
+ const count=Math.max(originals.length,revised.length);
+ for(let p=0;p<count;p++){
+  const block=node('section',undefined,'comparison-block');
+  const before=node('div',undefined,'comparison-original');
+  before.append(node('div','我的原文','comparison-label'));
+  const originalText=originals[p]||'';
+  const paragraph=node('p',originalText);
+  before.append(paragraph);
+  const pins=matches.result[p]||[];
+  if(pins.length){
+   const markers=node('div',undefined,'error-pins');
+   markers.append(node('span',pins.length+' 处错点','comparison-caption'));
+   pins.forEach(i=>markers.append(comparisonBadge(i,record)));
+   before.append(markers);
+  }
+  const after=node('div',undefined,'comparison-revised');
+  after.append(node('div','修改稿','comparison-label'));
+  after.append(node('p',revised[p]||''));
+  block.append(before,after);
+  panel.append(block);
  }
- if (!record) return;
+ if(matches.unfound.length){
+  const extras=node('div',undefined,'error-pins');
+  extras.append(node('span','其他语法错点','comparison-caption'));
+  matches.unfound.forEach(i=>extras.append(comparisonBadge(i,record)));
+  panel.append(extras);
+ }
+ const sheet=node('div',undefined,'error-explanation');
+ sheet.hidden=true;
+ const top=node('div',undefined,'error-explanation-top');
+ const number=node('span',undefined,'error-explanation-number');
+ const close=node('button','关闭 ×','error-explanation-close');
+ close.type='button';
+ close.onclick=()=>{sheet.hidden=true;positionWritingTrack(false)};
+ top.append(number,close);
+ const heading=node('h3',undefined,'error-explanation-heading');
+ const before=node('p',undefined,'error-explanation-before');
+ const after=node('p',undefined,'error-explanation-after');
+ const why=node('p',undefined,'error-explanation-why');
+ sheet.append(top,heading,node('small','原句'),before,node('small','修改后'),after,node('small','语法解释'),why);
+ panel.append(sheet);
+}
+function renderEntry(focus=false) {
+ const record=records[selected],plan=studySchedule[selected];
+ entry.replaceChildren(node('div',selected,'date'),node('h2',record?.title??plan?.title??'这天还没有写作记录'));
+ if(!record&&plan){
+  entry.append(node('p',plan.tag,'sub'));
+  const list=node('div',undefined,'schedule-list'),item=node('div',undefined,'schedule-item');
+  item.append(node('small','今日学习安排'),node('b',plan.title),node('p',plan.detail),node('span','计划日程','schedule-tag'));
+  list.append(item);entry.append(list);return;
+ }
+ if(!record)return;
  entry.append(node('p',record.type,'sub'));
- const list = node('div',undefined,'tabs');
- list.setAttribute('role','tablist');
- list.setAttribute('aria-label','写作内容');
- const viewport=node('div',undefined,'writing-viewport');
- const track=node('div',undefined,'writing-track');
+ const list=node('div',undefined,'tabs');
+ list.setAttribute('role','tablist');list.setAttribute('aria-label','写作内容');
+ const viewport=node('div',undefined,'writing-viewport'),track=node('div',undefined,'writing-track');
  viewport.append(track);
  tabs.forEach((label,i)=>{
   const button=node('button',label,'tab');
-  button.id='tab-'+i;
-  button.setAttribute('role','tab');
+  button.id='tab-'+i;button.type='button';button.setAttribute('role','tab');
   button.setAttribute('aria-selected',i===active);
   button.setAttribute('aria-controls','tab-panel-'+i);
   button.tabIndex=i===active?0:-1;
   button.onclick=()=>switchWritingTab(i,true);
   button.onkeydown=event=>{
    const step={ArrowRight:1,ArrowLeft:-1}[event.key];
-   if (!step && !['Home','End'].includes(event.key)) return;
+   if(!step&&!['Home','End'].includes(event.key))return;
    event.preventDefault();
    switchWritingTab(event.key==='Home'?0:event.key==='End'?tabs.length-1:(i+step+tabs.length)%tabs.length,true);
   };
@@ -1330,66 +1417,42 @@ function renderEntry(focus=false) {
  });
  entry.append(list,viewport);
  tabs.forEach((_,tabIndex)=>{
- const panel=node('div',undefined,'writing-slide');
- panel.id='tab-panel-'+tabIndex;
- panel.tabIndex=tabIndex===active?0:-1;
- panel.setAttribute('role','tabpanel');
- panel.setAttribute('aria-labelledby','tab-'+tabIndex);
- track.append(panel);
- if (tabIndex<2) {
-  panel.className='writing writing-slide';
-  if (tabIndex===0 && record.original.length>1) {
-   const labels=['开头草稿','解释原因','提出改期','结尾 · 初写','结尾 · 重写'];
-   record.original.forEach((line,i)=>{
-    const block=node('div',undefined,'excerpt');
-    block.append(node('small',labels[i]),node('p',line));
-    panel.append(block);
-   });
-  } else {
-   if (tabIndex===1 && record.original.length>1) panel.append(node('p','根据当天逐句练习整理的完整修改稿。','hint'));
-   const text=tabIndex===0?record.original[0]:record.revised;
-   for (const paragraph of text.split('\n\n')) panel.append(node('p',paragraph));
-  }
- } else if (tabIndex===4) {
-  panel.className='grammar writing-slide';
-  const notes = record.studyNotes;
-  if(!notes){panel.append(node('p','当天没有模板笔记。','hint'));} else {
-  panel.append(node('p',notes.intro,'hint'));
-  for (const section of notes.sections) {
-   panel.append(node('h3',section.title));
-   for (const item of section.items) {
-    const box=node('details');
-    const summary=node('summary',item.name);
-    box.append(summary);
-    if(item.template) box.append(node('p',item.template,'pair'));
-    if(item.example) box.append(node('p','例句：'+item.example,'pair'));
-    if(item.note) box.append(node('p',item.note));
-    panel.append(box);
+  const panel=node('div',undefined,'writing-slide');
+  panel.id='tab-panel-'+tabIndex;panel.tabIndex=tabIndex===active?0:-1;
+  panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby','tab-'+tabIndex);
+  track.append(panel);
+  if(tabIndex===0){
+   panel.className='writing-slide comparison';
+   renderComparison(record,panel);
+  }else if(tabIndex===2){
+   panel.className='grammar writing-slide';
+   const notes=record.studyNotes;
+   if(!notes)panel.append(node('p','当天没有模板笔记。','hint'));
+   else{
+    panel.append(node('p',notes.intro,'hint'));
+    for(const section of notes.sections){
+     panel.append(node('h3',section.title));
+     for(const item of section.items){
+      const box=node('details'),summary=node('summary',item.name);
+      box.append(summary);
+      if(item.template)box.append(node('p',item.template,'pair'));
+      if(item.example)box.append(node('p','例句：'+item.example,'pair'));
+      if(item.note)box.append(node('p',item.note));
+      panel.append(box);
+     }
+    }
    }
-  }
-  }
- } else {
-  panel.className='grammar writing-slide';
-  if (tabIndex===3) panel.append(node('p','先试着改写原句，再展开看答案。','hint'));
-  for (const [tag,before,after,why] of record.grammar) {
-   const item=node('details');
-   const title=node('summary',tag);
-   if (tabIndex===2){
-    const pair=node('p',undefined,'pair');
-    pair.append(node('del',before),document.createElement('br'),node('ins',after));
-    item.append(title,pair,node('p',why));
-    item.open=true;
-    panel.append(item);
-   } else {
+  }else{
+   panel.className='grammar writing-slide';
+   panel.append(node('p','先试着改写原句，再展开看答案。','hint'));
+   for(const [tag,before,after,why] of record.grammar){
     const box=node('div',undefined,'excerpt');
-    title.textContent='查看答案';
-    const line=node('p',before,'pair');
+    const item=node('details'),title=node('summary','查看答案');
     item.append(title,node('p',after,'pair'),node('p',why));
-    box.append(node('b',tag),line,node('p','改写：________________','hint'),item);
+    box.append(node('b',tag),node('p',before,'pair'),node('p','改写：________________','hint'),item);
     panel.append(box);
    }
   }
- }
  });
  enableWritingSwipe(viewport);
  positionWritingTrack(false);
