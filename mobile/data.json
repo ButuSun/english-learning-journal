@@ -866,6 +866,113 @@
           "要用 I look forward to 或 I am looking forward to。to 是介词，后接名词或动名词。"
         ]
       ]
+    },
+    "2026-11-23": {
+      "title": "推荐上海旅游 · 建议信",
+      "type": "考研英语二 · Part A · 建议信 · 完整练习",
+      "original": [
+        "Dear David,\nThank you for asking me about your trip plan. It is a honor to me. The city that I would recommend you is Shanghai, which is the best international city in china.\nThere are some reasons why I recommend this city. For one thing, Shanghai is the city which has lots of possibilities. You can find anything you interested in. Moreover, you haven't to worry about language distance, and you can speak English randomly here. For another, it is recommendable that going to Disneyland. I have twice wonderful experience here, so I believe you can experience a magic day.\nTo sum up, Shanghai is a nice place to visit when you first come China. Consider the cold weather, you should bring enough clothes. Booking a hotel early, hope you have a nice trip in China.\nLi ming"
+      ],
+      "revised": "Dear David,\n\nThank you for asking me about your trip plan. It is an honor to me. The city that I would recommend to you is Shanghai, which is the best international city in China.\n\nThere are some reasons why I recommend this city. For one thing, Shanghai is the city which has lots of possibilities. You can find anything you are interested in. Moreover, you don't have to worry about the language barrier, and you can speak English randomly here. For another, it is recommendable to go to Disneyland. I have had two wonderful experiences here, so I believe you can experience a magical day.\n\nTo sum up, Shanghai is a nice place to visit when you first come to China. Considering the cold weather, you should bring enough clothes. Book a hotel early. I hope you have a nice trip in China.\n\nLi Ming",
+      "grammar": [
+        [
+          "冠词",
+          "It is a honor to me.",
+          "It is an honor to me.",
+          "honor 的 h 不发音，以元音音素开头，因此使用 an。"
+        ],
+        [
+          "固定搭配与介词",
+          "The city that I would recommend you is Shanghai",
+          "The city that I would recommend to you is Shanghai",
+          "recommend something to somebody；这里 recommend 后面接给某人的推荐对象时需要 to。"
+        ],
+        [
+          "专有名词大小写",
+          "in china / Li ming",
+          "in China / Li Ming",
+          "国家名称和英文姓名中的名字首字母均需大写。"
+        ],
+        [
+          "系动词缺失",
+          "anything you interested in",
+          "anything you are interested in",
+          "be interested in 是固定结构，关系结构中不能省略 are。"
+        ],
+        [
+          "否定结构",
+          "you haven't to worry",
+          "you don't have to worry",
+          "表示“不必”用 don't have to，不能用 haven't to。"
+        ],
+        [
+          "固定搭配",
+          "language distance",
+          "language barrier",
+          "表示“语言障碍”通常使用固定搭配 language barrier。"
+        ],
+        [
+          "不定式结构",
+          "it is recommendable that going to Disneyland",
+          "it is recommendable to go to Disneyland",
+          "it is + 形容词 + to do；原句 that 后直接接 going，结构不完整。"
+        ],
+        [
+          "数量词与名词复数",
+          "I have twice wonderful experience",
+          "I have had two wonderful experiences",
+          "具体数量“两次”用 two；可数名词 experience 用复数；现在完成时用 have had。"
+        ],
+        [
+          "词性",
+          "a magic day",
+          "a magical day",
+          "修饰名词 day 需要形容词 magical。"
+        ],
+        [
+          "介词",
+          "when you first come China",
+          "when you first come to China",
+          "表示来到某地使用 come to + 地点。"
+        ],
+        [
+          "非谓语与句子连接",
+          "Consider the cold weather, you should...",
+          "Considering the cold weather, you should...",
+          "这里用 Considering 引出考虑因素；原句的祈使动词 Consider 与后面的完整句之间连接不当。"
+        ],
+        [
+          "祈使句与主语",
+          "Booking a hotel early, hope you have...",
+          "Book a hotel early. I hope you have...",
+          "给对方建议可用祈使句 Book...；hope 前需要明确主语 I。"
+        ]
+      ],
+      "studyNotes": {
+        "intro": "本次为英语二 Part A 建议信，推荐外国朋友 David 来上海旅游。原稿保留了上海的城市体验、英语交流、迪士尼三个理由，并在结尾补充天气与提前订酒店的建议。批改以明确语法、拼写和必要固定搭配纠错为主，没有重写论证顺序。",
+        "sections": [
+          {
+            "title": "本次可复用的三个句型与逻辑点",
+            "items": [
+              {
+                "name": "The city that I would recommend to you is...",
+                "template": "The city that I would recommend to you is Shanghai.",
+                "note": "用定语从句明确推荐对象，适合建议信开头。"
+              },
+              {
+                "name": "There are some reasons why...",
+                "template": "There are some reasons why I recommend this city.",
+                "note": "先总述推荐理由，再用 For one thing / For another 分点展开。"
+              },
+              {
+                "name": "Considering..., you should...",
+                "template": "Considering the cold weather, you should bring enough clothes.",
+                "note": "Considering + 名词短语引出需要考虑的情况，再提出具体建议。"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "studySchedule": {
