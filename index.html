@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ecefe8">
 <title>英语写作日历</title>
 <style>
@@ -12,8 +12,8 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 
 .stats-launch{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:13px 16px;border:1px solid var(--line);border-radius:6px;background:#eef3e9;color:var(--ink);box-shadow:0 2px 8px #24372c0b}.stats-launch strong{font-size:.92rem}.stats-launch span{font-size:.75rem;color:var(--muted)}.stats-launch:hover{border-color:#9caf9b;background:#e7eee2}.stats-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}.stats-metric{background:#f0f3ea;border:1px solid var(--line);border-radius:6px;padding:15px;display:flex;flex-direction:column;gap:5px}.stats-metric strong{font:700 1.8rem/1.1 var(--serif);color:var(--green)}.stats-metric span{font-size:.76rem;color:var(--muted)}.stats-heading{font-size:1rem;margin:22px 0 10px}.stats-category-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stats-category{border:1px solid var(--line);border-radius:6px;background:#fffdf7;padding:11px 13px;text-align:left;min-width:0}.stats-category.active{border-color:#78977a;background:#eef3e9;box-shadow:inset 3px 0 #547b5c}.stats-category-top{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:.82rem}.stats-category-top b{font-size:.78rem;color:var(--muted);white-space:nowrap}.stats-track{display:block;height:6px;border-radius:8px;background:#e8ece3;overflow:hidden;margin-top:9px}.stats-track i{display:block;height:100%;background:#78977a;border-radius:8px}.stats-back{margin:0 0 10px;padding:6px 12px;border:1px solid var(--line);border-radius:5px;background:#f7f7f0;color:var(--muted);font-size:.78rem}.stats-error-list{display:grid;gap:8px}.stats-error{border:1px solid var(--line);border-radius:6px;background:#f7f8f2;padding:11px 14px}.stats-error summary{cursor:pointer;font-weight:700}.stats-error p{margin:8px 0;overflow-wrap:anywhere}.stats-before{color:#925c50;font:1rem/1.6 var(--serif)}.stats-after{color:#315b42;font:1rem/1.6 var(--serif)}.stats-method{font-size:.78rem;color:var(--muted);line-height:1.6;margin-top:8px}
 @media(max-width:810px){header,.workspace{width:calc(100% - 30px)}header{padding-top:32px}.workspace{grid-template-columns:minmax(0,1fr);gap:18px}.sidebar{gap:12px}.notes{grid-template-columns:1fr 1fr}.notes h2{grid-column:1/-1}.entry{min-height:0}.stamp{display:none}.card{padding:9px 11px}.calendar{padding:14px}}
-.reader{padding:0;border:1px solid var(--line);border-radius:16px;width:min(780px,calc(100% - 40px));height:min(900px,calc(100dvh - 48px));max-height:none;max-width:none;background:var(--paper);color:var(--ink);overflow:hidden;box-shadow:0 24px 80px #18291f40;transform-origin:top left}.reader[open]{display:flex;flex-direction:column}.reader::backdrop{background:#1f302b66;backdrop-filter:blur(4px)}.reader-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--paper);flex-shrink:0}.reader-toolbar button{min-height:44px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:#f0f3ea}.reader-toolbar span{font-size:.8rem;color:var(--muted)}.reader-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable}.reader .entry{border:0;border-radius:0;box-shadow:none;min-height:0;padding:24px 28px 40px}.reader .entry:before{display:none}.reader .entry h2{overflow-wrap:anywhere}.tabs{overflow-x:auto;white-space:nowrap;scrollbar-width:thin}.tab{flex-shrink:0;min-height:44px}.stats-tree{display:grid;gap:14px}.stats-branch{border:1px solid var(--line);border-radius:8px;background:#f7f8f2;padding:12px}.stats-branch>summary{cursor:pointer;font-weight:700;min-height:32px}.stats-branch>summary span{font-weight:400;color:var(--muted);font-size:.8rem;margin-left:8px}.stats-children{border-left:2px solid #c9d6c4;margin:8px 0 0 6px;padding-left:12px;display:grid;gap:8px}.stats-children .stats-category{width:100%;min-height:52px}.stats-subtopics{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}.stats-subtopics button{min-height:44px;border:1px solid var(--line);border-radius:7px;padding:8px 12px;background:#fffdf7;text-align:left}.stats-subtopics button[aria-pressed=true]{background:#e4eee3;border-color:#78977a;font-weight:700}.stats-breadcrumb{font-size:.78rem;color:var(--muted);overflow-wrap:anywhere;margin:0 0 12px}.stats-entry-link{min-height:44px;padding:8px 12px;background:#eef3e9;border:1px solid var(--line);border-radius:6px;font-size:.8rem}.stats-error summary{line-height:1.6}.stats-error .hint{line-height:1.8}.stats-all{margin-top:16px;min-height:44px}.card{transition:transform .2s,box-shadow .2s}.card:active{transform:scale(.98)}
-@media(max-width:810px){.workspace>.entry{display:none}header{padding-top:24px}header p{font-size:.85rem}.notes{grid-template-columns:minmax(0,1fr)}.card{padding:14px 16px;min-height:72px}.reader{width:calc(100% - 16px);height:calc(100dvh - 20px);margin:auto;border-radius:14px}.reader-toolbar{padding:8px 12px}.reader .entry{padding:20px 16px 32px}.reader .entry h2{font-size:1.65rem;line-height:1.35}.reader .writing{font-size:1.08rem;line-height:1.9}.stats-metrics{gap:6px;margin:16px 0}.stats-metric{padding:10px 8px}.stats-metric strong{font-size:1.5rem}.stats-metric span{font-size:.7rem}.stats-subtopics{gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}.stats-subtopics button{flex:0 0 auto;max-width:85%}.reader .stats-heading{margin-top:18px}.reader-body{scrollbar-gutter:auto}}
+.reader{inset:0;margin:0;padding:0;border:0;width:100%;height:100vh;height:100dvh;max-height:none;max-width:none;background:var(--paper);color:var(--ink);overflow:hidden;transform-origin:top left}.reader[open]{display:flex;flex-direction:column}.reader::backdrop{background:#1f302b66;backdrop-filter:blur(4px)}.reader-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--paper);flex-shrink:0}.reader-toolbar button{min-height:44px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:#f0f3ea}.reader-toolbar span{font-size:.8rem;color:var(--muted)}.reader-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable}.reader .entry{border:0;border-radius:0;box-shadow:none;min-height:0;padding:24px 28px 40px}.reader .entry:before{display:none}.reader .entry h2{overflow-wrap:anywhere}.tabs{overflow-x:auto;white-space:nowrap;scrollbar-width:thin}.tab{flex-shrink:0;min-height:44px}.stats-tree{display:grid;gap:14px}.stats-branch{border:1px solid var(--line);border-radius:8px;background:#f7f8f2;padding:12px}.stats-branch>summary{cursor:pointer;font-weight:700;min-height:32px}.stats-branch>summary span{font-weight:400;color:var(--muted);font-size:.8rem;margin-left:8px}.stats-children{border-left:2px solid #c9d6c4;margin:8px 0 0 6px;padding-left:12px;display:grid;gap:8px}.stats-children .stats-category{width:100%;min-height:52px}.stats-subtopics{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}.stats-subtopics button{min-height:44px;border:1px solid var(--line);border-radius:7px;padding:8px 12px;background:#fffdf7;text-align:left}.stats-subtopics button[aria-pressed=true]{background:#e4eee3;border-color:#78977a;font-weight:700}.stats-breadcrumb{font-size:.78rem;color:var(--muted);overflow-wrap:anywhere;margin:0 0 12px}.stats-entry-link{min-height:44px;padding:8px 12px;background:#eef3e9;border:1px solid var(--line);border-radius:6px;font-size:.8rem}.stats-error summary{line-height:1.6}.stats-error .hint{line-height:1.8}.stats-all{margin-top:16px;min-height:44px}.card{transition:transform .2s,box-shadow .2s}.card:active{transform:scale(.98)}
+@media(max-width:810px){.workspace>.entry{display:none}header{padding-top:24px}header p{font-size:.85rem}.notes{grid-template-columns:minmax(0,1fr)}.card{padding:14px 16px;min-height:72px}.reader-toolbar{padding:8px 12px}.reader .entry{padding:20px 16px 32px}.reader .entry h2{font-size:1.65rem;line-height:1.35}.reader .writing{font-size:1.08rem;line-height:1.9}.stats-metrics{gap:6px;margin:16px 0}.stats-metric{padding:10px 8px}.stats-metric strong{font-size:1.5rem}.stats-metric span{font-size:.7rem}.stats-subtopics{gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}.stats-subtopics button{flex:0 0 auto;max-width:85%}.reader .stats-heading{margin-top:18px}.reader-body{scrollbar-gutter:auto}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 .writing-viewport{width:100%;overflow:hidden;touch-action:pan-y;min-width:0;transition:height 300ms cubic-bezier(.22,.75,.24,1)}.writing-track{display:flex;align-items:flex-start;will-change:transform}.writing-slide{flex:0 0 100%;width:100%;min-width:0;overflow-wrap:anywhere;min-height:160px}.writing-slide[aria-hidden=true]{pointer-events:none}@media(prefers-reduced-motion:reduce){.writing-track{transition:none!important}}
 .comparison{display:grid;gap:12px}
@@ -31,14 +31,18 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 .error-pin{display:grid;place-items:center;min-width:36px;min-height:34px;padding:0 4px;border:0;background:transparent;color:#824129;font:700 .76rem/1 system-ui,sans-serif}
 .error-pin span{display:grid;place-items:center;min-width:22px;height:22px;padding:0 3px;border:1px solid #c4927b;border-radius:99px;background:#fff5ee}
 .error-pin[aria-expanded=true] span{color:#fff;background:#824129;border-color:#824129}
-.error-explanation{padding:12px;margin-top:9px;background:#fffcf5;border:1px solid #cbb8a3;border-radius:8px}
-.error-explanation-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
-.error-explanation small{font:700 .73rem/1.5 system-ui,sans-serif;color:var(--muted)}
-.error-explanation-heading{font-size:.95rem;margin:0}
-.error-explanation-close{flex:none;border:1px solid var(--line);border-radius:6px;padding:4px 8px;background:white}
-.error-explanation-before{color:#824129}
-.error-explanation-after{color:#205a38}
-.error-explanation .error-explanation-why,.comparison .comparison-empty{font:.9rem/1.6 system-ui,sans-serif;color:var(--muted)}
+.reader-toolbar{padding-top:max(8px,env(safe-area-inset-top));padding-inline:max(12px,env(safe-area-inset-left)) max(12px,env(safe-area-inset-right))}
+.reader-body{padding-inline:env(safe-area-inset-left) env(safe-area-inset-right);padding-bottom:env(safe-area-inset-bottom)}
+.reader .entry{max-width:980px;margin-inline:auto}
+.comparison-revised strong{color:var(--green);font-weight:700}
+.error-explanation{width:min(460px,calc(100% - 32px));max-width:none;max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);padding:18px 20px;overflow:auto;overscroll-behavior:contain;color:var(--ink);background:#fffcf5;border:1px solid #cbb8a3;border-radius:14px;box-shadow:0 18px 50px #18291f40}
+.error-explanation::backdrop{background:#1f302b66}
+.error-explanation-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.error-explanation-heading{font-size:1rem;margin:0;overflow-wrap:anywhere}
+.error-explanation-close{flex:none;min-height:40px;border:1px solid var(--line);border-radius:6px;padding:4px 10px;background:white}
+.error-explanation-text{display:grid;gap:8px;line-height:1.7;overflow-wrap:anywhere}
+.error-explanation-text p{margin:0}
+.comparison .comparison-empty{font:.9rem/1.6 system-ui,sans-serif;color:var(--muted)}
 .full-revision{white-space:pre-wrap}
 @media(max-width:810px){.entry .tabs{gap:6px}.entry .tab{flex:1 0 auto;margin-right:0;padding-inline:2px;font-size:.83rem}}
 </style>
@@ -57,6 +61,13 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 <dialog class="reader" id="reader" aria-labelledby="readerTitle">
  <div class="reader-toolbar"><button id="readerBack" type="button">‹ 返回日历</button><span id="readerTitle">写作阅读</span><button id="readerClose" type="button" aria-label="关闭阅读视图">关闭</button></div>
  <div class="reader-body" id="readerBody"></div>
+</dialog>
+<dialog class="error-explanation" id="grammarExplanation" aria-labelledby="grammarExplanationTitle">
+ <div class="error-explanation-top">
+  <h2 class="error-explanation-heading" id="grammarExplanationTitle"></h2>
+  <form method="dialog"><button class="error-explanation-close" type="submit" autofocus>关闭</button></form>
+ </div>
+ <div class="error-explanation-text"></div>
 </dialog>
 <script>
 const studySchedule = {
@@ -1018,6 +1029,21 @@ let grammarStatsFilter = '全部';
 let grammarTopicFilter = '全部';
 const reader=document.querySelector('#reader');
 const readerBody=document.querySelector('#readerBody');
+const grammarPopup=document.querySelector('#grammarExplanation');
+const grammarPopupTitle=document.querySelector('#grammarExplanationTitle');
+const grammarPopupText=grammarPopup.querySelector('.error-explanation-text');
+let grammarPopupBadge=null;
+grammarPopup.addEventListener('close',()=>{
+ if(grammarPopup.open)return;
+ grammarPopupBadge?.setAttribute('aria-expanded','false');
+ grammarPopupBadge=null;
+});
+grammarPopup.addEventListener('click',event=>{
+ if(event.target!==grammarPopup)return;
+ const bounds=grammarPopup.getBoundingClientRect();
+ if(event.clientX<bounds.left||event.clientX>bounds.right||
+  event.clientY<bounds.top||event.clientY>bounds.bottom)grammarPopup.close();
+});
 const entryHome=entry.parentElement;
 let readerOrigin=null, readerScroll=0, readerClosing=false, readerCloseRequested=false, readerAnimation=null, readerToken=null;
 let statsReturn=null, statsOverviewScroll=0;
@@ -1054,6 +1080,7 @@ function updateReaderToolbar() {
 async function finishReaderClose() {
  if(!reader.open || readerClosing) return;
  readerClosing=true;
+ if(grammarPopup.open)grammarPopup.close();
  const origin=readerOrigin?.isConnected?readerOrigin:document.querySelector(readerOrigin?.dataset.note?'[data-note="'+readerOrigin.dataset.note+'"]':readerOrigin?.dataset.calendar?'[data-calendar="'+readerOrigin.dataset.calendar+'"]':'#openGrammarStats');
  await readerMotion(origin,true);
  reader.close();
@@ -1089,7 +1116,6 @@ function readerBack() {
  } else closeReader();
 }
 reader.addEventListener('cancel',event=>{event.preventDefault();closeReader();});
-reader.addEventListener('click',event=>{if(event.target===reader){const r=reader.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeReader();}});
 document.querySelector('#readerClose').onclick=closeReader;
 document.querySelector('#readerBack').onclick=readerBack;
 window.addEventListener('popstate',event=>{if(reader.open&&event.state?.journalReader!==readerToken)finishReaderClose();});
@@ -1161,7 +1187,7 @@ function dateKey(y,m,d) {
 }
 function select(key, from) {
  const source=document.querySelector('[data-'+from+'="'+key+'"]');
- if(matchMedia('(max-width: 810px)').matches&&!reader.open) openReader(source,'写作阅读');
+ if(!reader.open)openReader(source,'写作阅读');
  showGrammarStats = false;
  selected = key;
  month = Number(key.slice(5,7)) - 1;
@@ -1171,13 +1197,9 @@ function select(key, from) {
  renderCalendar();
  renderNotes();
  renderEntry();
- if (reader.open) {
-  updateReaderToolbar();
-  readerBody.scrollTop=0;
-  document.querySelector('#readerBack').focus({preventScroll:true});
- } else {
-  document.querySelector('[data-'+from+'="'+key+'"]')?.focus({preventScroll:true});
- }
+ updateReaderToolbar();
+ readerBody.scrollTop=0;
+ document.querySelector('#readerBack').focus({preventScroll:true});
 }
 function classifyGrammar(g) {
  const tag=String(g?.[0]||''), before=String(g?.[1]||''), why=String(g?.[3]||'');
@@ -1277,8 +1299,8 @@ function renderGrammarStats() {
   link.onclick=()=>{
    statsReturn={category:grammarStatsFilter,topic:grammarTopicFilter,scroll:readerBody.scrollTop};
    selected=date;active=0;showGrammarStats=false;renderEntry();updateReaderToolbar();readerBody.scrollTop=0;
-   const target=entry.querySelectorAll('#tab-panel details')[index];
-   if(target){target.scrollIntoView({block:'start'});target.querySelector('summary').focus({preventScroll:true});}
+   const target=entry.querySelector('[data-grammar-index="'+index+'"]');
+   if(target){target.scrollIntoView({block:'center'});target.focus({preventScroll:true});}
   };
   details.append(link);
   list.append(details);
@@ -1396,8 +1418,11 @@ const archivedErrorPhrases = {
  '2026-11-18':{1:['in a trip','in the work trip','choose to a nice hotel']},
  '2026-11-16':{1:['relate the lifestyle changed'],3:['does exercise good for','it but also']}
 };
-function wordsWithOffsets(text) {
- return Array.from(text.matchAll(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu),match=>({
+function wordsWithOffsets(text, includePunctuation=false) {
+ const pattern=includePunctuation
+  ? /[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*|[^\s]/gu
+  : /[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu;
+ return Array.from(text.matchAll(pattern),match=>({
   text:match[0].replaceAll('’',"'"),start:match.index,end:match.index+match[0].length
  }));
 }
@@ -1407,7 +1432,7 @@ function locateWords(sentence, phrase) {
  return sentence.flatMap((word,i)=>wanted.every((text,j)=>sentence[i+j]?.text.toLowerCase()===text)
   ? [sentence.slice(i,i+wanted.length)] : []);
 }
-function changedWordRanges(original, revised) {
+function changedWordRanges(original, revised, markOmissions=true) {
  // Match words in order so an annotation like "It is a honor to me"
  // strikes only the article. Keep case differences as edits.
  const shared=Array.from({length:original.length+1},()=>new Uint16Array(revised.length+1));
@@ -1430,7 +1455,7 @@ function changedWordRanges(original, revised) {
   const [left,right]=anchors[index-1], [nextLeft,nextRight]=anchors[index];
   if(nextLeft>left+1){
    ranges.push([original[left+1].start,original[nextLeft-1].end]);
-  }else if(nextRight>right+1){
+  }else if(markOmissions && original.length && nextRight>right+1){
    // With a missing word, mark the words that surround the omission.
    ranges.push([original[Math.max(0,left)].start,original[Math.min(nextLeft,original.length-1)].end]);
   }
@@ -1448,7 +1473,11 @@ function markOriginalErrors(paragraph, sentence, issueIndexes, grammar, override
   if(originalParts.length!==revisedParts.length)return [];
   return originalParts.flatMap((part,i)=>locateWords(words,part)
    .flatMap(match=>changedWordRanges(match,wordsWithOffsets(revisedParts[i]))));
- }).sort((left,right)=>left[0]-right[0]);
+ });
+ appendMarkedText(paragraph,sentence,ranges,'del');
+}
+function appendMarkedText(paragraph,text,ranges,tag) {
+ ranges.sort((left,right)=>left[0]-right[0]);
  let offset=0;
  const merged=[];
  for(const range of ranges){
@@ -1457,25 +1486,31 @@ function markOriginalErrors(paragraph, sentence, issueIndexes, grammar, override
   else merged.push(range);
  }
  for(const [start,end] of merged){
-  paragraph.append(sentence.slice(offset,start),node('del',sentence.slice(start,end)));
+  paragraph.append(text.slice(offset,start),node(tag,text.slice(start,end)));
   offset=end;
  }
- paragraph.append(sentence.slice(offset));
+ paragraph.append(text.slice(offset));
 }
-function grammarExplanation(id) {
- const box=node('div',undefined,'error-explanation');
- box.id=id;
- box.hidden=true;
- const top=node('div',undefined,'error-explanation-top');
- const heading=node('h3',undefined,'error-explanation-heading');
- const close=node('button','关闭','error-explanation-close');
- close.type='button';
- top.append(heading,close);
- const original=node('p',undefined,'error-explanation-before');
- const revised=node('p',undefined,'error-explanation-after');
- const why=node('p',undefined,'error-explanation-why');
- box.append(top,node('small','错点'),original,node('small','修改后'),revised,node('small','语法解释'),why);
- return {box,heading,close,original,revised,why};
+function appendRevisedSentences(container, originals, revised) {
+ const ranges=changedWordRanges(wordsWithOffsets(revised.join('\n'),true),wordsWithOffsets(originals.join('\n'),true),false);
+ let start=0;
+ for(const sentence of revised){
+  const end=start+sentence.length;
+  const highlights=ranges.filter(([left,right])=>left<end && right>start)
+   .map(([left,right])=>[Math.max(left,start)-start,Math.min(right,end)-start]);
+  const paragraph=node('p');
+  appendMarkedText(paragraph,sentence,highlights,'strong');
+  container.append(paragraph);
+  start=end+1;
+ }
+}
+function showGrammarExplanation(button,label,why) {
+ grammarPopupTitle.textContent=label;
+ const lines=why.split(/\r?\n|(?<=[。！？；;!?])\s*/u).map(line=>line.trim()).filter(Boolean);
+ grammarPopupText.replaceChildren(...lines.map(line=>node('p',line)));
+ grammarPopupBadge=button;
+ button.setAttribute('aria-expanded','true');
+ grammarPopup.showModal();
 }
 function renderComparison(record,panel) {
  const originals=writingSentences(record.original.join('\n'));
@@ -1483,50 +1518,21 @@ function renderComparison(record,panel) {
  const matches=grammarLocations(record,originals,archivedGrammarLocations[selected]||{});
  const pairs=sentencePairs(originals,revised,archivedSentenceGroups[selected]||[]);
  const errorPhrases=archivedErrorPhrases[selected]||{};
- let openBadge,openExplanation;
- const closeExplanation=(restoreFocus=false)=>{
-  if(!openBadge)return;
-  openBadge.setAttribute('aria-expanded','false');
-  openExplanation.box.hidden=true;
-  if(restoreFocus)openBadge.focus({preventScroll:true});
-  openBadge=null;
-  openExplanation=null;
- };
- const explanationFor=id=>{
-  const explanation=grammarExplanation(id);
-  explanation.close.onclick=()=>{
-   closeExplanation(true);
-   positionWritingTrack(false);
-  };
-  return explanation;
- };
- const addBadge=(badges,index,explanation)=>{
-  const [label,before,after,why]=record.grammar[index];
+ const addBadge=(badges,index)=>{
+  const [label,,,why]=record.grammar[index];
   const button=node('button',undefined,'error-pin');
   button.append(node('span',String(index+1)));
   button.type='button';
+  button.dataset.grammarIndex=index;
   button.setAttribute('aria-label','查看第 '+(index+1)+' 处错点：'+label);
-  button.setAttribute('aria-controls',explanation.box.id);
+  button.setAttribute('aria-haspopup','dialog');
+  button.setAttribute('aria-controls',grammarPopup.id);
   button.setAttribute('aria-expanded','false');
-  button.onclick=()=>{
-   const wasOpen=openBadge===button;
-   closeExplanation();
-   if(!wasOpen){
-    explanation.heading.textContent=label;
-    explanation.original.textContent=before;
-    explanation.revised.textContent=after;
-    explanation.why.textContent=why;
-    explanation.box.hidden=false;
-    button.setAttribute('aria-expanded','true');
-    openBadge=button;
-    openExplanation=explanation;
-   }
-   positionWritingTrack(false);
-  };
+  button.onclick=()=>showGrammarExplanation(button,label,why);
   badges.append(button);
  };
  let originalIndex=0;
- pairs.forEach(([before,after],row)=>{
+ pairs.forEach(([before,after])=>{
   const block=node('section',undefined,'comparison-block');
   const original=node('div',undefined,'comparison-original');
   const originalRow=node('div',undefined,'comparison-with-badges');
@@ -1536,7 +1542,6 @@ function renderComparison(record,panel) {
   original.append(originalRow);
   const revisedBlock=node('div',undefined,'comparison-revised');
   revisedBlock.append(node('div','修改后','comparison-label'));
-  const explanation=explanationFor('grammar-detail-'+row);
   const groupIssues=new Set();
   for(const sentence of before){
    const paragraph=node('p');
@@ -1548,24 +1553,20 @@ function renderComparison(record,panel) {
   if(!before.length)originalText.append(node('p','此处为修改稿新增内容','comparison-empty'));
   if(groupIssues.size){
    const badges=node('div',undefined,'error-badges');
-   [...groupIssues].sort((a,b)=>a-b).forEach(index=>addBadge(badges,index,explanation));
+   [...groupIssues].sort((a,b)=>a-b).forEach(index=>addBadge(badges,index));
    originalRow.append(badges);
-   original.append(explanation.box);
   }
-  after.forEach(sentence=>revisedBlock.append(node('p',sentence)));
+  appendRevisedSentences(revisedBlock,before,after);
   if(!after.length)revisedBlock.append(node('p','此句未出现在修改稿中','comparison-empty'));
   block.append(original,revisedBlock);
   panel.append(block);
  });
  if(matches.unfound.length){
-  const aside=node('div');
   const row=node('div',undefined,'comparison-with-badges');
   const badges=node('div',undefined,'error-badges');
-  const explanation=explanationFor('grammar-detail-other');
-  matches.unfound.forEach(index=>addBadge(badges,index,explanation));
+  matches.unfound.forEach(index=>addBadge(badges,index));
   row.append(node('span','补充语法笔记','comparison-label'),badges);
-  aside.append(row,explanation.box);
-  panel.append(aside);
+  panel.append(row);
  }
 }
 function renderEntry(focus=false) {
