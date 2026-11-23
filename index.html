@@ -915,6 +915,39 @@ const grid = document.querySelector('#calendar');
 const notes = document.querySelector('#notes');
 const entry = document.querySelector('#entry');
 const tabs = ['我的原文','修改稿','语法错点','挖空复习','模板笔记'];
+function switchWritingTab(next, focusTab=false) {
+ if(next<0 || next>=tabs.length || next===active) return;
+ active=next;
+ renderEntry(focusTab);
+ const chosen=document.querySelector('#tab-'+active);
+ chosen?.scrollIntoView({block:'nearest',inline:'nearest',behavior:'smooth'});
+ if(reader.open) readerBody.scrollTo({top:0,behavior:'smooth'});
+}
+function enableWritingSwipe(panel) {
+ let startX=0,startY=0,tracking=false,vertical=false;
+ panel.addEventListener('touchstart',event=>{
+  if(event.touches.length!==1 || event.target.closest('input,textarea,select,[contenteditable="true"]')) {tracking=false;return;}
+  startX=event.touches[0].clientX;
+  startY=event.touches[0].clientY;
+  tracking=true;vertical=false;
+ },{passive:true});
+ panel.addEventListener('touchmove',event=>{
+  if(!tracking || event.touches.length!==1) return;
+  const dx=event.touches[0].clientX-startX;
+  const dy=event.touches[0].clientY-startY;
+  if(Math.abs(dy)>12 && Math.abs(dy)>Math.abs(dx)) vertical=true;
+ },{passive:true});
+ panel.addEventListener('touchend',event=>{
+  if(!tracking || vertical || event.changedTouches.length!==1) return;
+  tracking=false;
+  const dx=event.changedTouches[0].clientX-startX;
+  const dy=event.changedTouches[0].clientY-startY;
+  if(Math.abs(dx)<65 || Math.abs(dx)<Math.abs(dy)*1.35) return;
+  switchWritingTab(active+(dx<0?1:-1));
+ },{passive:true});
+ panel.addEventListener('touchcancel',()=>{tracking=false;},{passive:true});
+}
+
 let showGrammarStats = false;
 let grammarStatsFilter = '全部';
 let grammarTopicFilter = '全部';
@@ -1241,6 +1274,7 @@ function renderEntry(focus=false) {
  panel.tabIndex=0;
  panel.setAttribute('role','tabpanel');
  panel.setAttribute('aria-labelledby','tab-'+active);
+ enableWritingSwipe(panel);
  tabs.forEach((label,i)=>{
   const button=node('button',label,'tab');
   button.id='tab-'+i;
@@ -1248,13 +1282,12 @@ function renderEntry(focus=false) {
   button.setAttribute('aria-selected',i===active);
   button.setAttribute('aria-controls',panel.id);
   button.tabIndex=i===active?0:-1;
-  button.onclick=()=>{active=i;renderEntry(true)};
+  button.onclick=()=>switchWritingTab(i,true);
   button.onkeydown=event=>{
    const step={ArrowRight:1,ArrowLeft:-1}[event.key];
    if (!step && !['Home','End'].includes(event.key)) return;
    event.preventDefault();
-   active=event.key==='Home'?0:event.key==='End'?tabs.length-1:(i+step+tabs.length)%tabs.length;
-   renderEntry(true);
+   switchWritingTab(event.key==='Home'?0:event.key==='End'?tabs.length-1:(i+step+tabs.length)%tabs.length,true);
   };
   list.append(button);
  });
