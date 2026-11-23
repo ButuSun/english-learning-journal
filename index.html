@@ -54,6 +54,7 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 .grammar-page{width:min(980px,calc(100% - 30px));margin:16px auto 42px}
 .grammar-page .entry{min-height:0}
 .grammar-example{padding-block:12px;border-top:1px solid var(--line)}
+.grammar-example-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .grammar-example-date{color:var(--muted);font-size:.8rem}
 .grammar-point-title{margin:2px 0 8px;font-size:1.05rem}
 .grammar-rules{padding-inline-start:1.35em;line-height:1.7;margin:8px 0 14px}
@@ -1675,6 +1676,279 @@ grammarPageLink.onclick=event=>{
  event.preventDefault();
  setMainRoute(grammarRoute());
 };
+const coreGrammarRules = {
+ "Indefinite articles: a and an": [
+  "Use a or an before a singular countable noun when introducing it or referring to one member of a class.",
+  "Choose a before a consonant sound and an before a vowel sound."
+ ],
+ "Collocations and prepositions": [
+  "Some words require a particular preposition to express a relationship. Learn the whole pattern, including what follows the preposition."
+ ],
+ "Capitalizing proper nouns": [
+  "Capitalize proper nouns, including names of people and countries."
+ ],
+ "Missing linking verb": [
+  "A clause needs a finite verb. Use a form of be to link a subject to an adjective that describes it."
+ ],
+ "Negation": [
+  "Use the auxiliary to form a negative. If the main verb has no auxiliary in the simple present or past, use do, does, or did plus not and the base verb."
+ ],
+ "Collocations": [
+  "A collocation is a conventional combination of words. Learn the expression as a unit."
+ ],
+ "Infinitive constructions": [
+  "A to-infinitive uses to plus the base form of a verb. In the pattern it is + adjective + to-infinitive, it introduces the action described by the adjective."
+ ],
+ "Quantifiers and plural nouns": [
+  "Use a singular countable noun after one and a plural countable noun after whole numbers greater than one."
+ ],
+ "Parts of speech": [
+  "Use adjectives to describe nouns and adverbs to describe verbs, adjectives, or other adverbs."
+ ],
+ "Prepositions": [
+  "Use prepositions to express relationships such as direction, place, and time. Choose the preposition that matches the intended relationship."
+ ],
+ "Nonfinite verbs and sentence connections": [
+  "An introductory participle phrase can add background to a complete main clause. An independent clause needs an appropriate connector or punctuation."
+ ],
+ "Imperatives and subjects": [
+  "Use the base form in an imperative. The subject you is usually understood. A separate declarative clause normally needs its own subject."
+ ],
+ "Plural nouns and relative clauses": [
+  "Use plural countable nouns when referring to a group in general. A relative clause can identify or describe that group."
+ ],
+ "Multiples and time prepositions": [
+  "Use twice or double to describe a twofold change. Use over to describe change across a period."
+ ],
+ "Joining clauses and noun content clauses": [
+  "Join independent clauses with appropriate punctuation or a conjunction. A that-clause after a noun such as fact states the content of that noun."
+ ],
+ "Present participles after nouns": [
+  "An -ing phrase can follow a noun and describe what that noun is doing. It can often be expanded into a relative clause with an active verb."
+ ],
+ "Subject–verb agreement and embedded clauses": [
+  "Match the finite verb to its subject. An embedded clause has its own subject and verb."
+ ],
+ "Not only … but also inversion": [
+  "When Not only introduces the first clause as a whole, put the auxiliary or modal before the subject. If there is no auxiliary, use do, does, or did plus the base verb.",
+  "Keep normal subject–verb order in the clause introduced by but also."
+ ],
+ "Verb structure and parts of speech": [
+  "A finite verb carries tense or agreement. Use the verb pattern required by the construction and the part of speech required by the word it modifies."
+ ],
+ "Noun number and word choice": [
+  "Use plural countable nouns for multiple members of a group. Choose verbs and nouns that conventionally go together."
+ ],
+ "Subjunctive forms and spelling": [
+  "After expressions such as It is important that, the mandative subjunctive uses the base form of the verb regardless of the subject."
+ ],
+ "Possessives and spelling": [
+  "Add an apostrophe and s to most singular nouns. Add only an apostrophe to regular plurals already ending in s."
+ ],
+ "Collocations and time reference": [
+  "Learn fixed expressions as units. Use tense and time expressions that match the time being described."
+ ],
+ "Relative clauses and repeated objects": [
+  "If a relative pronoun such as that already serves as the object of a verb, do not add another pronoun for the same object."
+ ],
+ "Connecting ideas and expressing time": [
+  "Use sequence markers to organize parallel points. A time clause introduced by as can show that two events develop together."
+ ],
+ "Adjective collocations": [
+  "Some adjectives take a specific preposition before their complement. Learn the adjective and preposition together."
+ ],
+ "Word choice and collocations": [
+  "Choose words that express the intended meaning and fit the conventional phrase."
+ ],
+ "Introducing examples and pronouns": [
+  "Use such as to introduce examples. Avoid repeating a pronoun when the clause or phrase already supplies the object."
+ ],
+ "Past participles and prepositions": [
+  "Use have plus a past participle to form perfect tenses. Learn any preposition required by the individual verb."
+ ],
+ "Subject–verb agreement and sentence structure": [
+  "A finite verb agrees with its own subject. Give each independent clause the structure it needs to express a complete idea."
+ ],
+ "Spelling and salutations": [
+  "Capitalize names in salutations and check the spelling of the recipient's name."
+ ],
+ "Present perfect continuous": [
+  "Use have or has been + -ing to emphasize an activity that began in the past and continues or has recently stopped."
+ ],
+ "Inversion after Only by": [
+  "When Only by + an expression of means opens a sentence, invert the main clause by placing the auxiliary or modal before its subject."
+ ],
+ "Third-person singular": [
+  "In the simple present, most verbs take -s or -es with a third-person singular subject."
+ ],
+ "Chart description and tense": [
+  "Use the simple past for completed changes. Use from and to to identify the starting and ending values."
+ ],
+ "Vocabulary and spelling": [
+  "Choose the word that matches the intended meaning and check its standard spelling."
+ ],
+ "Noun collocations": [
+  "Learn the verbs and prepositions that conventionally occur with a noun."
+ ],
+ "Stating reasons and word choice": [
+  "Use one reason is that + a complete clause to explain a cause."
+ ],
+ "Comparisons and subject–verb agreement": [
+  "Use compared with to introduce a comparison. In the main clause, match the verb to its subject."
+ ],
+ "Verb collocations and prepositions": [
+  "Check whether the verb takes an object directly or requires a preposition before its complement."
+ ],
+ "Fixed preposition patterns": [
+  "Learn the preposition together with the word or phrase that requires it."
+ ],
+ "Comparatives and adverbs": [
+  "Use an adverb to modify an action. For longer adverbs, form the comparative with more."
+ ],
+ "Plural and possessive nouns": [
+  "Use plural nouns for multiple people or things. For a regular plural ending in s, add an apostrophe to form the possessive."
+ ],
+ "Spelling and collocations": [
+  "Check both the spelling of individual words and the wording of fixed expressions."
+ ],
+ "Parts of speech and articles": [
+  "A possessive determiner such as your introduces a noun phrase. Use the to mark a noun phrase whose referent is identifiable."
+ ],
+ "Relative clauses and verb structure": [
+  "A relative clause introduced by which needs a finite verb or a complete verb phrase."
+ ],
+ "Quantifiers and photography vocabulary": [
+  "Use a lot of before a plural countable noun or an uncountable noun."
+ ],
+ "Subject–verb agreement and embedded exclamatives": [
+  "Match the verb to its subject. In an embedded how-clause, use how + adjective + subject + verb."
+ ],
+ "Noun number and collocations": [
+  "Use many with plural countable nouns and choose a verb that fits the noun."
+ ],
+ "Prepositions of place and time": [
+  "Use to for movement toward a place. Usually omit on before days introduced by next or last."
+ ],
+ "Using look forward to": [
+  "Use look forward to + noun or gerund. To is a preposition in this expression."
+ ],
+ "help + object + base verb": [
+  "Use help + object + a base verb or a to-infinitive."
+ ],
+ "provide sb. with sth.": [
+  "Use provide someone with something to say what a person receives."
+ ],
+ "choose to do": [
+  "When choose introduces an action, follow it with a to-infinitive."
+ ],
+ "Hypothetical conditionals": [
+  "For a present hypothetical, use if + past form and would + base verb in the main clause."
+ ],
+ "Patterns with hesitate": [
+  "Use hesitate to + base verb when someone is unsure about taking an action."
+ ],
+ "Using worth": [
+  "Use be worth followed by a noun or a gerund."
+ ],
+ "Spelling and word combinations": [
+  "Check the spelling of words that look similar and learn common verb–noun combinations together."
+ ],
+ "Having or having no choice": [
+  "Use have a choice for an available option and have no choice but to + base verb when there is no alternative."
+ ],
+ "Passive voice": [
+  "Form the passive with be plus a past participle. The subject receives the action."
+ ],
+ "Causative make": [
+  "In active clauses, use make + object + base verb to mean cause someone or something to act."
+ ],
+ "want / make up one's mind": [
+  "Use want to + base verb to express a desire. Use make up one's mind to + base verb to express a decision."
+ ],
+ "Irregular forms and spelling": [
+  "Check whether a verb has an irregular past or past participle. Regular verbs ending in consonant + y change y to i before -ed."
+ ],
+ "Comparative structures": [
+  "Use a comparative followed by than to name what is being compared."
+ ],
+ "Subject clauses and subject–verb agreement": [
+  "When a clause is part of a subject headed by a noun, make the verb agree with that head noun."
+ ],
+ "Past tense and gerunds": [
+  "Use the past tense for events or situations in a completed past time frame. Use an -ing form after be busy."
+ ],
+ "Too and either": [
+  "Use too to add an affirmative statement and either to add a negative statement."
+ ],
+ "Introducing examples": [
+  "Use such as to introduce examples of the category you just named."
+ ],
+ "Prepositions with apologize": [
+  "Use apologize to + person and apologize for + noun or gerund for the reason."
+ ],
+ "Verb collocations": [
+  "Learn common combinations of verbs and the nouns that serve as their objects."
+ ],
+ "because vs. because of": [
+  "Follow because with a clause and because of with a noun phrase or gerund."
+ ],
+ "Polite requests to reschedule": [
+  "Use Could we ...? to suggest a new time politely. If it is convenient for you acknowledges the other person's availability."
+ ],
+ "Modals and perfect forms": [
+  "Use modal + have + past participle to express a judgment about an event that may already have happened."
+ ],
+ "Modal verbs": [
+  "Follow a modal such as can, could, or must with the base form of the verb."
+ ],
+ "Uncountable nouns": [
+  "Uncountable nouns do not usually take a or an. Use a unit expression, such as a piece of, to refer to one item."
+ ],
+ "Time clauses referring to the future": [
+  "Use the simple present in a time clause with when even when the event is in the future."
+ ],
+ "Possessive determiners": [
+  "Use a possessive determiner such as my or your before a noun to indicate whose it is."
+ ]
+};
+const archivedExampleNotes = {
+ "2026-11-22": {
+  "5": [
+   "Choices in how ... describes different ways to do something.",
+   "Replay means play again."
+  ]
+ },
+ "2026-11-20": {
+  "9": [
+   "Should takes the base form: should build, not should built."
+  ]
+ },
+ "2026-11-19": {
+  "10": [
+   "Write every day as two words when it means each day.",
+   "Capitalize English."
+  ],
+  "12": [
+   "Use one auxiliary in the first clause. Here, does takes the base form broaden, so remove can.",
+   "In the second clause, it is singular, so use improves."
+  ]
+ },
+ "2026-11-16": {
+  "2": [
+   "Use the adjective regular to modify the noun exercise.",
+   "After does, use benefit rather than benefits."
+  ],
+  "4": [
+   "Use the gerund keeping after by.",
+   "Use the adjective healthy to describe body. Attitude is the word for a way of thinking."
+  ]
+ },
+ "2026-11-21": {
+  "11": [
+   "The difficulties refers to specific difficulties. Omit the when speaking generally."
+  ]
+ }
+};
 function renderGrammarStats() {
  const stats=collectGrammarStats();
  const heading=node('h2',grammarStatsFilter==='全部'?'Grammar Review':grammarStatsFilter);
@@ -1753,20 +2027,29 @@ function renderGrammarStats() {
  for(const [point,items] of filtered){
   const card=node('section',undefined,'stats-error');
   card.append(node('h3',point,'grammar-point-title'));
-  const rules=new Set(items.flatMap(({g})=>explanationLines(g[3])));
-  const explanation=node('ul',undefined,'grammar-rules');
-  rules.forEach(rule=>explanation.append(node('li',rule)));
-  card.append(explanation,node('h4','Examples · '+items.length,'stats-heading'));
-  for(const item of items)card.append(renderGrammarExample(item));
+  const rules=coreGrammarRules[englishText(point)];
+  if(rules?.length){
+   const explanation=node('ul',undefined,'grammar-rules');
+   rules.forEach(rule=>explanation.append(node('li',rule)));
+   card.append(explanation);
+  }
+  card.append(node('h4','Examples · '+items.length,'stats-heading'));
+  items.forEach((item,i)=>card.append(renderGrammarExample(item,i+1)));
   list.append(card);
  }
  if(!filtered.length)list.append(node('p','No examples in this category yet.','empty'));
  grammarContent.append(list);
 }
-function renderGrammarExample({date,g,index}) {
+function renderGrammarExample({date,g,index},number) {
  const example=node('div',undefined,'grammar-example');
- example.append(node('time',date,'grammar-example-date'));
- const [,original,revised]=g;
+ const top=node('div',undefined,'grammar-example-top');
+ const time=node('time',date,'grammar-example-date');
+ time.dateTime=date;
+ const [label,original,revised,why]=g;
+ const notes=archivedExampleNotes[date]?.[index]||explanationLines(why);
+ top.append(time);
+ if(notes.length)top.append(grammarNoteBadge(number,label,notes,'Example'));
+ example.append(top);
  const left=wordsWithOffsets(original,true),right=wordsWithOffsets(revised,true);
  const before=node('p',undefined,'stats-before'),after=node('p',undefined,'stats-after');
  before.append('Original: ');after.append('Revised: ');
@@ -1987,12 +2270,22 @@ function appendRevisedSentences(container, originals, revised) {
 function explanationLines(why) {
  return englishText(why).split(/\r?\n|(?<=[;!?])\s+|(?<=[^.\s]\.)\s+(?=[A-Z])/u).map(line=>line.trim()).filter(Boolean);
 }
-function showGrammarExplanation(button,label,why) {
- grammarPopupTitle.textContent=englishText(label);
- grammarPopupText.replaceChildren(...explanationLines(why).map(line=>node('p',line)));
- grammarPopupBadge=button;
- button.setAttribute('aria-expanded','true');
- grammarPopup.showModal();
+function grammarNoteBadge(number,label,lines,context='Grammar') {
+ const button=node('button',undefined,'error-pin');
+ button.append(node('span',String(number)));
+ button.type='button';
+ button.setAttribute('aria-label',context+' note '+number+': '+englishText(label));
+ button.setAttribute('aria-haspopup','dialog');
+ button.setAttribute('aria-controls',grammarPopup.id);
+ button.setAttribute('aria-expanded','false');
+ button.onclick=()=>{
+  grammarPopupTitle.textContent=englishText(label);
+  grammarPopupText.replaceChildren(...lines.map(line=>node('p',line)));
+  grammarPopupBadge=button;
+  button.setAttribute('aria-expanded','true');
+  grammarPopup.showModal();
+ };
+ return button;
 }
 function renderComparison(record,panel) {
  const originals=writingSentences(record.original.join('\n'));
@@ -2002,15 +2295,8 @@ function renderComparison(record,panel) {
  const errorPhrases=archivedErrorPhrases[selected]||{};
  const addBadge=(badges,index)=>{
   const [label,,,why]=record.grammar[index];
-  const button=node('button',undefined,'error-pin');
-  button.append(node('span',String(index+1)));
-  button.type='button';
+  const button=grammarNoteBadge(index+1,label,explanationLines(why));
   button.dataset.grammarIndex=index;
-  button.setAttribute('aria-label','Grammar note '+(index+1)+': '+englishText(label));
-  button.setAttribute('aria-haspopup','dialog');
-  button.setAttribute('aria-controls',grammarPopup.id);
-  button.setAttribute('aria-expanded','false');
-  button.onclick=()=>showGrammarExplanation(button,label,why);
   badges.append(button);
  };
  let originalIndex=0;
