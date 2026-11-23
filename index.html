@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<script>if(matchMedia("(max-width: 810px)").matches)location.replace("mobile/"+location.hash);</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ecefe8">
@@ -13,6 +12,9 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 
 .stats-launch{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:13px 16px;border:1px solid var(--line);border-radius:6px;background:#eef3e9;color:var(--ink);box-shadow:0 2px 8px #24372c0b}.stats-launch strong{font-size:.92rem}.stats-launch span{font-size:.75rem;color:var(--muted)}.stats-launch:hover{border-color:#9caf9b;background:#e7eee2}.stats-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0}.stats-metric{background:#f0f3ea;border:1px solid var(--line);border-radius:6px;padding:15px;display:flex;flex-direction:column;gap:5px}.stats-metric strong{font:700 1.8rem/1.1 var(--serif);color:var(--green)}.stats-metric span{font-size:.76rem;color:var(--muted)}.stats-heading{font-size:1rem;margin:22px 0 10px}.stats-category-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stats-category{border:1px solid var(--line);border-radius:6px;background:#fffdf7;padding:11px 13px;text-align:left;min-width:0}.stats-category.active{border-color:#78977a;background:#eef3e9;box-shadow:inset 3px 0 #547b5c}.stats-category-top{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:.82rem}.stats-category-top b{font-size:.78rem;color:var(--muted);white-space:nowrap}.stats-track{display:block;height:6px;border-radius:8px;background:#e8ece3;overflow:hidden;margin-top:9px}.stats-track i{display:block;height:100%;background:#78977a;border-radius:8px}.stats-back{margin:0 0 10px;padding:6px 12px;border:1px solid var(--line);border-radius:5px;background:#f7f7f0;color:var(--muted);font-size:.78rem}.stats-error-list{display:grid;gap:8px}.stats-error{border:1px solid var(--line);border-radius:6px;background:#f7f8f2;padding:11px 14px}.stats-error summary{cursor:pointer;font-weight:700}.stats-error p{margin:8px 0;overflow-wrap:anywhere}.stats-before{color:#925c50;font:1rem/1.6 var(--serif)}.stats-after{color:#315b42;font:1rem/1.6 var(--serif)}.stats-method{font-size:.78rem;color:var(--muted);line-height:1.6;margin-top:8px}
 @media(max-width:810px){header,.workspace{width:calc(100% - 30px)}header{padding-top:32px}.workspace{grid-template-columns:minmax(0,1fr);gap:18px}.sidebar{gap:12px}.notes{grid-template-columns:1fr 1fr}.notes h2{grid-column:1/-1}.entry{min-height:0}.stamp{display:none}.card{padding:9px 11px}.calendar{padding:14px}}
+.reader{padding:0;border:1px solid var(--line);border-radius:16px;width:min(780px,calc(100% - 40px));height:min(900px,calc(100dvh - 48px));max-height:none;max-width:none;background:var(--paper);color:var(--ink);overflow:hidden;box-shadow:0 24px 80px #18291f40;transform-origin:top left}.reader[open]{display:flex;flex-direction:column}.reader::backdrop{background:#1f302b66;backdrop-filter:blur(4px)}.reader-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--paper);flex-shrink:0}.reader-toolbar button{min-height:44px;border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:#f0f3ea}.reader-toolbar span{font-size:.8rem;color:var(--muted)}.reader-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable}.reader .entry{border:0;border-radius:0;box-shadow:none;min-height:0;padding:24px 28px 40px}.reader .entry:before{display:none}.reader .entry h2{overflow-wrap:anywhere}.tabs{overflow-x:auto;white-space:nowrap;scrollbar-width:thin}.tab{flex-shrink:0;min-height:44px}.stats-tree{display:grid;gap:14px}.stats-branch{border:1px solid var(--line);border-radius:8px;background:#f7f8f2;padding:12px}.stats-branch>summary{cursor:pointer;font-weight:700;min-height:32px}.stats-branch>summary span{font-weight:400;color:var(--muted);font-size:.8rem;margin-left:8px}.stats-children{border-left:2px solid #c9d6c4;margin:8px 0 0 6px;padding-left:12px;display:grid;gap:8px}.stats-children .stats-category{width:100%;min-height:52px}.stats-subtopics{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}.stats-subtopics button{min-height:44px;border:1px solid var(--line);border-radius:7px;padding:8px 12px;background:#fffdf7;text-align:left}.stats-subtopics button[aria-pressed=true]{background:#e4eee3;border-color:#78977a;font-weight:700}.stats-breadcrumb{font-size:.78rem;color:var(--muted);overflow-wrap:anywhere;margin:0 0 12px}.stats-entry-link{min-height:44px;padding:8px 12px;background:#eef3e9;border:1px solid var(--line);border-radius:6px;font-size:.8rem}.stats-error summary{line-height:1.6}.stats-error .hint{line-height:1.8}.stats-all{margin-top:16px;min-height:44px}.card{transition:transform .2s,box-shadow .2s}.card:active{transform:scale(.98)}
+@media(max-width:810px){.workspace>.entry{display:none}header{padding-top:24px}header p{font-size:.85rem}.notes{grid-template-columns:minmax(0,1fr)}.card{padding:14px 16px;min-height:72px}.reader{width:calc(100% - 16px);height:calc(100dvh - 20px);margin:auto;border-radius:14px}.reader-toolbar{padding:8px 12px}.reader .entry{padding:20px 16px 32px}.reader .entry h2{font-size:1.65rem;line-height:1.35}.reader .writing{font-size:1.08rem;line-height:1.9}.stats-metrics{gap:6px;margin:16px 0}.stats-metric{padding:10px 8px}.stats-metric strong{font-size:1.5rem}.stats-metric span{font-size:.7rem}.stats-subtopics{gap:6px}.reader .stats-heading{margin-top:18px}.reader-body{scrollbar-gutter:auto}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -26,6 +28,10 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 </aside>
 <section class="entry" id="entry" aria-label="当日写作"></section>
 </main>
+<dialog class="reader" id="reader" aria-labelledby="readerTitle">
+ <div class="reader-toolbar"><button id="readerBack" type="button">‹ 返回日历</button><span id="readerTitle">写作阅读</span><button id="readerClose" type="button" aria-label="关闭阅读视图">关闭</button></div>
+ <div class="reader-body" id="readerBody"></div>
+</dialog>
 <script>
 const studySchedule = {
  '2026-11-17':{title:'大作文练习 1',detail:'七大方案：复习主语从句、倒装、对比；完成一篇大作文，写后批改并重写薄弱句。',tag:'第 6 周 · 模板熟悉'},
@@ -911,6 +917,84 @@ const entry = document.querySelector('#entry');
 const tabs = ['我的原文','修改稿','语法错点','挖空复习','模板笔记'];
 let showGrammarStats = false;
 let grammarStatsFilter = '全部';
+let grammarTopicFilter = '全部';
+const reader=document.querySelector('#reader');
+const readerBody=document.querySelector('#readerBody');
+const entryHome=entry.parentElement;
+let readerOrigin=null, readerScroll=0, readerClosing=false, readerCloseRequested=false, readerAnimation=null, readerToken=null;
+let statsReturn=null, statsOverviewScroll=0;
+function readerMotion(from,closing=false) {
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches || !reader.animate) return Promise.resolve();
+ const rect=reader.getBoundingClientRect();
+ const target=from?.isConnected?from.getBoundingClientRect():null;
+ const start=target?{transform:`translate(${target.left-rect.left}px,${Math.max(-rect.height,target.top-rect.top)}px) scale(${Math.max(.08,target.width/rect.width)},${Math.max(.06,target.height/rect.height)})`,opacity:.35}:{transform:'translateY(16px) scale(.96)',opacity:0};
+ const end={transform:'translate(0,0) scale(1)',opacity:1};
+ readerAnimation?.cancel();
+ readerAnimation=reader.animate(closing?[end,start]:[start,end],{duration:300,easing:'cubic-bezier(.22,.7,.22,1)'});
+ return readerAnimation.finished.catch(()=>{});
+}
+function openReader(source,label) {
+ if(reader.open) return;
+ readerOrigin=source;
+ readerCloseRequested=false;
+ readerScroll=window.scrollY;
+ document.body.style.position='fixed';
+ document.body.style.top=-readerScroll+'px';
+ document.body.style.width='100%';
+ readerBody.append(entry);
+ document.querySelector('#readerTitle').textContent=label;
+ reader.showModal();
+ readerToken=Date.now()+'-'+Math.random().toString(36).slice(2);
+ history.pushState({...history.state,journalReader:readerToken},'');
+ readerBody.scrollTop=0;
+ readerMotion(source);
+}
+function updateReaderToolbar() {
+ document.querySelector('#readerTitle').textContent=showGrammarStats?'语法错误统计':'写作阅读';
+ document.querySelector('#readerBack').textContent=statsReturn?'‹ 返回错句':showGrammarStats&&grammarStatsFilter!=='全部'?'‹ 返回语法树':'‹ 返回日历';
+}
+async function finishReaderClose() {
+ if(!reader.open || readerClosing) return;
+ readerClosing=true;
+ const origin=readerOrigin?.isConnected?readerOrigin:document.querySelector(readerOrigin?.dataset.note?'[data-note="'+readerOrigin.dataset.note+'"]':readerOrigin?.dataset.calendar?'[data-calendar="'+readerOrigin.dataset.calendar+'"]':'#openGrammarStats');
+ await readerMotion(origin,true);
+ reader.close();
+ entryHome.append(entry);
+ document.body.style.position='';
+ document.body.style.top='';
+ document.body.style.width='';
+ showGrammarStats=false;
+ statsReturn=null;
+ renderCalendar();
+ renderNotes();
+ renderEntry();
+ window.scrollTo(0,readerScroll);
+ const focusTarget=origin?.isConnected?origin:document.querySelector(readerOrigin?.dataset.note?'[data-note="'+readerOrigin.dataset.note+'"]':readerOrigin?.dataset.calendar?'[data-calendar="'+readerOrigin.dataset.calendar+'"]':'#openGrammarStats');
+ focusTarget?.focus({preventScroll:true});
+ readerClosing=false;
+ readerCloseRequested=false;
+ readerToken=null;
+}
+function closeReader() {
+ if(readerClosing||readerCloseRequested) return;
+ readerCloseRequested=true;
+ if(history.state?.journalReader===readerToken) history.back();
+ else finishReaderClose();
+}
+function readerBack() {
+ if(statsReturn){
+  const back=statsReturn;statsReturn=null;showGrammarStats=true;
+  grammarStatsFilter=back.category;grammarTopicFilter=back.topic;
+  renderGrammarStats();readerBody.scrollTop=back.scroll;
+ } else if(showGrammarStats&&grammarStatsFilter!=='全部'){
+  grammarStatsFilter='全部';grammarTopicFilter='全部';renderGrammarStats();readerBody.scrollTop=statsOverviewScroll;
+ } else closeReader();
+}
+reader.addEventListener('cancel',event=>{event.preventDefault();closeReader();});
+reader.addEventListener('click',event=>{if(event.target===reader){const r=reader.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeReader();}});
+document.querySelector('#readerClose').onclick=closeReader;
+document.querySelector('#readerBack').onclick=readerBack;
+window.addEventListener('popstate',event=>{if(reader.open&&event.state?.journalReader!==readerToken)finishReaderClose();});
 // 备考周期：第 1 周从 2026-10-12（周一）开始；第 5 周于 2026-11-15 结束。
 const PREP_START = '2026-10-12';
 const EXAM_DATE = '2026-12-19';
@@ -978,20 +1062,21 @@ function dateKey(y,m,d) {
  return [String(y).padStart(4,'0'),String(m+1).padStart(2,'0'),String(d).padStart(2,'0')].join('-');
 }
 function select(key, from) {
+ const source=document.querySelector('[data-'+from+'="'+key+'"]');
+ if(matchMedia('(max-width: 810px)').matches&&!reader.open) openReader(source,'写作阅读');
  showGrammarStats = false;
  selected = key;
  month = Number(key.slice(5,7)) - 1;
  year = Number(key.slice(0,4));
  active = 0;
- history.replaceState(null,'','#'+key);
+ history.replaceState(history.state,'','#'+key);
  renderCalendar();
  renderNotes();
  renderEntry();
- if (matchMedia('(max-width: 810px)').matches) {
-  const title = entry.querySelector('h2');
-  title.tabIndex = -1;
-  title.focus({preventScroll:true});
-  entry.scrollIntoView({block:'start'});
+ if (reader.open) {
+  updateReaderToolbar();
+  readerBody.scrollTop=0;
+  document.querySelector('#readerBack').focus({preventScroll:true});
  } else {
   document.querySelector('[data-'+from+'="'+key+'"]')?.focus({preventScroll:true});
  }
@@ -999,6 +1084,10 @@ function select(key, from) {
 function classifyGrammar(g) {
  const tag=String(g?.[0]||''), before=String(g?.[1]||''), why=String(g?.[3]||'');
  if (/主谓一致/.test(tag) || /第三人称单数|主语.*谓语|谓语用.*单数/.test(why) || /examination approach|pictures shows|college life give|dream come true/i.test(before)) return '主谓一致';
+ if (/系动词缺失|否定结构/.test(tag)) return '谓语完整性与否定';
+ if (/祈使句与主语|句子完整性/.test(tag)) return '从句与句子结构';
+ if (/大小写/.test(tag)) return '词汇、词性与拼写';
+ if (/because 与 because of/.test(tag)) return '从句与句子结构';
  if (/倒装|Only by|Not only/i.test(tag+' '+before)) return '倒装与强调';
  if (/^(关系从句|定语从句|宾语从句|主语从句|同位语从句|句子连接|时间从句|虚拟条件句|举例结构|原因句型)/.test(tag) || /时间从句/.test(tag)) return '从句与句子结构';
  if (/^(名词|冠词|所有格|不可数名词|数量词|词性与冠词|物主限定词)/.test(tag) || /名词复数|名词单复数|名词所有格|不可数名词|数量词|冠词|限定词/.test(tag)) return '名词、冠词与数量';
@@ -1009,6 +1098,13 @@ function classifyGrammar(g) {
  if (/邮件结尾|称呼格式/.test(tag)) return '写作格式与语用';
  return '固定搭配与介词';
 }
+const grammarTree=[
+ {name:'句子结构',categories:['从句与句子结构','倒装与强调']},
+ {name:'谓语动词',categories:['主谓一致','谓语完整性与否定','时态、语态与动词形式']},
+ {name:'非谓语动词',categories:['非谓语与动词结构']},
+ {name:'名词短语',categories:['名词、冠词与数量']},
+ {name:'词汇与表达',categories:['固定搭配与介词','词汇、词性与拼写','写作格式与语用']}
+];
 function collectGrammarEntries() {
  const items=[];
  for (const date of Object.keys(records).sort().reverse()) {
@@ -1024,46 +1120,69 @@ function collectGrammarStats() {
 }
 function renderGrammarStats() {
  const stats=collectGrammarStats();
- entry.replaceChildren(node('div','累计学习数据','date'),node('h2','语法错误统计'),node('p','根据已归档的作文与专项练习自动汇总。每条语法记录按主要问题归入一个类别，避免一条记录被重复计数。','sub'));
- const metrics=node('div',undefined,'stats-metrics');
- [[stats.total,'已记录错点'],[stats.categories.length,'错误类别'],[stats.recurring,'出现 3 次以上的类别']].forEach(([value,label])=>{
-  const card=node('div',undefined,'stats-metric');
-  card.append(node('strong',value),node('span',label));
-  metrics.append(card);
+ entry.replaceChildren(node('div','我的语法树','date'),node('h2',grammarStatsFilter==='全部'?'语法错误统计':grammarStatsFilter));
+ updateReaderToolbar();
+ const openCategory=(category)=>{
+  if(grammarStatsFilter==='全部')statsOverviewScroll=readerBody.scrollTop;
+  grammarStatsFilter=category;grammarTopicFilter='全部';renderGrammarStats();readerBody.scrollTop=0;
+  const heading=entry.querySelector('h2');heading.tabIndex=-1;heading.focus({preventScroll:true});
+ };
+ if(grammarStatsFilter==='全部') {
+  entry.append(node('p','语言层面 → 错误类别 → 具体错点 → 我的错句。点进一个类别，直接回看原句与修改。','sub'));
+  const metrics=node('div',undefined,'stats-metrics');
+  [[stats.total,'已记录错点'],[stats.categories.length,'错误类别'],[stats.recurring,'出现至少 3 次的类别']].forEach(([value,label])=>{
+   const card=node('div',undefined,'stats-metric');card.append(node('strong',value),node('span',label));metrics.append(card);
+  });
+  entry.append(metrics,node('p','每条归档记录按主要问题计入一个类别，次数表示记录条数。','stats-method'));
+  const tree=node('div',undefined,'stats-tree');
+  const max=Math.max(1,...stats.categories.map(x=>x.count));
+  grammarTree.forEach(branch=>{
+   const categories=stats.categories.filter(x=>branch.categories.includes(x.name));
+   if(!categories.length)return;
+   const group=node('details',undefined,'stats-branch');group.open=true;
+   const summary=node('summary',branch.name);summary.append(node('span',categories.reduce((n,c)=>n+c.count,0)+' 条'));
+   const children=node('div',undefined,'stats-children');
+   categories.forEach(item=>{
+    const button=node('button',undefined,'stats-category');button.type='button';
+    const top=node('span',undefined,'stats-category-top');top.append(node('strong',item.name),node('b',item.count+' 条 ›'));
+    const track=node('span',undefined,'stats-track'), fill=node('i');fill.style.width=(item.count/max*100)+'%';track.append(fill);
+    button.append(top,track);button.onclick=()=>openCategory(item.name);children.append(button);
+   });
+   group.append(summary,children);tree.append(group);
+  });
+  entry.append(tree);
+  const all=node('button','查看全部 '+stats.total+' 条错句','stats-entry-link stats-all');all.onclick=()=>openCategory('全部错句');entry.append(all);
+  return;
+ }
+ const categoryItems=grammarStatsFilter==='全部错句'?stats.items:stats.items.filter(x=>x.category===grammarStatsFilter);
+ const branch=grammarTree.find(x=>x.categories.includes(grammarStatsFilter));
+ entry.append(node('p',['英语写作',branch?.name,grammarStatsFilter,grammarTopicFilter==='全部'?null:grammarTopicFilter].filter(Boolean).join(' / '),'stats-breadcrumb'));
+ const counts=new Map();categoryItems.forEach(x=>counts.set(x.g[0],(counts.get(x.g[0])||0)+1));
+ const topics=node('div',undefined,'stats-subtopics');topics.setAttribute('aria-label','按具体错点筛选');
+ [['全部',categoryItems.length],...Array.from(counts).sort((a,b)=>b[1]-a[1])].forEach(([tag,count])=>{
+  const button=node('button',(tag==='全部'?'全部错点':tag)+' · '+count);button.type='button';button.setAttribute('aria-pressed',grammarTopicFilter===tag);
+  button.onclick=()=>{grammarTopicFilter=tag;renderGrammarStats();readerBody.scrollTop=0;Array.from(entry.querySelectorAll('.stats-subtopics button')).find(x=>x.getAttribute('aria-pressed')==='true')?.focus({preventScroll:true});};
+  topics.append(button);
  });
- entry.append(metrics,node('h3','薄弱语法地图','stats-heading'));
- const categoryList=node('div',undefined,'stats-category-list');
- const max=Math.max(1,...stats.categories.map(x=>x.count));
- const allButton=node('button','全部类别 · '+stats.total,'stats-category'+(grammarStatsFilter==='全部'?' active':''));
- allButton.onclick=()=>{grammarStatsFilter='全部';renderGrammarStats();};
- categoryList.append(allButton);
- stats.categories.forEach(item=>{
-  const button=node('button',undefined,'stats-category'+(grammarStatsFilter===item.name?' active':''));
-  const top=node('span',undefined,'stats-category-top');
-  top.append(node('strong',item.name),node('b',item.count+' 条'));
-  const track=node('span',undefined,'stats-track');
-  const fill=node('i');
-  fill.style.width=(item.count/max*100)+'%';
-  track.append(fill);
-  button.append(top,track);
-  button.onclick=()=>{grammarStatsFilter=item.name;renderGrammarStats();};
-  categoryList.append(button);
- });
- entry.append(categoryList);
- const filtered=grammarStatsFilter==='全部'?stats.items:stats.items.filter(x=>x.category===grammarStatsFilter);
- const historyTitle=node('h3',grammarStatsFilter==='全部'?'历史错句 · 最近记录':'历史错句 · '+grammarStatsFilter,'stats-heading');
- entry.append(historyTitle);
- const back=node('button','返回当天作文','stats-back');
- back.onclick=()=>{showGrammarStats=false;renderEntry();};
- entry.append(back);
+ entry.append(topics);
+ const filtered=grammarTopicFilter==='全部'?categoryItems:categoryItems.filter(x=>x.g[0]===grammarTopicFilter);
+ entry.append(node('h3','历史错句 · '+filtered.length+' 条','stats-heading'));
  const list=node('div',undefined,'stats-error-list');
- filtered.forEach(({date,g})=>{
+ filtered.forEach(({date,g,index})=>{
   const details=node('details',undefined,'stats-error');
   details.open=true;
   details.append(node('summary',date+' · '+g[0]));
   details.append(node('p','原句：'+g[1],'stats-before'));
   details.append(node('p','修改：'+g[2],'stats-after'));
   details.append(node('p',g[3],'hint'));
+  const link=node('button','查看当天作文 ›','stats-entry-link');
+  link.onclick=()=>{
+   statsReturn={category:grammarStatsFilter,topic:grammarTopicFilter,scroll:readerBody.scrollTop};
+   selected=date;active=2;showGrammarStats=false;renderEntry();updateReaderToolbar();readerBody.scrollTop=0;
+   const target=entry.querySelectorAll('#tab-panel details')[index];
+   if(target){target.scrollIntoView({block:'start'});target.querySelector('summary').focus({preventScroll:true});}
+  };
+  details.append(link);
   list.append(details);
  });
  if (!filtered.length) list.append(node('p','这个类别暂时没有记录。','empty'));
@@ -1203,13 +1322,15 @@ function moveMonth(delta) {
 }
 document.querySelector('#prev').onclick=()=>moveMonth(-1);
 document.querySelector('#next').onclick=()=>moveMonth(1);
-document.querySelector('#openGrammarStats').addEventListener('click',()=>{showGrammarStats=true;grammarStatsFilter='全部';renderGrammarStats();});
+document.querySelector('#openGrammarStats').addEventListener('click',event=>{openReader(event.currentTarget,'语法错误统计');showGrammarStats=true;statsReturn=null;grammarStatsFilter='全部';grammarTopicFilter='全部';statsOverviewScroll=0;renderGrammarStats();readerBody.scrollTop=0;});
 document.querySelector('#grammarStatsCount').textContent=collectGrammarStats().total+' 条已记录错点 · 查看分析 →';
 updatePrepProgress();
 renderCalendar();
 renderNotes();
 renderEntry();
+if(initial&&matchMedia('(max-width: 810px)').matches)select(selected,'calendar');
 </script>
 </body>
 </html>
+
 
