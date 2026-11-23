@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ecefe8">
-<title>Writing Calendar</title>
+<title data-copy="Writing Calendar">Writing Calendar</title>
 <style>
 :root{color-scheme:light;--ink:#24372c;--muted:#536457;--line:#d9dfd4;--paper:#fdfbf4;--green:#284d39;--serif:Georgia,"Noto Serif SC","Songti SC",serif}
 *{box-sizing:border-box}body{margin:0;color:var(--ink);font:15px/1.55 "PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:#ecefe8;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' opacity='.12' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}
@@ -49,7 +49,10 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 @media(max-width:810px){.entry .tabs{gap:6px}.entry .tab{flex:1 0 auto;margin-right:0;padding-inline:2px;font-size:.83rem}}
 [hidden]{display:none!important}
 .main-tabs{width:min(1150px,calc(100% - 30px));margin:max(12px,env(safe-area-inset-top)) auto 0;display:flex;flex-wrap:wrap;gap:8px}
-.main-tabs a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border:1px solid var(--line);border-radius:8px;background:#f7f8f2;color:var(--ink);text-decoration:none}
+.main-tabs a,.main-tabs .language-toggle{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border:1px solid var(--line);border-radius:8px;background:#f7f8f2;color:var(--ink);text-decoration:none}
+.main-tabs .language-toggle{margin-inline-start:auto}
+.reader-toolbar .language-toggle{margin-inline-start:auto}
+@media(max-width:390px){.main-tabs{gap:6px}.main-tabs a,.main-tabs .language-toggle{padding-inline:8px;font-size:.84rem}.reader-toolbar{gap:6px}.reader-toolbar button{padding-inline:7px}.reader-toolbar span{font-size:.72rem}}
 .main-tabs a[aria-current=page]{background:var(--green);color:white;border-color:var(--green)}
 .grammar-page{width:min(980px,calc(100% - 30px));margin:16px auto 42px}
 .grammar-page .entry{min-height:0}
@@ -62,29 +65,30 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 </style>
 </head>
 <body>
-<nav class="main-tabs" aria-label="Journal navigation">
- <a id="calendarPageLink" href="#">Writing Calendar</a>
- <a id="grammarPageLink" href="#grammar">Grammar Review</a>
+<nav class="main-tabs" data-copy-label="Journal navigation" aria-label="Journal navigation">
+ <a id="calendarPageLink" href="#" data-copy="Writing Calendar">Writing Calendar</a>
+ <a id="grammarPageLink" href="#grammar" data-copy="Grammar Review">Grammar Review</a>
+ <button class="language-toggle" type="button" data-language-toggle lang="zh-CN">中文</button>
 </nav>
 <main class="workspace" id="calendarPage">
-<aside class="sidebar" aria-label="Practice dates">
-<section class="calendar"><div class="calHead"><h2 id="month"></h2><div class="monthControl"><button id="prev" aria-label="Previous month">‹</button><button id="next" aria-label="Next month">›</button></div></div><div class="grid" id="calendar"></div><div class="legend" aria-label="Calendar legend"><span class="legend-item"><span class="legend-swatch completed">✓</span>Completed</span><span class="legend-item"><span class="legend-swatch planned">P</span>Planned</span><span class="legend-item"><span class="legend-swatch selected">22</span>Selected</span></div></section>
-<section class="progress-card" aria-label="Exam preparation"><h2>Exam preparation</h2><div class="progress-meta"><span id="progress-week-label">Calculating study week…</span><strong id="progress-week-count">— / 10 weeks</strong></div><div class="progress-track" role="progressbar" aria-label="Study plan progress" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span id="progress-bar"></span></div><p class="progress-caption" id="progress-caption">Calculating countdown…</p></section>
-<nav class="notes" id="notes" aria-label="Archived writing"></nav>
+<aside class="sidebar" data-copy-label="Practice dates" aria-label="Practice dates">
+<section class="calendar"><div class="calHead"><h2 id="month"></h2><div class="monthControl"><button id="prev" data-copy-label="Previous month" aria-label="Previous month">‹</button><button id="next" data-copy-label="Next month" aria-label="Next month">›</button></div></div><div class="grid" id="calendar"></div><div class="legend" data-copy-label="Calendar legend" aria-label="Calendar legend"><span class="legend-item"><span class="legend-swatch completed">✓</span><span data-copy="Completed">Completed</span></span><span class="legend-item"><span class="legend-swatch planned">P</span><span data-copy="Planned">Planned</span></span><span class="legend-item"><span class="legend-swatch selected">22</span><span data-copy="Selected">Selected</span></span></div></section>
+<section class="progress-card" data-copy-label="Exam preparation" aria-label="Exam preparation"><h2 data-copy="Exam preparation">Exam preparation</h2><div class="progress-meta"><span id="progress-week-label" data-copy="Calculating study week…">Calculating study week…</span><strong id="progress-week-count" data-copy="— / 10 weeks">— / 10 weeks</strong></div><div class="progress-track" role="progressbar" data-copy-label="Study plan progress" aria-label="Study plan progress" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span id="progress-bar"></span></div><p class="progress-caption" id="progress-caption" data-copy="Calculating countdown…">Calculating countdown…</p></section>
+<nav class="notes" id="notes" data-copy-label="Archived writing" aria-label="Archived writing"></nav>
 </aside>
-<section class="entry" id="entry" aria-label="Writing for this date"></section>
+<section class="entry" id="entry" data-copy-label="Writing for this date" aria-label="Writing for this date"></section>
 </main>
-<section id="grammarPage" class="grammar-page" aria-label="Grammar Review" hidden>
+<section id="grammarPage" class="grammar-page" data-copy-label="Grammar Review" aria-label="Grammar Review" hidden>
  <div class="entry" id="grammarContent"></div>
 </section>
 <dialog class="reader" id="reader" aria-labelledby="readerTitle">
- <div class="reader-toolbar"><button id="readerBack" type="button">‹ Back to calendar</button><span id="readerTitle">Writing Review</span><button id="readerClose" type="button" aria-label="Close writing review">Close</button></div>
+ <div class="reader-toolbar"><button id="readerBack" type="button" data-copy="‹ Back to calendar">‹ Back to calendar</button><span id="readerTitle" data-copy="Writing Review">Writing Review</span><button class="language-toggle" type="button" data-language-toggle lang="zh-CN">中文</button><button id="readerClose" type="button" data-copy-label="Close writing review" aria-label="Close writing review" data-copy="Close">Close</button></div>
  <div class="reader-body" id="readerBody"></div>
 </dialog>
 <dialog class="error-explanation" id="grammarExplanation" aria-labelledby="grammarExplanationTitle">
  <div class="error-explanation-top">
   <h2 class="error-explanation-heading" id="grammarExplanationTitle"></h2>
-  <form method="dialog"><button class="error-explanation-close" type="submit" autofocus>Close</button></form>
+  <form method="dialog"><button class="error-explanation-close" type="submit" autofocus data-copy="Close">Close</button></form>
  </div>
  <div class="error-explanation-text"></div>
 </dialog>
@@ -1322,10 +1326,125 @@ const englishCopy = {
 function englishText(value) {
  return Object.hasOwn(englishCopy,value)?englishCopy[value]:value;
 }
-const monthFormat=new Intl.DateTimeFormat('en',{month:'long',year:'numeric'});
-const shortDateFormat=new Intl.DateTimeFormat('en',{month:'short',day:'numeric',timeZone:'UTC'});
+const interfaceChinese = {
+ "Writing Calendar": "英语写作日历",
+ "Grammar Review": "语法错误统计",
+ "Journal navigation": "写作日历导航",
+ "Practice dates": "练习日期",
+ "Previous month": "上个月",
+ "Next month": "下个月",
+ "Calendar legend": "日历图例",
+ "Completed": "已完成",
+ "Planned": "计划练习",
+ "Selected": "当前选中",
+ "Exam preparation": "考前备考进度",
+ "Calculating study week…": "正在计算备考周次…",
+ "— / 10 weeks": "— / 10 周",
+ "Study plan progress": "备考周数进度",
+ "Calculating countdown…": "正在计算考试倒计时…",
+ "Archived writing": "已归档的作文",
+ "Writing for this date": "当日写作",
+ "‹ Back to calendar": "‹ 返回日历",
+ "‹ Back to grammar": "‹ 返回语法统计",
+ "Writing Review": "写作回顾",
+ "Close writing review": "关闭写作回顾",
+ "Close": "关闭",
+ "Compare": "逐句对照",
+ "Revised Draft": "完整修改稿",
+ "Practice": "挖空复习",
+ "Notes": "模板笔记",
+ "Practice Entries": "练习便签",
+ "The study plan has not started yet.": "备考计划尚未开始。",
+ "The 10-week study plan is complete.": "10 周备考计划已结束。",
+ "It is exam day. Good luck!": "今天是考试日。祝你考试顺利！",
+ "‹ Back to grammar tree": "‹ 返回语法树",
+ "Browse grammar rules and examples from your writing.": "按类别查看语法讲解和自己的修改例句。",
+ "Recorded issues": "已记录错点",
+ "Categories": "错误类别",
+ "Categories with 3+ examples": "出现至少 3 次的类别",
+ "Each issue is counted once under its main category.": "每个错点按主要问题归入一个类别。",
+ "Filter by grammar point": "按语法点筛选",
+ "All grammar points": "全部语法点",
+ "No examples in this category yet.": "这个分类暂时没有记录。",
+ "Examples": "修改例句",
+ "Original: ": "原句　",
+ "Revised: ": "修改　",
+ "View full entry ›": "查看当天作文 ›",
+ "Original": "原文",
+ "Revised": "修改后",
+ "Added in the revision.": "此处为修改稿新增内容",
+ "Omitted from the revision.": "此句未出现在修改稿中",
+ "Additional grammar notes": "补充语法笔记",
+ "No writing entry for this day.": "这天还没有写作记录",
+ "Study plan for this day": "今日学习安排",
+ "Writing review tabs": "写作回顾标签",
+ "No notes for this entry.": "当天没有模板笔记。",
+ "Example: ": "例句：",
+ "Try revising each sentence before revealing the answer.": "先试着改写原句，再展开看答案。",
+ "Show answer": "查看答案",
+ "Your revision: ________________": "改写：________________",
+ "Writing entry": "有写作练习",
+ "Exam day": "考研考试日",
+ "Mon": "一",
+ "Tue": "二",
+ "Wed": "三",
+ "Thu": "四",
+ "Fri": "五",
+ "Sat": "六",
+ "Sun": "日",
+ "Choices in how ... describes different ways to do something.": "choices in how ... 用来表达做某事的不同方式。",
+ "Replay means play again.": "replay 表示重新播放。",
+ "Should takes the base form: should build, not should built.": "should 后接动词原形，写成 should build。",
+ "Write every day as two words when it means each day.": "表示“每天”时，every day 分开写。",
+ "Capitalize English.": "English 的首字母要大写。",
+ "Use one auxiliary in the first clause. Here, does takes the base form broaden, so remove can.": "第一个分句保留一个助动词。这里用 does 加动词原形 broaden，删去 can。",
+ "In the second clause, it is singular, so use improves.": "第二个分句的主语 it 是单数，谓语用 improves。",
+ "Use the adjective regular to modify the noun exercise.": "用形容词 regular 修饰名词 exercise。",
+ "After does, use benefit rather than benefits.": "does 后用动词原形 benefit。",
+ "Use the gerund keeping after by.": "by 后接动名词 keeping。",
+ "Use the adjective healthy to describe body. Attitude is the word for a way of thinking.": "用形容词 healthy 修饰 body。attitude 表示态度。",
+ "The difficulties refers to specific difficulties. Omit the when speaking generally.": "the difficulties 指特定的困难，泛指困难时省略 the。"
+};
+let language='en';
+try {
+ if(localStorage.getItem('writing-journal-language')==='zh-CN')language='zh-CN';
+} catch {}
+const isChinese=()=>language==='zh-CN';
+function displayText(value) {
+ if(!isChinese())return englishText(value);
+ return Object.hasOwn(interfaceChinese,value)?interfaceChinese[value]:value;
+}
+const dateFormats=Object.fromEntries(['en','zh-CN'].map(locale=>[locale,{
+ month:new Intl.DateTimeFormat(locale,{month:'long',year:'numeric'}),
+ short:new Intl.DateTimeFormat(locale,{month:'short',day:'numeric',timeZone:'UTC'})
+}]));
+function applyInterfaceLanguage() {
+ document.documentElement.lang=language;
+ document.querySelectorAll('[data-copy]').forEach(el=>el.textContent=displayText(el.dataset.copy));
+ document.querySelectorAll('[data-copy-label]').forEach(el=>el.setAttribute('aria-label',displayText(el.dataset.copyLabel)));
+ document.querySelectorAll('[data-language-toggle]').forEach(button=>{
+  button.textContent=isChinese()?'English':'中文';
+  button.lang=isChinese()?'en':'zh-CN';
+ });
+}
+function switchLanguage() {
+ language=isChinese()?'en':'zh-CN';
+ try {localStorage.setItem('writing-journal-language',language);} catch {}
+ const pageScroll=window.scrollY,reviewScroll=readerBody.scrollTop;
+ applyInterfaceLanguage();
+ updatePrepProgress();
+ renderCalendar();
+ renderNotes();
+ renderEntry();
+ updateReaderToolbar();
+ if(reader.open)readerBody.scrollTop=reviewScroll;
+ else {
+  showMainPage();
+  window.scrollTo(0,pageScroll);
+ }
+}
 function formatDuration(count,unit) {
- return count+' '+unit+(count===1?'':'s');
+ return isChinese()?count+(unit==='week'?' 周':' 天'):count+' '+unit+(count===1?'':'s');
 }
 
 const keys = Object.keys(records).sort().reverse();
@@ -1451,7 +1570,7 @@ function openReader(source,label) {
  document.body.style.top=-readerScroll+'px';
  document.body.style.width='100%';
  readerBody.append(entry);
- document.querySelector('#readerTitle').textContent=label;
+ document.querySelector('#readerTitle').textContent=displayText(label);
  reader.showModal();
  readerToken=Date.now()+'-'+Math.random().toString(36).slice(2);
  history.pushState({...history.state,journalReader:readerToken},'');
@@ -1459,8 +1578,8 @@ function openReader(source,label) {
  readerMotion(source);
 }
 function updateReaderToolbar() {
- document.querySelector('#readerTitle').textContent='Writing Review';
- document.querySelector('#readerBack').textContent=reviewFromGrammar?'‹ Back to grammar':'‹ Back to calendar';
+ document.querySelector('#readerTitle').textContent=displayText('Writing Review');
+ document.querySelector('#readerBack').textContent=displayText(reviewFromGrammar?'‹ Back to grammar':'‹ Back to calendar');
 }
 async function finishReaderClose() {
  if(!reader.open || readerClosing) return;
@@ -1473,7 +1592,10 @@ async function finishReaderClose() {
  document.body.style.position='';
  document.body.style.top='';
  document.body.style.width='';
- if(reviewFromGrammar)selected=selectedBeforeReview;
+ if(reviewFromGrammar){
+  selected=selectedBeforeReview;
+  if(grammarRenderLanguage!==language)showMainPage();
+ }
  reviewFromGrammar=false;
  selectedBeforeReview=null;
  renderCalendar();
@@ -1521,28 +1643,30 @@ function updatePrepProgress() {
  const caption = document.getElementById('progress-caption');
  if(!weekLabel||!weekCount||!bar||!track||!caption) return;
  if(todayUTC<startUTC) {
-  weekLabel.textContent='The study plan has not started yet.';
-  weekCount.textContent='0 / '+TOTAL_PREP_WEEKS+' weeks';
+  weekLabel.textContent=displayText('The study plan has not started yet.');
+  weekCount.textContent='0 / '+TOTAL_PREP_WEEKS+(isChinese()?' 周':' weeks');
  } else if(week>TOTAL_PREP_WEEKS) {
-  weekLabel.textContent='The 10-week study plan is complete.';
-  weekCount.textContent='10 / 10 weeks';
+  weekLabel.textContent=displayText('The 10-week study plan is complete.');
+  weekCount.textContent=isChinese()?'10 / 10 周':'10 / 10 weeks';
  } else {
   const dayOfWeek = new Date(todayUTC).getUTCDay();
-  const nextWeekText = dayOfWeek===0
-   ? 'Next week: Week '+Math.min(week+1,TOTAL_PREP_WEEKS)
-   : formatDuration(7-dayOfWeek,'day')+' left this week';
-  weekLabel.textContent='Week '+week+' · '+nextWeekText;
-  weekCount.textContent=week+' / '+TOTAL_PREP_WEEKS+' weeks';
+  const nextWeek=Math.min(week+1,TOTAL_PREP_WEEKS);
+  const daysThisWeek=formatDuration(7-dayOfWeek,'day');
+  const nextWeekText=dayOfWeek===0
+   ? (isChinese()?'下周进入第 '+nextWeek+' 周':'Next week: Week '+nextWeek)
+   : (isChinese()?'本周还剩 '+daysThisWeek:daysThisWeek+' left this week');
+  weekLabel.textContent=(isChinese()?'第 '+week+' 周':'Week '+week)+' · '+nextWeekText;
+  weekCount.textContent=week+' / '+TOTAL_PREP_WEEKS+(isChinese()?' 周':' weeks');
  }
  bar.style.width=percent+'%';
  track.setAttribute('aria-valuenow',String(completedWeeks));
  if(remainingDays===0) {
-  caption.textContent='It is exam day. Good luck!';
+  caption.textContent=displayText('It is exam day. Good luck!');
  } else {
   const weeksLeft=Math.floor(remainingDays/7);
   const daysLeft=remainingDays%7;
   const countdown=weeksLeft>0?[formatDuration(weeksLeft,'week'),daysLeft?formatDuration(daysLeft,'day'):''].filter(Boolean).join(', '):formatDuration(remainingDays,'day');
-  caption.textContent='Exam on December 19 · '+countdown+' to go.';
+  caption.textContent=isChinese()?'距离 12 月 19 日考试还有 '+countdown+'。':'Exam on December 19 · '+countdown+' to go.';
  }
 }
 
@@ -1554,7 +1678,7 @@ let active = 0;
 
 function node(tag, value, className) {
  const item = document.createElement(tag);
- if (value !== undefined) item.textContent = englishText(value);
+ if (value !== undefined) item.textContent = displayText(value);
  if (className) item.className = className;
  return item;
 }
@@ -1911,6 +2035,241 @@ const coreGrammarRules = {
   "Use a possessive determiner such as my or your before a noun to indicate whose it is."
  ]
 };
+const coreGrammarRulesChinese = {
+ "Indefinite articles: a and an": [
+  "首次提到某个单数可数名词，或泛指某类中的一个时，用 a 或 an。",
+  "辅音音素前用 a，元音音素前用 an。"
+ ],
+ "Collocations and prepositions": [
+  "有些词需要和特定介词搭配，记忆时把介词及其后的成分一起记。"
+ ],
+ "Capitalizing proper nouns": [
+  "国家、人名等专有名词的首字母要大写。"
+ ],
+ "Missing linking verb": [
+  "从句需要限定动词。用 be 的适当形式连接主语和描述主语的形容词。"
+ ],
+ "Negation": [
+  "用助动词构成否定。一般现在时或一般过去时的实义动词没有助动词时，用 do、does 或 did 加 not 和动词原形。"
+ ],
+ "Collocations": [
+  "固定搭配是英语中习惯一起出现的词，记忆时可以把整个表达一起记。"
+ ],
+ "Infinitive constructions": [
+  "不定式由 to 加动词原形构成。it is + 形容词 + to do 中，it 引出后面的动作。"
+ ],
+ "Quantifiers and plural nouns": [
+  "one 后用可数名词单数，大于一的整数后用可数名词复数。"
+ ],
+ "Parts of speech": [
+  "形容词修饰名词，副词修饰动词、形容词或其他副词。"
+ ],
+ "Prepositions": [
+  "介词可表示方向、地点和时间。根据具体关系选择相应介词。"
+ ],
+ "Nonfinite verbs and sentence connections": [
+  "句首分词短语可以为完整的主句补充背景。两个独立分句之间需要恰当的连接词或标点。"
+ ],
+ "Imperatives and subjects": [
+  "祈使句用动词原形，通常省略主语 you。另起一个陈述分句时，通常要写出它的主语。"
+ ],
+ "Plural nouns and relative clauses": [
+  "泛指一类事物时，可数名词可用复数。定语从句可以限定或描述这类事物。"
+ ],
+ "Multiples and time prepositions": [
+  "用 twice 或 double 表示两倍，用 over 表示变化所跨越的一段时间。"
+ ],
+ "Joining clauses and noun content clauses": [
+  "独立分句需要用恰当的标点或连词连接。fact 等名词后的 that 从句说明名词的具体内容。"
+ ],
+ "Present participles after nouns": [
+  "-ing 短语可以放在名词后面，说明该名词所代表的人或物正在做什么，通常可展开成主动语态的定语从句。"
+ ],
+ "Subject–verb agreement and embedded clauses": [
+  "限定动词要和它的主语一致。从句可以有自己的主语和谓语。"
+ ],
+ "Not only … but also inversion": [
+  "Not only 放在句首并修饰整个分句时，助动词或情态动词放在主语前。若原来没有助动词，用 do、does 或 did，实义动词用原形。",
+  "but also 引出的分句保持正常的主谓语序。"
+ ],
+ "Verb structure and parts of speech": [
+  "限定动词体现时态或主谓一致。根据句型选择动词结构，根据被修饰的成分选词性。"
+ ],
+ "Noun number and word choice": [
+  "指同一类中的多个成员时，可数名词用复数。动词和名词要符合英语的搭配习惯。"
+ ],
+ "Subjunctive forms and spelling": [
+  "It is important that 等结构表达要求时，可用虚拟语气，从句谓语用动词原形。"
+ ],
+ "Possessives and spelling": [
+  "多数单数名词所有格加 ’s。以 s 结尾的规则复数只加撇号。"
+ ],
+ "Collocations and time reference": [
+  "固定搭配可以作为一个整体记忆。时态和时间表达要与所讲事件的时间一致。"
+ ],
+ "Relative clauses and repeated objects": [
+  "关系代词 that 已在定语从句中作宾语时，不再加指同一对象的代词。"
+ ],
+ "Connecting ideas and expressing time": [
+  "用顺序词组织并列的观点。as 引导的时间从句可表示两件事同步发展。"
+ ],
+ "Adjective collocations": [
+  "有些形容词需要接特定介词来引出补足语。形容词和介词可以一起记。"
+ ],
+ "Word choice and collocations": [
+  "选词兼顾词义和搭配习惯。"
+ ],
+ "Introducing examples and pronouns": [
+  "用 such as 举例。如果从句或短语已经有宾语，就不要重复加代词。"
+ ],
+ "Past participles and prepositions": [
+  "完成时由 have 加过去分词构成。动词需要什么介词，要看它的具体搭配。"
+ ],
+ "Subject–verb agreement and sentence structure": [
+  "谓语和它自己的主语保持一致。独立分句要有表达完整意思所需的结构。"
+ ],
+ "Spelling and salutations": [
+  "称呼中的人名要大写，并核对姓名的正确拼写。"
+ ],
+ "Present perfect continuous": [
+  "用 have 或 has been + -ing，强调过去开始并持续到现在或刚结束的活动。"
+ ],
+ "Inversion after Only by": [
+  "Only by 加方式状语放在句首时，主句部分倒装，助动词或情态动词放在主语前。"
+ ],
+ "Third-person singular": [
+  "一般现在时中，第三人称单数主语后的大多数动词加 -s 或 -es。"
+ ],
+ "Chart description and tense": [
+  "描述已经发生的变化用一般过去时，用 from 和 to 标出起点和终点。"
+ ],
+ "Vocabulary and spelling": [
+  "选择符合原意的词，并核对标准拼写。"
+ ],
+ "Noun collocations": [
+  "记住常与某个名词一起使用的动词或介词。"
+ ],
+ "Stating reasons and word choice": [
+  "用 one reason is that 加完整从句说明原因。"
+ ],
+ "Comparisons and subject–verb agreement": [
+  "用 compared with 引出比较对象。主句的谓语和它自己的主语一致。"
+ ],
+ "Verb collocations and prepositions": [
+  "注意动词是直接接宾语，还是先接介词再引出补足语。"
+ ],
+ "Fixed preposition patterns": [
+  "把介词和需要它的词或短语一起记忆。"
+ ],
+ "Comparatives and adverbs": [
+  "修饰动作时用副词。较长副词的比较级通常用 more 构成。"
+ ],
+ "Plural and possessive nouns": [
+  "可数名词指多个人或事物时用复数。以 s 结尾的规则复数所有格只加撇号。"
+ ],
+ "Spelling and collocations": [
+  "既检查单词拼写，也检查固定搭配中的用词。"
+ ],
+ "Parts of speech and articles": [
+  "your 等物主限定词引出名词短语。指向明确、可识别的对象时用 the。"
+ ],
+ "Relative clauses and verb structure": [
+  "which 引导的定语从句需要一个限定动词或完整的谓语结构。"
+ ],
+ "Quantifiers and photography vocabulary": [
+  "a lot of 后可接可数名词复数或不可数名词。"
+ ],
+ "Subject–verb agreement and embedded exclamatives": [
+  "谓语要和主语一致。嵌入句中的 how 从句用 how + 形容词 + 主语 + 谓语。"
+ ],
+ "Noun number and collocations": [
+  "many 修饰可数名词复数。所用动词还应和名词搭配。"
+ ],
+ "Prepositions of place and time": [
+  "用 to 表示朝某地移动。next 或 last 修饰的日期前通常不加 on。"
+ ],
+ "Using look forward to": [
+  "look forward to 后接名词或动名词。这里的 to 是介词。"
+ ],
+ "help + object + base verb": [
+  "help + 宾语后，可以接动词原形或带 to 的不定式。"
+ ],
+ "provide sb. with sth.": [
+  "用 provide someone with something 表示给某人提供某物。"
+ ],
+ "choose to do": [
+  "choose 后表示选择做某事时，接带 to 的不定式。"
+ ],
+ "Hypothetical conditionals": [
+  "假设现在的情况时，if 从句常用过去式，主句用 would 加动词原形。"
+ ],
+ "Patterns with hesitate": [
+  "用 hesitate to 加动词原形表示犹豫是否采取某个行动。"
+ ],
+ "Using worth": [
+  "be worth 后可接名词或动名词。"
+ ],
+ "Spelling and word combinations": [
+  "区分形近词的拼写，并把习惯搭配的动词和名词一起记。"
+ ],
+ "Having or having no choice": [
+  "用 have a choice 表示有选择，用 have no choice but to 加动词原形表示别无选择。"
+ ],
+ "Passive voice": [
+  "被动语态由 be 加过去分词构成。主语是动作的承受者。"
+ ],
+ "Causative make": [
+  "主动语态中，用 make + 宾语 + 动词原形表示使某人或某物做某事。"
+ ],
+ "want / make up one's mind": [
+  "用 want to 加动词原形表示想做某事，用 make up one’s mind to 加动词原形表示下定决心。"
+ ],
+ "Irregular forms and spelling": [
+  "注意动词的过去式或过去分词是否不规则。规则动词以辅音字母加 y 结尾时，先把 y 改为 i，再加 -ed。"
+ ],
+ "Comparative structures": [
+  "比较级后用 than 引出比较对象。"
+ ],
+ "Subject clauses and subject–verb agreement": [
+  "主语是由名词领起、带有从句的短语时，谓语和中心名词一致。"
+ ],
+ "Past tense and gerunds": [
+  "描述已经结束的时间段中的情况用过去时。be busy 后接 -ing 形式。"
+ ],
+ "Too and either": [
+  "肯定句中的“也”通常用 too，否定句中的“也”通常用 either。"
+ ],
+ "Introducing examples": [
+  "用 such as 给前面提到的类别举例。"
+ ],
+ "Prepositions with apologize": [
+  "用 apologize to 加道歉对象，用 apologize for 加名词或动名词说明原因。"
+ ],
+ "Verb collocations": [
+  "把常见的动词和作其宾语的名词组合起来记。"
+ ],
+ "because vs. because of": [
+  "because 接完整从句，because of 接名词短语或动名词。"
+ ],
+ "Polite requests to reschedule": [
+  "用 Could we ...? 礼貌提出新时间。If it is convenient for you 表示考虑对方是否方便。"
+ ],
+ "Modals and perfect forms": [
+  "用情态动词 + have + 过去分词，推测可能已经发生的事。"
+ ],
+ "Modal verbs": [
+  "can、could、must 等情态动词后用动词原形。"
+ ],
+ "Uncountable nouns": [
+  "不可数名词通常不加 a 或 an。需要表示一个单位时，可用 a piece of 等数量短语。"
+ ],
+ "Time clauses referring to the future": [
+  "when 引导的时间状语从句即使表示将来，通常也用一般现在时。"
+ ],
+ "Possessive determiners": [
+  "用 my、your 等物主限定词修饰名词，说明它属于谁。"
+ ]
+};
 const archivedExampleNotes = {
  "2026-11-22": {
   "5": [
@@ -1949,7 +2308,9 @@ const archivedExampleNotes = {
   ]
  }
 };
+let grammarRenderLanguage;
 function renderGrammarStats() {
+ grammarRenderLanguage=language;
  const stats=collectGrammarStats();
  const heading=node('h2',grammarStatsFilter==='全部'?'Grammar Review':grammarStatsFilter);
  grammarContent.replaceChildren();
@@ -1985,7 +2346,7 @@ function renderGrammarStats() {
    const categories=stats.categories.filter(x=>branch.categories.includes(x.name));
    if(!categories.length)return;
    const group=node('details',undefined,'stats-branch');group.open=true;
-   const summary=node('summary',branch.name);summary.append(node('span',categories.reduce((n,c)=>n+c.count,0)+' entries'));
+   const summary=node('summary',branch.name);summary.append(node('span',categories.reduce((n,c)=>n+c.count,0)+(isChinese()?' 条':' entries')));
    const children=node('div',undefined,'stats-children');
    categories.forEach(item=>{
     const button=node('button',undefined,'stats-category');button.type='button';
@@ -1996,12 +2357,12 @@ function renderGrammarStats() {
    group.append(summary,children);tree.append(group);
   });
   grammarContent.append(tree);
-  const all=node('button','View all '+stats.total+' examples','stats-entry-link stats-all');all.onclick=()=>openCategory('全部错句');grammarContent.append(all);
+  const all=node('button',isChinese()?'查看全部 '+stats.total+' 条错句':'View all '+stats.total+' examples','stats-entry-link stats-all');all.onclick=()=>openCategory('全部错句');grammarContent.append(all);
   return;
  }
  const categoryItems=grammarStatsFilter==='全部错句'?stats.items:stats.items.filter(item=>item.category===grammarStatsFilter);
  const branch=grammarTree.find(item=>item.categories.includes(grammarStatsFilter));
- grammarContent.append(node('p',[branch?.name,grammarStatsFilter].filter(Boolean).map(englishText).join(' / '),'stats-breadcrumb'));
+ grammarContent.append(node('p',[branch?.name,grammarStatsFilter].filter(Boolean).map(displayText).join(' / '),'stats-breadcrumb'));
  const groups=new Map();
  for(const item of categoryItems){
   const point=grammarPoint(item.g);
@@ -2010,9 +2371,9 @@ function renderGrammarStats() {
  }
  const points=[...groups].sort((a,b)=>b[1].length-a[1].length);
  const topics=node('div',undefined,'stats-subtopics');
- topics.setAttribute('aria-label','Filter by grammar point');
+ topics.setAttribute('aria-label',displayText('Filter by grammar point'));
  [['全部',categoryItems.length],...points.map(([point,items])=>[point,items.length])].forEach(([point,count])=>{
-  const button=node('button',(point==='全部'?'All grammar points':englishText(point))+' · '+count);
+  const button=node('button',displayText(point==='全部'?'All grammar points':point)+' · '+count);
   button.type='button';button.setAttribute('aria-pressed',String(grammarTopicFilter===point));
   button.onclick=()=>{
    history.replaceState(history.state,'',grammarRoute(grammarStatsFilter,point));
@@ -2027,13 +2388,13 @@ function renderGrammarStats() {
  for(const [point,items] of filtered){
   const card=node('section',undefined,'stats-error');
   card.append(node('h3',point,'grammar-point-title'));
-  const rules=coreGrammarRules[englishText(point)];
+  const rules=(isChinese()?coreGrammarRulesChinese:coreGrammarRules)[englishText(point)];
   if(rules?.length){
    const explanation=node('ul',undefined,'grammar-rules');
    rules.forEach(rule=>explanation.append(node('li',rule)));
    card.append(explanation);
   }
-  card.append(node('h4','Examples · '+items.length,'stats-heading'));
+  card.append(node('h4',displayText('Examples')+' · '+items.length,'stats-heading'));
   items.forEach((item,i)=>card.append(renderGrammarExample(item,i+1)));
   list.append(card);
  }
@@ -2052,7 +2413,7 @@ function renderGrammarExample({date,g,index},number) {
  example.append(top);
  const left=wordsWithOffsets(original,true),right=wordsWithOffsets(revised,true);
  const before=node('p',undefined,'stats-before'),after=node('p',undefined,'stats-after');
- before.append('Original: ');after.append('Revised: ');
+ before.append(displayText('Original: '));after.append(displayText('Revised: '));
  appendMarkedText(before,original,changedWordRanges(left,right,false),'del');
  appendMarkedText(after,revised,changedWordRanges(right,left,false),'strong');
  const link=node('button','View full entry ›','stats-entry-link');
@@ -2071,7 +2432,7 @@ function renderGrammarExample({date,g,index},number) {
  return example;
 }
 function renderCalendar() {
- monthLabel.textContent=monthFormat.format(new Date(year,month,1));
+ monthLabel.textContent=dateFormats[language].month.format(new Date(year,month,1));
  grid.replaceChildren();
  for (const day of ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']) grid.append(node('span',day,'weekday'));
  const offset = (new Date(year,month,1).getDay()+6)%7;
@@ -2084,7 +2445,7 @@ function renderCalendar() {
   if (studySchedule[key]) button.classList.add('planned');
   if (key==='2026-12-19') button.classList.add('exam-day');
   if (selected===key) {button.classList.add('selected');button.setAttribute('aria-current','date');}
-  button.setAttribute('aria-label',[key,records[key]?'Writing entry':'',englishText(studySchedule[key]?.title),key==='2026-12-19'?'Exam day':''].filter(Boolean).join(', '));
+  button.setAttribute('aria-label',[key,records[key]?displayText('Writing entry'):'',displayText(studySchedule[key]?.title),key==='2026-12-19'?displayText('Exam day'):''].filter(Boolean).join(', '));
   button.addEventListener('click',()=>select(key,'calendar'));
   grid.append(button);
  }
@@ -2095,7 +2456,7 @@ function renderNotes() {
   const button=node('button',undefined,'card');
   button.dataset.note=key;
   if (selected===key) button.setAttribute('aria-current','date');
-  button.append(node('small',shortDateFormat.format(new Date(key+'T12:00:00Z'))),node('b',records[key].title));
+  button.append(node('small',dateFormats[language].short.format(new Date(key+'T12:00:00Z'))),node('b',records[key].title));
   button.addEventListener('click',()=>select(key,'note'));
   notes.append(button);
  }
@@ -2239,7 +2600,7 @@ function markOriginalErrors(paragraph, sentence, issueIndexes, grammar, override
  appendMarkedText(paragraph,sentence,ranges,'del');
 }
 function appendMarkedText(paragraph,text,ranges,tag) {
- if(!ranges.length){paragraph.append(englishText(text));return;}
+ if(!ranges.length){paragraph.append(displayText(text));return;}
  ranges.sort((left,right)=>left[0]-right[0]);
  let offset=0;
  const merged=[];
@@ -2268,18 +2629,18 @@ function appendRevisedSentences(container, originals, revised) {
  }
 }
 function explanationLines(why) {
- return englishText(why).split(/\r?\n|(?<=[;!?])\s+|(?<=[^.\s]\.)\s+(?=[A-Z])/u).map(line=>line.trim()).filter(Boolean);
+ return displayText(why).split(/\r?\n|(?<=[。！？；])\s*|(?<=[;!?])\s+|(?<=[^.\s]\.)\s+(?=[A-Z])/u).map(line=>line.trim()).filter(Boolean);
 }
 function grammarNoteBadge(number,label,lines,context='Grammar') {
  const button=node('button',undefined,'error-pin');
  button.append(node('span',String(number)));
  button.type='button';
- button.setAttribute('aria-label',context+' note '+number+': '+englishText(label));
+ button.setAttribute('aria-label',(isChinese()?(context==='Example'?'例句注释 ':'语法注释 '):context+' note ')+number+': '+displayText(label));
  button.setAttribute('aria-haspopup','dialog');
  button.setAttribute('aria-controls',grammarPopup.id);
  button.setAttribute('aria-expanded','false');
  button.onclick=()=>{
-  grammarPopupTitle.textContent=englishText(label);
+  grammarPopupTitle.textContent=displayText(label);
   grammarPopupText.replaceChildren(...lines.map(line=>node('p',line)));
   grammarPopupBadge=button;
   button.setAttribute('aria-expanded','true');
@@ -2349,7 +2710,7 @@ function renderEntry(focus=false) {
  if(!record)return;
  entry.append(node('p',record.type,'sub'));
  const list=node('div',undefined,'tabs');
- list.setAttribute('role','tablist');list.setAttribute('aria-label','Writing review tabs');
+ list.setAttribute('role','tablist');list.setAttribute('aria-label',displayText('Writing review tabs'));
  const viewport=node('div',undefined,'writing-viewport'),track=node('div',undefined,'writing-track');
  viewport.append(track);
  tabs.forEach((label,i)=>{
@@ -2377,7 +2738,7 @@ function renderEntry(focus=false) {
    panel.className='writing-slide comparison';
    renderComparison(record,panel);
   }else if(tabIndex===1){
-   panel.append(node('div',record.revised.split('\n').map(englishText).join('\n'),'writing full-revision'));
+   panel.append(node('div',record.revised.split('\n').map(displayText).join('\n'),'writing full-revision'));
   }else if(tabIndex===3){
    panel.className='grammar writing-slide';
    const notes=record.studyNotes;
@@ -2390,7 +2751,7 @@ function renderEntry(focus=false) {
       const box=node('details'),summary=node('summary',item.name);
       box.append(summary);
       if(item.template)box.append(node('p',item.template,'pair'));
-      if(item.example)box.append(node('p','Example: '+englishText(item.example),'pair'));
+      if(item.example)box.append(node('p',displayText('Example: ')+displayText(item.example),'pair'));
       if(item.note)box.append(node('p',item.note));
       panel.append(box);
      }
@@ -2420,6 +2781,8 @@ function moveMonth(delta) {
 }
 document.querySelector('#prev').onclick=()=>moveMonth(-1);
 document.querySelector('#next').onclick=()=>moveMonth(1);
+document.querySelectorAll('[data-language-toggle]').forEach(button=>button.onclick=switchLanguage);
+applyInterfaceLanguage();
 updatePrepProgress();
 renderCalendar();
 renderNotes();
