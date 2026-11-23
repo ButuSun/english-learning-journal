@@ -25,6 +25,7 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 .comparison-revised .comparison-label{color:var(--green)}
 .comparison p{font:1.04rem/1.75 var(--serif);white-space:pre-wrap;margin:0;overflow-wrap:anywhere}
 .comparison p+p{margin-top:.25em}
+.comparison-original del{color:#943a2e;text-decoration-thickness:1.5px}
 .error-pin{display:inline-grid;place-items:center;vertical-align:middle;min-width:30px;min-height:30px;margin-inline:3px;padding:0 4px;border:0;background:transparent;color:#824129;font:700 .76rem/1 system-ui,sans-serif}
 .error-pin span{display:grid;place-items:center;min-width:22px;height:22px;padding:0 3px;border:1px solid #c4927b;border-radius:99px;background:#fff5ee}
 .error-pin[aria-expanded=true] span{color:#fff;background:#824129;border-color:#824129}
@@ -1388,6 +1389,79 @@ function grammarLocations(record, originals, overrides) {
  });
  return {result,unfound};
 }
+// A few archived explanations quote a paraphrase or span two original sentences.
+const archivedErrorPhrases = {
+ '2026-11-23':{7:['that going'],12:['Booking','hope']},
+ '2026-11-21':{4:['one','Nearly examination'],8:['fight','prepared this examination']},
+ '2026-11-18':{1:['in a trip','in the work trip','choose to a nice hotel']},
+ '2026-11-16':{1:['relate the lifestyle changed'],3:['does exercise good for','it but also']}
+};
+function wordsWithOffsets(text) {
+ return Array.from(text.matchAll(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu),match=>({
+  text:match[0].replaceAll('’',"'"),start:match.index,end:match.index+match[0].length
+ }));
+}
+function locateWords(sentence, phrase) {
+ const wanted=wordsWithOffsets(phrase).map(word=>word.text.toLowerCase());
+ if(!wanted.length)return [];
+ return sentence.flatMap((word,i)=>wanted.every((text,j)=>sentence[i+j]?.text.toLowerCase()===text)
+  ? [sentence.slice(i,i+wanted.length)] : []);
+}
+function changedWordRanges(original, revised) {
+ // Match words in order so an annotation like "It is a honor to me"
+ // strikes only the article. Keep case differences as edits.
+ const shared=Array.from({length:original.length+1},()=>new Uint16Array(revised.length+1));
+ for(let i=original.length-1;i>=0;i--){
+  for(let j=revised.length-1;j>=0;j--){
+   shared[i][j]=original[i].text===revised[j].text
+    ? 1+shared[i+1][j+1] : Math.max(shared[i+1][j],shared[i][j+1]);
+  }
+ }
+ const anchors=[[-1,-1]];
+ let i=0,j=0;
+ while(i<original.length && j<revised.length){
+  if(original[i].text===revised[j].text)anchors.push([i++,j++]);
+  else if(shared[i+1][j]>=shared[i][j+1])i++;
+  else j++;
+ }
+ anchors.push([original.length,revised.length]);
+ const ranges=[];
+ for(let index=1;index<anchors.length;index++){
+  const [left,right]=anchors[index-1], [nextLeft,nextRight]=anchors[index];
+  if(nextLeft>left+1){
+   ranges.push([original[left+1].start,original[nextLeft-1].end]);
+  }else if(nextRight>right+1){
+   // With a missing word, mark the words that surround the omission.
+   ranges.push([original[Math.max(0,left)].start,original[Math.min(nextLeft,original.length-1)].end]);
+  }
+ }
+ return ranges;
+}
+function markOriginalErrors(paragraph, sentence, issueIndexes, grammar, overrides) {
+ const words=wordsWithOffsets(sentence);
+ const ranges=issueIndexes.flatMap(index=>{
+  const override=overrides[index+1];
+  if(override)return override.flatMap(phrase=>locateWords(words,phrase).map(match=>[match[0].start,match.at(-1).end]));
+  const [,before,after]=grammar[index];
+  const split=/\s+\/\s+|\.{3}|…/;
+  const originalParts=before.split(split), revisedParts=after.split(split);
+  if(originalParts.length!==revisedParts.length)return [];
+  return originalParts.flatMap((part,i)=>locateWords(words,part)
+   .flatMap(match=>changedWordRanges(match,wordsWithOffsets(revisedParts[i]))));
+ }).sort((left,right)=>left[0]-right[0]);
+ let offset=0;
+ const merged=[];
+ for(const range of ranges){
+  const last=merged.at(-1);
+  if(last && range[0]<=last[1])last[1]=Math.max(last[1],range[1]);
+  else merged.push(range);
+ }
+ for(const [start,end] of merged){
+  paragraph.append(sentence.slice(offset,start),node('del',sentence.slice(start,end)));
+  offset=end;
+ }
+ paragraph.append(sentence.slice(offset));
+}
 function grammarExplanation(id) {
  const box=node('div',undefined,'error-explanation');
  box.id=id;
@@ -1408,6 +1482,7 @@ function renderComparison(record,panel) {
  const revised=writingSentences(record.revised);
  const matches=grammarLocations(record,originals,archivedGrammarLocations[selected]||{});
  const pairs=sentencePairs(originals,revised,archivedSentenceGroups[selected]||[]);
+ const errorPhrases=archivedErrorPhrases[selected]||{};
  let openBadge,openExplanation;
  const closeExplanation=(restoreFocus=false)=>{
   if(!openBadge)return;
@@ -1460,8 +1535,10 @@ function renderComparison(record,panel) {
   const explanation=explanationFor('grammar-detail-'+row);
   let hasBadges=false;
   for(const sentence of before){
-   const paragraph=node('p',sentence);
-   for(const index of matches.result[originalIndex++]){
+   const paragraph=node('p');
+   const issueIndexes=matches.result[originalIndex++];
+   markOriginalErrors(paragraph,sentence,issueIndexes,record.grammar||[],errorPhrases);
+   for(const index of issueIndexes){
     addBadge(paragraph,index,explanation);
     hasBadges=true;
    }
