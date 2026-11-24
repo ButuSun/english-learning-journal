@@ -980,7 +980,7 @@
       "original": [
         "The bar chart above illustrates the percentage of preferred Leisure Activities Among College Students. To be specific, watching movies account for 40%, which is the most popular activity.  Besides, doing sports, reading count for 25% and 20% separately. It reflect a fact that college students are more willing to watch a movie on their spare time.\nSome factors may contribute this phenomenon. First of all, as for watching movie itself, it is a usual activity which people can join with their family or friends. Secondly, People don't have to learn much prearqusites before watching movie, and they can spare a whole 1-2 hours, maybe longer, together. Last but not least, people need leisure time when they finish work or study task, because people brain can't work all the time.\nTo sum up, we should care more about the college student's leisure time. For one thing, government should bring more high quality artwork to people. For another, the society should give more opportunity of exercise. In this way, hopefully, the college student's life would be better."
       ],
-      "revised": "The bar chart above illustrates the percentage of preferred leisure activities among college students. To be specific, watching movies accounts for 40%, which is the most popular activity. Besides, doing sports and reading account for 25% and 20%, respectively. It reflects a fact that college students are more willing to watch a movie in their spare time.\n\nSome factors may contribute to this phenomenon. First of all, as for watching movies itself, it is a usual activity which people can join with their family or friends. Secondly, people don't have to learn many prerequisites before watching movies, and they can spare a whole 1–2 hours, maybe longer, together. Last but not least, people need leisure time when they finish work or study tasks, because people's brains can't work all the time.\n\nTo sum up, we should care more about college students' leisure time. For one thing, the government should bring more high-quality artwork to people. For another, society should give more opportunities for exercise. In this way, hopefully, college students' lives would be better.",
+      "revised": "The bar chart above illustrates the percentage of preferred leisure activities among college students. To be specific, watching movies accounts for 40%, which is the most popular activity. Besides, doing sports and reading account for 25% and 20% separately. It reflects a fact that college students are more willing to watch a movie in their spare time.\n\nSome factors may contribute to this phenomenon. First of all, as for watching movies itself, it is a usual activity which people can join with their family or friends. Secondly, people don't have to learn many prerequisites before watching movies, and they can spare a whole 1–2 hours, maybe longer, together. Last but not least, people need leisure time when they finish work or study tasks, because people's brains can't work all the time.\n\nTo sum up, we should care more about college students' leisure time. For one thing, the government should bring more high-quality artwork to people. For another, society should give more opportunities for exercise. In this way, hopefully, college students' lives would be better.",
       "grammar": [
         [
           "大小写与标题格式",
@@ -995,10 +995,10 @@
           "watching movies 是动名词短语，整体作单数主语，谓语用 accounts。"
         ],
         [
-          "并列主语与副词",
+          "并列结构",
           "doing sports, reading count for 25% and 20% separately",
-          "doing sports and reading account for 25% and 20%, respectively",
-          "两个并列主语用 and 连接；分别对应两个数据用 respectively。"
+          "doing sports and reading count for 25% and 20% separately",
+          "两个并列活动需要用 and 连接；两个并列主语使用复数谓语 count。"
         ],
         [
           "主谓一致",
@@ -1082,7 +1082,7 @@
           "名词所有格与单复数",
           "the college student's life",
           "college students' lives",
-          "泛指大学生群体用复数所有格；与群体对应的 lives 用复数。"
+          "泛指大学生群体用复数所有格；与复数群体对应的 lives 用复数。"
         ]
       ],
       "studyNotes": {
