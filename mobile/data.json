@@ -973,6 +973,143 @@
           "要用 I look forward to 或 I am looking forward to。to 是介词，后接名词或动名词。"
         ]
       ]
+    },
+    "2026-11-24": {
+      "title": "大学生休闲活动 · 图表作文",
+      "type": "考研英语二 · Part B · 图表作文 · 完整练习",
+      "original": [
+        "The bar chart above illustrates the percentage of preferred Leisure Activities Among College Students. To be specific, watching movies account for 40%, which is the most popular activity.  Besides, doing sports, reading count for 25% and 20% separately. It reflect a fact that college students are more willing to watch a movie on their spare time.\nSome factors may contribute this phenomenon. First of all, as for watching movie itself, it is a usual activity which people can join with their family or friends. Secondly, People don't have to learn much prearqusites before watching movie, and they can spare a whole 1-2 hours, maybe longer, together. Last but not least, people need leisure time when they finish work or study task, because people brain can't work all the time.\nTo sum up, we should care more about the college student's leisure time. For one thing, government should bring more high quality artwork to people. For another, the society should give more opportunity of exercise. In this way, hopefully, the college student's life would be better."
+      ],
+      "revised": "The bar chart above illustrates the percentage of preferred leisure activities among college students. To be specific, watching movies accounts for 40%, which is the most popular activity. Besides, doing sports and reading account for 25% and 20%, respectively. It reflects a fact that college students are more willing to watch a movie in their spare time.\n\nSome factors may contribute to this phenomenon. First of all, as for watching movies itself, it is a usual activity which people can join with their family or friends. Secondly, people don't have to learn many prerequisites before watching movies, and they can spare a whole 1–2 hours, maybe longer, together. Last but not least, people need leisure time when they finish work or study tasks, because people's brains can't work all the time.\n\nTo sum up, we should care more about college students' leisure time. For one thing, the government should bring more high-quality artwork to people. For another, society should give more opportunities for exercise. In this way, hopefully, college students' lives would be better.",
+      "grammar": [
+        [
+          "大小写与标题格式",
+          "preferred Leisure Activities Among College Students",
+          "preferred leisure activities among college students",
+          "这里不是独立标题，而是普通句子中的名词短语，普通名词不需要标题式大写。"
+        ],
+        [
+          "主谓一致",
+          "watching movies account for 40%",
+          "watching movies accounts for 40%",
+          "watching movies 是动名词短语，整体作单数主语，谓语用 accounts。"
+        ],
+        [
+          "并列主语与副词",
+          "doing sports, reading count for 25% and 20% separately",
+          "doing sports and reading account for 25% and 20%, respectively",
+          "两个并列主语用 and 连接；分别对应两个数据用 respectively。"
+        ],
+        [
+          "主谓一致",
+          "It reflect a fact",
+          "It reflects a fact",
+          "It 是第三人称单数主语，谓语动词需要加 -s。"
+        ],
+        [
+          "介词搭配",
+          "on their spare time",
+          "in their spare time",
+          "固定表达是 in one's spare time。"
+        ],
+        [
+          "固定搭配与介词",
+          "contribute this phenomenon",
+          "contribute to this phenomenon",
+          "表示“促成/导致某种现象”时使用 contribute to。"
+        ],
+        [
+          "名词单复数",
+          "watching movie / before watching movie",
+          "watching movies / before watching movies",
+          "泛指看电影这一活动时，movie 通常用复数。"
+        ],
+        [
+          "拼写与名词数量",
+          "much prearqusites",
+          "many prerequisites",
+          "prerequisites 拼写错误；prerequisite 是可数名词复数，前面用 many。"
+        ],
+        [
+          "大小写",
+          "Secondly, People",
+          "Secondly, people",
+          "句中普通名词 people 不需要大写。"
+        ],
+        [
+          "名词单复数",
+          "study task",
+          "study tasks",
+          "泛指学习任务时用可数名词复数。"
+        ],
+        [
+          "所有格与名词单复数",
+          "people brain",
+          "people's brains",
+          "表示“人们的大脑”需要所有格；泛指人类时用 brains。"
+        ],
+        [
+          "名词所有格",
+          "the college student's leisure time",
+          "college students' leisure time",
+          "这里泛指大学生群体，使用复数所有格 students'。"
+        ],
+        [
+          "冠词",
+          "government should",
+          "the government should",
+          "government 作为这里的可数机构名词，需要限定词 the。"
+        ],
+        [
+          "复合形容词",
+          "high quality artwork",
+          "high-quality artwork",
+          "复合形容词放在名词前作定语时通常加连字符。"
+        ],
+        [
+          "冠词与泛指",
+          "the society",
+          "society",
+          "泛指社会整体时通常直接使用 society，不加 the。"
+        ],
+        [
+          "名词单复数与介词",
+          "more opportunity of exercise",
+          "more opportunities for exercise",
+          "more 后接可数名词复数；表示锻炼的机会用 opportunities for exercise。"
+        ],
+        [
+          "名词所有格与单复数",
+          "the college student's life",
+          "college students' lives",
+          "泛指大学生群体用复数所有格；与群体对应的 lives 用复数。"
+        ]
+      ],
+      "studyNotes": {
+        "intro": "本次英语二 Part B 图表作文围绕大学生休闲活动展开。文章按“图表数据—原因分析—个人建议”组织，原因部分保留了电影适合与家人朋友共同参与、观看门槛较低、学习工作后需要休息三个观点；结尾从政府和社会两个主体提出建议。",
+        "sections": [
+          {
+            "title": "本次可复用的三个句型与逻辑点",
+            "items": [
+              {
+                "name": "To be specific, ... accounts for ...",
+                "template": "To be specific, watching movies accounts for 40%, which is the most popular activity.",
+                "note": "描述图表中的具体数据；动名词短语作主语时，整体通常按单数处理。"
+              },
+              {
+                "name": "Some factors may contribute to this phenomenon.",
+                "template": "Some factors may contribute to this phenomenon.",
+                "note": "用于从图表现象过渡到原因分析；注意 contribute 必须与 to 搭配。"
+              },
+              {
+                "name": "People need leisure time when..., because...",
+                "template": "People need leisure time when they finish work or study tasks, because people's brains can't work all the time.",
+                "note": "先提出普遍需求，再用 because 解释原因；适合分析休闲、学习、工作与身心状态之间的关系。"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "studySchedule": {
