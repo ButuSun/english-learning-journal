@@ -2302,7 +2302,7 @@ function showMainPage() {
  const point=params.get('point');
  const topic=previousGrammarPoints[point]||previousGrammarPoints[params.get('category')]||point;
  grammarRenderHash=hash;
- renderGrammarStats(topic,params.get('group'));
+ renderGrammarStats(topic,history.state?.grammarGroup === undefined ? params.get('group') : history.state.grammarGroup);
 }
 window.addEventListener('popstate',event=>{
  if(reader.open && event.state?.journalReader!==readerToken){
@@ -2391,6 +2391,7 @@ function renderGrammarStats(point,group) {
   translate:displayText,
   extraNotes:({date,index})=>archivedExampleNotes[date]?.[index],
   openRoute:openGrammarRoute,
+  onGroupChange:id=>history.replaceState({...history.state,grammarGroup:id},''),
   back:backToGrammarOverview,
   openEntry:({date,index},link)=>{
    reviewFromGrammar=true;

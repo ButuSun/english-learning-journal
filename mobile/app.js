@@ -410,7 +410,6 @@ globalThis.JournalGrammar = (() => {
   const copy = {
     en: {
       title:'Grammar Review', back:'‹ Back to grammar review', backToGroup:'‹ Back to the category chart',
-      pieNote:'Each error pattern counts once, even if it has several examples.',
       cardCount:n => n + (n === 1 ? ' pattern' : ' patterns'),
       exampleCount:n => n + (n === 1 ? ' example' : ' examples'),
       rule:'Rule', use:'How to use it', mistakes:'Common errors',
@@ -422,7 +421,6 @@ globalThis.JournalGrammar = (() => {
     },
     zh: {
       title:'语法统计', back:'‹ 返回语法总览', backToGroup:'‹ 返回分类饼图',
-      pieNote:'同一种错法只计一次，点开错题卡可看所有例句。',
       cardCount:n => n + ' 种',
       exampleCount:n => n + ' 条例句',
       rule:'语法规则', use:'正确用法', mistakes:'常见错误',
@@ -503,11 +501,23 @@ globalThis.JournalGrammar = (() => {
     return card;
   }
 
-  const groupsById = new Map(groups.map(group => [group.id, group]));
   const groupByTopic = new Map(groups.flatMap(group =>
     group.points.map(([topic]) => [topic, group])
   ));
-  const pieColors = ['#355c48', '#637b52', '#896d47', '#546779', '#796355'];
+  const pieColors = ['#b9d9f8', '#e9f2ff', '#d2e6fc', '#aac7ed', '#e0edfc'];
+  const subPieColors = ['#d9eaff', '#bbd8f6', '#edf5ff', '#a8c7ee', '#c9e1f9'];
+  const shortLabels = {
+    verbs:['Verbs', '动词'], nouns:['Nouns', '名词'], 'function-words':['Function words', '功能词'],
+    sentences:['Sentence structure', '句子结构'], vocabulary:['Vocabulary', '词汇与搭配'],
+    agreement:['Agreement', '主谓一致'], tense:['Tense', '时态'], voice:['Passive', '被动语态'],
+    nonfinite:['Nonfinite verbs', '非谓语'], auxiliaries:['Auxiliaries', '助动词'],
+    number:['Noun number', '单复数'], possessives:['Possessives', '所有格'], countability:['Countability', '可数性'],
+    articles:['Articles', '冠词'], prepositions:['Prepositions', '介词'], conjunctions:['Conjunctions', '连词'],
+    pronouns:['Pronouns', '代词'], clauses:['Clauses', '主从句'], relatives:['Relative clauses', '定语从句'],
+    inversion:['Inversion', '倒装'], completeness:['Completeness', '句子完整'],
+    'word-class':['Word classes', '词性'], spelling:['Spelling', '拼写'], capitalization:['Capitalization', '大小写'],
+    collocations:['Collocations', '固定搭配'], 'word-choice':['Word choice', '词义选择']
+  };
 
   function render(container, records, options) {
     const {examples} = summarize(records);
@@ -516,7 +526,6 @@ globalThis.JournalGrammar = (() => {
     const nameIndex = lang === 'zh' ? 1 : 0;
     const t = copy[lang];
     const review = element('div', 'grammar-review');
-    const group = groupsById.get(groupId);
     const key = query.trim().toLowerCase();
     const cards = new Map([...examples].map(([id, entries]) => {
       const grouped = groupErrors(id, entries);
@@ -532,19 +541,18 @@ globalThis.JournalGrammar = (() => {
 
     if (examples.has(point)) {
       renderTopic(review, point, cards.get(point), options, lang);
-    } else if (group) {
-      renderHeading(review, group.name[nameIndex], '#grammar', t.back, options);
-      const entries = group.points.filter(([id]) => cards.get(id).length).map(([id, en, zh]) => ({
-        id, name:(lang === 'zh' ? zh : en)[0], count:cards.get(id).length, route:pointRoute(id)
-      }));
-      renderPie(review, entries, options, t, key ? t.noSearch : t.empty);
     } else {
+      review.classList.add('grammar-review-chart');
       review.append(element('h2', 'grammar-review-title', t.title));
-      const entries = groups.map(group => ({
-        id:group.id, name:group.name[nameIndex], route:groupRoute(group.id),
+      const categories = groups.map(group => ({
+        id:group.id, name:group.name[nameIndex],
         count:group.points.reduce((count, [id]) => count + cards.get(id).length, 0)
       }));
-      renderPie(review, entries, options, t, key ? t.noSearch : t.empty);
+      const children = new Map(groups.map(group => [group.id, group.points
+        .filter(([id]) => cards.get(id).length)
+        .map(([id, en, zh]) => ({id, name:(lang === 'zh' ? zh : en)[0],
+          count:cards.get(id).length, route:pointRoute(id)}))]));
+      renderPie(review, categories, children, groupId, nameIndex, options, t, key ? t.noSearch : t.empty);
       const unknown = cards.get('unclassified');
       if (unknown.length) {
         const button = element('button', 'grammar-review-back', t.unclassified + ' ›');
@@ -562,54 +570,155 @@ globalThis.JournalGrammar = (() => {
     return node;
   }
 
-  function renderPie(review, entries, options, t, emptyMessage = t.empty) {
-    const total = entries.reduce((sum, entry) => sum + entry.count, 0);
-    review.append(element('p', 'grammar-review-muted grammar-review-chart-note', total ? t.pieNote : emptyMessage));
-    if (!entries.length) return;
-    const chart = element('div', 'grammar-review-pie-layout');
-    const svg = svgElement('svg', {viewBox:'0 0 240 240', class:'grammar-review-pie', 'aria-hidden':'true'});
-    const legend = element('ul', 'grammar-review-legend');
-    const percentage = new Intl.NumberFormat(options.locale, {style:'percent', maximumFractionDigits:1});
-    const pointAt = (angle, radius) => [120 + radius * Math.cos(angle), 120 + radius * Math.sin(angle)];
-    let angle = -Math.PI / 2;
-    for (const [index, {id, name, route, count}] of entries.entries()) {
-      const color = pieColors[index % pieColors.length];
-      const share = total ? count / total : 0;
-      const item = element('li');
-      const button = element('button', 'grammar-review-legend-button');
-      button.type = 'button';
-      button.dataset.grammarNav = id;
-      button.addEventListener('click', () => options.openRoute(route, button));
-      const swatch = element('span', 'grammar-review-swatch');
-      swatch.style.backgroundColor = color;
-      swatch.setAttribute('aria-hidden', 'true');
-      const value = element('span', 'grammar-review-legend-count', t.cardCount(count));
-      const rate = element('span', 'grammar-review-legend-rate', percentage.format(share));
-      button.append(swatch, element('span', '', name), value, rate);
-      item.append(button);
-      legend.append(item);
+  const pieCenter = 210;
+  const pieRadius = 194;
+  const turn = 2 * Math.PI;
+  const pointAt = (angle, radius) => [pieCenter + radius * Math.cos(angle), pieCenter + radius * Math.sin(angle)];
 
-      if (!count) continue;
-      const end = angle + share * 2 * Math.PI;
-      const slice = share === 1 ? svgElement('circle', {cx:120, cy:120, r:112})
-        : svgElement('path', {d:`M 120 120 L ${pointAt(angle, 112).join(' ')} A 112 112 0 ${share > .5 ? 1 : 0} 1 ${pointAt(end, 112).join(' ')} Z`});
-      slice.setAttribute('fill', color);
-      slice.dataset.grammarSlice = id;
-      slice.addEventListener('click', event => options.openRoute(route, svg, {
-        x:event.clientX, y:event.clientY
-      }, id));
-      svg.append(slice);
-      if (share >= .09) {
-        const [x, y] = share === 1 ? [120,120] : pointAt((angle + end) / 2, 76);
-        const label = svgElement('text', {x, y, 'text-anchor':'middle', 'dominant-baseline':'central'});
-        label.textContent = percentage.format(share);
-        svg.append(label);
+  function sectorPath(centerAngle, span) {
+    const start = pointAt(centerAngle - span / 2, pieRadius);
+    const middle = pointAt(centerAngle, pieRadius);
+    const end = pointAt(centerAngle + span / 2, pieRadius);
+    if (span >= turn) return `M ${start.join(' ')} A ${pieRadius} ${pieRadius} 0 0 1 ${middle.join(' ')} A ${pieRadius} ${pieRadius} 0 0 1 ${start.join(' ')} Z`;
+    return `M ${pieCenter} ${pieCenter} L ${start.join(' ')} A ${pieRadius} ${pieRadius} 0 0 1 ${middle.join(' ')} A ${pieRadius} ${pieRadius} 0 0 1 ${end.join(' ')} Z`;
+  }
+
+  function activateSvg(node, name, action) {
+    node.setAttribute('role', 'button');
+    node.setAttribute('tabindex', '0');
+    node.setAttribute('aria-label', name);
+    node.addEventListener('click', action);
+    node.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        action(event);
       }
-      angle = end;
+    });
+  }
+
+  function renderPie(review, categories, children, initialGroup, nameIndex, options, t, emptyMessage) {
+    const svg = svgElement('svg', {viewBox:'0 0 420 420', class:'grammar-review-pie',
+      role:'group', 'aria-label':t.title});
+    const background = svgElement('circle', {cx:pieCenter, cy:pieCenter, r:pieRadius, class:'grammar-review-pie-base'});
+    svg.append(background);
+    review.append(svg);
+    let current = children.has(initialGroup) ? initialGroup : null;
+    let busy = false;
+
+    const parent = buildLayer(categories, null);
+    let active = current ? buildLayer(children.get(current), current) : parent;
+    svg.append(active.layer);
+
+    function buildLayer(entries, group) {
+      const layer = svgElement('g', {'class':'grammar-pie-layer'});
+      const total = entries.reduce((sum, entry) => sum + entry.count, 0);
+      const sectors = new Map();
+      let angle = -Math.PI / 2;
+      for (const [index, {id, name, route, count}] of entries.entries()) {
+        if (!count) continue;
+        const span = count / total * turn;
+        const center = angle + span / 2;
+        const color = (group ? subPieColors : pieColors)[index];
+        const sector = svgElement('g', {class:'grammar-pie-sector', 'data-grammar-nav':id});
+        const shape = svgElement('path', {d:sectorPath(center, span), fill:color, 'data-grammar-slice':id});
+        sector.append(shape);
+        const shortName = shortLabels[id][nameIndex];
+        const narrow = group && span < 1.02;
+        const radius = span >= turn ? (group ? 89 : 0) : narrow ? 121 : 113;
+        const [x, y] = span >= turn && group ? [pieCenter, pieCenter - radius] : pointAt(center, radius);
+        const rotation = center * 180 / Math.PI;
+        const upright = rotation > 90 && rotation <= 270 ? rotation - 180 : rotation;
+        const labelRotation = narrow && (nameIndex === 0 || shortName.length > 2) ? upright : 0;
+        const label = svgElement('text', {transform:`translate(${x} ${y}) rotate(${labelRotation})`,
+          'text-anchor':'middle', 'aria-hidden':'true'});
+        if (span < .5) {
+          label.setAttribute('class', 'grammar-pie-compact-label');
+          label.setAttribute('dominant-baseline', 'central');
+          label.textContent = shortName + ' ' + count;
+        } else {
+          const line = svgElement('tspan', {x:0, y:-3});
+          line.textContent = shortName;
+          const amount = svgElement('tspan', {x:0, y:19, class:'grammar-pie-count'});
+          amount.textContent = count;
+          label.append(line, amount);
+        }
+        sector.append(label);
+        activateSvg(sector, name + ' · ' + t.cardCount(count), event => {
+          if (busy) return;
+          if (group) {
+            options.openRoute(route, sector, event.type === 'click' ? {x:event.clientX, y:event.clientY} : undefined, id);
+          } else changeLevel(id);
+        });
+        layer.append(sector);
+        sectors.set(id, {center, span, color, sector});
+        angle += span;
+      }
+      if (!total) {
+        const empty = svgElement('text', {x:pieCenter, y:group ? pieCenter - 62 : pieCenter,
+          class:'grammar-pie-empty', 'text-anchor':'middle'});
+        empty.textContent = emptyMessage;
+        layer.append(empty);
+      }
+      let back;
+      if (group) {
+        const radius = 30;
+        back = svgElement('g', {class:'grammar-pie-back', 'data-grammar-pie-back':''});
+        const button = svgElement('circle', {cx:pieCenter, cy:pieCenter, r:radius});
+        const arrow = svgElement('path', {d:'M 219 210 H 201 M 201 210 L 209 202 M 201 210 L 209 218',
+          'aria-hidden':'true'});
+        back.append(button, arrow);
+        activateSvg(back, t.back, () => { if (!busy) changeLevel(null); });
+        layer.append(back);
+      }
+      return {layer, sectors, back};
     }
-    if (total) chart.append(svg);
-    chart.append(legend);
-    review.append(chart);
+
+    function changeLevel(group) {
+      const opening = group !== null;
+      const selected = parent.sectors.get(group || current);
+      const next = opening ? buildLayer(children.get(group), group) : parent;
+      const previous = active;
+      const focus = opening ? next.back : selected?.sector;
+      current = group;
+      active = next;
+      options.onGroupChange?.(group);
+
+      if (!selected || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        svg.replaceChildren(background, next.layer);
+        focus?.focus({preventScroll:true});
+        return;
+      }
+
+      busy = true;
+      svg.setAttribute('aria-busy', 'true');
+      const fan = svgElement('path', {class:'grammar-pie-fan', fill:selected.color, 'aria-hidden':'true'});
+      const under = opening ? previous.layer : next.layer;
+      const over = opening ? next.layer : previous.layer;
+      svg.replaceChildren(background, under, fan, over);
+      const ease = x => x * x * (3 - 2 * x);
+      let start;
+      function animate(time) {
+        if (!svg.isConnected) return;
+        start ??= time;
+        const progress = Math.max(0, Math.min((time - start) / 640, 1));
+        const play = opening ? progress : 1 - progress;
+        const unfold = ease(Math.min(play / .72, 1));
+        const reveal = ease(Math.max((play - .64) / .36, 0));
+        fan.setAttribute('d', sectorPath(selected.center, selected.span + (turn - selected.span) * unfold));
+        under.style.opacity = 1 - unfold;
+        over.style.opacity = reveal;
+        if (progress < 1) requestAnimationFrame(animate);
+        else {
+          next.layer.style.opacity = '';
+          svg.replaceChildren(background, next.layer);
+          svg.removeAttribute('aria-busy');
+          busy = false;
+          focus?.focus({preventScroll:true});
+        }
+      }
+      // Put the starting wedge on screen before advancing the first frame.
+      animate(performance.now());
+    }
   }
 
   function renderHeading(review, name, parentRoute, label, options) {
@@ -710,10 +819,16 @@ let lastSync=read('wj.lastSync',null), refreshing=false;
 document.documentElement.style.setProperty('--font',font+'px');
 function toast(s){$('#toast').textContent=s;$('#toast').style.display='block';clearTimeout(toast.id);toast.id=setTimeout(()=>$('#toast').style.display='none',3500)}
 function nav(p, fromTab=false){
-  if(!fromTab&&p==='calendar'&&isGrammarDetail()&&window.JournalNative){
-    if(grammarParams().has('entry'))returnToGrammar();
-    else $('#reviewContent .grammar-review-back')?.click();
-    return;
+  if(!fromTab&&p==='calendar'&&window.JournalNative){
+    if(grammarParams().has('entry')){
+      returnToGrammar();
+      return;
+    }
+    const back=$('#reviewContent .grammar-review-detail > .grammar-review-back, #reviewContent .grammar-pie-back');
+    if(back){
+      back.dispatchEvent(new MouseEvent('click'));
+      return;
+    }
   }
   if(location.hash==='#grammar'||isGrammarDetail())history.pushState(null,'',location.pathname+location.search);
   page=p;detail=null;tab=0;grammarReturn=null;render();window.scrollTo(0,0);
@@ -742,7 +857,7 @@ function clock(){const s=timerSeconds+(timerStarted?Math.floor((Date.now()-timer
 setInterval(()=>{if($('#clock'))$('#clock').textContent=clock()},1000);
 function draftList(){sheet('<h2>我的草稿</h2>'+drafts.slice().reverse().map(d=>`<button class="note" data-open-draft="${esc(d.id)}"><span class="hint">${esc(d.date)} · 第 ${d.version} 版</span><strong>${esc(d.title||'未命名练习')}</strong><span class="hint">${wordCount(d.text)} 词 · 本机保存</span></button>`).join('')+'<button class="primary wide" id="newBlank">＋ 新练习</button>');document.querySelectorAll('[data-open-draft]').forEach(b=>b.onclick=()=>{currentDraft=b.dataset.openDraft;$('#sheet').close();renderWrite()});$('#newBlank').onclick=()=>{$('#sheet').close();newDraft()}}
 function renderReview(){
-  if(reviewTab===0&&isGrammarDetail()){
+  if(reviewTab===0&&grammarParams().has('point')){
     $('#app').innerHTML='<div class="review-wrap"><section id="reviewContent"></section></div>';
     renderReviewContent();
     return;
@@ -849,9 +964,12 @@ function renderReviewContent(){
   if(reviewTab===0){
     const container=$('#reviewContent');
     const params=grammarParams();
+    const group=history.state?.grammarGroup === undefined ? params.get('group') : history.state.grammarGroup;
     JournalGrammar.render(container,data.records,{
-      locale:'zh-CN', point:params.get('point'), group:params.get('group'), query, translate:text=>text,
-      openRoute:openGrammarRoute, back:backToGrammarOverview, openEntry:openGrammarEntry
+      locale:'zh-CN', point:params.get('point'), group, query, translate:text=>text,
+      openRoute:openGrammarRoute,
+      onGroupChange:id=>history.replaceState({...history.state,grammarGroup:id},''),
+      back:backToGrammarOverview, openEntry:openGrammarEntry
     });
     return;
   }

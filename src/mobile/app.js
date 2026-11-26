@@ -12,10 +12,16 @@ let lastSync=read('wj.lastSync',null), refreshing=false;
 document.documentElement.style.setProperty('--font',font+'px');
 function toast(s){$('#toast').textContent=s;$('#toast').style.display='block';clearTimeout(toast.id);toast.id=setTimeout(()=>$('#toast').style.display='none',3500)}
 function nav(p, fromTab=false){
-  if(!fromTab&&p==='calendar'&&isGrammarDetail()&&window.JournalNative){
-    if(grammarParams().has('entry'))returnToGrammar();
-    else $('#reviewContent .grammar-review-back')?.click();
-    return;
+  if(!fromTab&&p==='calendar'&&window.JournalNative){
+    if(grammarParams().has('entry')){
+      returnToGrammar();
+      return;
+    }
+    const back=$('#reviewContent .grammar-review-detail > .grammar-review-back, #reviewContent .grammar-pie-back');
+    if(back){
+      back.dispatchEvent(new MouseEvent('click'));
+      return;
+    }
   }
   if(location.hash==='#grammar'||isGrammarDetail())history.pushState(null,'',location.pathname+location.search);
   page=p;detail=null;tab=0;grammarReturn=null;render();window.scrollTo(0,0);
@@ -44,7 +50,7 @@ function clock(){const s=timerSeconds+(timerStarted?Math.floor((Date.now()-timer
 setInterval(()=>{if($('#clock'))$('#clock').textContent=clock()},1000);
 function draftList(){sheet('<h2>我的草稿</h2>'+drafts.slice().reverse().map(d=>`<button class="note" data-open-draft="${esc(d.id)}"><span class="hint">${esc(d.date)} · 第 ${d.version} 版</span><strong>${esc(d.title||'未命名练习')}</strong><span class="hint">${wordCount(d.text)} 词 · 本机保存</span></button>`).join('')+'<button class="primary wide" id="newBlank">＋ 新练习</button>');document.querySelectorAll('[data-open-draft]').forEach(b=>b.onclick=()=>{currentDraft=b.dataset.openDraft;$('#sheet').close();renderWrite()});$('#newBlank').onclick=()=>{$('#sheet').close();newDraft()}}
 function renderReview(){
-  if(reviewTab===0&&isGrammarDetail()){
+  if(reviewTab===0&&grammarParams().has('point')){
     $('#app').innerHTML='<div class="review-wrap"><section id="reviewContent"></section></div>';
     renderReviewContent();
     return;
@@ -151,9 +157,12 @@ function renderReviewContent(){
   if(reviewTab===0){
     const container=$('#reviewContent');
     const params=grammarParams();
+    const group=history.state?.grammarGroup === undefined ? params.get('group') : history.state.grammarGroup;
     JournalGrammar.render(container,data.records,{
-      locale:'zh-CN', point:params.get('point'), group:params.get('group'), query, translate:text=>text,
-      openRoute:openGrammarRoute, back:backToGrammarOverview, openEntry:openGrammarEntry
+      locale:'zh-CN', point:params.get('point'), group, query, translate:text=>text,
+      openRoute:openGrammarRoute,
+      onGroupChange:id=>history.replaceState({...history.state,grammarGroup:id},''),
+      back:backToGrammarOverview, openEntry:openGrammarEntry
     });
     return;
   }
