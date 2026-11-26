@@ -5,7 +5,8 @@ globalThis.JournalGrammar = (() => {
   // Each point has a permanent ID and localized name, rule, usage and common errors.
   const groups = [
     {
-      name: ['Verb system', '动词系统'],
+      id: 'verbs',
+      name: ['Verb system', '动词'],
       points: [
         ['agreement',
           ['Subject–verb agreement', 'The person and number of the subject determine the form of the finite verb.', 'Use “the chart shows”, “the factors contribute” and “the chart does show”. A relative pronoun takes the number of its antecedent.', 'Dropping -s after a singular subject, or using a singular verb with a plural subject.'],
@@ -25,7 +26,8 @@ globalThis.JournalGrammar = (() => {
       ]
     },
     {
-      name: ['Noun system', '名词系统'],
+      id: 'nouns',
+      name: ['Noun system', '名词'],
       points: [
         ['number',
           ['Singular and plural', 'Countable nouns change form when referring to one or several people or things.', 'Use a singular form for one item and a plural after a number greater than one, after many, and often for a whole class.', 'Using a singular noun after many or a plural number, or using the wrong irregular plural.'],
@@ -39,6 +41,7 @@ globalThis.JournalGrammar = (() => {
       ]
     },
     {
+      id: 'function-words',
       name: ['Function words', '功能词'],
       points: [
         ['articles',
@@ -56,6 +59,7 @@ globalThis.JournalGrammar = (() => {
       ]
     },
     {
+      id: 'sentences',
       name: ['Sentence structure', '句子结构'],
       points: [
         ['clauses',
@@ -73,6 +77,7 @@ globalThis.JournalGrammar = (() => {
       ]
     },
     {
+      id: 'vocabulary',
       name: ['Vocabulary and collocations', '词汇与搭配'],
       points: [
         ['word-class',
@@ -96,6 +101,117 @@ globalThis.JournalGrammar = (() => {
   const topics = new Map(groups.flatMap(group => group.points.map(([id, en, zh]) =>
     [id, {id, en, zh}]
   )));
+
+  // A pattern is a correction rule. Matching the changed construction lets
+  // later entries join the same card without relying on dates or example text IDs.
+  const errorPatterns = {
+    agreement: [
+      ['singular-verb', '单数主语漏加动词 -s', 'Missing -s after a singular subject',
+        /\b(?:give|approach|come|reflect|illustrate|account)\b/i, /\b(?:gives|approaches|comes|reflects|illustrates|accounts)\b/i],
+      ['plural-verb', '复数主语误用单数谓语', 'Singular verb after a plural subject',
+        /\b(?:pictures? shows|factors that contributes)\b/i, /\b(?:pictures show|factors that contribute)\b/i],
+      ['plural-do', '复数主语误用 does', 'Using does with a plural subject', /\bdoes\b/i, /\bdo\b/i]
+    ],
+    voice: [
+      ['hold-participle', '被动语态中把 held 写成 hold', 'Using hold instead of held in the passive',
+        /\b(?:is|are|was|were|be|been) hold\b/i, /\b(?:is|are|was|were|be|been) held\b/i]
+    ],
+    nonfinite: [
+      ['participle-modifier', '用限定动词直接修饰名词', 'Using a finite verb directly as a noun modifier',
+        /\b(?:there are|there were)\s+.+?\b(?:contribute|contributes)\b/i, /\bcontributing\b/i],
+      ['infinitive', '动词的不定式补语漏写 to 或接错形式', 'Missing to or using the wrong form in an infinitive complement',
+        /\b(?:choose to \w+ing|want (?!to\b)\w+|hesitat\w* for \w+ing)\b/i, /\b(?:choose|want|hesitat\w*) to\s+\w+/i]
+    ],
+    number: [
+      ['generic-plural', '泛指一类人或事物时误用可数名词单数', 'Using a singular count noun for a general class',
+        /\b(?:university|task|movie|novel)\b/i, /\b(?:universities|tasks|movies|novels)\b/i],
+      ['multiple-plural', '明确表示多个时名词仍用单数', 'Keeping a noun singular when referring to multiple items',
+        /\b(?:twice wonderful experience|more opportunity|some book|main purpose)\b/i,
+        /\b(?:experiences|opportunities|books|purposes)\b/i]
+    ],
+    possessives: [
+      ['plural-possessive', '复数名词所有格漏写或把撇号放错', 'Missing or misplaced apostrophe in a plural possessive',
+        /\bstudents?(?:['’]s)?\s/i, /\bstudents['’]/i]
+    ],
+    articles: [
+      ['generic-the', '泛指事物时多加 the', 'Adding the to a general reference',
+        /\bthe (?:exercise|difficulties|society|information searching)\b/i, null],
+      ['missing-a-an', '单数可数名词前漏写 a 或 an', 'Missing a or an before a singular count noun',
+        /\b(?:such natural thing|is important factor)\b/i, /\b(?:such a natural thing|is an important factor)\b/i],
+      ['a-an-sound', '元音音素前把 an 写成 a', 'Using a instead of an before a vowel sound',
+        /\ba honor\b/i, /\ban honor\b/i],
+      ['missing-the', '特指对象前漏写 the', 'Missing the before a specific referent',
+        /\b(?:government should|for postgraduate entrance examination)\b/i, /\bthe\b/i]
+    ],
+    prepositions: [
+      ['come-to-place', '表示到某地时漏写 come to', 'Missing to after come before a place', /\bcome (?!to\b)\w+/i, /\bcome to\b/i],
+      ['time-determiner', '在 this 或 next 开头的时间短语前多加介词', 'Adding a preposition before a time phrase beginning with this or next',
+        /\b(?:in this weekend|on next Friday)\b/i, /\b(?:this weekend|next Friday)\b/i]
+    ],
+    clauses: [
+      ['fact-clause', '用完整句作主语时缺少从句结构', 'Missing the clause structure for a proposition used as a subject',
+        /\b(?:more people choose|the majority of students choose)\b/i, /\bthe fact that\b/i]
+    ],
+    inversion: [
+      ['extra-auxiliary', 'Not only 部分倒装中叠加助动词', 'Stacking auxiliaries after fronted not only',
+        /\bnot only does\b.*\b(?:should|can)\b/i, /\bnot only (?:should|does)\b/i]
+    ],
+    completeness: [
+      ['extra-be', '实义动词前多加 be', 'Adding be before a main verb',
+        /\b(?:is (?:truly )?helps|would be last)\b/i, /\b(?:help|helps|last)\b/i]
+    ],
+    capitalization: [
+      ['proper-name', '姓名或地名首字母漏大写', 'Leaving a proper name lowercase',
+        /\b(?:Li ming|Dear jack|in china)\b/, /\b(?:Li Ming|Dear Jack|in China)\b/],
+      ['running-text', '句中的普通词误用大写', 'Capitalizing ordinary words in running text',
+        /\b(?:People|Leisure Activities)\b/, /\b(?:people|leisure activities)\b/]
+    ],
+    collocations: [
+      ['account-for-share', '表示占比时把 account for 写成 count', 'Using count instead of account for to express a share',
+        /\bcount(?:s|ed|ing)?(?:\s+for\b|\s+(?:the\s+)?highest percentage\b)/i, /\baccount(?:s|ed|ing)? for\b/i],
+      ['such-as', '举例时把 such as 写成 such like', 'Using such like instead of such as',
+        /\bsuch like\b/i, /\bsuch as\b/i],
+      ['look-forward', '期待回复时把 look forward to 写成 look for', 'Using look for instead of look forward to for an anticipated reply',
+        /\blook(?:ing)? for\b/i, /\blook(?:ing)? forward to\b/i],
+      ['a-lot-of', '数量短语 a lot of 写错或漏写 of', 'Omitting of or misforming a lot of',
+        /\ba (?:lots of|lot (?!of\b)\w+)\b/i, /\ba lot of\b/i]
+    ],
+    'word-choice': [
+      ['convenient', '把表示「方便」的 convenient 写成 convince', 'Confusing convenient with convince',
+        /\bconvince\b/i, /\bconvenient\b/i]
+    ]
+  };
+
+  function omittedGenericArticle(before, after, why) {
+    if (!/泛指|generic|general reference/i.test(why)) return false;
+    return [...before.matchAll(/\bthe (\w+)/gi)].some(([, noun]) =>
+      new RegExp('\\b' + noun + '\\b', 'i').test(after) &&
+      !new RegExp('\\bthe ' + noun + '\\b', 'i').test(after));
+  }
+
+  function groupErrors(topic, examples) {
+    const cards = new Map();
+    for (const example of examples) {
+      const [label, before, after, why] = example.g;
+      const rule = errorPatterns[topic]?.find(([id, , , wrong, correct]) => {
+        if (id === 'generic-the') return omittedGenericArticle(before, after, why) ||
+          (wrong.test(before) && !wrong.test(after));
+        return wrong.test(before) && correct.test(after);
+      });
+      // An unmatched correction keeps its own card unless the exact changed
+      // text recurs. A broad annotation label alone does not establish a match.
+      const key = rule?.[0] || JSON.stringify([matchKey(before), matchKey(after)]);
+      if (!cards.has(key)) {
+        cards.set(key, {
+          id: rule?.[0] || example.date + ':' + example.index,
+          title: rule ? {zh:rule[1], en:rule[2]} : null,
+          label, examples:[]
+        });
+      }
+      cards.get(key).examples.push(example);
+    }
+    return [...cards.values()].sort((a, b) => b.examples.length - a.examples.length);
+  }
 
   const topicAliases = new Map([...topics.values()].flatMap(({id, en, zh}) =>
     [[id, id], [en[0].toLowerCase(), id], [zh[0], id]]
@@ -293,22 +409,28 @@ globalThis.JournalGrammar = (() => {
 
   const copy = {
     en: {
-      title:'Grammar Review', categories:'topics with errors', back:'‹ Back to grammar review',
-      frequency:'Error frequency', knowledge:'Grammar topics', rule:'Rule', use:'How to use it',
-      mistakes:'Common errors', examples:'My past errors', none:'No recorded errors for this topic.',
+      title:'Grammar Review', back:'‹ Back to grammar review', backToGroup:'‹ Back to the category chart',
+      pieNote:'Each error pattern counts once, even if it has several examples.',
+      cardCount:n => n + (n === 1 ? ' pattern' : ' patterns'),
+      exampleCount:n => n + (n === 1 ? ' example' : ' examples'),
+      rule:'Rule', use:'How to use it', mistakes:'Common errors',
+      examples:'My error patterns', none:'No recorded errors for this topic.',
       original:'Original', revised:'Revised', noteOriginal:'Excerpt from feedback', noteRevised:'Archived correction',
       because:'Why it was corrected', open:'View full entry ›',
       noSearch:'No topics match your search.', empty:'No recorded errors yet.',
-      unclassified:'Unclassified', share:'share of all recorded errors'
+      unclassified:'Unclassified'
     },
     zh: {
-      title:'语法统计', categories:'个知识点有错题记录', back:'‹ 返回语法统计',
-      frequency:'各类别错误频率', knowledge:'语法知识分类', rule:'语法规则', use:'正确用法',
-      mistakes:'常见错误', examples:'我的历史错句', none:'你还没有这个知识点的错误记录。',
+      title:'语法统计', back:'‹ 返回语法总览', backToGroup:'‹ 返回分类饼图',
+      pieNote:'同一种错法只计一次，点开错题卡可看所有例句。',
+      cardCount:n => n + ' 种',
+      exampleCount:n => n + ' 条例句',
+      rule:'语法规则', use:'正确用法', mistakes:'常见错误',
+      examples:'我的错题卡', none:'你还没有这个知识点的错误记录。',
       original:'原句', revised:'修改句', noteOriginal:'批注中的原句片段', noteRevised:'归档订正',
       because:'错误原因', open:'查看当天作文 ›',
       noSearch:'没有找到匹配的知识点。', empty:'还没有归档的语法错误。',
-      unclassified:'待归类', share:'占全部错误'
+      unclassified:'待归类'
     }
   };
 
@@ -381,108 +503,130 @@ globalThis.JournalGrammar = (() => {
     return card;
   }
 
+  const groupsById = new Map(groups.map(group => [group.id, group]));
+  const groupByTopic = new Map(groups.flatMap(group =>
+    group.points.map(([topic]) => [topic, group])
+  ));
+  const pieColors = ['#355c48', '#637b52', '#896d47', '#546779', '#796355'];
+
   function render(container, records, options) {
-    const {examples, ranked, total} = summarize(records);
-    const {locale, point, query = ''} = options;
+    const {examples} = summarize(records);
+    const {locale, point, group:groupId, query = ''} = options;
     const lang = locale === 'zh-CN' ? 'zh' : 'en';
+    const nameIndex = lang === 'zh' ? 1 : 0;
     const t = copy[lang];
     const review = element('div', 'grammar-review');
-    if (examples.has(point)) {
-      renderTopic(review, point, examples.get(point), options, lang);
-      container.replaceChildren(review);
-      return;
-    }
-
-    const unknown = examples.get('unclassified');
+    const group = groupsById.get(groupId);
     const key = query.trim().toLowerCase();
-    const visible = (id, details) => !key || details.join(' ').toLowerCase().includes(key) ||
-      examples.get(id).some(issue => [issue.date, ...issue.g].join(' ').toLowerCase().includes(key));
-
-    review.append(element('h2', 'grammar-review-title', t.title));
-    const chart = element('section', 'grammar-review-chart');
-    chart.append(element('h3', '', t.frequency),
-      element('p', 'grammar-review-muted', ranked.length + ' ' + t.categories));
-    const chartList = element('div', 'grammar-review-bars');
-    const percentage = new Intl.NumberFormat(locale, {style:'percent', maximumFractionDigits:1});
-    const chartIds = unknown.length ? [...ranked, 'unclassified'] : ranked;
-    const max = Math.max(1, ...chartIds.map(id => examples.get(id).length));
-    for (const id of chartIds) {
+    const cards = new Map([...examples].map(([id, entries]) => {
+      const grouped = groupErrors(id, entries);
+      if (!key) return [id, grouped];
       const topic = topics.get(id);
-      const name = topic ? topic[lang][0] : t.unclassified;
-      const group = groups.find(group => group.points.some(([topicId]) => topicId === id));
-      if (!visible(id, topic ? [...group.name, ...topic.en, ...topic.zh] : [name])) continue;
-      const count = examples.get(id).length;
-      const rate = percentage.format(count / total);
-      const button = element('button', 'grammar-review-bar');
-      button.type = 'button';
-      button.dataset.grammarBar = id;
-      button.setAttribute('aria-label', name + ' · ' + count + ' · ' + rate + ' ' + t.share);
-      const track = element('span', 'grammar-review-track');
-      track.setAttribute('aria-hidden', 'true');
-      track.style.setProperty('--bar', (100 * count / max) + '%');
-      button.append(element('span', 'grammar-review-bar-name', name), track,
-        element('strong', 'grammar-review-count', count), element('span', 'grammar-review-rate', rate));
-      button.addEventListener('click', () => options.openPoint(id, button));
-      chartList.append(button);
-    }
-    chart.append(chartList.childElementCount ? chartList : element('p', 'grammar-review-muted', total ? t.noSearch : t.empty));
-    review.append(chart);
+      const group = groupByTopic.get(id);
+      const names = [group?.name, topic?.en, topic?.zh].flat().join(' ').toLowerCase();
+      if (names.includes(key)) return [id, grouped];
+      return [id, grouped.filter(card => [
+        card.title?.zh, card.title?.en, ...card.examples.flatMap(issue => [issue.date, ...issue.g])
+      ].join(' ').toLowerCase().includes(key))];
+    }));
 
-    const knowledge = element('section', 'grammar-review-knowledge');
-    const heading = element('h3', '', t.knowledge);
-    heading.id = 'grammar-knowledge-title';
-    knowledge.append(heading);
-    const viewport = element('div', 'grammar-review-tree-scroll');
-    viewport.setAttribute('role', 'region');
-    viewport.setAttribute('aria-labelledby', heading.id);
-    viewport.tabIndex = 0;
-    const tree = element('div', 'grammar-review-tree');
-    for (const group of groups) {
-      const entries = group.points.filter(([id, en, zh]) => visible(id, [...group.name, ...en, ...zh]));
-      if (!entries.length) continue;
-      const branch = element('section', 'grammar-review-group');
-      branch.append(element('h4', '', group.name[lang === 'zh' ? 1 : 0]));
-      const children = element('ul', 'grammar-review-children');
-      for (const [id, en, zh] of entries) {
-        const child = element('li');
-        child.append(topicButton(id, (lang === 'zh' ? zh : en)[0]));
-        children.append(child);
+    if (examples.has(point)) {
+      renderTopic(review, point, cards.get(point), options, lang);
+    } else if (group) {
+      renderHeading(review, group.name[nameIndex], '#grammar', t.back, options);
+      const entries = group.points.filter(([id]) => cards.get(id).length).map(([id, en, zh]) => ({
+        id, name:(lang === 'zh' ? zh : en)[0], count:cards.get(id).length, route:pointRoute(id)
+      }));
+      renderPie(review, entries, options, t, key ? t.noSearch : t.empty);
+    } else {
+      review.append(element('h2', 'grammar-review-title', t.title));
+      const entries = groups.map(group => ({
+        id:group.id, name:group.name[nameIndex], route:groupRoute(group.id),
+        count:group.points.reduce((count, [id]) => count + cards.get(id).length, 0)
+      }));
+      renderPie(review, entries, options, t, key ? t.noSearch : t.empty);
+      const unknown = cards.get('unclassified');
+      if (unknown.length) {
+        const button = element('button', 'grammar-review-back', t.unclassified + ' ›');
+        button.type = 'button';
+        button.addEventListener('click', () => options.openRoute(pointRoute('unclassified'), button));
+        review.append(button);
       }
-      branch.append(children);
-      tree.append(branch);
     }
-    viewport.append(tree);
-    knowledge.append(tree.childElementCount ? viewport : element('p', 'grammar-review-muted', t.noSearch));
-    if (unknown.length && visible('unclassified', [t.unclassified])) {
-      knowledge.append(topicButton('unclassified', t.unclassified));
-    }
-    review.append(knowledge);
     container.replaceChildren(review);
-
-    function topicButton(id, name) {
-      const button = element('button', 'grammar-review-topic');
-      button.type = 'button';
-      button.dataset.grammarTopic = id;
-      const arrow = element('span', 'grammar-review-arrow', '›');
-      arrow.setAttribute('aria-hidden', 'true');
-      button.append(element('span', '', name),
-        element('span', 'grammar-review-topic-count', examples.get(id).length), arrow);
-      button.addEventListener('click', () => options.openPoint(id, button));
-      return button;
-    }
   }
 
-  function renderTopic(review, id, examples, options, lang) {
-    const t = copy[lang];
-    const [name, rule, use, mistakes] = topics.get(id)?.[lang] || [t.unclassified];
-    const back = element('button', 'grammar-review-back', t.back);
+  function svgElement(tag, attrs) {
+    const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (const [key, value] of Object.entries(attrs)) node.setAttribute(key, value);
+    return node;
+  }
+
+  function renderPie(review, entries, options, t, emptyMessage = t.empty) {
+    const total = entries.reduce((sum, entry) => sum + entry.count, 0);
+    review.append(element('p', 'grammar-review-muted grammar-review-chart-note', total ? t.pieNote : emptyMessage));
+    if (!entries.length) return;
+    const chart = element('div', 'grammar-review-pie-layout');
+    const svg = svgElement('svg', {viewBox:'0 0 240 240', class:'grammar-review-pie', 'aria-hidden':'true'});
+    const legend = element('ul', 'grammar-review-legend');
+    const percentage = new Intl.NumberFormat(options.locale, {style:'percent', maximumFractionDigits:1});
+    const pointAt = (angle, radius) => [120 + radius * Math.cos(angle), 120 + radius * Math.sin(angle)];
+    let angle = -Math.PI / 2;
+    for (const [index, {id, name, route, count}] of entries.entries()) {
+      const color = pieColors[index % pieColors.length];
+      const share = total ? count / total : 0;
+      const item = element('li');
+      const button = element('button', 'grammar-review-legend-button');
+      button.type = 'button';
+      button.dataset.grammarNav = id;
+      button.addEventListener('click', () => options.openRoute(route, button));
+      const swatch = element('span', 'grammar-review-swatch');
+      swatch.style.backgroundColor = color;
+      swatch.setAttribute('aria-hidden', 'true');
+      const value = element('span', 'grammar-review-legend-count', t.cardCount(count));
+      const rate = element('span', 'grammar-review-legend-rate', percentage.format(share));
+      button.append(swatch, element('span', '', name), value, rate);
+      item.append(button);
+      legend.append(item);
+
+      if (!count) continue;
+      const end = angle + share * 2 * Math.PI;
+      const slice = share === 1 ? svgElement('circle', {cx:120, cy:120, r:112})
+        : svgElement('path', {d:`M 120 120 L ${pointAt(angle, 112).join(' ')} A 112 112 0 ${share > .5 ? 1 : 0} 1 ${pointAt(end, 112).join(' ')} Z`});
+      slice.setAttribute('fill', color);
+      slice.dataset.grammarSlice = id;
+      slice.addEventListener('click', event => options.openRoute(route, svg, {
+        x:event.clientX, y:event.clientY
+      }, id));
+      svg.append(slice);
+      if (share >= .09) {
+        const [x, y] = share === 1 ? [120,120] : pointAt((angle + end) / 2, 76);
+        const label = svgElement('text', {x, y, 'text-anchor':'middle', 'dominant-baseline':'central'});
+        label.textContent = percentage.format(share);
+        svg.append(label);
+      }
+      angle = end;
+    }
+    if (total) chart.append(svg);
+    chart.append(legend);
+    review.append(chart);
+  }
+
+  function renderHeading(review, name, parentRoute, label, options) {
+    const back = element('button', 'grammar-review-back', label);
     back.type = 'button';
-    back.addEventListener('click', options.back);
+    back.addEventListener('click', () => options.back(parentRoute));
     const title = element('h2', 'grammar-review-title', name);
     title.tabIndex = -1;
     review.classList.add('grammar-review-detail');
     review.append(back, title);
+  }
 
+  function renderTopic(review, id, cards, options, lang) {
+    const t = copy[lang];
+    const [name, rule, use, mistakes] = topics.get(id)?.[lang] || [t.unclassified];
+    const group = groupByTopic.get(id);
+    renderHeading(review, name, group ? groupRoute(group.id) : '#grammar', group ? t.backToGroup : t.back, options);
     if (rule) {
       const rules = element('dl', 'grammar-review-rules');
       for (const [label, text] of [[t.rule, rule], [t.use, use], [t.mistakes, mistakes]]) {
@@ -491,46 +635,52 @@ globalThis.JournalGrammar = (() => {
       review.append(rules);
     }
 
-    const heading = element('h3', 'grammar-review-examples-title', t.examples);
-    review.append(heading);
-    if (examples.length) examples.forEach(issue => review.append(exampleCard(issue, options, t)));
-    else review.append(element('p', 'grammar-review-muted', t.none));
+    review.append(element('h3', 'grammar-review-examples-title', t.examples));
+    if (!cards.length) review.append(element('p', 'grammar-review-muted', t.none));
+    for (const card of cards) {
+      const details = element('details', 'grammar-review-error');
+      details.dataset.grammarError = card.id;
+      const why = options.translate(card.examples[0].g[3]);
+      const firstReason = why.split(/[。；;]/)[0].trim();
+      const title = card.title?.[lang] || firstReason || options.translate(card.label);
+      const summary = element('summary');
+      summary.append(element('span', '', title), element('span', 'grammar-review-example-count', t.exampleCount(card.examples.length)));
+      details.append(summary);
+      for (const issue of card.examples) details.append(exampleCard(issue, options, t));
+      review.append(details);
+    }
   }
 
   function pointRoute(id) {
     return '#grammar?' + new URLSearchParams({point:id});
   }
 
-  function readOverview(container, source) {
-    return {
-      y:window.scrollY,
-      x:container.querySelector('.grammar-review-tree-scroll')?.scrollLeft || 0,
-      bar:source?.dataset.grammarBar,
-      topic:source?.dataset.grammarTopic
-    };
+  function groupRoute(id) {
+    return '#grammar?' + new URLSearchParams({group:id});
+  }
+
+  function readOverview(source, id) {
+    return {y:window.scrollY, id:id || source?.dataset.grammarNav};
   }
 
   function restoreOverview(container, position) {
     if (!position) return;
-    const viewport = container.querySelector('.grammar-review-tree-scroll');
-    if (viewport) viewport.scrollLeft = position.x;
     window.scrollTo(0, position.y);
-    const buttons = container.querySelectorAll('[data-grammar-bar], [data-grammar-topic]');
-    if (position.bar || position.topic) {
-      [...buttons].find(button => position.bar
-        ? button.dataset.grammarBar === position.bar
-        : button.dataset.grammarTopic === position.topic)?.focus({preventScroll:true});
+    if (position.id) {
+      [...container.querySelectorAll('[data-grammar-nav]')].find(button =>
+        button.dataset.grammarNav === position.id)?.focus({preventScroll:true});
     }
   }
 
-  function animatePoint(container, from) {
+  function animatePoint(container, from, at) {
     const panel = container.querySelector('.grammar-review-detail');
     panel?.querySelector('h2').focus({preventScroll:true});
     if (!panel?.animate || !from || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const to = panel.getBoundingClientRect();
     const scale = Math.max(.72, Math.min(.94, from.width / to.width));
-    const x = from.left + from.width / 2 - (to.left + to.width / 2);
-    const y = from.top + from.height / 2 - to.top;
+    const x = (at?.x ?? from.left + from.width / 2) - (to.left + to.width / 2);
+    const offsetY = (at?.y ?? from.top + from.height / 2) - to.top;
+    const y = Math.max(-120, Math.min(180, offsetY));
     panel.animate([
       {transform:`translate(${x}px, ${y}px) scale(${scale})`, opacity:.3},
       {transform:'translate(0, 0) scale(1)', opacity:1}
@@ -542,7 +692,7 @@ globalThis.JournalGrammar = (() => {
     return point?.[locale === 'zh-CN' ? 'zh' : 'en'][0] || g[0];
   }
 
-  return {summarize, render, label, pointRoute, readOverview, restoreOverview, animatePoint,
+  return {summarize, groupErrors, render, label, pointRoute, readOverview, restoreOverview, animatePoint,
     writingSentences, wordsWithOffsets, locateWords, changedWordRanges};
 })();
 
@@ -560,12 +710,12 @@ let lastSync=read('wj.lastSync',null), refreshing=false;
 document.documentElement.style.setProperty('--font',font+'px');
 function toast(s){$('#toast').textContent=s;$('#toast').style.display='block';clearTimeout(toast.id);toast.id=setTimeout(()=>$('#toast').style.display='none',3500)}
 function nav(p, fromTab=false){
-  if(!fromTab&&p==='calendar'&&grammarParams().has('point')&&window.JournalNative){
+  if(!fromTab&&p==='calendar'&&isGrammarDetail()&&window.JournalNative){
     if(grammarParams().has('entry'))returnToGrammar();
-    else backToGrammarOverview();
+    else $('#reviewContent .grammar-review-back')?.click();
     return;
   }
-  if(grammarParams().has('point'))history.pushState(null,'',location.pathname+location.search);
+  if(location.hash==='#grammar'||isGrammarDetail())history.pushState(null,'',location.pathname+location.search);
   page=p;detail=null;tab=0;grammarReturn=null;render();window.scrollTo(0,0);
 }
 document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>nav(b.dataset.page,true));
@@ -592,7 +742,7 @@ function clock(){const s=timerSeconds+(timerStarted?Math.floor((Date.now()-timer
 setInterval(()=>{if($('#clock'))$('#clock').textContent=clock()},1000);
 function draftList(){sheet('<h2>我的草稿</h2>'+drafts.slice().reverse().map(d=>`<button class="note" data-open-draft="${esc(d.id)}"><span class="hint">${esc(d.date)} · 第 ${d.version} 版</span><strong>${esc(d.title||'未命名练习')}</strong><span class="hint">${wordCount(d.text)} 词 · 本机保存</span></button>`).join('')+'<button class="primary wide" id="newBlank">＋ 新练习</button>');document.querySelectorAll('[data-open-draft]').forEach(b=>b.onclick=()=>{currentDraft=b.dataset.openDraft;$('#sheet').close();renderWrite()});$('#newBlank').onclick=()=>{$('#sheet').close();newDraft()}}
 function renderReview(){
-  if(reviewTab===0&&grammarParams().has('point')){
+  if(reviewTab===0&&isGrammarDetail()){
     $('#app').innerHTML='<div class="review-wrap"><section id="reviewContent"></section></div>';
     renderReviewContent();
     return;
@@ -619,19 +769,25 @@ function grammarParams(){
   return new URLSearchParams(location.hash.startsWith('#grammar?')?location.hash.slice(9):'');
 }
 
-function openGrammarPoint(id, button){
-  const from=button.getBoundingClientRect();
-  history.replaceState({...history.state,grammarOverview:JournalGrammar.readOverview($('#reviewContent'),button)},'','#grammar');
-  history.pushState({fromGrammarOverview:true},'',JournalGrammar.pointRoute(id));
-  window.scrollTo(0,0);
-  render();
-  JournalGrammar.animatePoint($('#reviewContent'),from);
+function isGrammarDetail(){
+  const params=grammarParams();
+  return params.has('point')||params.has('group');
 }
 
-function backToGrammarOverview(){
+function openGrammarRoute(route, button, at, id){
+  const from=button.getBoundingClientRect();
+  const current=isGrammarDetail()?location.hash:'#grammar';
+  history.replaceState({...history.state,grammarOverview:JournalGrammar.readOverview(button,id)},'',current);
+  history.pushState({fromGrammarOverview:true},'',route);
+  window.scrollTo(0,0);
+  render();
+  JournalGrammar.animatePoint($('#reviewContent'),from,at);
+}
+
+function backToGrammarOverview(parentRoute){
   if(history.state?.fromGrammarOverview)history.back();
   else {
-    history.replaceState(null,'','#grammar');
+    history.replaceState(null,'',parentRoute);
     render();
     window.scrollTo(0,0);
   }
@@ -671,32 +827,32 @@ function loadGrammarRoute(){
 }
 
 window.addEventListener('popstate',event=>{
-  if(location.hash!=='#grammar'&&!grammarParams().has('point')){
-    if(grammarReturn||$('#reviewContent .grammar-review-detail'))nav('calendar',true);
+  if(location.hash!=='#grammar'&&!isGrammarDetail()){
+    if(grammarReturn||page==='review')nav('calendar',true);
     return;
   }
   loadGrammarRoute();
   render();
   const container=$('#reviewContent');
   if(!container)return;
-  if(location.hash==='#grammar')JournalGrammar.restoreOverview(container,event.state?.grammarOverview);
-  else if(event.state?.grammarEntryOrigin){
+  if(event.state?.grammarEntryOrigin){
     const {scroll,entry}=event.state.grammarEntryOrigin;
+    const target=container.querySelector('[data-grammar-entry="'+entry+'"]');
+    if(target)target.closest('.grammar-review-error').open=true;
     window.scrollTo(0,scroll);
-    container.querySelector('[data-grammar-entry="'+entry+'"]')?.focus({preventScroll:true});
-  }else JournalGrammar.animatePoint(container);
+    target?.focus({preventScroll:true});
+  }else if(event.state?.grammarOverview)JournalGrammar.restoreOverview(container,event.state.grammarOverview);
+  else JournalGrammar.animatePoint(container);
 });
 
 function renderReviewContent(){
   if(reviewTab===0){
     const container=$('#reviewContent');
-    const treeScroll=container.querySelector('.grammar-review-tree-scroll')?.scrollLeft;
+    const params=grammarParams();
     JournalGrammar.render(container,data.records,{
-      locale:'zh-CN', point:grammarParams().get('point'), query, translate:text=>text,
-      openPoint:openGrammarPoint, back:backToGrammarOverview, openEntry:openGrammarEntry
+      locale:'zh-CN', point:params.get('point'), group:params.get('group'), query, translate:text=>text,
+      openRoute:openGrammarRoute, back:backToGrammarOverview, openEntry:openGrammarEntry
     });
-    const tree=container.querySelector('.grammar-review-tree-scroll');
-    if(tree&&treeScroll!==undefined)tree.scrollLeft=treeScroll;
     return;
   }
   const q=query.trim().toLowerCase();
@@ -731,4 +887,4 @@ async function refreshData(manual=false){if(refreshing)return;refreshing=true;tr
 window.onNativeUpdate=s=>{if($('#updateStatus'))$('#updateStatus').textContent=s;toast(s)};
 window.addEventListener('online',()=>refreshData());
 window.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshData();if(page==='calendar'&&!detail)render()}});
-(async()=>{const cached=read('wj.cloud',null);if(validData(cached))data=cached;else{try{const v=await getJSON('data.json');if(validData(v))data=v}catch{toast('离线内容暂不可用，请刷新重试')}}if(location.hash==='#grammar'||grammarParams().has('point'))loadGrammarRoute();render();refreshData()})();
+(async()=>{const cached=read('wj.cloud',null);if(validData(cached))data=cached;else{try{const v=await getJSON('data.json');if(validData(v))data=v}catch{toast('离线内容暂不可用，请刷新重试')}}if(location.hash==='#grammar'||isGrammarDetail())loadGrammarRoute();render();refreshData()})();

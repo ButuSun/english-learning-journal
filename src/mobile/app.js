@@ -12,12 +12,12 @@ let lastSync=read('wj.lastSync',null), refreshing=false;
 document.documentElement.style.setProperty('--font',font+'px');
 function toast(s){$('#toast').textContent=s;$('#toast').style.display='block';clearTimeout(toast.id);toast.id=setTimeout(()=>$('#toast').style.display='none',3500)}
 function nav(p, fromTab=false){
-  if(!fromTab&&p==='calendar'&&grammarParams().has('point')&&window.JournalNative){
+  if(!fromTab&&p==='calendar'&&isGrammarDetail()&&window.JournalNative){
     if(grammarParams().has('entry'))returnToGrammar();
-    else backToGrammarOverview();
+    else $('#reviewContent .grammar-review-back')?.click();
     return;
   }
-  if(grammarParams().has('point'))history.pushState(null,'',location.pathname+location.search);
+  if(location.hash==='#grammar'||isGrammarDetail())history.pushState(null,'',location.pathname+location.search);
   page=p;detail=null;tab=0;grammarReturn=null;render();window.scrollTo(0,0);
 }
 document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>nav(b.dataset.page,true));
@@ -44,7 +44,7 @@ function clock(){const s=timerSeconds+(timerStarted?Math.floor((Date.now()-timer
 setInterval(()=>{if($('#clock'))$('#clock').textContent=clock()},1000);
 function draftList(){sheet('<h2>我的草稿</h2>'+drafts.slice().reverse().map(d=>`<button class="note" data-open-draft="${esc(d.id)}"><span class="hint">${esc(d.date)} · 第 ${d.version} 版</span><strong>${esc(d.title||'未命名练习')}</strong><span class="hint">${wordCount(d.text)} 词 · 本机保存</span></button>`).join('')+'<button class="primary wide" id="newBlank">＋ 新练习</button>');document.querySelectorAll('[data-open-draft]').forEach(b=>b.onclick=()=>{currentDraft=b.dataset.openDraft;$('#sheet').close();renderWrite()});$('#newBlank').onclick=()=>{$('#sheet').close();newDraft()}}
 function renderReview(){
-  if(reviewTab===0&&grammarParams().has('point')){
+  if(reviewTab===0&&isGrammarDetail()){
     $('#app').innerHTML='<div class="review-wrap"><section id="reviewContent"></section></div>';
     renderReviewContent();
     return;
@@ -71,19 +71,25 @@ function grammarParams(){
   return new URLSearchParams(location.hash.startsWith('#grammar?')?location.hash.slice(9):'');
 }
 
-function openGrammarPoint(id, button){
-  const from=button.getBoundingClientRect();
-  history.replaceState({...history.state,grammarOverview:JournalGrammar.readOverview($('#reviewContent'),button)},'','#grammar');
-  history.pushState({fromGrammarOverview:true},'',JournalGrammar.pointRoute(id));
-  window.scrollTo(0,0);
-  render();
-  JournalGrammar.animatePoint($('#reviewContent'),from);
+function isGrammarDetail(){
+  const params=grammarParams();
+  return params.has('point')||params.has('group');
 }
 
-function backToGrammarOverview(){
+function openGrammarRoute(route, button, at, id){
+  const from=button.getBoundingClientRect();
+  const current=isGrammarDetail()?location.hash:'#grammar';
+  history.replaceState({...history.state,grammarOverview:JournalGrammar.readOverview(button,id)},'',current);
+  history.pushState({fromGrammarOverview:true},'',route);
+  window.scrollTo(0,0);
+  render();
+  JournalGrammar.animatePoint($('#reviewContent'),from,at);
+}
+
+function backToGrammarOverview(parentRoute){
   if(history.state?.fromGrammarOverview)history.back();
   else {
-    history.replaceState(null,'','#grammar');
+    history.replaceState(null,'',parentRoute);
     render();
     window.scrollTo(0,0);
   }
@@ -123,32 +129,32 @@ function loadGrammarRoute(){
 }
 
 window.addEventListener('popstate',event=>{
-  if(location.hash!=='#grammar'&&!grammarParams().has('point')){
-    if(grammarReturn||$('#reviewContent .grammar-review-detail'))nav('calendar',true);
+  if(location.hash!=='#grammar'&&!isGrammarDetail()){
+    if(grammarReturn||page==='review')nav('calendar',true);
     return;
   }
   loadGrammarRoute();
   render();
   const container=$('#reviewContent');
   if(!container)return;
-  if(location.hash==='#grammar')JournalGrammar.restoreOverview(container,event.state?.grammarOverview);
-  else if(event.state?.grammarEntryOrigin){
+  if(event.state?.grammarEntryOrigin){
     const {scroll,entry}=event.state.grammarEntryOrigin;
+    const target=container.querySelector('[data-grammar-entry="'+entry+'"]');
+    if(target)target.closest('.grammar-review-error').open=true;
     window.scrollTo(0,scroll);
-    container.querySelector('[data-grammar-entry="'+entry+'"]')?.focus({preventScroll:true});
-  }else JournalGrammar.animatePoint(container);
+    target?.focus({preventScroll:true});
+  }else if(event.state?.grammarOverview)JournalGrammar.restoreOverview(container,event.state.grammarOverview);
+  else JournalGrammar.animatePoint(container);
 });
 
 function renderReviewContent(){
   if(reviewTab===0){
     const container=$('#reviewContent');
-    const treeScroll=container.querySelector('.grammar-review-tree-scroll')?.scrollLeft;
+    const params=grammarParams();
     JournalGrammar.render(container,data.records,{
-      locale:'zh-CN', point:grammarParams().get('point'), query, translate:text=>text,
-      openPoint:openGrammarPoint, back:backToGrammarOverview, openEntry:openGrammarEntry
+      locale:'zh-CN', point:params.get('point'), group:params.get('group'), query, translate:text=>text,
+      openRoute:openGrammarRoute, back:backToGrammarOverview, openEntry:openGrammarEntry
     });
-    const tree=container.querySelector('.grammar-review-tree-scroll');
-    if(tree&&treeScroll!==undefined)tree.scrollLeft=treeScroll;
     return;
   }
   const q=query.trim().toLowerCase();
@@ -183,4 +189,4 @@ async function refreshData(manual=false){if(refreshing)return;refreshing=true;tr
 window.onNativeUpdate=s=>{if($('#updateStatus'))$('#updateStatus').textContent=s;toast(s)};
 window.addEventListener('online',()=>refreshData());
 window.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshData();if(page==='calendar'&&!detail)render()}});
-(async()=>{const cached=read('wj.cloud',null);if(validData(cached))data=cached;else{try{const v=await getJSON('data.json');if(validData(v))data=v}catch{toast('离线内容暂不可用，请刷新重试')}}if(location.hash==='#grammar'||grammarParams().has('point'))loadGrammarRoute();render();refreshData()})();
+(async()=>{const cached=read('wj.cloud',null);if(validData(cached))data=cached;else{try{const v=await getJSON('data.json');if(validData(v))data=v}catch{toast('离线内容暂不可用，请刷新重试')}}if(location.hash==='#grammar'||isGrammarDetail())loadGrammarRoute();render();refreshData()})();

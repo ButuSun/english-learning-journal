@@ -2009,7 +2009,6 @@ function switchLanguage() {
  language=isChinese()?'en':'zh-CN';
  try {localStorage.setItem('writing-journal-language',language);} catch {}
  const pageScroll=window.scrollY,reviewScroll=readerBody.scrollTop;
- const treeScroll=grammarContent.querySelector('.grammar-review-tree-scroll')?.scrollLeft;
  applyInterfaceLanguage();
  updatePrepProgress();
  renderCalendar();
@@ -2019,8 +2018,6 @@ function switchLanguage() {
  if(reader.open)readerBody.scrollTop=reviewScroll;
  else {
   showMainPage();
-  const tree=grammarContent.querySelector('.grammar-review-tree-scroll');
-  if(tree&&treeScroll!==undefined)tree.scrollLeft=treeScroll;
   window.scrollTo(0,pageScroll);
  }
 }
@@ -2185,6 +2182,7 @@ async function finishReaderClose() {
  window.scrollTo(0,readerScroll);
  const restoredExample=origin?.dataset.grammarEntry &&
   grammarContent.querySelector('[data-grammar-entry="'+origin.dataset.grammarEntry+'"]');
+ if(restoredExample)restoredExample.closest('.grammar-review-error').open=true;
  (origin?.isConnected?origin:restoredExample||calendarPageLink)?.focus({preventScroll:true});
  readerClosing=false;
  readerCloseRequested=false;
@@ -2304,7 +2302,7 @@ function showMainPage() {
  const point=params.get('point');
  const topic=previousGrammarPoints[point]||previousGrammarPoints[params.get('category')]||point;
  grammarRenderHash=hash;
- renderGrammarStats(topic);
+ renderGrammarStats(topic,params.get('group'));
 }
 window.addEventListener('popstate',event=>{
  if(reader.open && event.state?.journalReader!==readerToken){
@@ -2313,8 +2311,10 @@ window.addEventListener('popstate',event=>{
  }
  if(!reader.open){
   showMainPage();
-  if(location.hash==='#grammar')JournalGrammar.restoreOverview(grammarContent,event.state?.grammarOverview);
-  else if(grammarContent.querySelector('.grammar-review-detail')&&!grammarPage.hidden)JournalGrammar.animatePoint(grammarContent);
+  if(!grammarPage.hidden){
+   if(event.state?.grammarOverview)JournalGrammar.restoreOverview(grammarContent,event.state.grammarOverview);
+   else JournalGrammar.animatePoint(grammarContent);
+  }
  }
 });
 function setMainRoute(hash) {
@@ -2371,26 +2371,26 @@ const archivedExampleNotes = {
   ]
  }
 };
-function openGrammarPoint(id, trigger) {
+function openGrammarRoute(route, trigger, at, id) {
  const from=trigger.getBoundingClientRect();
- history.replaceState({...history.state,grammarOverview:JournalGrammar.readOverview(grammarContent,trigger)},'');
- history.pushState({fromGrammarOverview:true},'',JournalGrammar.pointRoute(id));
+ history.replaceState({...history.state,grammarOverview:JournalGrammar.readOverview(trigger,id)},'');
+ history.pushState({fromGrammarOverview:true},'',route);
  window.scrollTo(0,0);
  showMainPage();
- JournalGrammar.animatePoint(grammarContent,from);
+ JournalGrammar.animatePoint(grammarContent,from,at);
 }
-function backToGrammarOverview() {
+function backToGrammarOverview(parentRoute) {
  if(history.state?.fromGrammarOverview)history.back();
- else setMainRoute('#grammar');
+ else setMainRoute(parentRoute);
 }
-function renderGrammarStats(point) {
+function renderGrammarStats(point,group) {
  grammarRenderLanguage=language;
  JournalGrammar.render(grammarContent,records,{
   locale:language,
-  point,
+  point,group,
   translate:displayText,
   extraNotes:({date,index})=>archivedExampleNotes[date]?.[index],
-  openPoint:openGrammarPoint,
+  openRoute:openGrammarRoute,
   back:backToGrammarOverview,
   openEntry:({date,index},link)=>{
    reviewFromGrammar=true;
