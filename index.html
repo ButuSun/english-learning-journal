@@ -55,9 +55,6 @@ button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:2p
 @media(max-width:390px){.main-tabs{gap:6px}.main-tabs a,.main-tabs .language-toggle{padding-inline:8px;font-size:.84rem}.reader-toolbar{gap:6px}.reader-toolbar button{padding-inline:7px}.reader-toolbar span{font-size:.72rem}}
 .main-tabs a[aria-current=page]{background:var(--green);color:white;border-color:var(--green)}
 .grammar-page{width:min(980px,calc(100% - 30px));margin:16px auto 42px}
-.grammar-review-active{background:#f4f4f4;background-image:none}
-.grammar-review-active .main-tabs a,.grammar-review-active .main-tabs button{color:#171717;background:#fff;border-color:#ddd}
-.grammar-review-active .main-tabs a[aria-current=page]{color:#fff;background:#171717;border-color:#171717}
 </style>
 <link rel="stylesheet" href="shared/grammar-review.css">
 </head>
@@ -1937,7 +1934,7 @@ const interfaceChinese = {
  "Archived writing": "已归档的作文",
  "Writing for this date": "当日写作",
  "‹ Back to calendar": "‹ 返回日历",
- "‹ Back to grammar": "‹ 返回语法统计",
+ "‹ Back to grammar topic": "‹ 返回知识点",
  "Writing Review": "写作回顾",
  "Close writing review": "关闭写作回顾",
  "Close": "关闭",
@@ -2012,6 +2009,7 @@ function switchLanguage() {
  language=isChinese()?'en':'zh-CN';
  try {localStorage.setItem('writing-journal-language',language);} catch {}
  const pageScroll=window.scrollY,reviewScroll=readerBody.scrollTop;
+ const treeScroll=grammarContent.querySelector('.grammar-review-tree-scroll')?.scrollLeft;
  applyInterfaceLanguage();
  updatePrepProgress();
  renderCalendar();
@@ -2021,6 +2019,8 @@ function switchLanguage() {
  if(reader.open)readerBody.scrollTop=reviewScroll;
  else {
   showMainPage();
+  const tree=grammarContent.querySelector('.grammar-review-tree-scroll');
+  if(tree&&treeScroll!==undefined)tree.scrollLeft=treeScroll;
   window.scrollTo(0,pageScroll);
  }
 }
@@ -2111,7 +2111,7 @@ const grammarPage=document.querySelector('#grammarPage');
 const grammarContent=document.querySelector('#grammarContent');
 const calendarPageLink=document.querySelector('#calendarPageLink');
 const grammarPageLink=document.querySelector('#grammarPageLink');
-let grammarOpenPoint=null,grammarRenderLanguage,grammarRenderHash;
+let grammarRenderLanguage,grammarRenderHash;
 const reader=document.querySelector('#reader');
 const readerBody=document.querySelector('#readerBody');
 const grammarPopup=document.querySelector('#grammarExplanation');
@@ -2160,7 +2160,7 @@ function openReader(source,label) {
 }
 function updateReaderToolbar() {
  document.querySelector('#readerTitle').textContent=displayText('Writing Review');
- document.querySelector('#readerBack').textContent=displayText(reviewFromGrammar?'‹ Back to grammar':'‹ Back to calendar');
+ document.querySelector('#readerBack').textContent=displayText(reviewFromGrammar?'‹ Back to grammar topic':'‹ Back to calendar');
 }
 async function finishReaderClose() {
  if(!reader.open || readerClosing) return;
@@ -2297,23 +2297,25 @@ function showMainPage() {
  const grammar=hash==='grammar'||hash.startsWith('grammar?');
  grammarPage.hidden=!grammar;
  calendarPage.hidden=grammar;
- document.body.classList.toggle('grammar-review-active',grammar);
  (grammar?calendarPageLink:grammarPageLink).removeAttribute('aria-current');
  (grammar?grammarPageLink:calendarPageLink).setAttribute('aria-current','page');
  if(!grammar || (grammarRenderLanguage===language && grammarRenderHash===hash))return;
  const params=new URLSearchParams(hash.split('?')[1]);
  const point=params.get('point');
- const jumpPoint=previousGrammarPoints[point]||previousGrammarPoints[params.get('category')]||point;
- const routeChanged=grammarRenderHash!==hash;
+ const topic=previousGrammarPoints[point]||previousGrammarPoints[params.get('category')]||point;
  grammarRenderHash=hash;
- renderGrammarStats(routeChanged?jumpPoint:null);
+ renderGrammarStats(topic);
 }
 window.addEventListener('popstate',event=>{
  if(reader.open && event.state?.journalReader!==readerToken){
   void finishReaderClose();
   return;
  }
- if(!reader.open)showMainPage();
+ if(!reader.open){
+  showMainPage();
+  if(location.hash==='#grammar')JournalGrammar.restoreOverview(grammarContent,event.state?.grammarOverview);
+  else if(grammarContent.querySelector('.grammar-review-detail')&&!grammarPage.hidden)JournalGrammar.animatePoint(grammarContent);
+ }
 });
 function setMainRoute(hash) {
  if(location.hash!==hash)history.pushState(null,'',hash);
@@ -2369,15 +2371,27 @@ const archivedExampleNotes = {
   ]
  }
 };
-function renderGrammarStats(jumpPoint) {
+function openGrammarPoint(id, trigger) {
+ const from=trigger.getBoundingClientRect();
+ history.replaceState({...history.state,grammarOverview:JournalGrammar.readOverview(grammarContent,trigger)},'');
+ history.pushState({fromGrammarOverview:true},'',JournalGrammar.pointRoute(id));
+ window.scrollTo(0,0);
+ showMainPage();
+ JournalGrammar.animatePoint(grammarContent,from);
+}
+function backToGrammarOverview() {
+ if(history.state?.fromGrammarOverview)history.back();
+ else setMainRoute('#grammar');
+}
+function renderGrammarStats(point) {
  grammarRenderLanguage=language;
  JournalGrammar.render(grammarContent,records,{
   locale:language,
+  point,
   translate:displayText,
   extraNotes:({date,index})=>archivedExampleNotes[date]?.[index],
-  openPoint:jumpPoint?null:grammarOpenPoint,
-  jumpPoint,
-  onPoint:id=>{grammarOpenPoint=id;},
+  openPoint:openGrammarPoint,
+  back:backToGrammarOverview,
   openEntry:({date,index},link)=>{
    reviewFromGrammar=true;
    selectedBeforeReview=selected;

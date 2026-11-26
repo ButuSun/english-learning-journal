@@ -293,7 +293,7 @@ globalThis.JournalGrammar = (() => {
 
   const copy = {
     en: {
-      title:'Grammar Review', total:'Recorded errors', categories:'Categories with errors',
+      title:'Grammar Review', categories:'topics with errors', back:'‹ Back to grammar review',
       frequency:'Error frequency', knowledge:'Grammar topics', rule:'Rule', use:'How to use it',
       mistakes:'Common errors', examples:'My past errors', none:'No recorded errors for this topic.',
       original:'Original', revised:'Revised', noteOriginal:'Excerpt from feedback', noteRevised:'Archived correction',
@@ -302,7 +302,7 @@ globalThis.JournalGrammar = (() => {
       unclassified:'Unclassified', share:'share of all recorded errors'
     },
     zh: {
-      title:'语法统计', total:'累计错误数', categories:'有错误的类别',
+      title:'语法统计', categories:'个知识点有错题记录', back:'‹ 返回语法统计',
       frequency:'各类别错误频率', knowledge:'语法知识分类', rule:'语法规则', use:'正确用法',
       mistakes:'常见错误', examples:'我的历史错句', none:'你还没有这个知识点的错误记录。',
       original:'原句', revised:'修改句', noteOriginal:'批注中的原句片段', noteRevised:'归档订正',
@@ -383,141 +383,158 @@ globalThis.JournalGrammar = (() => {
 
   function render(container, records, options) {
     const {examples, ranked, total} = summarize(records);
-    const {locale, query = '', onPoint = () => {}} = options;
+    const {locale, point, query = ''} = options;
     const lang = locale === 'zh-CN' ? 'zh' : 'en';
     const t = copy[lang];
-    const unknown = examples.get('unclassified');
-    const visible = (id, details = []) => {
-      if (!query) return true;
-      const key = query.trim().toLowerCase();
-      return details.join(' ').toLowerCase().includes(key) || examples.get(id).some(issue =>
-        [issue.date, ...issue.g].join(' ').toLowerCase().includes(key));
-    };
-
     const review = element('div', 'grammar-review');
-    const title = element('h2', 'grammar-review-title', t.title);
-    const metrics = element('dl', 'grammar-review-metrics');
-    for (const [label, value] of [[t.total, total], [t.categories, ranked.length]]) {
-      const metric = element('div');
-      metric.append(element('dt', '', label), element('dd', '', value));
-      metrics.append(metric);
+    if (examples.has(point)) {
+      renderTopic(review, point, examples.get(point), options, lang);
+      container.replaceChildren(review);
+      return;
     }
-    review.append(title, metrics);
 
+    const unknown = examples.get('unclassified');
+    const key = query.trim().toLowerCase();
+    const visible = (id, details) => !key || details.join(' ').toLowerCase().includes(key) ||
+      examples.get(id).some(issue => [issue.date, ...issue.g].join(' ').toLowerCase().includes(key));
+
+    review.append(element('h2', 'grammar-review-title', t.title));
     const chart = element('section', 'grammar-review-chart');
-    chart.append(element('h3', '', t.frequency));
+    chart.append(element('h3', '', t.frequency),
+      element('p', 'grammar-review-muted', ranked.length + ' ' + t.categories));
     const chartList = element('div', 'grammar-review-bars');
     const percentage = new Intl.NumberFormat(locale, {style:'percent', maximumFractionDigits:1});
-    const targets = new Map();
     const chartIds = unknown.length ? [...ranked, 'unclassified'] : ranked;
     const max = Math.max(1, ...chartIds.map(id => examples.get(id).length));
     for (const id of chartIds) {
-      const point = topics.get(id);
-      const name = point ? point[lang][0] : t.unclassified;
-      if (!visible(id, point ? [...point.en, ...point.zh] : [name])) continue;
+      const topic = topics.get(id);
+      const name = topic ? topic[lang][0] : t.unclassified;
+      const group = groups.find(group => group.points.some(([topicId]) => topicId === id));
+      if (!visible(id, topic ? [...group.name, ...topic.en, ...topic.zh] : [name])) continue;
       const count = examples.get(id).length;
       const rate = percentage.format(count / total);
       const button = element('button', 'grammar-review-bar');
       button.type = 'button';
       button.dataset.grammarBar = id;
-      button.setAttribute('aria-controls', 'grammar-point-' + id);
       button.setAttribute('aria-label', name + ' · ' + count + ' · ' + rate + ' ' + t.share);
       const track = element('span', 'grammar-review-track');
       track.setAttribute('aria-hidden', 'true');
       track.style.setProperty('--bar', (100 * count / max) + '%');
       button.append(element('span', 'grammar-review-bar-name', name), track,
         element('strong', 'grammar-review-count', count), element('span', 'grammar-review-rate', rate));
-      button.addEventListener('click', () => open(id, true));
+      button.addEventListener('click', () => options.openPoint(id, button));
       chartList.append(button);
     }
     chart.append(chartList.childElementCount ? chartList : element('p', 'grammar-review-muted', total ? t.noSearch : t.empty));
     review.append(chart);
 
     const knowledge = element('section', 'grammar-review-knowledge');
-    knowledge.append(element('h3', '', t.knowledge));
+    const heading = element('h3', '', t.knowledge);
+    heading.id = 'grammar-knowledge-title';
+    knowledge.append(heading);
+    const viewport = element('div', 'grammar-review-tree-scroll');
+    viewport.setAttribute('role', 'region');
+    viewport.setAttribute('aria-labelledby', heading.id);
+    viewport.tabIndex = 0;
+    const tree = element('div', 'grammar-review-tree');
     for (const group of groups) {
+      const entries = group.points.filter(([id, en, zh]) => visible(id, [...group.name, ...en, ...zh]));
+      if (!entries.length) continue;
       const branch = element('section', 'grammar-review-group');
-      const title = element('h4', '', group.name[lang === 'zh' ? 1 : 0]);
-      branch.append(title);
-      for (const [id, en, zh] of group.points) {
-        if (visible(id, [...group.name, ...en, ...zh])) {
-          branch.append(topicPanel(id, lang === 'zh' ? zh : en));
-        }
+      branch.append(element('h4', '', group.name[lang === 'zh' ? 1 : 0]));
+      const children = element('ul', 'grammar-review-children');
+      for (const [id, en, zh] of entries) {
+        const child = element('li');
+        child.append(topicButton(id, (lang === 'zh' ? zh : en)[0]));
+        children.append(child);
       }
-      if (branch.childElementCount > 1) knowledge.append(branch);
+      branch.append(children);
+      tree.append(branch);
     }
+    viewport.append(tree);
+    knowledge.append(tree.childElementCount ? viewport : element('p', 'grammar-review-muted', t.noSearch));
     if (unknown.length && visible('unclassified', [t.unclassified])) {
-      knowledge.append(topicPanel('unclassified', [t.unclassified]));
+      knowledge.append(topicButton('unclassified', t.unclassified));
     }
-    if (knowledge.childElementCount === 1) knowledge.append(element('p', 'grammar-review-muted', t.noSearch));
     review.append(knowledge);
     container.replaceChildren(review);
 
-    let active = null;
-    if (targets.has(options.openPoint)) open(options.openPoint);
-    else if (options.jumpPoint && targets.has(options.jumpPoint)) open(options.jumpPoint, true);
-    return {jump: id => { if (targets.has(id)) open(id, true); }};
-
-    function topicPanel(id, [name, rule, use, mistakes]) {
-      const point = element('section', 'grammar-review-point');
-      point.id = 'grammar-point-' + id;
-      const heading = element('h5');
-      const button = element('button', 'grammar-review-toggle');
+    function topicButton(id, name) {
+      const button = element('button', 'grammar-review-topic');
       button.type = 'button';
-      button.setAttribute('aria-expanded', 'false');
-      button.setAttribute('aria-controls', 'grammar-content-' + id);
-      const count = examples.get(id).length;
-      button.append(element('span', '', name), element('span', 'grammar-review-topic-count', count),
-        element('span', 'grammar-review-indicator'));
-      button.lastElementChild.setAttribute('aria-hidden', 'true');
-      button.addEventListener('click', () => open(active === id ? null : id));
-      heading.append(button);
-      const panel = element('div', 'grammar-review-panel');
-      panel.id = 'grammar-content-' + id;
-      panel.inert = true;
-      const inner = element('div', 'grammar-review-panel-inner');
-      if (rule) {
-        const rules = element('dl', 'grammar-review-rules');
-        for (const [label, text] of [[t.rule, rule], [t.use, use], [t.mistakes, mistakes]]) {
-          rules.append(element('dt', '', label), element('dd', '', text));
-        }
-        inner.append(rules);
+      button.dataset.grammarTopic = id;
+      const arrow = element('span', 'grammar-review-arrow', '›');
+      arrow.setAttribute('aria-hidden', 'true');
+      button.append(element('span', '', name),
+        element('span', 'grammar-review-topic-count', examples.get(id).length), arrow);
+      button.addEventListener('click', () => options.openPoint(id, button));
+      return button;
+    }
+  }
+
+  function renderTopic(review, id, examples, options, lang) {
+    const t = copy[lang];
+    const [name, rule, use, mistakes] = topics.get(id)?.[lang] || [t.unclassified];
+    const back = element('button', 'grammar-review-back', t.back);
+    back.type = 'button';
+    back.addEventListener('click', options.back);
+    const title = element('h2', 'grammar-review-title', name);
+    title.tabIndex = -1;
+    review.classList.add('grammar-review-detail');
+    review.append(back, title);
+
+    if (rule) {
+      const rules = element('dl', 'grammar-review-rules');
+      for (const [label, text] of [[t.rule, rule], [t.use, use], [t.mistakes, mistakes]]) {
+        rules.append(element('dt', '', label), element('dd', '', text));
       }
-      panel.append(inner);
-      point.append(heading, panel);
-      targets.set(id, {point, button, panel, inner, loaded:false});
-      return point;
+      review.append(rules);
     }
 
-    function open(id, jump = false) {
-      if (active && active !== id) {
-        const previous = targets.get(active);
-        previous.point.classList.remove('is-open');
-        previous.button.setAttribute('aria-expanded', 'false');
-        previous.panel.inert = true;
-      }
-      active = id;
-      onPoint(id);
-      if (!id) return;
-      const target = targets.get(id);
-      if (!target.loaded) {
-        const list = examples.get(id);
-        if (list.length) {
-          target.inner.append(element('h6', 'grammar-review-examples-title', t.examples));
-          list.forEach(issue => target.inner.append(exampleCard(issue, options, t)));
-        } else {
-          target.inner.append(element('p', 'grammar-review-muted', t.none));
-        }
-        target.loaded = true;
-      }
-      target.point.classList.add('is-open');
-      target.button.setAttribute('aria-expanded', 'true');
-      target.panel.inert = false;
-      if (jump) {
-        target.button.focus({preventScroll:true});
-        target.point.scrollIntoView({block:'start', behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
-      }
+    const heading = element('h3', 'grammar-review-examples-title', t.examples);
+    review.append(heading);
+    if (examples.length) examples.forEach(issue => review.append(exampleCard(issue, options, t)));
+    else review.append(element('p', 'grammar-review-muted', t.none));
+  }
+
+  function pointRoute(id) {
+    return '#grammar?' + new URLSearchParams({point:id});
+  }
+
+  function readOverview(container, source) {
+    return {
+      y:window.scrollY,
+      x:container.querySelector('.grammar-review-tree-scroll')?.scrollLeft || 0,
+      bar:source?.dataset.grammarBar,
+      topic:source?.dataset.grammarTopic
+    };
+  }
+
+  function restoreOverview(container, position) {
+    if (!position) return;
+    const viewport = container.querySelector('.grammar-review-tree-scroll');
+    if (viewport) viewport.scrollLeft = position.x;
+    window.scrollTo(0, position.y);
+    const buttons = container.querySelectorAll('[data-grammar-bar], [data-grammar-topic]');
+    if (position.bar || position.topic) {
+      [...buttons].find(button => position.bar
+        ? button.dataset.grammarBar === position.bar
+        : button.dataset.grammarTopic === position.topic)?.focus({preventScroll:true});
     }
+  }
+
+  function animatePoint(container, from) {
+    const panel = container.querySelector('.grammar-review-detail');
+    panel?.querySelector('h2').focus({preventScroll:true});
+    if (!panel?.animate || !from || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const to = panel.getBoundingClientRect();
+    const scale = Math.max(.72, Math.min(.94, from.width / to.width));
+    const x = from.left + from.width / 2 - (to.left + to.width / 2);
+    const y = from.top + from.height / 2 - to.top;
+    panel.animate([
+      {transform:`translate(${x}px, ${y}px) scale(${scale})`, opacity:.3},
+      {transform:'translate(0, 0) scale(1)', opacity:1}
+    ], {duration:280, easing:'cubic-bezier(.22,.7,.22,1)'});
   }
 
   function label(date, g, index, locale) {
@@ -525,7 +542,8 @@ globalThis.JournalGrammar = (() => {
     return point?.[locale === 'zh-CN' ? 'zh' : 'en'][0] || g[0];
   }
 
-  return {summarize, render, label, writingSentences, wordsWithOffsets, locateWords, changedWordRanges};
+  return {summarize, render, label, pointRoute, readOverview, restoreOverview, animatePoint,
+    writingSentences, wordsWithOffsets, locateWords, changedWordRanges};
 })();
 
 'use strict';
@@ -536,16 +554,24 @@ const today=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Shanghai',year:'
 function read(k,f){try{return JSON.parse(localStorage.getItem(k))??f}catch{return f}}
 function put(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch{toast('本机空间不足，尚未保存，请立即复制原文');return false}}
 let data={records:{},studySchedule:{}}, page='calendar', selected=today(), month=selected.slice(0,7), tab=0, detail=null;
-let grammarOpenPoint=null, grammarReturn=null;
+let grammarReturn=null;
 let drafts=read('wj.drafts',[]), favourites=read('wj.favourites',[]), font=read('wj.font',19), currentDraft=null, reviewTab=0, query='', timerStarted=null,timerSeconds=0;
 let lastSync=read('wj.lastSync',null), refreshing=false;
 document.documentElement.style.setProperty('--font',font+'px');
 function toast(s){$('#toast').textContent=s;$('#toast').style.display='block';clearTimeout(toast.id);toast.id=setTimeout(()=>$('#toast').style.display='none',3500)}
-function nav(p){page=p;detail=null;tab=0;grammarReturn=null;render();window.scrollTo(0,0)}
-document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>nav(b.dataset.page));
+function nav(p, fromTab=false){
+  if(!fromTab&&p==='calendar'&&grammarParams().has('point')&&window.JournalNative){
+    if(grammarParams().has('entry'))returnToGrammar();
+    else backToGrammarOverview();
+    return;
+  }
+  if(grammarParams().has('point'))history.pushState(null,'',location.pathname+location.search);
+  page=p;detail=null;tab=0;grammarReturn=null;render();window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>nav(b.dataset.page,true));
 $('#settings').onclick=settings;$('#closeSheet').onclick=()=>$('#sheet').close();
 function sheet(html){$('#sheetBody').innerHTML=html;if(!$('#sheet').open)$('#sheet').showModal()}
-function render(){document.body.classList.toggle('grammar-review-active',page==='review'&&reviewTab===0&&!detail);document.querySelectorAll('[data-page]').forEach(b=>{b.removeAttribute('aria-current');if(b.dataset.page===page)b.setAttribute('aria-current','page')});if(detail)renderDetail();else if(page==='calendar')renderCalendar();else if(page==='write')renderWrite();else renderReview()}
+function render(){document.querySelectorAll('[data-page]').forEach(b=>{b.removeAttribute('aria-current');if(b.dataset.page===page)b.setAttribute('aria-current','page')});if(detail)renderDetail();else if(page==='calendar')renderCalendar();else if(page==='write')renderWrite();else renderReview()}
 function prep(){const d=Date.parse(today()+'T00:00:00Z'),start=Date.parse('2026-10-12T00:00:00Z'),exam=Date.parse('2026-12-19T00:00:00Z');const week=Math.min(10,Math.max(0,Math.floor((d-start)/604800000)+1)),left=Math.ceil((exam-d)/86400000);return `<section class="paper prep"><div class="row"><div><small>${left<0?'备考计划已结束':week===0?'备考计划尚未开始':'把学过的，慢慢写出来'}</small><div>第 ${week} 周 <small>/ 10 周</small></div></div><div><strong>${left>0?left:left===0?'今天':'已结束'}</strong>${left>0?' <small>天后考试</small>':''}</div></div><div class="track"><i style="width:${week*10}%"></i></div></section>`}
 function renderCalendar(){let [y,m]=month.split('-').map(Number),n=new Date(y,m,0).getDate(),offset=(new Date(y,m-1,1).getDay()+6)%7;let cells=[...'一二三四五六日'].map(x=>`<span class="weekday">${x}</span>`).join('')+'<span></span>'.repeat(offset);for(let d=1;d<=n;d++){const key=`${month}-${String(d).padStart(2,'0')}`,has=!!data.records[key]||drafts.some(x=>x.date===key),plan=!!data.studySchedule[key];cells+=`<button class="day ${has?'has':''} ${plan?'planned':''} ${key===selected?'selected':''} ${key===today()?'today':''} ${key==='2026-12-19'?'exam':''}" data-date="${key}" aria-label="${key}${has?'，已有写作内容':''}${plan?'，计划：'+data.studySchedule[key].title:''}" ${key===selected?'aria-pressed="true"':'aria-pressed="false"'}>${d}${key==='2026-12-19'?'⭐':''}</button>`}
 $('#app').innerHTML=`<div class="split"><div>${prep()}<section class="paper"><div class="row calendar-head"><strong>${y} 年 ${m} 月</strong><div><button id="prev" aria-label="上个月">‹</button><button id="next" aria-label="下个月">›</button></div></div><div class="grid">${cells}</div><div class="row legend" aria-label="日历状态图例"><span class="legend-item"><i class="legend-key completed">✓</i>已有写作内容</span><span class="legend-item"><i class="legend-key planned">计</i>计划练习</span><span class="legend-item"><i class="legend-key selected">22</i>当前选中</span><button id="today" class="small-btn">回到今天</button></div></section><button class="primary wide" id="newToday">＋ 写一篇</button><p class="status-note">${lastSync?'云端内容已下载 · '+esc(lastSync):'显示离线内容'}<br>草稿保存在本机</p></div><div id="dayContent"><div class="section-label">${esc(selected)} · 当天记录</div>${dayCards(selected)}<div class="section-label">最近的写作便签</div>${Object.keys(data.records).filter(k=>k!==selected).sort().reverse().slice(0,6).map(k=>recordCard(k)).join('')}</div></div>`;
@@ -554,7 +580,7 @@ function moveMonth(delta){const [y,m]=month.split('-').map(Number),d=new Date(y,
 function recordCard(k){const r=data.records[k];return `<button class="note ${k.endsWith('15')?'sage':''}" data-record="${k}"><span class="badge">${esc(k.slice(5))} · 已归档</span><strong>${esc(r.title)}</strong><div class="note-footer">${r.grammar?.length||0} 个语法点${r.studyNotes?' · 含模板笔记':''} <span style="float:right">阅读 →</span></div></button>`}
 function dayCards(k){const plan=data.studySchedule[k],ds=drafts.filter(d=>d.date===k);return (plan?`<div class="paper plan"><span class="hint">${esc(plan.tag)}</span><h3>${esc(plan.title)}</h3><p>${esc(plan.detail)}</p></div>`:'')+(data.records[k]?recordCard(k):'')+ds.map(d=>`<button class="note" data-draft="${esc(d.id)}"><span class="badge">本机草稿 · 第 ${d.version} 版</span><strong>${esc(d.title||'未命名练习')}</strong><span class="hint">${wordCount(d.text)} 词 · 继续写 →</span></button>`).join('')+(!plan&&!data.records[k]&&!ds.length?'<div class="paper empty">这一天还留着一页空白。<br><button class="quiet" id="newSelected">开始写作</button></div>':'')}
 function bindCards(){document.querySelectorAll('[data-record]').forEach(b=>b.onclick=()=>{detail=b.dataset.record;tab=0;render();window.scrollTo(0,0)});document.querySelectorAll('[data-draft]').forEach(b=>b.onclick=()=>{currentDraft=b.dataset.draft;nav('write')});if($('#newSelected'))$('#newSelected').onclick=()=>newDraft(null,selected)}
-function renderDetail(){const r=data.records[detail];if(!r){detail=null;render();return}$('#app').innerHTML=`<div class="detail-wrap"><button class="back" id="back">‹ ${grammarReturn?'返回语法统计':'返回日历'}</button><section class="paper"><span class="hint">${esc(detail)} · 写作档案</span><h2 class="detail-title">${esc(r.title)}</h2><p class="muted">${esc(r.type)}</p><div class="tabs" role="tablist">${['我的原文','批改记录','学习笔记'].map((t,i)=>`<button role="tab" aria-selected="${tab===i}" class="${tab===i?'active':''}" data-tab="${i}">${t}</button>`).join('')}</div><div id="detailBody"></div><button class="wide quiet" id="rewrite">＋ 用新纸再写一版</button></section></div>`;$('#back').onclick=grammarReturn?returnToGrammar:()=>nav('calendar');document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=+b.dataset.tab;renderDetail()});$('#rewrite').onclick=()=>newDraft(detail);let body=$('#detailBody');if(tab===0){body.innerHTML=r.original.map((p,i)=>`<div>${r.original.length>1?`<p class="hint">第 ${i+1} 段练习</p>`:''}<p class="prose">${esc(p)}</p></div>`).join('')}else if(tab===1){body.innerHTML='<p class="hint">原文保留不动，逐项查看已归档的错点。</p>'+r.grammar.map((g,i)=>grammarCard(detail,g,i,false)).join('')+`<details class="error"><summary>查看历史修改稿</summary><p class="hint">这是此前归档的修改稿，可能包含表达调整；后续默认只订正明确错误。</p><p class="prose">${esc(r.revised)}</p></details>`;bindFavourites()}else{body.innerHTML=studyNotes(r.studyNotes,detail);bindFavourites()}}
+function renderDetail(){const r=data.records[detail];if(!r){detail=null;render();return}$('#app').innerHTML=`<div class="detail-wrap"><button class="back" id="back">‹ ${grammarReturn?'返回知识点':'返回日历'}</button><section class="paper"><span class="hint">${esc(detail)} · 写作档案</span><h2 class="detail-title">${esc(r.title)}</h2><p class="muted">${esc(r.type)}</p><div class="tabs" role="tablist">${['我的原文','批改记录','学习笔记'].map((t,i)=>`<button role="tab" aria-selected="${tab===i}" class="${tab===i?'active':''}" data-tab="${i}">${t}</button>`).join('')}</div><div id="detailBody"></div><button class="wide quiet" id="rewrite">＋ 用新纸再写一版</button></section></div>`;$('#back').onclick=grammarReturn?returnToGrammar:()=>nav('calendar');document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=+b.dataset.tab;renderDetail()});$('#rewrite').onclick=()=>newDraft(detail);let body=$('#detailBody');if(tab===0){body.innerHTML=r.original.map((p,i)=>`<div>${r.original.length>1?`<p class="hint">第 ${i+1} 段练习</p>`:''}<p class="prose">${esc(p)}</p></div>`).join('')}else if(tab===1){body.innerHTML='<p class="hint">原文保留不动，逐项查看已归档的错点。</p>'+r.grammar.map((g,i)=>grammarCard(detail,g,i,false)).join('')+`<details class="error"><summary>查看历史修改稿</summary><p class="hint">这是此前归档的修改稿，可能包含表达调整；后续默认只订正明确错误。</p><p class="prose">${esc(r.revised)}</p></details>`;bindFavourites()}else{body.innerHTML=studyNotes(r.studyNotes,detail);bindFavourites()}}
 function studyNotes(notes,date){if(!notes)return '<div class="empty">当天没有模板笔记。<br>可在“批改记录”查看语法点。</div>';return `<p class="muted">${esc(notes.intro)}</p>`+notes.sections.map((s,si)=>`<h3 style="margin-top:24px">${esc(s.title)}</h3>`+s.items.map((item,i)=>{const id=`${date}:note:${si}:${i}`;return `<details class="error"><summary>${esc(item.name)}</summary><button class="fav" data-fav="${id}" aria-label="收藏此句" aria-pressed="${favourites.includes(id)}">${favourites.includes(id)?'★':'☆'}</button>${item.template?`<p class="pair">${esc(item.template)}</p>`:''}${item.example?`<p class="pair after">${esc(item.example)}</p>`:''}${item.note?`<p class="hint">${esc(item.note)}</p>`:''}</details>`}).join('')).join('')}
 function grammarCard(date,g,i,quiz){const id=`${date}:grammar:${i}`;return `<div class="error"><button class="fav" data-fav="${id}" aria-label="收藏此错点" aria-pressed="${favourites.includes(id)}">${favourites.includes(id)?'★':'☆'}</button><p class="hint error-meta">${esc(date)} · ${esc(JournalGrammar.label(date,g,i,'zh-CN'))}</p><h3>${esc(g[0])}</h3><p class="pair ${quiz?'':'before'}">${esc(g[1])}</p>${quiz?'<details open><summary>想好后，查看答案</summary>':''}<p class="pair after">${esc(g[2])}</p><p class="hint">${esc(g[3])}</p>${quiz?'</details>':''}<button class="small-btn" data-source="${date}">来自 ${esc(date)} ↗</button></div>`}
 function bindFavourites(){document.querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{const id=b.dataset.fav,next=favourites.includes(id)?favourites.filter(x=>x!==id):[...favourites,id];if(put('wj.favourites',next)){favourites=next;b.textContent=next.includes(id)?'★':'☆';b.setAttribute('aria-pressed',String(next.includes(id)))}});document.querySelectorAll('[data-source]').forEach(b=>b.onclick=()=>{detail=b.dataset.source;page='calendar';tab=1;render();window.scrollTo(0,0)})}
@@ -566,6 +592,11 @@ function clock(){const s=timerSeconds+(timerStarted?Math.floor((Date.now()-timer
 setInterval(()=>{if($('#clock'))$('#clock').textContent=clock()},1000);
 function draftList(){sheet('<h2>我的草稿</h2>'+drafts.slice().reverse().map(d=>`<button class="note" data-open-draft="${esc(d.id)}"><span class="hint">${esc(d.date)} · 第 ${d.version} 版</span><strong>${esc(d.title||'未命名练习')}</strong><span class="hint">${wordCount(d.text)} 词 · 本机保存</span></button>`).join('')+'<button class="primary wide" id="newBlank">＋ 新练习</button>');document.querySelectorAll('[data-open-draft]').forEach(b=>b.onclick=()=>{currentDraft=b.dataset.openDraft;$('#sheet').close();renderWrite()});$('#newBlank').onclick=()=>{$('#sheet').close();newDraft()}}
 function renderReview(){
+  if(reviewTab===0&&grammarParams().has('point')){
+    $('#app').innerHTML='<div class="review-wrap"><section id="reviewContent"></section></div>';
+    renderReviewContent();
+    return;
+  }
   const labels=['错误统计','语法错点','模板笔记','我的收藏'];
   const tabs=labels.map((label,i)=>
     `<button class="${reviewTab===i?'active':''}" aria-pressed="${reviewTab===i}" data-review="${i}">${label}</button>`
@@ -584,30 +615,88 @@ function renderReview(){
   renderReviewContent();
 }
 
+function grammarParams(){
+  return new URLSearchParams(location.hash.startsWith('#grammar?')?location.hash.slice(9):'');
+}
+
+function openGrammarPoint(id, button){
+  const from=button.getBoundingClientRect();
+  history.replaceState({...history.state,grammarOverview:JournalGrammar.readOverview($('#reviewContent'),button)},'','#grammar');
+  history.pushState({fromGrammarOverview:true},'',JournalGrammar.pointRoute(id));
+  window.scrollTo(0,0);
+  render();
+  JournalGrammar.animatePoint($('#reviewContent'),from);
+}
+
+function backToGrammarOverview(){
+  if(history.state?.fromGrammarOverview)history.back();
+  else {
+    history.replaceState(null,'','#grammar');
+    render();
+    window.scrollTo(0,0);
+  }
+}
+
 function openGrammarEntry({date}, link){
-  grammarReturn={scroll:window.scrollY, entry:link.dataset.grammarEntry};
-  detail=date;
-  tab=0;
+  const entry=link.dataset.grammarEntry;
+  history.replaceState({...history.state,grammarEntryOrigin:{scroll:window.scrollY,entry}},'');
+  const params=grammarParams();
+  params.set('entry',date);
+  history.pushState({fromGrammarPoint:true},'','#grammar?'+params);
+  loadGrammarRoute();
   render();
   window.scrollTo(0,0);
   $('#back').focus({preventScroll:true});
 }
 
 function returnToGrammar(){
-  const previous=grammarReturn;
-  grammarReturn=null;
-  detail=null;
-  render();
-  window.scrollTo(0,previous.scroll);
-  document.querySelector('[data-grammar-entry="'+previous.entry+'"]')?.focus({preventScroll:true});
+  if(history.state?.fromGrammarPoint)history.back();
+  else {
+    history.replaceState(null,'',JournalGrammar.pointRoute(grammarParams().get('point')));
+    loadGrammarRoute();
+    render();
+    window.scrollTo(0,0);
+    JournalGrammar.animatePoint($('#reviewContent'));
+  }
 }
+
+function loadGrammarRoute(){
+  const params=grammarParams();
+  page='review';
+  reviewTab=0;
+  const date=params.get('entry');
+  detail=date&&Object.prototype.hasOwnProperty.call(data.records,date)?date:null;
+  grammarReturn=Boolean(detail);
+  tab=0;
+}
+
+window.addEventListener('popstate',event=>{
+  if(location.hash!=='#grammar'&&!grammarParams().has('point')){
+    if(grammarReturn||$('#reviewContent .grammar-review-detail'))nav('calendar',true);
+    return;
+  }
+  loadGrammarRoute();
+  render();
+  const container=$('#reviewContent');
+  if(!container)return;
+  if(location.hash==='#grammar')JournalGrammar.restoreOverview(container,event.state?.grammarOverview);
+  else if(event.state?.grammarEntryOrigin){
+    const {scroll,entry}=event.state.grammarEntryOrigin;
+    window.scrollTo(0,scroll);
+    container.querySelector('[data-grammar-entry="'+entry+'"]')?.focus({preventScroll:true});
+  }else JournalGrammar.animatePoint(container);
+});
 
 function renderReviewContent(){
   if(reviewTab===0){
-    JournalGrammar.render($('#reviewContent'),data.records,{
-      locale:'zh-CN', query, openPoint:grammarOpenPoint, translate:text=>text,
-      onPoint:id=>{grammarOpenPoint=id;}, openEntry:openGrammarEntry
+    const container=$('#reviewContent');
+    const treeScroll=container.querySelector('.grammar-review-tree-scroll')?.scrollLeft;
+    JournalGrammar.render(container,data.records,{
+      locale:'zh-CN', point:grammarParams().get('point'), query, translate:text=>text,
+      openPoint:openGrammarPoint, back:backToGrammarOverview, openEntry:openGrammarEntry
     });
+    const tree=container.querySelector('.grammar-review-tree-scroll');
+    if(tree&&treeScroll!==undefined)tree.scrollLeft=treeScroll;
     return;
   }
   const q=query.trim().toLowerCase();
@@ -642,4 +731,4 @@ async function refreshData(manual=false){if(refreshing)return;refreshing=true;tr
 window.onNativeUpdate=s=>{if($('#updateStatus'))$('#updateStatus').textContent=s;toast(s)};
 window.addEventListener('online',()=>refreshData());
 window.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshData();if(page==='calendar'&&!detail)render()}});
-(async()=>{const cached=read('wj.cloud',null);if(validData(cached))data=cached;else{try{const v=await getJSON('data.json');if(validData(v))data=v}catch{toast('离线内容暂不可用，请刷新重试')}}render();refreshData()})();
+(async()=>{const cached=read('wj.cloud',null);if(validData(cached))data=cached;else{try{const v=await getJSON('data.json');if(validData(v))data=v}catch{toast('离线内容暂不可用，请刷新重试')}}if(location.hash==='#grammar'||grammarParams().has('point'))loadGrammarRoute();render();refreshData()})();

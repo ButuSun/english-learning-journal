@@ -292,7 +292,7 @@ globalThis.JournalGrammar = (() => {
 
   const copy = {
     en: {
-      title:'Grammar Review', total:'Recorded errors', categories:'Categories with errors',
+      title:'Grammar Review', categories:'topics with errors', back:'‹ Back to grammar review',
       frequency:'Error frequency', knowledge:'Grammar topics', rule:'Rule', use:'How to use it',
       mistakes:'Common errors', examples:'My past errors', none:'No recorded errors for this topic.',
       original:'Original', revised:'Revised', noteOriginal:'Excerpt from feedback', noteRevised:'Archived correction',
@@ -301,7 +301,7 @@ globalThis.JournalGrammar = (() => {
       unclassified:'Unclassified', share:'share of all recorded errors'
     },
     zh: {
-      title:'语法统计', total:'累计错误数', categories:'有错误的类别',
+      title:'语法统计', categories:'个知识点有错题记录', back:'‹ 返回语法统计',
       frequency:'各类别错误频率', knowledge:'语法知识分类', rule:'语法规则', use:'正确用法',
       mistakes:'常见错误', examples:'我的历史错句', none:'你还没有这个知识点的错误记录。',
       original:'原句', revised:'修改句', noteOriginal:'批注中的原句片段', noteRevised:'归档订正',
@@ -382,141 +382,158 @@ globalThis.JournalGrammar = (() => {
 
   function render(container, records, options) {
     const {examples, ranked, total} = summarize(records);
-    const {locale, query = '', onPoint = () => {}} = options;
+    const {locale, point, query = ''} = options;
     const lang = locale === 'zh-CN' ? 'zh' : 'en';
     const t = copy[lang];
-    const unknown = examples.get('unclassified');
-    const visible = (id, details = []) => {
-      if (!query) return true;
-      const key = query.trim().toLowerCase();
-      return details.join(' ').toLowerCase().includes(key) || examples.get(id).some(issue =>
-        [issue.date, ...issue.g].join(' ').toLowerCase().includes(key));
-    };
-
     const review = element('div', 'grammar-review');
-    const title = element('h2', 'grammar-review-title', t.title);
-    const metrics = element('dl', 'grammar-review-metrics');
-    for (const [label, value] of [[t.total, total], [t.categories, ranked.length]]) {
-      const metric = element('div');
-      metric.append(element('dt', '', label), element('dd', '', value));
-      metrics.append(metric);
+    if (examples.has(point)) {
+      renderTopic(review, point, examples.get(point), options, lang);
+      container.replaceChildren(review);
+      return;
     }
-    review.append(title, metrics);
 
+    const unknown = examples.get('unclassified');
+    const key = query.trim().toLowerCase();
+    const visible = (id, details) => !key || details.join(' ').toLowerCase().includes(key) ||
+      examples.get(id).some(issue => [issue.date, ...issue.g].join(' ').toLowerCase().includes(key));
+
+    review.append(element('h2', 'grammar-review-title', t.title));
     const chart = element('section', 'grammar-review-chart');
-    chart.append(element('h3', '', t.frequency));
+    chart.append(element('h3', '', t.frequency),
+      element('p', 'grammar-review-muted', ranked.length + ' ' + t.categories));
     const chartList = element('div', 'grammar-review-bars');
     const percentage = new Intl.NumberFormat(locale, {style:'percent', maximumFractionDigits:1});
-    const targets = new Map();
     const chartIds = unknown.length ? [...ranked, 'unclassified'] : ranked;
     const max = Math.max(1, ...chartIds.map(id => examples.get(id).length));
     for (const id of chartIds) {
-      const point = topics.get(id);
-      const name = point ? point[lang][0] : t.unclassified;
-      if (!visible(id, point ? [...point.en, ...point.zh] : [name])) continue;
+      const topic = topics.get(id);
+      const name = topic ? topic[lang][0] : t.unclassified;
+      const group = groups.find(group => group.points.some(([topicId]) => topicId === id));
+      if (!visible(id, topic ? [...group.name, ...topic.en, ...topic.zh] : [name])) continue;
       const count = examples.get(id).length;
       const rate = percentage.format(count / total);
       const button = element('button', 'grammar-review-bar');
       button.type = 'button';
       button.dataset.grammarBar = id;
-      button.setAttribute('aria-controls', 'grammar-point-' + id);
       button.setAttribute('aria-label', name + ' · ' + count + ' · ' + rate + ' ' + t.share);
       const track = element('span', 'grammar-review-track');
       track.setAttribute('aria-hidden', 'true');
       track.style.setProperty('--bar', (100 * count / max) + '%');
       button.append(element('span', 'grammar-review-bar-name', name), track,
         element('strong', 'grammar-review-count', count), element('span', 'grammar-review-rate', rate));
-      button.addEventListener('click', () => open(id, true));
+      button.addEventListener('click', () => options.openPoint(id, button));
       chartList.append(button);
     }
     chart.append(chartList.childElementCount ? chartList : element('p', 'grammar-review-muted', total ? t.noSearch : t.empty));
     review.append(chart);
 
     const knowledge = element('section', 'grammar-review-knowledge');
-    knowledge.append(element('h3', '', t.knowledge));
+    const heading = element('h3', '', t.knowledge);
+    heading.id = 'grammar-knowledge-title';
+    knowledge.append(heading);
+    const viewport = element('div', 'grammar-review-tree-scroll');
+    viewport.setAttribute('role', 'region');
+    viewport.setAttribute('aria-labelledby', heading.id);
+    viewport.tabIndex = 0;
+    const tree = element('div', 'grammar-review-tree');
     for (const group of groups) {
+      const entries = group.points.filter(([id, en, zh]) => visible(id, [...group.name, ...en, ...zh]));
+      if (!entries.length) continue;
       const branch = element('section', 'grammar-review-group');
-      const title = element('h4', '', group.name[lang === 'zh' ? 1 : 0]);
-      branch.append(title);
-      for (const [id, en, zh] of group.points) {
-        if (visible(id, [...group.name, ...en, ...zh])) {
-          branch.append(topicPanel(id, lang === 'zh' ? zh : en));
-        }
+      branch.append(element('h4', '', group.name[lang === 'zh' ? 1 : 0]));
+      const children = element('ul', 'grammar-review-children');
+      for (const [id, en, zh] of entries) {
+        const child = element('li');
+        child.append(topicButton(id, (lang === 'zh' ? zh : en)[0]));
+        children.append(child);
       }
-      if (branch.childElementCount > 1) knowledge.append(branch);
+      branch.append(children);
+      tree.append(branch);
     }
+    viewport.append(tree);
+    knowledge.append(tree.childElementCount ? viewport : element('p', 'grammar-review-muted', t.noSearch));
     if (unknown.length && visible('unclassified', [t.unclassified])) {
-      knowledge.append(topicPanel('unclassified', [t.unclassified]));
+      knowledge.append(topicButton('unclassified', t.unclassified));
     }
-    if (knowledge.childElementCount === 1) knowledge.append(element('p', 'grammar-review-muted', t.noSearch));
     review.append(knowledge);
     container.replaceChildren(review);
 
-    let active = null;
-    if (targets.has(options.openPoint)) open(options.openPoint);
-    else if (options.jumpPoint && targets.has(options.jumpPoint)) open(options.jumpPoint, true);
-    return {jump: id => { if (targets.has(id)) open(id, true); }};
-
-    function topicPanel(id, [name, rule, use, mistakes]) {
-      const point = element('section', 'grammar-review-point');
-      point.id = 'grammar-point-' + id;
-      const heading = element('h5');
-      const button = element('button', 'grammar-review-toggle');
+    function topicButton(id, name) {
+      const button = element('button', 'grammar-review-topic');
       button.type = 'button';
-      button.setAttribute('aria-expanded', 'false');
-      button.setAttribute('aria-controls', 'grammar-content-' + id);
-      const count = examples.get(id).length;
-      button.append(element('span', '', name), element('span', 'grammar-review-topic-count', count),
-        element('span', 'grammar-review-indicator'));
-      button.lastElementChild.setAttribute('aria-hidden', 'true');
-      button.addEventListener('click', () => open(active === id ? null : id));
-      heading.append(button);
-      const panel = element('div', 'grammar-review-panel');
-      panel.id = 'grammar-content-' + id;
-      panel.inert = true;
-      const inner = element('div', 'grammar-review-panel-inner');
-      if (rule) {
-        const rules = element('dl', 'grammar-review-rules');
-        for (const [label, text] of [[t.rule, rule], [t.use, use], [t.mistakes, mistakes]]) {
-          rules.append(element('dt', '', label), element('dd', '', text));
-        }
-        inner.append(rules);
+      button.dataset.grammarTopic = id;
+      const arrow = element('span', 'grammar-review-arrow', '›');
+      arrow.setAttribute('aria-hidden', 'true');
+      button.append(element('span', '', name),
+        element('span', 'grammar-review-topic-count', examples.get(id).length), arrow);
+      button.addEventListener('click', () => options.openPoint(id, button));
+      return button;
+    }
+  }
+
+  function renderTopic(review, id, examples, options, lang) {
+    const t = copy[lang];
+    const [name, rule, use, mistakes] = topics.get(id)?.[lang] || [t.unclassified];
+    const back = element('button', 'grammar-review-back', t.back);
+    back.type = 'button';
+    back.addEventListener('click', options.back);
+    const title = element('h2', 'grammar-review-title', name);
+    title.tabIndex = -1;
+    review.classList.add('grammar-review-detail');
+    review.append(back, title);
+
+    if (rule) {
+      const rules = element('dl', 'grammar-review-rules');
+      for (const [label, text] of [[t.rule, rule], [t.use, use], [t.mistakes, mistakes]]) {
+        rules.append(element('dt', '', label), element('dd', '', text));
       }
-      panel.append(inner);
-      point.append(heading, panel);
-      targets.set(id, {point, button, panel, inner, loaded:false});
-      return point;
+      review.append(rules);
     }
 
-    function open(id, jump = false) {
-      if (active && active !== id) {
-        const previous = targets.get(active);
-        previous.point.classList.remove('is-open');
-        previous.button.setAttribute('aria-expanded', 'false');
-        previous.panel.inert = true;
-      }
-      active = id;
-      onPoint(id);
-      if (!id) return;
-      const target = targets.get(id);
-      if (!target.loaded) {
-        const list = examples.get(id);
-        if (list.length) {
-          target.inner.append(element('h6', 'grammar-review-examples-title', t.examples));
-          list.forEach(issue => target.inner.append(exampleCard(issue, options, t)));
-        } else {
-          target.inner.append(element('p', 'grammar-review-muted', t.none));
-        }
-        target.loaded = true;
-      }
-      target.point.classList.add('is-open');
-      target.button.setAttribute('aria-expanded', 'true');
-      target.panel.inert = false;
-      if (jump) {
-        target.button.focus({preventScroll:true});
-        target.point.scrollIntoView({block:'start', behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
-      }
+    const heading = element('h3', 'grammar-review-examples-title', t.examples);
+    review.append(heading);
+    if (examples.length) examples.forEach(issue => review.append(exampleCard(issue, options, t)));
+    else review.append(element('p', 'grammar-review-muted', t.none));
+  }
+
+  function pointRoute(id) {
+    return '#grammar?' + new URLSearchParams({point:id});
+  }
+
+  function readOverview(container, source) {
+    return {
+      y:window.scrollY,
+      x:container.querySelector('.grammar-review-tree-scroll')?.scrollLeft || 0,
+      bar:source?.dataset.grammarBar,
+      topic:source?.dataset.grammarTopic
+    };
+  }
+
+  function restoreOverview(container, position) {
+    if (!position) return;
+    const viewport = container.querySelector('.grammar-review-tree-scroll');
+    if (viewport) viewport.scrollLeft = position.x;
+    window.scrollTo(0, position.y);
+    const buttons = container.querySelectorAll('[data-grammar-bar], [data-grammar-topic]');
+    if (position.bar || position.topic) {
+      [...buttons].find(button => position.bar
+        ? button.dataset.grammarBar === position.bar
+        : button.dataset.grammarTopic === position.topic)?.focus({preventScroll:true});
     }
+  }
+
+  function animatePoint(container, from) {
+    const panel = container.querySelector('.grammar-review-detail');
+    panel?.querySelector('h2').focus({preventScroll:true});
+    if (!panel?.animate || !from || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const to = panel.getBoundingClientRect();
+    const scale = Math.max(.72, Math.min(.94, from.width / to.width));
+    const x = from.left + from.width / 2 - (to.left + to.width / 2);
+    const y = from.top + from.height / 2 - to.top;
+    panel.animate([
+      {transform:`translate(${x}px, ${y}px) scale(${scale})`, opacity:.3},
+      {transform:'translate(0, 0) scale(1)', opacity:1}
+    ], {duration:280, easing:'cubic-bezier(.22,.7,.22,1)'});
   }
 
   function label(date, g, index, locale) {
@@ -524,5 +541,6 @@ globalThis.JournalGrammar = (() => {
     return point?.[locale === 'zh-CN' ? 'zh' : 'en'][0] || g[0];
   }
 
-  return {summarize, render, label, writingSentences, wordsWithOffsets, locateWords, changedWordRanges};
+  return {summarize, render, label, pointRoute, readOverview, restoreOverview, animatePoint,
+    writingSentences, wordsWithOffsets, locateWords, changedWordRanges};
 })();
