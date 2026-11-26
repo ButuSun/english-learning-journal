@@ -2,7 +2,7 @@ name: Update mobile content
 on:
   push:
     branches: [main]
-    paths: [index.html, 'mobile/app.js', 'mobile/index.html', 'mobile/style.css', 'scripts/build-mobile.mjs']
+    paths: [index.html, 'shared/**', 'src/mobile/**', 'mobile/index.html', 'scripts/build-mobile.mjs']
   workflow_dispatch:
 permissions:
   contents: write
@@ -22,7 +22,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add mobile/data.json mobile/version.json
+          git add mobile/app.js mobile/style.css mobile/data.json mobile/version.json
           if ! git diff --cached --quiet; then
             git commit -m 'Update mobile journal content'
             git push
