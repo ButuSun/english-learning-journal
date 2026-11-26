@@ -83,13 +83,12 @@ function isGrammarDetail(){
 }
 
 function openGrammarRoute(route, button, at, id){
-  const from=button.getBoundingClientRect();
   const current=isGrammarDetail()?location.hash:'#grammar';
   history.replaceState({...history.state,grammarOverview:JournalGrammar.readOverview(button,id)},'',current);
   history.pushState({fromGrammarOverview:true},'',route);
   window.scrollTo(0,0);
   render();
-  JournalGrammar.animatePoint($('#reviewContent'),from,at);
+  JournalGrammar.animatePoint($('#reviewContent'),at);
 }
 
 function backToGrammarOverview(parentRoute){

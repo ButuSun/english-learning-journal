@@ -39,29 +39,26 @@
   font-size: .82rem;
   color: var(--review-muted);
 }
-.grammar-review-chart {
-  background: #fbfdff;
-  border-color: #dce8f5;
-  color: #24405d;
-}
 .grammar-review-pie {
   display: block;
   width: 100%;
   max-width: 460px;
   margin: 10px auto 0;
   font-family: system-ui, sans-serif;
-  color: #1a395a;
+  color: var(--review-ink);
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
-.grammar-review-pie-base { fill: #f0f6fd; }
+.grammar-review-pie-base { fill: var(--review-soft); }
 .grammar-pie-sector, .grammar-pie-back { cursor: pointer; outline: none; }
 .grammar-pie-sector > path {
-  stroke: #fbfdff;
+  stroke: var(--paper);
   stroke-width: 1.8;
 }
-.grammar-pie-sector:hover > path { filter: saturate(1.35); }
+
 .grammar-pie-sector:focus-visible > path {
-  stroke: #426590;
+  stroke: var(--review-accent);
   stroke-width: 3;
 }
 .grammar-review-pie text {
@@ -70,15 +67,15 @@
   font-size: 16px;
   pointer-events: none;
 }
-.grammar-review-pie .grammar-pie-compact-label { font-size: 15px; }
+.grammar-review-pie .grammar-pie-compact-label { font-size: 12px; }
 .grammar-pie-count { font-weight: 550; font-variant-numeric: tabular-nums; }
 .grammar-pie-back circle {
-  fill: #fbfdff;
-  stroke: #b7cde6;
+  fill: var(--paper);
+  stroke: var(--review-line);
   stroke-width: 1.2;
 }
-.grammar-pie-back:hover circle { fill: #ecf5ff; }
-.grammar-pie-back:focus-visible circle { stroke: #426590; stroke-width: 3; }
+.grammar-pie-back:hover circle { fill: var(--review-soft); }
+.grammar-pie-back:focus-visible circle { stroke: var(--review-accent); stroke-width: 3; }
 .grammar-pie-back path {
   fill: none;
   stroke: currentColor;
@@ -182,3 +179,6 @@
   .grammar-review .grammar-review-rules { grid-template-columns: 1fr; gap: 4px; }
   .grammar-review-rules dd + dt { margin-top: 4px; }
 }
+
+.grammar-topic-zoom { position: fixed; inset: 0; z-index: 2147483646; overflow: hidden; touch-action: none; }
+.grammar-topic-zoom > div { position: absolute; border-radius: 50%; will-change: transform; }

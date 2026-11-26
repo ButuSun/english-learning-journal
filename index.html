@@ -2372,12 +2372,11 @@ const archivedExampleNotes = {
  }
 };
 function openGrammarRoute(route, trigger, at, id) {
- const from=trigger.getBoundingClientRect();
  history.replaceState({...history.state,grammarOverview:JournalGrammar.readOverview(trigger,id)},'');
  history.pushState({fromGrammarOverview:true},'',route);
  window.scrollTo(0,0);
  showMainPage();
- JournalGrammar.animatePoint(grammarContent,from,at);
+ JournalGrammar.animatePoint(grammarContent,at);
 }
 function backToGrammarOverview(parentRoute) {
  if(history.state?.fromGrammarOverview)history.back();

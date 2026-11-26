@@ -503,18 +503,18 @@ globalThis.JournalGrammar = (() => {
   const groupByTopic = new Map(groups.flatMap(group =>
     group.points.map(([topic]) => [topic, group])
   ));
-  const pieColors = ['#b9d9f8', '#e9f2ff', '#d2e6fc', '#aac7ed', '#e0edfc'];
-  const subPieColors = ['#d9eaff', '#bbd8f6', '#edf5ff', '#a8c7ee', '#c9e1f9'];
+  const pieColors = ['#bed0bb', '#eee4ce', '#d9e2cd', '#cbd8ce', '#e4dfc9'];
+  const subPieColors = ['#d5dfcd', '#e9e2cc', '#b9ccb7', '#e1e6d8', '#cdd8cd'];
   const shortLabels = {
     verbs:['Verbs', '动词'], nouns:['Nouns', '名词'], 'function-words':['Function words', '功能词'],
     sentences:['Sentence structure', '句子结构'], vocabulary:['Vocabulary', '词汇与搭配'],
     agreement:['Agreement', '主谓一致'], tense:['Tense', '时态'], voice:['Passive', '被动语态'],
     nonfinite:['Nonfinite verbs', '非谓语'], auxiliaries:['Auxiliaries', '助动词'],
     number:['Noun number', '单复数'], possessives:['Possessives', '所有格'], countability:['Countability', '可数性'],
-    articles:['Articles', '冠词'], prepositions:['Prepositions', '介词'], conjunctions:['Conjunctions', '连词'],
+    articles:['Articles', '冠词'], prepositions:['Prepositions', '介词'], conjunctions:['Conj.', '连词'],
     pronouns:['Pronouns', '代词'], clauses:['Clauses', '主从句'], relatives:['Relative clauses', '定语从句'],
     inversion:['Inversion', '倒装'], completeness:['Completeness', '句子完整'],
-    'word-class':['Word classes', '词性'], spelling:['Spelling', '拼写'], capitalization:['Capitalization', '大小写'],
+    'word-class':['Word classes', '词性'], spelling:['Spelling', '拼写'], capitalization:['Caps', '大小写'],
     collocations:['Collocations', '固定搭配'], 'word-choice':['Word choice', '词义选择']
   };
 
@@ -623,29 +623,31 @@ globalThis.JournalGrammar = (() => {
         sector.append(shape);
         const shortName = shortLabels[id][nameIndex];
         const narrow = group && span < 1.02;
-        const radius = span >= turn ? (group ? 89 : 0) : narrow ? 121 : 113;
+        const radius = span >= turn ? (group ? 89 : 0) : narrow ? 145 : 113;
         const [x, y] = span >= turn && group ? [pieCenter, pieCenter - radius] : pointAt(center, radius);
-        const rotation = center * 180 / Math.PI;
-        const upright = rotation > 90 && rotation <= 270 ? rotation - 180 : rotation;
-        const labelRotation = narrow && (nameIndex === 0 || shortName.length > 2) ? upright : 0;
-        const label = svgElement('text', {transform:`translate(${x} ${y}) rotate(${labelRotation})`,
+        const label = svgElement('text', {transform:`translate(${x} ${y})`,
           'text-anchor':'middle', 'aria-hidden':'true'});
-        if (span < .5) {
-          label.setAttribute('class', 'grammar-pie-compact-label');
-          label.setAttribute('dominant-baseline', 'central');
-          label.textContent = shortName + ' ' + count;
-        } else {
-          const line = svgElement('tspan', {x:0, y:-3});
-          line.textContent = shortName;
-          const amount = svgElement('tspan', {x:0, y:19, class:'grammar-pie-count'});
-          amount.textContent = count;
-          label.append(line, amount);
-        }
+        const compact = span < .5;
+        if (compact) label.setAttribute('class', 'grammar-pie-compact-label');
+        const across = compact && Math.abs(Math.cos(center)) > .75;
+        const lines = narrow && !across ? shortName.split(' ') : [shortName];
+        if (across) lines[0] += ' ' + count;
+        else lines.push(String(count));
+        const spacing = compact ? 13 : 18;
+        lines.forEach((text, i) => {
+          const line = svgElement('tspan', {x:0, y:(i - (lines.length - 1) / 2) * spacing + 5});
+          line.textContent = text;
+          if (text === String(count)) line.setAttribute('class', 'grammar-pie-count');
+          label.append(line);
+        });
         sector.append(label);
         activateSvg(sector, name + ' · ' + t.cardCount(count), event => {
           if (busy) return;
           if (group) {
-            options.openRoute(route, sector, event.type === 'click' ? {x:event.clientX, y:event.clientY} : undefined, id);
+            busy = true;
+            const anchor = new DOMPoint(x, y).matrixTransform(svg.getScreenCTM());
+            const at = event.type === 'click' && event.detail ? {x:event.clientX, y:event.clientY} : anchor;
+            expandTopic(sector, at, color, () => options.openRoute(route, sector, at, id));
           } else changeLevel(id);
         });
         layer.append(sector);
@@ -690,33 +692,40 @@ globalThis.JournalGrammar = (() => {
 
       busy = true;
       svg.setAttribute('aria-busy', 'true');
-      const fan = svgElement('path', {class:'grammar-pie-fan', fill:selected.color, 'aria-hidden':'true'});
+      // Two clipped half-discs unfold around the same diameter. Only their
+      // transforms and layer opacities animate, leaving the sector paths static.
+      const fan = svgElement('g', {class:'grammar-pie-fan', 'aria-hidden':'true',
+        transform:`rotate(${selected.center * 180 / Math.PI + 90} 210 210)`});
       const under = opening ? previous.layer : next.layer;
       const over = opening ? next.layer : previous.layer;
       svg.replaceChildren(background, under, fan, over);
-      const ease = x => x * x * (3 - 2 * x);
-      let start;
-      function animate(time) {
-        if (!svg.isConnected) return;
-        start ??= time;
-        const progress = Math.max(0, Math.min((time - start) / 640, 1));
-        const play = opening ? progress : 1 - progress;
-        const unfold = ease(Math.min(play / .72, 1));
-        const reveal = ease(Math.max((play - .64) / .36, 0));
-        fan.setAttribute('d', sectorPath(selected.center, selected.span + (turn - selected.span) * unfold));
-        under.style.opacity = 1 - unfold;
-        over.style.opacity = reveal;
-        if (progress < 1) requestAnimationFrame(animate);
-        else {
-          next.layer.style.opacity = '';
-          svg.replaceChildren(background, next.layer);
-          svg.removeAttribute('aria-busy');
-          busy = false;
-          focus?.focus({preventScroll:true});
-        }
+      const timing = {duration:560, easing:'cubic-bezier(.24,.65,.25,1)',
+        direction:opening ? 'normal' : 'reverse', fill:'both'};
+      const animations = [];
+      for (const side of [-1, 1]) {
+        const ix = side < 0 ? 16 : 210;
+        const clip = svgElement('svg', {x:ix, y:16, width:194, height:388,
+          viewBox:`${ix} 16 194 388`, overflow:'hidden'});
+        const half = svgElement('path', {d:sectorPath(side > 0 ? 0 : Math.PI, Math.PI), fill:selected.color});
+        half.style.transformBox = 'view-box';
+        // The inner SVG has its own origin at the corner of the half-disc.
+        half.style.transformOrigin = `${210 - ix}px 194px`;
+        clip.append(half);
+        fan.append(clip);
+        const degrees = side * (selected.span / turn - 1) * 180;
+        animations.push(half.animate([{transform:`rotate(${degrees}deg)`}, {transform:'rotate(0deg)'}], timing));
       }
-      // Put the starting wedge on screen before advancing the first frame.
-      animate(performance.now());
+      animations.push(over.animate([{opacity:0}, {opacity:0, offset:.32}, {opacity:1}], timing));
+      const fade = under.animate([{opacity:1}, {opacity:0}], timing);
+      animations.push(fade);
+      fade.finished.then(() => {
+        svg.replaceChildren(background, next.layer);
+        animations.forEach(animation => animation.cancel());
+        svg.removeAttribute('aria-busy');
+        busy = false;
+        if (svg.isConnected) focus?.focus({preventScroll:true});
+      });
+
     }
   }
 
@@ -780,19 +789,33 @@ globalThis.JournalGrammar = (() => {
     }
   }
 
-  function animatePoint(container, from, at) {
-    const panel = container.querySelector('.grammar-review-detail');
-    panel?.querySelector('h2').focus({preventScroll:true});
-    if (!panel?.animate || !from || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const to = panel.getBoundingClientRect();
-    const scale = Math.max(.72, Math.min(.94, from.width / to.width));
-    const x = (at?.x ?? from.left + from.width / 2) - (to.left + to.width / 2);
-    const offsetY = (at?.y ?? from.top + from.height / 2) - to.top;
-    const y = Math.max(-120, Math.min(180, offsetY));
-    panel.animate([
-      {transform:`translate(${x}px, ${y}px) scale(${scale})`, opacity:.3},
-      {transform:'translate(0, 0) scale(1)', opacity:1}
-    ], {duration:280, easing:'cubic-bezier(.22,.7,.22,1)'});
+  function animatePoint(container, at) {
+    const detail = container.querySelector('.grammar-review-detail');
+    detail?.querySelector('h2')?.focus({preventScroll:true});
+    if (!at || !detail?.animate || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const bounds = detail.getBoundingClientRect();
+    detail.style.transformOrigin = `${at.x - bounds.left}px ${at.y - bounds.top}px`;
+    detail.animate([{transform:'scale(.88)'}, {transform:'scale(1)'}],
+      {duration:440, easing:'cubic-bezier(.22,.64,.24,1)'});
+  }
+
+  function expandTopic(source, at, color, open) {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !source.animate) return open();
+    const veil = element('div', 'grammar-topic-zoom');
+    veil.setAttribute('aria-hidden', 'true');
+    const radius = Math.ceil(Math.hypot(Math.max(at.x, innerWidth - at.x),
+      Math.max(at.y, innerHeight - at.y))) + 2;
+    const disc = element('div');
+    Object.assign(disc.style, {left:(at.x-radius)+'px', top:(at.y-radius)+'px',
+      width:(radius*2)+'px', height:(radius*2)+'px', background:color});
+    veil.append(disc);
+    document.body.append(veil);
+    const motion = disc.animate([{transform:'scale(.005)'}, {transform:'scale(1)'}],
+      {duration:540, easing:'cubic-bezier(.35,.02,.28,1)', fill:'both'});
+    motion.finished.then(() => {
+      if (source.isConnected && source.getClientRects().length) open();
+      return veil.animate([{opacity:1}, {opacity:0}], {duration:270, easing:'ease-out'}).finished;
+    }).finally(() => veil.remove());
   }
 
   function label(date, g, index, locale) {
