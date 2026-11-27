@@ -1396,6 +1396,89 @@
           }
         ]
       }
+    },
+    "2026-11-27": {
+      "title": "博物馆约定改期 · 道歉信",
+      "type": "考研英语二 · Part A · 道歉信 · 完整练习",
+      "original": [
+        "Dear David,\n\nI'm terribly sorry that I cannot visit the museum with you this weekend. Since I have to handle an unexpected work assignment. I am used to very excited about this trip, and I know you have waited for me since last mouth. But this assignment so hurry that I have to handle it right now.\nThankfully, this business will not last too long, and it end before next weekend. If you are free next weekend, I hope we can reschedule this visit. Please let me know. I'm looking for your reply.\nLi Ming"
+      ],
+      "revised": "Dear David,\n\nI'm terribly sorry that I cannot visit the museum with you this weekend because I have to handle an unexpected work assignment. I was very excited about this trip, and I know you have waited for me since last month. But this assignment is so urgent that I have to handle it right now.\n\nThankfully, this work will not last too long, and it will end before next weekend. If you are free next weekend, I hope we can reschedule this visit. Please let me know. I'm looking forward to your reply.\n\nLi Ming",
+      "grammar": [
+        [
+          "句子完整性 · 原因状语从句",
+          "Since I have to handle an unexpected work assignment.",
+          "...this weekend because I have to handle an unexpected work assignment.",
+          "Since 引导原因状语从句，不能单独作为完整句子；将原因从句并入前一句，或改用完整主句。"
+        ],
+        [
+          "动词结构 · be used to 与 be excited",
+          "I am used to very excited about this trip",
+          "I was very excited about this trip",
+          "be used to 后面需要接名词或动名词；这里要表达过去对旅行感到兴奋，使用 was excited。"
+        ],
+        [
+          "拼写",
+          "last mouth",
+          "last month",
+          "mouth 是“嘴”；month 是“月份”。"
+        ],
+        [
+          "词性与句子结构",
+          "this assignment so hurry",
+          "this assignment is so urgent",
+          "缺少 be 动词；hurry 不能在这里作表语，表示任务紧急使用形容词 urgent。"
+        ],
+        [
+          "词汇选择",
+          "this business will not last too long",
+          "this work will not last too long",
+          "这里指当前的工作任务，work 比 business 更符合原意。"
+        ],
+        [
+          "时态与谓语结构",
+          "it end before next weekend",
+          "it will end before next weekend",
+          "描述未来结束时间，使用 will + 动词原形。"
+        ],
+        [
+          "固定搭配",
+          "I'm looking for your reply",
+          "I'm looking forward to your reply",
+          "look for 表示寻找；look forward to 表示期待，to 后接名词或动名词。"
+        ],
+        [
+          "时态理解 · 现在完成时",
+          "you have waited for me since last month",
+          "you have waited for me since last month",
+          "原句正确。since + 过去时间点，搭配现在完成时，表示从过去持续到现在。"
+        ]
+      ],
+      "studyNotes": {
+        "intro": "本次为英语二 Part A 道歉信。作文完成了道歉、解释工作任务原因和提出下周重新安排三个任务。保留了用户原有逻辑和段落顺序，主要修正原因从句残句、be 动词遗漏、词汇选择、时态和固定搭配。",
+        "sections": [
+          {
+            "title": "本次可复用的三个句型与逻辑点",
+            "items": [
+              {
+                "name": "I'm terribly sorry that I cannot... because...",
+                "template": "I'm terribly sorry that I cannot visit the museum with you this weekend because I have to handle an unexpected work assignment.",
+                "note": "道歉并紧接着解释原因；because 引导原因状语从句，应与主句连接，不能单独成句。"
+              },
+              {
+                "name": "If you are free..., I hope we can...",
+                "template": "If you are free next weekend, I hope we can reschedule this visit.",
+                "note": "用条件句提出替代安排；if 从句使用一般现在时，主句表达未来可能的安排。"
+              },
+              {
+                "name": "I'm looking forward to your reply.",
+                "template": "I'm looking forward to your reply.",
+                "note": "道歉信结尾期待对方回复；look forward to 中的 to 是介词，后接名词或动名词。"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "studySchedule": {
