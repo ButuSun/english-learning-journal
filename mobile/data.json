@@ -1479,6 +1479,82 @@
           }
         ]
       }
+    },
+    "2026-11-28": {
+      "title": "阅读错题与作文句型迁移",
+      "type": "考研英语二 · 阅读复盘（非完整作文）",
+      "original": [],
+      "revised": "",
+      "grammar": [],
+      "studyNotes": {
+        "intro": "11月28日阅读复盘：2025英语二 Text 1–2，以及今日主动询问的句子。仅记录阅读学习，不视为已完成大作文；迁移例句为助手提供的练习素材。",
+        "sections": [
+          {
+            "title": "阅读错题与理解",
+            "items": [
+              {
+                "name": "2025 Text 2 第30题：地方领导人的作用",
+                "template": "What health functions should remain at the centre, and what should be devolved to local leaders, often responsible for services that create health, and with a much better understanding of the needs of their populations?",
+                "note": "responsible for... 与 with... 并列补充说明 local leaders；with 是普通介词短语，不是独立主谓的复合结构。地方更了解需求，故应承担更多职能。答案 C。"
+              },
+              {
+                "name": "Text 1：限定词与概念范围（复盘重点，未确认错题）",
+                "template": "Today's tip requests are often not connected to ...",
+                "note": "often 不等于 always；tip creep 是范围扩大，tip inflation 是金额上涨；区分目的、手段、结果。第22题 C、第23题 A、第24题 D。"
+              },
+              {
+                "name": "Text 2：health 与 healthcare（复盘重点，未确认错题）",
+                "note": "医疗服务只是健康结果的一部分；不能把局部概念当整体。第29题 B。"
+              }
+            ]
+          },
+          {
+            "title": "主动询问的复杂语法",
+            "items": [
+              {
+                "name": "as one that... rather than...",
+                "template": "However, just be certain you can explain your end-around approach as one that built your case, rather than simply circumvented your manager.",
+                "note": "explain A as B；one 指 approach；that 引导定语从句，built 与 circumvented 构成对照。build your case 是为自己的主张积累依据，circumvent 是绕过。原题题号未确认。"
+              },
+              {
+                "name": "嵌入式定语从句与 what 从句",
+                "template": "people they assumed were ... / what they owe",
+                "note": "they assumed 嵌入关系从句，关系词在内层作主语；what they owe 相当于 the amount that they owe。"
+              }
+            ]
+          },
+          {
+            "title": "作文迁移：下一次写作优先尝试",
+            "items": [
+              {
+                "name": "make it easier for sb. to do sth.",
+                "template": "AI makes it easier for students to acquire knowledge.",
+                "note": "形式宾语 it；适用于科技与学习话题。"
+              },
+              {
+                "name": "rather than：对比论证",
+                "template": "Students should focus on developing practical skills rather than simply memorizing facts.",
+                "note": "rather than 两侧尽量保持结构平行；适用于教育、学习方式。"
+              },
+              {
+                "name": "To ensure that...：目的与措施",
+                "template": "To ensure that students develop healthy habits, schools should encourage regular exercise.",
+                "note": "适用于大作文措施段。"
+              },
+              {
+                "name": "with + 名词短语：补充特点",
+                "template": "Students with a better understanding of their own needs can make more effective study plans.",
+                "note": "with 短语修饰 students；先掌握这一简洁写法。"
+              },
+              {
+                "name": "without doing sth.：兼顾目标与限制",
+                "template": "Students can improve their learning efficiency without spending too much time on repetitive tasks.",
+                "note": "适用于效率、科技与时间管理话题。"
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   "studySchedule": {
